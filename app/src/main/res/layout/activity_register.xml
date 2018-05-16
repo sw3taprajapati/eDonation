@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:hint="Organization Name"
             android:inputType="text"
-            android:paddingBottom="24dp"/>
+            android:paddingBottom="24dp"
+            android:id="@+id/editText"/>
 
         <EditText
             android:layout_width="match_parent"
