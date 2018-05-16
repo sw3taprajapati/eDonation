@@ -1,3 +1,6 @@
+
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,8 +18,8 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
         android:paddingTop="24dp">
-
         <EditText
+            android:id="@+id/orgn_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Organization Name"
@@ -24,13 +27,15 @@
             android:paddingBottom="24dp"/>
 
         <EditText
+            android:id="@+id/orgn_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Organization Email"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             android:paddingBottom="24dp"/>
 
         <EditText
+            android:id="@+id/orgn_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Location"
@@ -38,6 +43,7 @@
             android:paddingBottom="24dp"/>
 
         <EditText
+            android:id="@+id/orgn_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Phone no."
@@ -46,6 +52,7 @@
             android:textColor="@color/black"/>
 
         <EditText
+            android:id="@+id/orgn_website"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Website"
@@ -54,6 +61,7 @@
             android:textColor="@color/black"/>
 
         <EditText
+            android:id="@+id/orgn_pan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="PAN No."
@@ -62,6 +70,7 @@
             android:textColor="@color/black"/>
 
         <Button
+            android:id="@+id/register_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -72,3 +81,4 @@
     </LinearLayout>
 
 </LinearLayout>
+
