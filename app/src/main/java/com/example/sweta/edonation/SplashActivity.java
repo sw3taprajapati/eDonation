@@ -1,10 +1,14 @@
 package com.example.sweta.edonation;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 public class SplashActivity extends AppCompatActivity {
     @Override
@@ -16,9 +20,12 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
-                startActivity(intent);
-                finish();
+
+                    Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+                    finish();
+
+
             }
         },2000);
     }
