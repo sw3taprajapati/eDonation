@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Toolbar toolbar;
     EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan;
     String orgnameString, orgemailString, orglocationString, orgwebsiteString;
-    int orgphoneInt, orgpanInt, length;
+    int orgphoneInt;
     Button orgregister;
 
     @Override
@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void initListeners() {
         orgregister.setOnClickListener(this);
-        orgphone.setOnClickListener(this);
+        //orgphone.setOnClickListener(this);
 
     }
 
@@ -68,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent=new Intent(RegisterActivity.this, DashboardActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, DashboardActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -92,6 +92,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
+
         String phone;
         String panno;
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -129,67 +130,88 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         //Toast.makeText(this, "Organization location cannot be empty", Toast.LENGTH_SHORT).show();
                         orglocation.setError("Organization location cannot be empty");
 
-                    } else {
-                        phone = orgphone.getText().toString().trim();
-
-                        if (phone.equals("")) {
-                            //Toast.makeText(this, "Organization phone cannot be empty", Toast.LENGTH_SHORT).show();
-                            orgphone.setError("Organization phone cannot be empty");
-
-                        } else if (phone.length() != 10 && phone.length() != 7) {
-
-                            //Toast.makeText(this, "Enter valid phone number", Toast.LENGTH_SHORT).show();
-                            orgphone.setError("Enter valid number");
+                    } else if (orgemailString.matches(emailPattern)) {
+                        orglocationString = orglocation.getText().toString().trim();
+                        if (orglocationString.equals("")) {
+                            //Toast.makeText(this, "Organization location cannot be empty", Toast.LENGTH_SHORT).show();
+                            orglocation.setError("Organization location cannot be empty");
 
                         } else {
-                            try {
-                                orgphoneInt = Integer.parseInt(orgphone.getText().toString());
-                            } catch (Exception e) {
+                            phone = orgphone.getText().toString().trim();
 
-                            }
+                            if (phone.equals("")) {
+                                //Toast.makeText(this, "Organization phone cannot be empty", Toast.LENGTH_SHORT).show();
+                                orgphone.setError("Organization phone cannot be empty");
 
-                            orgwebsiteString = orgwebsite.getText().toString().trim();
-                            boolean flag = isValidUrl(orgwebsiteString);
-                            if (flag == false) {
-                                orgwebsite.setError("Invalid website");
+                            } else if (phone.length() != 10 && phone.length() != 7) {
+
+                                //Toast.makeText(this, "Enter valid phone number", Toast.LENGTH_SHORT).show();
+                                orgphone.setError("Enter valid number");
 
                             } else {
-                                if (orgwebsiteString.equals("")) {
-                                    //Toast.makeText(this, "Organization website cannot be empty", Toast.LENGTH_SHORT).show();
-                                    orgwebsite.setError("Organization website cannot be empty");
+                                try {
+                                    orgphoneInt = Integer.parseInt(orgphone.getText().toString());
+                                } catch (Exception e) {
 
+                                }
+                                orgwebsiteString = orgwebsite.getText().toString().trim();
+                                boolean flag = isValidUrl(orgwebsiteString);
+                                if (flag == false) {
+                                    orgwebsite.setError("Invalid website");
 
                                 } else {
-                                    panno = orgpan.getText().toString();
-                                    if (panno.equals("")) {
-                                        orgpan.setError("Organization pan cannot be empty");
-                                        //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
+                                    if (orgwebsiteString.equals("")) {
+                                        //Toast.makeText(this, "Organization website cannot be empty", Toast.LENGTH_SHORT).show();
+                                        orgwebsite.setError("Organization website cannot be empty");
+
+
                                     } else {
+                                        panno = orgpan.getText().toString();
+                                        if (panno.equals("")) {
+                                            orgpan.setError("Organization pan cannot be empty");
+                                            //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
+                                        } else {
 
-                                        Intent intent = new Intent(RegisterActivity.this, OnVerifyActivity.class);
-                                        startActivity(intent);
-                                        finish();
+                                            Intent intent = new Intent(RegisterActivity.this, OnVerifyActivity.class);
+                                            startActivity(intent);
+                                            finish();
 
+                                        }
+                                    }
+                                    orgwebsiteString = orgwebsite.getText().toString().trim();
+                                    boolean flag = isValidUrl(orgwebsiteString);
+                                    if (orgwebsiteString.equals("")) {
+                                        //Toast.makeText(this, "Organization website cannot be empty", Toast.LENGTH_SHORT).show();
+                                        orgwebsite.setError("Organization website cannot be empty");
+                                    } else if (flag == false) {
+                                        orgwebsite.setError("Invalid website");
+
+                                    } else {
+                                        panno = orgpan.getText().toString();
+                                        if (panno.equals("")) {
+                                            orgpan.setError("Organization pan cannot be empty");
+                                            //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
+                                        } else {
+
+                                            Intent intent = new Intent(RegisterActivity.this, OnVerifyActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
                                     }
                                 }
+                            } else{
+                                orgemail.setError("enter valid email");
+                                //Toast.makeText(this, "Enter valid email address", Toast.LENGTH_SHORT).show();
+
+
                             }
+
+
                         }
+
                     }
-                } else {
-                    orgemail.setError("enter valid email");
-                    //Toast.makeText(this, "Enter valid email address", Toast.LENGTH_SHORT).show();
-
-
                 }
-
-
             }
-
-
         }
     }
-
 }
-
-
-
