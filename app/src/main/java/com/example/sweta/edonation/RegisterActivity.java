@@ -1,5 +1,6 @@
 package com.example.sweta.edonation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Contacts;
 import android.provider.ContactsContract;
@@ -159,6 +160,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 //Toast.makeText(this, "Enter valid email address", Toast.LENGTH_SHORT).show();
 
             }
+
+            Intent intent=new Intent(RegisterActivity.this,OnVerifyActivity.class);
+            startActivity(intent);
+            finish();
         }
 
     }

@@ -23,11 +23,8 @@
         </activity>
 
         <activity android:name=".RegisterActivity"/>
-<<<<<<< HEAD
         <activity android:name=".DashboardActivity"/>
-=======
         <activity android:name=".OnVerifyActivity" />
->>>>>>> d23b9953722a6d2a3f16b331c3194a5d52562691
     </application>
 
 </manifest>
