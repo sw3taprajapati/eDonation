@@ -18,61 +18,72 @@
         android:weightSum="7">
 
         <EditText
-            android:id="@+id/orgName"
+            android:id="@+id/orgn_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorTheme"
             android:hint="Organization Name"
             android:inputType="text"
             android:paddingBottom="24dp"
             android:layout_weight="1"/>
 
         <EditText
-            android:id="@+id/orgEmail"
+            android:textCursorDrawable="@drawable/ic_cursor"
+            android:id="@+id/orgn_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorTheme"
             android:hint="Organization Email"
             android:inputType="text"
             android:paddingBottom="24dp"
             android:layout_weight="1"/>
 
         <EditText
-            android:id="@+id/location"
+            android:id="@+id/orgn_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorTheme"
             android:hint="Location"
             android:inputType="text"
             android:paddingBottom="24dp"
             android:layout_weight="1"/>
 
         <EditText
-            android:id="@+id/phoneNum"
+            android:textCursorDrawable="@drawable/ic_cursor"
+            android:id="@+id/orgn_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorTheme"
             android:hint="Phone no."
-            android:inputType="text"
+            android:inputType="number"
             android:paddingBottom="24dp"
-            android:textColor="@color/black"/>
+
+            android:textColor="@color/black" />
 
         <EditText
-            android:id="@+id/website"
+            android:id="@+id/orgn_website"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorTheme"
             android:hint="Website"
             android:inputType="text"
             android:paddingBottom="24dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textCursorDrawable="@drawable/ic_cursor" />
 
         <EditText
-            android:id="@+id/panNum"
+            android:id="@+id/orgn_pan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorTheme"
             android:hint="PAN No."
             android:inputType="text"
             android:paddingBottom="24dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textCursorDrawable="@drawable/ic_cursor" />
 
         <Button
-            android:id="@+id/registerBtn"
+            android:id="@+id/register_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -83,3 +94,4 @@
     </LinearLayout>
 
 </LinearLayout>
+
