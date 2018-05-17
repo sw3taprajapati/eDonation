@@ -102,6 +102,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     if (phone.equals("")) {
                         Toast.makeText(this, "Organization phone cannot be empty", Toast.LENGTH_SHORT).show();
 
+                    }else if(phone.length()!=10 && phone.length()!=7){
+
+                        Toast.makeText(this, "Enter valid phone number", Toast.LENGTH_SHORT).show();
+
                     } else {
                         try {
                             orgphoneInt = Integer.parseInt(orgphone.getText().toString());
