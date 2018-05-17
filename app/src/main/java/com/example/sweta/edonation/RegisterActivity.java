@@ -18,7 +18,7 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
     Toolbar toolbar;
     EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan;
@@ -38,7 +38,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void initListeners() {
         orgregister.setOnClickListener(this);
         orgphone.setOnClickListener(this);
-        orgname.addTextChangedListener(this);
 
     }
 
