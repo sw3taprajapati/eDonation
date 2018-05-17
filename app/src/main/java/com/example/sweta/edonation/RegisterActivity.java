@@ -19,7 +19,9 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
+
 
     Toolbar toolbar;
     EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan;
@@ -102,6 +104,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             //orgemail.isEnabled(false);
 
 
+
         } else {
             orgemailString = orgemail.getText().toString().trim();
             if (orgemailString.equals("")) {
@@ -109,6 +112,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 orgemail.setError("Organization email cannot be empty");
             } else if (orgemailString.matches(emailPattern)) {
                 orglocationString = orglocation.getText().toString().trim();
+
+        } else {
+            orgemailString = orgemail.getText().toString().trim();
+
+            if (orgemailString.equals("")) {
+                // Toast.makeText(this, "Organization email cannot be empty", Toast.LENGTH_SHORT).show();
+                orgemail.setError("Organization email cannot be empty");
+
+            }else if (orgemailString.matches(emailPattern)) {
+                orglocationString = orglocation.getText().toString().trim();
+
+
                 if (orglocationString.equals("")) {
                     //Toast.makeText(this, "Organization location cannot be empty", Toast.LENGTH_SHORT).show();
                     orglocation.setError("Organization location cannot be empty");
@@ -149,7 +164,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     orgpan.setError("Organization pan cannot be empty");
                                     //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(this, "Successful", Toast.LENGTH_SHORT).show();
+
+
+                                    Intent intent = new Intent(RegisterActivity.this, OnVerifyActivity.class);
+                                    startActivity(intent);
+                                    finish();
+
                                 }
                             }
                         }
@@ -159,14 +179,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 orgemail.setError("enter valid email");
                 //Toast.makeText(this, "Enter valid email address", Toast.LENGTH_SHORT).show();
 
+
             }
 
-            Intent intent=new Intent(RegisterActivity.this,OnVerifyActivity.class);
-            startActivity(intent);
-            finish();
+
+        }
+
+
+            }
         }
 
     }
-}
+
 
 

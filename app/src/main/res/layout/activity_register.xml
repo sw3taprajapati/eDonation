@@ -38,7 +38,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorTheme"
                 android:hint="Organization Email"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:paddingBottom="24dp"
                 android:textCursorDrawable="@drawable/ic_cursor" />
 
