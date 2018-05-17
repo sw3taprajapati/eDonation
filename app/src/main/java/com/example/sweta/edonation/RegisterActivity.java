@@ -164,7 +164,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     orgpan.setError("Organization pan cannot be empty");
                                     //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(this, "Successful", Toast.LENGTH_SHORT).show();
+
 
                                     Intent intent = new Intent(RegisterActivity.this, OnVerifyActivity.class);
                                     startActivity(intent);
@@ -182,9 +182,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             }
 
-            Intent intent=new Intent(RegisterActivity.this,OnVerifyActivity.class);
-            startActivity(intent);
-            finish();
+
         }
 
 
