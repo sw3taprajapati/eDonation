@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Toolbar toolbar;
     EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan;
     String orgnameString, orgemailString, orglocationString, orgwebsiteString;
-    int orgphoneInt;
+    int orgphoneInt,orgpanInt;
     Button orgregister;
 
     @Override
@@ -151,6 +151,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
                             } else {
 
+                                orgpanInt=orgpan.getText().toString().trim();
                                 Intent intent = new Intent(RegisterActivity.this, OnVerifyActivity.class);
                                 startActivity(intent);
                                 finish();
