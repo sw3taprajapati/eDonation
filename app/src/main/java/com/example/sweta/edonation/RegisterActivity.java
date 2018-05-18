@@ -19,12 +19,14 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
+
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+
 
     Toolbar toolbar;
     EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan;
     String orgnameString, orgemailString, orglocationString, orgwebsiteString;
-    int orgphoneInt, orgpanInt, length;
+    int orgphoneInt;
     Button orgregister;
 
     @Override
@@ -38,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void initListeners() {
         orgregister.setOnClickListener(this);
-        orgphone.setOnClickListener(this);
+        //orgphone.setOnClickListener(this);
 
     }
 
@@ -88,6 +90,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
+
         String phone;
         String panno;
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -107,6 +110,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             if (orgemailString.equals("")) {
                 // Toast.makeText(this, "Organization email cannot be empty", Toast.LENGTH_SHORT).show();
                 orgemail.setError("Organization email cannot be empty");
+
             } else if (orgemailString.matches(emailPattern)) {
                 orglocationString = orglocation.getText().toString().trim();
                 if (orglocationString.equals("")) {
@@ -134,23 +138,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                         orgwebsiteString = orgwebsite.getText().toString().trim();
                         boolean flag = isValidUrl(orgwebsiteString);
-                        if (flag == false) {
+                        if (orgwebsiteString.equals("")) {
+                            //Toast.makeText(this, "Organization website cannot be empty", Toast.LENGTH_SHORT).show();
+                            orgwebsite.setError("Organization website cannot be empty");
+                        } else if (flag == false) {
                             orgwebsite.setError("Invalid website");
 
                         } else {
-                            if (orgwebsiteString.equals("")) {
-                                //Toast.makeText(this, "Organization website cannot be empty", Toast.LENGTH_SHORT).show();
-                                orgwebsite.setError("Organization website cannot be empty");
-
-
+                            panno = orgpan.getText().toString();
+                            if (panno.equals("")) {
+                                orgpan.setError("Organization pan cannot be empty");
+                                //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
                             } else {
-                                panno = orgpan.getText().toString();
-                                if (panno.equals("")) {
-                                    orgpan.setError("Organization pan cannot be empty");
-                                    //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(this, "Successful", Toast.LENGTH_SHORT).show();
-                                }
+
+                                Intent intent = new Intent(RegisterActivity.this, OnVerifyActivity.class);
+                                startActivity(intent);
+                                finish();
+
                             }
                         }
                     }
@@ -159,14 +163,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 orgemail.setError("enter valid email");
                 //Toast.makeText(this, "Enter valid email address", Toast.LENGTH_SHORT).show();
 
+
             }
 
-            Intent intent=new Intent(RegisterActivity.this,OnVerifyActivity.class);
-            startActivity(intent);
-            finish();
+
         }
+
 
     }
 }
-
-
