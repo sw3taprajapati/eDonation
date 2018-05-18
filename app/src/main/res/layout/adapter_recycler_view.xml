@@ -51,7 +51,6 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/website_button"
             android:textColor="@color/white"
-            android:padding="8dp"
             android:drawableLeft="@mipmap/ic_website"/>
 
         <Button
@@ -63,7 +62,6 @@
             android:layout_weight="1"
             android:drawableLeft="@mipmap/ic_call"
             android:layout_marginRight="16dp"
-            android:padding="8dp"
             android:layout_marginTop="16dp"/>
 
 
