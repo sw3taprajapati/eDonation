@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "527633947626",
+    "firebase_url": "https://edonation-c2ca3.firebaseio.com",
+    "project_id": "edonation-c2ca3",
+    "storage_bucket": "edonation-c2ca3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527633947626:android:21be9f15377a622b",
+        "android_client_info": {
+          "package_name": "com.example.sweta.edonation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527633947626-reqv10e42k3epg4mmvvi3mi03d58ppt7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sweta.edonation",
+            "certificate_hash": "63b4ea76a1cba0ce2c832c54629878a7e909d097"
+          }
+        },
+        {
+          "client_id": "527633947626-cjgimmkrvb58hu74kac77oje86anke29.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbxYLeF2uwb4fBf1TvenCDudRRxDQfrLI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527633947626-cjgimmkrvb58hu74kac77oje86anke29.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
