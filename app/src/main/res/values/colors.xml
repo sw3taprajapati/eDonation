@@ -5,7 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffff</color>
     <color name="black">#000000</color>
-    <color name="blue"></color>
-    <color name="colorThemeDark">#04b37c</color>
-    <color name="colorTheme">#24cc7e</color>
+    <color name="blue">#FF303F9F</color>
+    <color name="colorThemeDark">#009070</color>
+    <color name="colorTheme">#00b58c</color>
+    <color name="websiteColor">#05ace4</color>
+    <color name="callColor">#00c268</color>
 </resources>

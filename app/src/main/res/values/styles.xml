@@ -9,6 +9,11 @@
         <item name="android:textColorSecondary">@color/white</item>
         <item name="android:statusBarColor">@color/colorThemeDark</item>
     </style>
+
+
+
+
+
     <style name="AppTheme.Splash" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
     </style>
