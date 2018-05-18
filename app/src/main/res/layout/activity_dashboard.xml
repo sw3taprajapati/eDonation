@@ -21,8 +21,9 @@
         android:textColor="@color/black"
         android:textSize="20dp" />
 
-    <Button
-        android:id="@+id/registerBtn"
+
+    <LinearLayout
+        android:id="@+id/ll_location_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/searchView"
@@ -30,17 +31,31 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/button_border"
-        android:drawableLeft="@mipmap/icon_register_text"
-        android:padding="8dp"
-        android:text="@string/register"
-        android:textColor="@color/blue"
-        android:textSize="20dp" />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:padding="8dp"
+            android:src="@mipmap/icon_register_text" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="null"
+            android:paddingBottom="10dp"
+            android:paddingTop="6dp"
+            android:gravity="left|center_vertical"
+            android:text="@string/register"
+            android:textColor="@color/blue" />
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/registerBtn"
+        android:layout_below="@+id/ll_location_container"
         android:layout_margin="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
