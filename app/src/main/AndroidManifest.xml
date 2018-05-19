@@ -32,6 +32,7 @@
 
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".DashboardActivity"/>
+        <activity android:name=".AdminActivity"/>
         <activity android:name=".OnVerifyActivity" />
 
     </application>
