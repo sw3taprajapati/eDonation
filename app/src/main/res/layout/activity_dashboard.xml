@@ -29,12 +29,13 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/button_border"
+        android:background="@null"
         android:drawableLeft="@mipmap/icon_register_text"
         android:padding="8dp"
         android:text="@string/register"
         android:textColor="@color/blue"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
