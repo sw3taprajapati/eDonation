@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import android.widget.Toolbar;
@@ -23,7 +24,8 @@ import android.widget.Toast;
 
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button registerBtn;
+    EditText searchTxt;
+    Button registerBtn,searchBtn;
     android.support.v7.widget.Toolbar toolbar;
     private Context context;
 
@@ -32,10 +34,13 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+
         initComponents();
         initToolbar();
         setListener();
         checkwifi();
+//        editTextListener();
+
 
     }
     private boolean isNetworkConnected() {
@@ -69,6 +74,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         registerBtn =findViewById(R.id.registerBtn);
         toolbar=findViewById(R.id.toolbar);
+        searchTxt=findViewById(R.id.searchTxt);
     }
 
     private void initToolbar() {
@@ -93,17 +99,31 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void setListener(){
+
         registerBtn.setOnClickListener(this);
+        searchTxt.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
 
-        //if(v==registerBtn){
+        if(v==registerBtn){
             Intent intent=new Intent(DashboardActivity.this,
                     RegisterActivity.class);
             startActivity(intent);
             finish();
-        //}
+
+            //cursor appear only on click in searchtex
+        }
+        else if(v==searchTxt){
+            if (v.getId() == searchTxt.getId()) {
+                searchTxt.setCursorVisible(true);
+            }
+        }
     }
+
 }
+
+
+
+
