@@ -1,21 +1,16 @@
 package com.example.sweta.edonation;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Contacts;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,8 +21,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Toolbar toolbar;
     EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan;
     String orgnameString, orgemailString, orglocationString, orgwebsiteString;
-    int orgphoneInt;
+    int orgphoneInt,orgpanInt,status=0;
     Button orgregister;
+
+    DatabaseReference databaseOrganization;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +33,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         initComponent();
         initListeners();
         initToolbar();
+
+        databaseOrganization= FirebaseDatabase.getInstance().getReference("OrganizationDetails");
+
     }
 
     private void initListeners() {
@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
 
         String phone;
-        String panno;
+        String panNo;
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
         orgnameString = orgname.getText().toString().trim();
@@ -145,20 +145,29 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             orgwebsite.setError("Invalid website");
 
                         } else {
-                            panno = orgpan.getText().toString();
-                            if (panno.equals("")) {
+                            panNo = orgpan.getText().toString();
+                            if (panNo.equals("")) {
                                 orgpan.setError("Organization pan cannot be empty");
                                 //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
-                            } else {
+                            }
+                            else
+                            {
+                                orgpanInt=Integer.parseInt(orgpan.getText().toString());
 
-                                Intent intent = new Intent(RegisterActivity.this, OnVerifyActivity.class);
-                                startActivity(intent);
-                                finish();
+                                    String orgId = databaseOrganization.push().getKey();
+                                    Organization org = new Organization(orgId, orgnameString,orgemailString,orglocationString,orgphoneInt,orgwebsiteString,orgpanInt,status);
+                                    databaseOrganization.child(orgId).setValue(org);
 
+
+                                    Intent intent = new Intent(RegisterActivity.this, OnVerifyActivity.class);
+                                    startActivity(intent);
+                                    finish();
+
+                                }
                             }
                         }
                     }
-                }
+
             } else {
                 orgemail.setError("enter valid email");
                 //Toast.makeText(this, "Enter valid email address", Toast.LENGTH_SHORT).show();

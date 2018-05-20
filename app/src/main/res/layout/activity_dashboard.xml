@@ -8,6 +8,16 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
+    <Button
+        android:id="@+id/admin_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/toolbar"
+        android:layout_alignEnd="@+id/searchView"
+        android:layout_gravity="right"
+        android:text="Admin"
+        />
+
     <android.support.v7.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"

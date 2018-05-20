@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button registerBtn;
+    Button adminBtn;
 
 
     @Override
@@ -26,11 +27,15 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     private void initComponents(){
 
-        registerBtn =findViewById(R.id.registerBtn);
+        registerBtn = findViewById(R.id.registerBtn);
+        adminBtn = findViewById(R.id.admin_button);
+
     }
 
     private void setListener(){
         registerBtn.setOnClickListener(this);
+        adminBtn.setOnClickListener(this);
+
     }
 
     @Override
@@ -42,5 +47,17 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             startActivity(intent);
             finish();
         }
+
+        if(v==adminBtn){
+            Intent intent=new Intent(DashboardActivity.this,
+                    AdminActivity.class);
+            startActivity(intent);
+            finish();
+
+
+        }
+
+
+
     }
 }
