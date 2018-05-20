@@ -88,14 +88,14 @@
                 android:background="@mipmap/ic_website" />
 
             <Button
+                android:id="@+id/btnWebsite"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:background=""
                 android:text="website"
-                android:textColor="@color/white" />
+                android:background="@null"
+                android:textColor="@color/white"/>
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/callBtnLayout"
             android:layout_width="0dp"
@@ -118,8 +118,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:background=""
                 android:text="call"
+                android:background="@null"
                 android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>

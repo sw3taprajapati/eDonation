@@ -42,12 +42,13 @@
             android:src="@mipmap/icon_register_text" />
 
         <Button
+            android:id="@+id/registerBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background=""
             android:paddingBottom="10dp"
             android:paddingTop="6dp"
-            android:gravity="left|center_vertical"
+            android:background="@null"
+            android:gravity="left"
             android:text="@string/register"
             android:textColor="@color/blue" />
     </LinearLayout>

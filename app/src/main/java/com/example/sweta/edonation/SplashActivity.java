@@ -1,14 +1,10 @@
 package com.example.sweta.edonation;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 public class SplashActivity extends AppCompatActivity {
     @Override
