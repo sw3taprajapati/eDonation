@@ -23,6 +23,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     Button registerBtn;
     private Context context;
+    Button adminBtn;
 
 
     @Override
@@ -37,7 +38,13 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
+
         return cm.getActiveNetworkInfo() != null;
+
+        // registerBtn = findViewById(R.id.registerBtn);
+        // adminBtn = findViewById(R.id.adminButton);
+
+
     }
 
     private void checkwifi() {
@@ -84,31 +91,45 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     private void initComponents() {
 
         registerBtn = findViewById(R.id.registerBtn);
+        adminBtn = findViewById(R.id.adminButton);
+
     }
 
     private void setListener() {
         registerBtn.setOnClickListener(this);
+        adminBtn.setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View v) {
         boolean check1 = isNetworkConnected();
         if (check1 == true) {
-
             if (v == registerBtn) {
                 Intent intent = new Intent(DashboardActivity.this,
                         RegisterActivity.class);
                 startActivity(intent);
                 finish();
+
+            } else if (v == adminBtn) {
+
+                Intent intent = new Intent(DashboardActivity.this,
+                        AdminActivity.class);
+                startActivity(intent);
+                //finish();
+
             }
         } else {
-            if (v == registerBtn) {
-                Toast toast = Toast.makeText(this, "Connect to a network", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-            }
-        }
 
+            Toast toast = Toast.makeText(this, "Connect to a network", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+
+        }
     }
 }
+
+
+
+
 

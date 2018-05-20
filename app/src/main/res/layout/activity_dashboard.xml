@@ -8,6 +8,16 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
+    <Button
+        android:id="@+id/adminButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/toolbar"
+        android:layout_alignEnd="@+id/searchView"
+        android:layout_gravity="right"
+        android:text="Admin"
+        />
+
     <android.support.v7.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
@@ -40,7 +50,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/registerTxt"
+        android:layout_below="@+id/registerBtn"
         android:layout_margin="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
