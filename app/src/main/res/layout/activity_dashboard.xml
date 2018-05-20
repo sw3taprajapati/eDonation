@@ -9,7 +9,18 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
-    <android.support.v7.widget.SearchView
+    <LinearLayout
+        android:id="@+id/llSearchViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+    <EditText
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,16 +29,23 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/search_border"
-        android:padding="8dp"
+        android:hint="Search by Name"
+        android:layout_weight="1"
         android:textColor="@color/black"
         android:textSize="20dp" />
 
+        <ImageButton
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llLocationContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/searchView"
+        android:layout_below="@+id/llSearchViewContainer"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
