@@ -12,11 +12,13 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import android.widget.Toolbar;
@@ -24,8 +26,10 @@ import android.widget.Toast;
 
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText searchTxt;
-    Button registerBtn,searchBtn;
+    private EditText searchTxt;
+    private Button registerBtn;
+    private ImageButton searchBtn;
+    private RecyclerView recyclerView;
     android.support.v7.widget.Toolbar toolbar;
     private Context context;
 
@@ -75,6 +79,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         registerBtn =findViewById(R.id.registerBtn);
         toolbar=findViewById(R.id.toolbar);
         searchTxt=findViewById(R.id.searchTxt);
+        searchBtn=findViewById(R.id.searchButton);
+        recyclerView=findViewById(R.id.recyclerView);
+
     }
 
     private void initToolbar() {

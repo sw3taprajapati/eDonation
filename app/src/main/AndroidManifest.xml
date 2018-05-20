@@ -33,7 +33,6 @@
         <activity android:name=".DashboardActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".OnVerifyActivity" />
-        <activity android:name=".AdminActivity" android:exported="true"/>
     </application>
 
 </manifest>

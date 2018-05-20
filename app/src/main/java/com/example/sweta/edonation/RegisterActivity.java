@@ -145,7 +145,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             try {
                                 orgphoneInt = Integer.parseInt(orgphone.getText().toString());
                             } catch (Exception e) {
-
+                                orgpan.setError("Organization Phone Number must be in numeric value");
                             }
 
                             orgwebsiteString = orgwebsite.getText().toString().trim();
