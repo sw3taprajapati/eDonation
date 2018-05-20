@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -23,7 +24,7 @@
 
 
     <LinearLayout
-        android:id="@+id/ll_location_container"
+        android:id="@+id/llLocationContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/searchView"
@@ -43,7 +44,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="null"
+            android:background=""
             android:paddingBottom="10dp"
             android:paddingTop="6dp"
             android:gravity="left|center_vertical"
@@ -55,7 +56,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_location_container"
+        android:layout_below="@+id/llLocationContainer"
         android:layout_margin="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
