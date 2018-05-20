@@ -5,8 +5,42 @@
     android:background="@color/white">
 
     <include
-        android:id="@+id/toolBar"
+        android:id="@+id/toolbar"
         layout="@layout/toolbar" />
+
+<LinearLayout
+    android:id="@+id/admin_heading"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_below="@id/toolbar">
+
+    <TextView
+        android:id="@+id/organization_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Organization Name"/>
+
+    <TextView
+        android:id="@+id/pan_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:text="PAN No."
+        android:layout_marginTop="8dp" />
+
+
+</LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/admin_heading"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:scrollbars="vertical" />
 
 
 </RelativeLayout>
