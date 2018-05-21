@@ -24,6 +24,9 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.Query;
+
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText searchTxt;
@@ -47,40 +50,39 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
 
     }
+
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         return cm.getActiveNetworkInfo() != null;
     }
 
-    private void checkwifi(){
+    private void checkwifi() {
 
 //        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE)
 //                != PackageManager.PERMISSION_GRANTED) {
 //            // Permission is not granted
 //        }
 
-        boolean check=isNetworkConnected();
-        if (check==true){
+        boolean check = isNetworkConnected();
+        if (check == true) {
             initComponents();
             setListener();
 
-        }
-
-        else{
+        } else {
             WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             wifi.setWifiEnabled(true);
             //Toast.makeText(this,"no internet connection",Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void initComponents(){
+    private void initComponents() {
 
-        registerBtn =findViewById(R.id.registerBtn);
-        toolbar=findViewById(R.id.toolbar);
-        searchTxt=findViewById(R.id.searchTxt);
-        searchBtn=findViewById(R.id.searchButton);
-        recyclerView=findViewById(R.id.recyclerView);
+        registerBtn = findViewById(R.id.registerBtn);
+        toolbar = findViewById(R.id.toolbar);
+        searchTxt = findViewById(R.id.searchTxt);
+        searchBtn = findViewById(R.id.searchBtn);
+        recyclerView = findViewById(R.id.recyclerView);
 
     }
 
@@ -105,29 +107,61 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         return true;
     }
 
-    private void setListener(){
+    private void setListener() {
 
         registerBtn.setOnClickListener(this);
         searchTxt.setOnClickListener(this);
+        searchBtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
 
-        if(v==registerBtn){
-            Intent intent=new Intent(DashboardActivity.this,
+        if (v == registerBtn) {
+            Intent intent = new Intent(DashboardActivity.this,
                     RegisterActivity.class);
             startActivity(intent);
             finish();
 
             //cursor appear only on click in searchtex
-        }
-        else if(v==searchTxt){
+        } else if (v == searchTxt) {
             if (v.getId() == searchTxt.getId()) {
                 searchTxt.setCursorVisible(true);
             }
+        } else if (v == searchBtn) {
+            String searchText = searchTxt.getText().toString();
+
+            firebaseOrganizationSearch(searchText);
         }
     }
+
+    private void firebaseOrganizationSearch(String searchText) {
+        Toast.makeText(DashboardActivity.this, "Started Search", Toast.LENGTH_LONG).show();
+
+        Query firebaseSearchQuery = eDonation.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
+
+        FirebaseRecyclerAdapter<Organization, OrganizationViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Organization, OrganizationViewHolder>(
+
+                Organization.class,
+                R.layout.adapter_recycler_view,
+                OrganizationViewHolder.class,
+                firebaseSearchQuery
+
+        ) {
+            @Override
+            protected void populateViewHolder(OrganizationViewHolder viewHolder, Organization model, int position) {
+
+
+                viewHolder.setDetails(getApplicationContext(), model.getOrgFullName(),model.getOrgFullName(), model.getStatus(), model.or());
+
+            }
+        };
+
+        mResultList.setAdapter(firebaseRecyclerAdapter);
+
+    }
+}
 
 }
 

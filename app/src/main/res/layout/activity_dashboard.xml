@@ -9,41 +9,44 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
-    <LinearLayout
-        android:id="@+id/searchContainer"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/searchTxt"
+        android:layout_width="306dp"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/toolbar"
         android:layout_below="@+id/toolbar"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:orientation="horizontal">
+        android:background="@drawable/search_layout"
+        android:ems="10"
+        android:hint="Search here"
+        android:inputType="textPersonName"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:textColor="#999999"
+        android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/searchTxt"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:padding="@dimen/dimen_10dp"
-            android:layout_below="@+id/toolbar"
-            android:background="@drawable/search_border"
-            android:hint="Search by name..."
-            android:cursorVisible="false"/>
-
-        <ImageButton
-            android:id="@+id/searchButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:background="@color/white"
-            android:src="@drawable/ic_search" />
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/searchBtn"
+        android:layout_width="44dp"
+        android:layout_height="41dp"
+        android:layout_alignEnd="@+id/llLocationContainer"
+        android:layout_alignTop="@+id/searchTxt"
+        android:background="@android:color/background_light"
+        app:srcCompat="@drawable/ic_search" />
 
 
     <LinearLayout
         android:id="@+id/llLocationContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/searchContainer"
+        android:layout_below="@+id/searchTxt"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"

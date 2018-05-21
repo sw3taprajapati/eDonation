@@ -115,6 +115,7 @@
                 android:background="@mipmap/ic_call" />
 
             <Button
+                android:id="@+id/callBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
