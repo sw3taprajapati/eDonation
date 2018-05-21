@@ -73,6 +73,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                Intent intent=new Intent(RegisterActivity.this,DashboardActivity.class);
                 finish();
                 return true;
         }

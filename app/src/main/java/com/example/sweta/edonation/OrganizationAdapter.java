@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdapter.OrganizationViewHolder>{
+public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapter.OrganizationViewHolder>{
 
     Context context;
     List<Organization> organizationList;
 
-    public OrganizationsAdapter(Context context, List<Organization> organizationList) {
+    public OrganizationAdapter(Context context, List<Organization> organizationList) {
         this.context = context;
         this.organizationList = organizationList;
     }

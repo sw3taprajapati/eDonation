@@ -9,11 +9,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-public class OrganizationViewHolder extends RecyclerView.ViewHolder {
+public class SearchViewHolder extends RecyclerView.ViewHolder {
 
     View view;
 
-    public OrganizationViewHolder(View itemView) {
+    public SearchViewHolder(View itemView) {
         super(itemView);
         view=itemView;
     }

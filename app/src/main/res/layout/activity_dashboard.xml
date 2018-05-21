@@ -9,6 +9,20 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
+    <Button
+        android:id="@+id/adminButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/toolbar"
+        android:textColor="@color/white"
+        android:background="@color/colorThemeDark"
+        android:layout_alignParentEnd="true"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        android:layout_gravity="right"
+        android:text="Admin"/>
+
+
     <EditText
         android:id="@+id/searchTxt"
         android:layout_width="306dp"

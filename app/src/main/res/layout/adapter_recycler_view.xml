@@ -24,15 +24,16 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@mipmap/ic_location" />
 
         <TextView
             android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"/>
 
 
     </LinearLayout>
@@ -48,15 +49,16 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@mipmap/ic_email" />
 
         <TextView
             android:id="@+id/emailTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"/>
 
 
     </LinearLayout>
@@ -72,7 +74,7 @@
         <LinearLayout
             android:id="@+id/websiteBtnLayout"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
@@ -82,8 +84,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:background="@mipmap/ic_website" />
 
@@ -99,7 +101,7 @@
         <LinearLayout
             android:id="@+id/callBtnLayout"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
@@ -109,8 +111,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:background="@mipmap/ic_call" />
 

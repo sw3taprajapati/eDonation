@@ -21,7 +21,7 @@ public class AdminActivity extends AppCompatActivity{
 
     Toolbar toolbar;
     RecyclerView recyclerView;
-    OrganizationsAdapter adapter;
+    OrganizationAdapter adapter;
     List<Organization> organizationList;
 
 
@@ -52,7 +52,7 @@ public class AdminActivity extends AppCompatActivity{
                         organizationList.add(org);
                     }
 
-                    adapter = new OrganizationsAdapter(AdminActivity.this, organizationList);
+                    adapter = new OrganizationAdapter(AdminActivity.this, organizationList);
                     recyclerView.setAdapter(adapter);
                 }
             }
