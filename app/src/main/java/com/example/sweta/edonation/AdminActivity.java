@@ -30,9 +30,9 @@ public class AdminActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        /*initComponent();
-        initToolbar();
-    */
+      /*  initComponent();
+        initToolbar(); */
+
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

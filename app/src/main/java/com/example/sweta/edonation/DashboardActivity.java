@@ -9,52 +9,42 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
-
-import android.widget.Toolbar;
 import android.widget.Toast;
-
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.Query;
 
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText searchTxt;
-    private Button registerBtn;
-    private ImageButton searchBtn;
-    private RecyclerView recyclerView;
-    android.support.v7.widget.Toolbar toolbar;
+    Button registerBtn;
     private Context context;
+    Button adminBtn;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-
-        initComponents();
-        initToolbar();
-        setListener();
         checkwifi();
-//        editTextListener();
-
 
     }
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
+
         return cm.getActiveNetworkInfo() != null;
+
+        // registerBtn = findViewById(R.id.registerBtn);
+        // adminBtn = findViewById(R.id.adminButton);
+
+
     }
 
     private void checkwifi() {
@@ -70,100 +60,75 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             setListener();
 
         } else {
-            WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-            wifi.setWifiEnabled(true);
+
+            Toast toast = Toast.makeText(this, "Connect to a network", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+
+
+            initComponents();
+            setListener();
+
+            //finishActivity(1);
+
+
+            //startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+            //onBackPressed();
+
+//            checkwifi();
+
+//             WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+//            wifi.setWifiEnabled(true);
+
+
+            // WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+            //  wifi.setWifiEnabled(true);
             //Toast.makeText(this,"no internet connection",Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private void initComponents() {
 
         registerBtn = findViewById(R.id.registerBtn);
-        toolbar = findViewById(R.id.toolbar);
-        searchTxt = findViewById(R.id.searchTxt);
-        searchBtn = findViewById(R.id.searchBtn);
-        recyclerView = findViewById(R.id.recyclerView);
+        adminBtn = findViewById(R.id.adminButton);
 
-    }
-
-    private void initToolbar() {
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("e-Donation");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
     }
 
     private void setListener() {
-
         registerBtn.setOnClickListener(this);
-        searchTxt.setOnClickListener(this);
-        searchBtn.setOnClickListener(this);
+        adminBtn.setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View v) {
+        boolean check1 = isNetworkConnected();
+        if (check1 == true) {
+            if (v == registerBtn) {
+                Intent intent = new Intent(DashboardActivity.this,
+                        RegisterActivity.class);
+                startActivity(intent);
+                finish();
 
-        if (v == registerBtn) {
-            Intent intent = new Intent(DashboardActivity.this,
-                    RegisterActivity.class);
-            startActivity(intent);
-            finish();
+            } else if (v == adminBtn) {
 
-            //cursor appear only on click in searchtex
-        } else if (v == searchTxt) {
-            if (v.getId() == searchTxt.getId()) {
-                searchTxt.setCursorVisible(true);
+                Intent intent = new Intent(DashboardActivity.this,
+                        AdminActivity.class);
+                startActivity(intent);
+                //finish();
+
             }
-        } else if (v == searchBtn) {
-            String searchText = searchTxt.getText().toString();
+        } else {
 
-            firebaseOrganizationSearch(searchText);
+            Toast toast = Toast.makeText(this, "Connect to a network", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+
         }
     }
-
-    private void firebaseOrganizationSearch(String searchText) {
-        Toast.makeText(DashboardActivity.this, "Started Search", Toast.LENGTH_LONG).show();
-
-        Query firebaseSearchQuery = eDonation.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
-
-        FirebaseRecyclerAdapter<Organization, OrganizationViewHolder> firebaseRecyclerAdapter =
-                new FirebaseRecyclerAdapter<Organization, OrganizationViewHolder>(
-
-                Organization.class,
-                R.layout.adapter_recycler_view,
-                OrganizationViewHolder.class,
-                firebaseSearchQuery
-
-        ) {
-            @Override
-            protected void populateViewHolder(OrganizationViewHolder viewHolder, Organization model, int position) {
-
-
-                viewHolder.setDetails(getApplicationContext(), model.getOrgFullName(),model.getOrgFullName(), model.getStatus(), model.or());
-
-            }
-        };
-
-        mResultList.setAdapter(firebaseRecyclerAdapter);
-
-    }
 }
 
-}
 
 
 
