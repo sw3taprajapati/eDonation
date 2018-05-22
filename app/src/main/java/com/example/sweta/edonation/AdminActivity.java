@@ -1,5 +1,6 @@
 package com.example.sweta.edonation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,6 +31,7 @@ public class AdminActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
+
       /*  initComponent();
         initToolbar(); */
 
@@ -58,6 +60,7 @@ public class AdminActivity extends AppCompatActivity{
             }
 
 
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 //this method executes when error
@@ -70,11 +73,16 @@ public class AdminActivity extends AppCompatActivity{
         toolbar=findViewById(R.id.toolBar);
     }
 
-    private void initToolbar(){
+    private void initToolbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Admin");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
