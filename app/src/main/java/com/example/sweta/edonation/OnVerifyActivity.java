@@ -1,5 +1,6 @@
 package com.example.sweta.edonation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -31,6 +32,8 @@ public class OnVerifyActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                Intent intent=new Intent(OnVerifyActivity.this,RegisterActivity.class);
+                startActivity(intent);
                 finish();
                 return true;
         }

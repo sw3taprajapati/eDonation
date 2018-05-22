@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">eDonation</string>
     <string name="register">Register As Organization</string>
+    <string name="search">Search by Name</string>
 </resources>
