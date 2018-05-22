@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import android.widget.Toolbar;
@@ -25,7 +27,8 @@ import android.widget.Toast;
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText searchTxt;
-    Button registerBtn,searchBtn;
+    Button registerBtn;
+    ImageButton mapBtn;
     android.support.v7.widget.Toolbar toolbar;
     private Context context;
 
@@ -75,6 +78,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         registerBtn =findViewById(R.id.registerBtn);
         toolbar=findViewById(R.id.toolbar);
         searchTxt=findViewById(R.id.searchTxt);
+        mapBtn=findViewById(R.id.mapBtn);
     }
 
     private void initToolbar() {
@@ -119,6 +123,11 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             if (v.getId() == searchTxt.getId()) {
                 searchTxt.setCursorVisible(true);
             }
+        }
+
+        else if(v==mapBtn){
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
         }
     }
 

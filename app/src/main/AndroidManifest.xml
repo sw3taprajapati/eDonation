@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.sweta.edonation" >
+    package="com.example.sweta.edonation">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -18,11 +18,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:allowBackup" >
+        tools:replace="android:allowBackup">
         <activity
             android:name=".SplashActivity"
             android:noHistory="true"
-            android:theme="@style/AppTheme.Splash" >
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,6 +33,15 @@
         <activity android:name=".DashboardActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".OnVerifyActivity" />
+        <activity
+            android:name=".DonorProfileActivity"
+            android:label="@string/title_activity_donor_profile"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".DonorRegisterActivity" />
+        <activity android:name=".OrgnEventActivity" />
+        <activity android:name=".OrgnEventProfileActivity" />
+        <activity android:name=".OrganizationEventActivity" />
+        <activity android:name=".DonorEventRecyclerActivity"></activity>
     </application>
 
 </manifest>
