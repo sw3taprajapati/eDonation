@@ -29,7 +29,8 @@
                 android:backgroundTint="@color/colorTheme"
                 android:hint="Organization Name"
                 android:inputType="text"
-                android:paddingBottom="24dp" />
+                android:paddingBottom="24dp"
+                android:textCursorDrawable="@drawable/ic_cursor"/>
 
             <EditText
                 android:id="@+id/orgn_email"
@@ -43,6 +44,29 @@
                 android:textCursorDrawable="@drawable/ic_cursor" />
 
             <EditText
+                android:id="@+id/orgPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorTheme"
+                android:hint="Password"
+                android:inputType="textEmailAddress"
+                android:paddingBottom="24dp"
+                android:textCursorDrawable="@drawable/ic_cursor" />
+
+            <EditText
+                android:id="@+id/orgConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorTheme"
+                android:hint="Confirm Password"
+                android:inputType="textEmailAddress"
+                android:paddingBottom="24dp"
+                android:textCursorDrawable="@drawable/ic_cursor" />
+
+
+            <EditText
                 android:id="@+id/orgn_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,7 +74,8 @@
                 android:backgroundTint="@color/colorTheme"
                 android:hint="Location"
                 android:inputType="text"
-                android:paddingBottom="24dp" />
+                android:paddingBottom="24dp"
+                android:textCursorDrawable="@drawable/ic_cursor"/>
 
             <EditText
                 android:id="@+id/orgn_phone"

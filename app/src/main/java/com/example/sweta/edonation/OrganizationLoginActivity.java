@@ -1,0 +1,61 @@
+package com.example.sweta.edonation;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Patterns;
+import android.view.Menu;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class OrganizationLoginActivity extends AppCompatActivity implements View.OnClickListener {
+
+    Toolbar toolbar;
+    Button orgSignin;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_organization_login);
+        initComponent();
+        initToolbar();
+        setListener();
+
+    }
+
+    private void initComponent() {
+        toolbar = findViewById(R.id.toolBar);
+        orgSignin = findViewById(R.id.orgSigninBtn);
+
+    }
+
+    private void initToolbar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Organization Login");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+
+    private void setListener(){
+        orgSignin.setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View v) {
+
+        if (v == orgSignin) {
+
+            Intent intent = new Intent(OrganizationLoginActivity.this, OrganizationRegisterActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+
+    }
+}

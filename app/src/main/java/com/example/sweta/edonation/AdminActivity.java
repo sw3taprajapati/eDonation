@@ -1,5 +1,6 @@
 package com.example.sweta.edonation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,12 +21,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminActivity extends AppCompatActivity{
+public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toolbar toolbar;
     RecyclerView recyclerView;
     OrganizationsAdapter adapter;
     List<Organization> organizationList;
+    Button approveBtn;
+    TextView panNo;
 
 
     @Override
@@ -46,8 +52,8 @@ public class AdminActivity extends AppCompatActivity{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //this method executes when successful
 
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot organizationSnapshot : dataSnapshot.getChildren()){
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
                         Organization org = organizationSnapshot.getValue(Organization.class);
                         organizationList.add(org);
                     }
@@ -66,11 +72,14 @@ public class AdminActivity extends AppCompatActivity{
         });
     }
 
-    private void initComponent(){
-        toolbar=findViewById(R.id.toolBar);
+
+    private void initComponent() {
+        toolbar = findViewById(R.id.toolBar);
+        approveBtn = findViewById(R.id.approveBtn);
+        panNo = findViewById(R.id.panNo);
     }
 
-    private void initToolbar(){
+    private void initToolbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Admin");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -90,4 +99,28 @@ public class AdminActivity extends AppCompatActivity{
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
-}
+
+    private void setListener() {
+        approveBtn.setOnClickListener(this);
+
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        if (v == approveBtn) {
+
+            Intent intent=new Intent(AdminActivity.this,OrganizationRegisterActivity.class);
+            startActivity(intent);
+            finish();
+
+            }
+        }
+    }
+
+
+
+
+
+
+

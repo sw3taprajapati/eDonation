@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class OrganizationRegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     Toolbar toolbar;
@@ -29,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_organzation_register);
         initComponent();
         initListeners();
         initToolbar();
@@ -62,18 +62,24 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Register Account");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
+
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            Intent intent = new Intent(OrganizationRegisterActivity.this, ChooseUserActivity.class);
+            startActivity(intent);
+            finish();
+
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
@@ -159,7 +165,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     databaseOrganization.child(orgId).setValue(org);
 
 
-                                    Intent intent = new Intent(RegisterActivity.this, OnVerifyActivity.class);
+                                    Intent intent = new Intent(OrganizationRegisterActivity.this, OnVerifyActivity.class);
                                     startActivity(intent);
                                     finish();
 
