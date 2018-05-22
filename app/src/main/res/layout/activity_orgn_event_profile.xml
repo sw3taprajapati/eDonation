@@ -39,10 +39,20 @@
                 android:gravity="left"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:text="Events Going to be held"
+                android:text="EVENTS GOING TO BE HELD"
+                android:textSize="10dp"
                />
 
-
         </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/admin_heading"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:scrollbars="vertical" />
     </LinearLayout>
+
 </ScrollView>

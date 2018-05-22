@@ -41,7 +41,8 @@
         <activity android:name=".OrgnEventActivity" />
         <activity android:name=".OrgnEventProfileActivity" />
         <activity android:name=".OrganizationEventActivity" />
-        <activity android:name=".DonorEventRecyclerActivity"></activity>
+        <activity android:name=".DonorEventRecyclerActivity" />
+        <activity android:name=".InterestedDonorRecyclerActivity"></activity>
     </application>
 
 </manifest>

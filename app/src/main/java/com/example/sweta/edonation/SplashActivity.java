@@ -17,7 +17,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
 
 
-                    Intent intent = new Intent(SplashActivity.this,OrganizationEventActivity.class);
+                    Intent intent = new Intent(SplashActivity.this,OrgnEventProfileActivity.class);
                     startActivity(intent);
                     finish();
 

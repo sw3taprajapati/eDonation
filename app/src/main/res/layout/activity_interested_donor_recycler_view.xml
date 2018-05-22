@@ -21,7 +21,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:background="#04539b"
-            android:text="Events"
+            android:text="Interested Donors"
             android:textColor="@color/white"
             android:textSize="24dp" />
 
@@ -33,14 +33,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/orgNameTxt"
+                android:id="@+id/donorNameTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="OrganizationName"
+                android:text="DonorName"
                 android:textSize="@dimen/dimen_20dp" />
 
             <EditText
-                android:id="@+id/orgNameEdt"
+                android:id="@+id/donoreEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -55,19 +55,18 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/requirementTxt"
+                android:id="@+id/donorContactTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Requirements"
+                android:text="Contact"
                 android:textSize="@dimen/dimen_20dp" />
 
             <EditText
-                android:id="@+id/requirementEdt"
+                android:id="@+id/donorContactEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,50 +76,47 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/locationTxt"
+                android:id="@+id/donorLocationTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Location"
                 android:textSize="@dimen/dimen_20dp" />
 
             <EditText
-                android:id="@+id/locationEdt"
+                android:id="@+id/donorLocationEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/dateTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date"
-                android:textSize="@dimen/dimen_20dp" />
-
-            <EditText
-                android:id="@+id/dateEdt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <Button
+            android:id="@+id/acceptBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Accept"
+            android:background="@drawable/round_button"
+            android:layout_weight="1"
+            android:textColorHint="@color/white"/>
 
         <Button
-            android:id="@+id/interestedbtn"
-            android:layout_width="200dp"
+            android:id="@+id/declineBtn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:hint="Decline"
             android:background="@drawable/round_button"
-            android:hint="INTERESTED"
-            android:textColorHint="@color/white" />
+            android:layout_weight="1"
+            android:textColorHint="@color/white"
+            android:layout_marginLeft="16dp"/>
 
 
     </LinearLayout>
+    </LinearLayout>
+
 </ScrollView>
