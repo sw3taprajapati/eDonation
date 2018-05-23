@@ -28,7 +28,7 @@
             android:name=".AdminActivity"
             android:exported="true" />
         <activity android:name=".ChooseUserActivity" />
-        <activity android:name=".OrganizationLoginActivity"></activity>
+        <activity android:name=".OrganizationLoginActivity"/>
     </application>
 
 </manifest>

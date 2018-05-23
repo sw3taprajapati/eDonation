@@ -19,8 +19,8 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
 
 
     Toolbar toolbar;
-    EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan;
-    String orgnameString, orgemailString, orglocationString, orgwebsiteString;
+    EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan , orgPassword, orgConfirmPassword;
+    String orgnameString, orgemailString, orglocationString, orgwebsiteString, orgPasswordString, orgConfirmPasswordString;
     int orgphoneInt,orgpanInt,status=0;
     Button orgregister;
 
@@ -29,12 +29,12 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_organzation_register);
+        setContentView(R.layout.activity_organization_register);
         initComponent();
         initListeners();
         initToolbar();
 
-        databaseOrganization= FirebaseDatabase.getInstance().getReference("OrganizationDetails");
+       databaseOrganization= FirebaseDatabase.getInstance().getReference("OrganizationDetails");
 
     }
 
@@ -49,6 +49,8 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
         toolbar = findViewById(R.id.toolBar);
         orgname = findViewById(R.id.orgn_name);
         orgemail = findViewById(R.id.orgn_email);
+        orgPassword = findViewById(R.id.orgPassword);
+        orgConfirmPassword  = findViewById(R.id.orgConfirmPassword);
         orglocation = findViewById(R.id.orgn_location);
         orgphone = findViewById(R.id.orgn_phone);
         orgwebsite = findViewById(R.id.orgn_website);
@@ -161,7 +163,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
                                 orgpanInt=Integer.parseInt(orgpan.getText().toString());
 
                                     String orgId = databaseOrganization.push().getKey();
-                                    Organization org = new Organization(orgId, orgnameString,orgemailString,orglocationString,orgphoneInt,orgwebsiteString,orgpanInt,status);
+                                    Organization org = new Organization(orgId, orgnameString,orgemailString,orgPasswordString, orgConfirmPasswordString,orglocationString,orgphoneInt,orgwebsiteString,orgpanInt,status);
                                     databaseOrganization.child(orgId).setValue(org);
 
 

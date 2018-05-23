@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.common.SignInButton;
+
 public class ChooseUserActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button loginOrg, loginDonor;
     TextView registerOrg, registerDonor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,8 @@ public class ChooseUserActivity extends AppCompatActivity implements View.OnClic
             finish();
     }
     }
+
+
 }
 
 

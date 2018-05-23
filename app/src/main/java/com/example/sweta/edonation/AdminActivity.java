@@ -1,6 +1,7 @@
 package com.example.sweta.edonation;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -110,9 +111,16 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if (v == approveBtn) {
 
-            Intent intent=new Intent(AdminActivity.this,OrganizationRegisterActivity.class);
-            startActivity(intent);
-            finish();
+
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Confirmation");
+            intent.putExtra(Intent.EXTRA_TEXT, "Your email is verfied");
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+                finish();
+            }
 
             }
         }
