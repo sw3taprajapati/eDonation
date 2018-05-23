@@ -52,7 +52,7 @@ public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdap
             super(itemView);
 
             textViewOrgName = itemView.findViewById(R.id.orgName);
-            textViewPanNo = itemView.findViewById(R.id.orgnPan);
+            textViewPanNo = itemView.findViewById(R.id.panNo);
         }
     }
 }

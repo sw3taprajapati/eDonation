@@ -32,7 +32,7 @@ public class OnVerifyActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent=new Intent(OnVerifyActivity.this,RegisterActivity.class);
+                Intent intent=new Intent(OnVerifyActivity.this,OrganizationRegisterActivity.class);
                 startActivity(intent);
                 finish();
                 return true;

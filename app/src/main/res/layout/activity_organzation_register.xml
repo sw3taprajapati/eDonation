@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -23,17 +22,18 @@
             android:weightSum="7">
 
             <EditText
-                android:id="@+id/orgnName"
+                android:id="@+id/orgn_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorTheme"
                 android:hint="Organization Name"
                 android:inputType="text"
-                android:paddingBottom="24dp" />
+                android:paddingBottom="24dp"
+                android:textCursorDrawable="@drawable/ic_cursor"/>
 
             <EditText
-                android:id="@+id/orgnEmail"
+                android:id="@+id/orgn_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -44,6 +44,29 @@
                 android:textCursorDrawable="@drawable/ic_cursor" />
 
             <EditText
+                android:id="@+id/orgPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorTheme"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingBottom="24dp"
+                android:textCursorDrawable="@drawable/ic_cursor" />
+
+            <EditText
+                android:id="@+id/orgConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorTheme"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:paddingBottom="24dp"
+                android:textCursorDrawable="@drawable/ic_cursor" />
+
+
+            <EditText
                 android:id="@+id/orgnLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,7 +74,8 @@
                 android:backgroundTint="@color/colorTheme"
                 android:hint="Location"
                 android:inputType="text"
-                android:paddingBottom="24dp" />
+                android:paddingBottom="24dp"
+                android:textCursorDrawable="@drawable/ic_cursor"/>
 
             <EditText
                 android:id="@+id/orgnPhone"
@@ -95,7 +119,6 @@
                 android:background="@drawable/round_button"
                 android:text="REGISTER"
                 android:textColor="@color/white" />
-
 
         </LinearLayout>
 
