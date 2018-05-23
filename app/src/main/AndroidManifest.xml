@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity"
+        <activity android:name=".activities.SplashActivity"
             android:noHistory="true"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
@@ -22,10 +22,10 @@
 
         </activity>
 
-        <activity android:name=".RegisterActivity"/>
-        <activity android:name=".DashboardActivity"/>
-        <activity android:name=".OnVerifyActivity" />
-        <activity android:name=".AdminActivity" />
+        <activity android:name=".activities.RegisterActivity"/>
+        <activity android:name=".activities.DashboardActivity"/>
+        <activity android:name=".activities.OnVerifyActivity" />
+        <activity android:name=".activities.AdminActivity" />
     </application>
-
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 </manifest>

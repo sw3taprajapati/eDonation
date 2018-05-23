@@ -1,4 +1,4 @@
-package com.example.sweta.edonation;
+package com.example.sweta.edonation.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.sweta.edonation.pojoclasses.Organization;
+import com.example.sweta.edonation.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.regex.Matcher;
@@ -73,7 +76,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent=new Intent(RegisterActivity.this,DashboardActivity.class);
+                Intent intent=new Intent(RegisterActivity.this,
+                        DashboardActivity.class);
+                startActivity(intent);
                 finish();
                 return true;
         }
