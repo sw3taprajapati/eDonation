@@ -1,4 +1,4 @@
-package com.example.sweta.edonation;
+package com.example.sweta.edonation.pojoclasses;
 
 public class Organization {
 
@@ -24,6 +24,38 @@ public class Organization {
         this.orgWebsite = orgWebsite;
         this.orgPhone = orgPhone;
         this.orgPan = orgPan;
+        this.status = status;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
+    public void setOrgFullName(String orgFullName) {
+        this.orgFullName = orgFullName;
+    }
+
+    public void setOrgEmailID(String orgEmailID) {
+        this.orgEmailID = orgEmailID;
+    }
+
+    public void setOrgLocation(String orgLocation) {
+        this.orgLocation = orgLocation;
+    }
+
+    public void setOrgPhone(int orgPhone) {
+        this.orgPhone = orgPhone;
+    }
+
+    public void setOrgWebsite(String orgWebsite) {
+        this.orgWebsite = orgWebsite;
+    }
+
+    public void setOrgPan(int orgPan) {
+        this.orgPan = orgPan;
+    }
+
+    public void setStatus(int status) {
         this.status = status;
     }
 

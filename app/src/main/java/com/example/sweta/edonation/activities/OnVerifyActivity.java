@@ -1,4 +1,4 @@
-package com.example.sweta.edonation;
+package com.example.sweta.edonation.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.sweta.edonation.OrganizationRegisterActivity;
+import com.example.sweta.edonation.R;
 
 public class OnVerifyActivity extends AppCompatActivity{
     Toolbar toolbar;
@@ -32,7 +35,8 @@ public class OnVerifyActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent=new Intent(OnVerifyActivity.this,OrganizationRegisterActivity.class);
+                Intent intent=new Intent(OnVerifyActivity.this,
+                        OrganizationRegisterActivity.class);
                 startActivity(intent);
                 finish();
                 return true;

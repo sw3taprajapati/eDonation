@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.sweta.edonation.activities.OnVerifyActivity;
+import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -100,13 +102,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
             return false;
     }
 
-    public static boolean isValidPassword(String s) {
-        Pattern PASSWORD_PATTERN
-                = Pattern.compile(
-                "[a-zA-Z0-9]"
-        );
-        return !TextUtils.isEmpty(s) && PASSWORD_PATTERN.matcher(s).matches();
-    }
 
     @Override
     public void onClick(View v) {
@@ -134,6 +129,8 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
             } else if (orgemailString.matches(emailPattern)) {
 
                 orgPasswordString = orgPassword.getText().toString().trim();
+
+
                 if (orgPasswordString.equals("")) {
                     orgPassword.setError("Password cannot be empty");
                 } else if (orgPasswordString.length() <= 8) {
