@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.example.sweta.edonation.activities.OnVerifyActivity;
@@ -17,6 +18,8 @@ import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,10 +28,12 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
 
 
     Toolbar toolbar;
-
-    EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan , orgPassword, orgConfirmPassword;
-    String orgnameString, orgemailString, orglocationString, orgwebsiteString, orgPasswordString, orgConfirmPasswordString;
+    List<CheckBox> items = new ArrayList<CheckBox>();
+    EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan , orgPassword, describeItems;
+    String orgnameString, orgemailString, orglocationString, orgwebsiteString, orgPasswordString, currentlyLooking,orgDescribeItemsString;
+    //boolean check1Boolean, check2Boolean,check3Boolean, check4Boolean;
     int orgphoneInt,orgpanInt,status=0;
+    CheckBox check1, check2, check3, check4;
 
     Button orgregister;
 
@@ -50,22 +55,28 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
 
     private void initListeners() {
         orgregister.setOnClickListener(this);
-        //orgphone.setOnClickListener(this);
+
 
     }
 
     private void initComponent() {
 
         toolbar = findViewById(R.id.toolBar);
-        orgname = findViewById(R.id.orgn_name);
-        orgemail = findViewById(R.id.orgn_email);
+        orgname = findViewById(R.id.orgName);
+        orgemail = findViewById(R.id.orgEmail);
         orgPassword = findViewById(R.id.orgPassword);
+
         //orgConfirmPassword  = findViewById(R.id.orgConfirmPassword);
+
         orglocation = findViewById(R.id.orgnLocation);
         orgphone = findViewById(R.id.orgnPhone);
         orgwebsite = findViewById(R.id.orgnWebsite);
         orgpan = findViewById(R.id.orgnPan);
-
+        check1 = findViewById(R.id.food_checkbox);
+        check2 = findViewById(R.id.clothes_checkbox);
+        check3 = findViewById(R.id.books_checkbox);
+        check4 = findViewById(R.id.stationery_checkbox);
+        describeItems = findViewById(R.id.describeItems);
         orgregister = findViewById(R.id.registerBtn);
 
 
@@ -76,7 +87,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Register Account");
+        getSupportActionBar().setTitle("Register Organization");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
@@ -87,7 +98,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            Intent intent = new Intent(OrganizationRegisterActivity.this, ChooseUserActivity.class);
+            Intent intent = new Intent(OrganizationRegisterActivity.this, OnVerifyActivity.class);
             startActivity(intent);
             finish();
 
@@ -111,8 +122,34 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
     }
 
 
+    public  void selectItem(View v){
+
+
+        if(check1.isChecked()){
+            currentlyLooking = String.valueOf(check1.getText());
+            //check1Boolean= true;
+        }
+
+        if (check2.isChecked()){
+            currentlyLooking = String.valueOf(check2.getText());
+            //check2Boolean = true;
+        }
+
+        if(check3.isChecked()){
+            currentlyLooking = String.valueOf(check3.getText());
+            //check3Boolean = true;
+        }
+
+        if(check4.isChecked()){
+            currentlyLooking = String.valueOf(check4.getText());
+            //check4Boolean = true;
+        }
+
+    }
+
     @Override
     public void onClick(View v) {
+
 
         String phone;
         String panNo;
@@ -121,17 +158,15 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
         orgnameString = orgname.getText().toString().trim();
 
         if (orgnameString.equals("")) {
-            // Toast.makeText(this, "Organization name cannot be empty", Toast.LENGTH_SHORT).show();
+
             orgname.setError("Organization name cannot be empty");
-            //orgemail.setEnabled(false);
-            //orgemail.setClickable(false);
-            //orgemail.isEnabled(false);
+
 
 
         } else {
             orgemailString = orgemail.getText().toString().trim();
             if (orgemailString.equals("")) {
-                // Toast.makeText(this, "Organization email cannot be empty", Toast.LENGTH_SHORT).show();
+
                 orgemail.setError("Organization email cannot be empty");
 
             } else if (orgemailString.matches(emailPattern)) {
@@ -148,10 +183,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
                     orgPassword.setError("Enter pasword containing numbers and alphabets");
 
                 } else {
-                    orgConfirmPasswordString = orgConfirmPassword.getText().toString().trim();
-                    if (orgConfirmPasswordString.equals("")) {
-                        orgConfirmPassword.setError("Confirm password cannot be empty");
-                    } else if (orgConfirmPasswordString.equals(orgPasswordString)) {
                         orglocationString = orglocation.getText().toString().trim();
                         if (orglocationString.equals("")) {
                             //Toast.makeText(this, "Organization location cannot be empty", Toast.LENGTH_SHORT).show();
@@ -195,7 +226,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
 
 
                                     String orgId = databaseOrganization.push().getKey();
-                                    Organization org = new Organization(orgId, orgnameString,orgemailString,orgPasswordString, orgConfirmPasswordString,orglocationString,orgphoneInt,orgwebsiteString,orgpanInt,status);
+                                    Organization org = new Organization(orgId, orgnameString,orgemailString,orgPasswordString,orglocationString,orgphoneInt,orgwebsiteString,orgpanInt,currentlyLooking,orgDescribeItemsString,status);
                                     databaseOrganization.child(orgId).setValue(org);
 
 
@@ -213,11 +244,8 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
                         }
 
 
-                    } else {
-                        orgConfirmPassword.setError("Both password doesnt match");
                     }
-                }
-            } else {
+                } else {
                 orgemail.setError("enter valid email");
                 //Toast.makeText(this, "Enter valid email address", Toast.LENGTH_SHORT).show();
             }

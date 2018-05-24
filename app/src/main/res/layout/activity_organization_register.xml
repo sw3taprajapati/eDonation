@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/orgn_name"
+                android:id="@+id/orgName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/orgn_email"
+                android:id="@+id/orgEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -77,15 +77,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorTheme"
-                android:hint="Confirm Password"
-                android:digits="0,1,2,3,4,5,6,7,8,9,*,qwertzuiopasdfghjklyxcvbnm,_"
-                android:inputType="textPassword"
-                android:paddingBottom="24dp"
-                android:textCursorDrawable="@drawable/ic_cursor" >
+                android:layout_height="wrap_content">
 
 
 
@@ -179,6 +171,7 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
+                android:onClick="selectItem"
 
                 />
 
@@ -190,6 +183,7 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
+                android:onClick="selectItem"
 
                 />
 
@@ -201,6 +195,7 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
+                android:onClick="selectItem"
 
                 />
 
@@ -212,6 +207,7 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
+                android:onClick="selectItem"
 
                 />
 

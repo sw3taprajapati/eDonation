@@ -1,49 +1,40 @@
 package com.example.sweta.edonation;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-public class OrgnEventProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class EditProfileActivity extends AppCompatActivity{
 
     Toolbar toolbar;
-    Button eventButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orgn_event_profile);
+        setContentView(R.layout.activity_organization_register);
 
         initComponent();
-        setListeners();
         initToolbar();
     }
 
-
-    private void initComponent() {
-
-        toolbar = findViewById(R.id.toolBar);
-        eventButton =findViewById(R.id.eventsBtn);
-
-
-    }
-    private void setListeners(){
-        eventButton.setOnClickListener(this);
+    private void initComponent(){
+        toolbar=findViewById(R.id.toolBar);
     }
 
-    private void initToolbar() {
+    private void initToolbar(){
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Oganization's Event");
+        getSupportActionBar().setTitle("Edit Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                Intent intent=new Intent(EditProfileActivity.this,OrganizationRegisterActivity.class);
+                startActivity(intent);
                 finish();
                 return true;
         }
@@ -56,12 +47,6 @@ public class OrgnEventProfileActivity extends AppCompatActivity implements View.
     }
 
 
-    @Override
-    public void onClick(View v) {
-        Intent intent=new Intent(OrgnEventProfileActivity.this,OrganizationEventActivity.class);
-        startActivity(intent);
 
-
-
-    }
 }
+

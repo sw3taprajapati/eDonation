@@ -41,9 +41,22 @@
                 android:paddingBottom="5dp"
                 android:paddingTop="15dp"
 
-                android:text=" EVENTS GOING TO BE HELD" />
+                android:text="EVENTS GOING TO BE HELD"
+                android:textColor="#04539b"
+                android:textSize="10dp"
+               />
 
 
         </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/admin_heading"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:scrollbars="vertical" />
     </LinearLayout>
+
 </ScrollView>
