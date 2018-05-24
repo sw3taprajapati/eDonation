@@ -26,7 +26,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
 
     Toolbar toolbar;
     RecyclerView recyclerView;
-    OrganizationsAdapter adapter;
+    OrganizationAdapter adapter;
     List<Organization> organizationList;
     Button approveBtn;
     TextView panNo;
@@ -37,9 +37,10 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        /*initComponent();
-        initToolbar();
-    */
+
+      /*  initComponent();
+        initToolbar(); */
+
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -59,10 +60,11 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                         organizationList.add(org);
                     }
 
-                    adapter = new OrganizationsAdapter(AdminActivity.this, organizationList);
+                    adapter = new OrganizationAdapter(AdminActivity.this, organizationList);
                     recyclerView.setAdapter(adapter);
                 }
             }
+
 
 
             @Override
@@ -84,7 +86,12 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Admin");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -93,6 +100,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 finish();
                 return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }

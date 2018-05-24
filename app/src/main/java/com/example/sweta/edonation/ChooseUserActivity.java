@@ -7,12 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.common.SignInButton;
+
 
 public class ChooseUserActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button loginOrg, loginDonor;
-    TextView registerOrg, registerDonor;
+    TextView registerOrg;
 
 
     @Override
@@ -28,15 +28,15 @@ public class ChooseUserActivity extends AppCompatActivity implements View.OnClic
 
     private void initComponent(){
         loginOrg = findViewById(R.id.loginOrganizationBtn);
-        loginDonor = findViewById(R.id.loginDonorBtn);
+        //loginDonor = findViewById(R.id.loginDonorBtn);
         registerOrg = findViewById(R.id.registerOrgLink);
-        registerDonor = findViewById(R.id.registerDonorLink);
+
     }
 
     private void setListener(){
         loginOrg.setOnClickListener(this);
-        loginDonor.setOnClickListener(this);
-        registerDonor.setOnClickListener(this);
+        //loginDonor.setOnClickListener(this);
+
         registerOrg.setOnClickListener(this);
 
 
@@ -52,11 +52,11 @@ public class ChooseUserActivity extends AppCompatActivity implements View.OnClic
             finish();
         }
 
-        if(v == loginDonor){
-            Intent intent = new Intent(ChooseUserActivity.this, OrganizationRegisterActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        //if(v == loginDonor){
+//            Intent intent = new Intent(ChooseUserActivity.this, OrganizationRegisterActivity.class);
+//            startActivity(intent);
+//            finish();
+        //}
 
         if (v == registerOrg) {
             Intent intent = new Intent(ChooseUserActivity.this, OrganizationRegisterActivity.class);
@@ -65,11 +65,11 @@ public class ChooseUserActivity extends AppCompatActivity implements View.OnClic
 
         }
 
-        if(v == registerDonor){
+        /*if(v == registerDonor){
             Intent intent = new Intent(ChooseUserActivity.this, OrganizationRegisterActivity.class);
             startActivity(intent);
             finish();
-    }
+    }*/
     }
 
 

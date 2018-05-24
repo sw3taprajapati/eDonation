@@ -1,16 +1,20 @@
 package com.example.sweta.edonation;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,9 +23,11 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
 
 
     Toolbar toolbar;
+
     EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan , orgPassword, orgConfirmPassword;
     String orgnameString, orgemailString, orglocationString, orgwebsiteString, orgPasswordString, orgConfirmPasswordString;
     int orgphoneInt,orgpanInt,status=0;
+
     Button orgregister;
 
     DatabaseReference databaseOrganization;
@@ -34,7 +40,9 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
         initListeners();
         initToolbar();
 
+
        databaseOrganization= FirebaseDatabase.getInstance().getReference("OrganizationDetails");
+
 
     }
 
@@ -51,11 +59,15 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
         orgemail = findViewById(R.id.orgn_email);
         orgPassword = findViewById(R.id.orgPassword);
         orgConfirmPassword  = findViewById(R.id.orgConfirmPassword);
-        orglocation = findViewById(R.id.orgn_location);
-        orgphone = findViewById(R.id.orgn_phone);
-        orgwebsite = findViewById(R.id.orgn_website);
-        orgpan = findViewById(R.id.orgn_pan);
-        orgregister = findViewById(R.id.register_btn);
+        orglocation = findViewById(R.id.orgnLocation);
+        orgphone = findViewById(R.id.orgnPhone);
+        orgwebsite = findViewById(R.id.orgnWebsite);
+        orgpan = findViewById(R.id.orgnPan);
+
+        orgregister = findViewById(R.id.registerBtn);
+
+
+
 
 
     }
@@ -96,6 +108,14 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
             return false;
     }
 
+    public static boolean isValidPassword(String s) {
+        Pattern PASSWORD_PATTERN
+                = Pattern.compile(
+                "[a-zA-Z0-9]"
+        );
+        return !TextUtils.isEmpty(s) && PASSWORD_PATTERN.matcher(s).matches();
+    }
+
     @Override
     public void onClick(View v) {
 
@@ -120,72 +140,90 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
                 orgemail.setError("Organization email cannot be empty");
 
             } else if (orgemailString.matches(emailPattern)) {
-                orglocationString = orglocation.getText().toString().trim();
-                if (orglocationString.equals("")) {
-                    //Toast.makeText(this, "Organization location cannot be empty", Toast.LENGTH_SHORT).show();
-                    orglocation.setError("Organization location cannot be empty");
+
+                orgPasswordString = orgPassword.getText().toString().trim();
+                if (orgPasswordString.equals("")) {
+                    orgPassword.setError("Password cannot be empty");
+                } else if (orgPasswordString.length() <= 8) {
+                    orgPassword.setError("Password cannot be less than eight characters");
+
+                } else if (orgPasswordString.contains("a-zA-Z1-9")) {
+                    orgPassword.setError("Enter pasword containing numbers and alphabets");
 
                 } else {
-                    phone = orgphone.getText().toString().trim();
-
-                    if (phone.equals("")) {
-                        //Toast.makeText(this, "Organization phone cannot be empty", Toast.LENGTH_SHORT).show();
-                        orgphone.setError("Organization phone cannot be empty");
-
-                    } else if (phone.length() != 10 && phone.length() != 7) {
-
-                        //Toast.makeText(this, "Enter valid phone number", Toast.LENGTH_SHORT).show();
-                        orgphone.setError("Enter valid number");
-
-                    } else {
-                        try {
-                            orgphoneInt = Integer.parseInt(orgphone.getText().toString());
-                        } catch (Exception e) {
-
-                        }
-
-                        orgwebsiteString = orgwebsite.getText().toString().trim();
-                        boolean flag = isValidUrl(orgwebsiteString);
-                        if (orgwebsiteString.equals("")) {
-                            //Toast.makeText(this, "Organization website cannot be empty", Toast.LENGTH_SHORT).show();
-                            orgwebsite.setError("Organization website cannot be empty");
-                        } else if (flag == false) {
-                            orgwebsite.setError("Invalid website");
-
+                    orgConfirmPasswordString = orgConfirmPassword.getText().toString().trim();
+                    if (orgConfirmPasswordString.equals("")) {
+                        orgConfirmPassword.setError("Confirm password cannot be empty");
+                    } else if (orgConfirmPasswordString.equals(orgPasswordString)) {
+                        orglocationString = orglocation.getText().toString().trim();
+                        if (orglocationString.equals("")) {
+                            //Toast.makeText(this, "Organization location cannot be empty", Toast.LENGTH_SHORT).show();
+                            orglocation.setError("Organization location cannot be empty");
                         } else {
-                            panNo = orgpan.getText().toString();
-                            if (panNo.equals("")) {
-                                orgpan.setError("Organization pan cannot be empty");
-                                //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-                                orgpanInt=Integer.parseInt(orgpan.getText().toString());
+                            phone = orgphone.getText().toString().trim();
+
+                            if (phone.equals("")) {
+                                //Toast.makeText(this, "Organization phone cannot be empty", Toast.LENGTH_SHORT).show();
+                                orgphone.setError("Organization phone cannot be empty");
+
+                            } else if (phone.length() != 10 && phone.length() != 7) {
+
+                                //Toast.makeText(this, "Enter valid phone number", Toast.LENGTH_SHORT).show();
+                                orgphone.setError("Enter valid number");
+
+                            } else {
+                                try {
+                                    orgphoneInt = Integer.parseInt(orgphone.getText().toString());
+                                } catch (Exception e) {
+
+                                }
+
+                                orgwebsiteString = orgwebsite.getText().toString().trim();
+                                boolean flag = isValidUrl(orgwebsiteString);
+                                if (orgwebsiteString.equals("")) {
+                                    //Toast.makeText(this, "Organization website cannot be empty", Toast.LENGTH_SHORT).show();
+                                    orgwebsite.setError("Organization website cannot be empty");
+                                } else if (flag == false) {
+                                    orgwebsite.setError("Invalid website");
+
+                                } else {
+                                    panNo = orgpan.getText().toString();
+                                    if (panNo.equals("")) {
+                                        orgpan.setError("Organization pan cannot be empty");
+                                        //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        orgpanInt = Integer.parseInt(orgpan.getText().toString());
+
+
+
 
                                     String orgId = databaseOrganization.push().getKey();
                                     Organization org = new Organization(orgId, orgnameString,orgemailString,orgPasswordString, orgConfirmPasswordString,orglocationString,orgphoneInt,orgwebsiteString,orgpanInt,status);
                                     databaseOrganization.child(orgId).setValue(org);
 
 
-                                    Intent intent = new Intent(OrganizationRegisterActivity.this, OnVerifyActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                        Intent intent = new Intent(OrganizationRegisterActivity.this, OnVerifyActivity.class);
+                                        startActivity(intent);
+                                        finish();
+
+
+                                    }
+
 
                                 }
+
                             }
                         }
-                    }
 
+
+                    } else {
+                        orgConfirmPassword.setError("Both password doesnt match");
+                    }
+                }
             } else {
                 orgemail.setError("enter valid email");
                 //Toast.makeText(this, "Enter valid email address", Toast.LENGTH_SHORT).show();
-
-
             }
-
-
         }
-
-
     }
 }

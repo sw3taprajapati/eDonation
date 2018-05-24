@@ -25,7 +25,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     private void initComponents(){
 
         registerBtn = findViewById(R.id.registerBtn);
-        adminBtn = findViewById(R.id.admin_button);
+        adminBtn = findViewById(R.id.adminButton);
 
     }
 
