@@ -58,11 +58,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel :" + String.valueOf(organization.getOrgPhone())));
+                intent.setData(Uri.parse("tel:" + String.valueOf(organization.getOrgPhone())));
                 try {
                     context.startActivity(intent);
                 } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(context, "Could not find an activity to place the call.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Could not find an activity to place the call.",
+                            Toast.LENGTH_SHORT).show();
                 }
 
             }
