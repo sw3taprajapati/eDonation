@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.sweta.edonation.activities.OnVerifyActivity;
+import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -24,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Toolbar toolbar;
 
     EditText nameOrg, emailOrg, locationOrg, phoneOrg, websiteOrg, panOrg;
-    String orgNameString, orgEmailString, orgLocationString, orgWebsiteString;
+    String orgNameString, orgEmailString, orgLocationString, orgWebsiteString,orgPasswordString;
     int orgPhoneInt, orgPanInt,status=0;
     Button registerOrg;
 
@@ -165,7 +167,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 orgPanInt = Integer.parseInt(panOrg.getText().toString());
 
                                 String orgId = databaseOrganization.push().getKey();
-                                Organization org = new Organization(orgId, orgNameString, orgEmailString, orgLocationString, orgPhoneInt, orgWebsiteString, orgPanInt, status);
+                                Organization org = new Organization(orgId, orgNameString, orgEmailString,orgPasswordString, orgLocationString, orgPhoneInt, orgWebsiteString, orgPanInt, status);
                                 databaseOrganization.child(orgId).setValue(org);
 
 

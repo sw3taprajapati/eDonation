@@ -1,12 +1,16 @@
-package com.example.sweta.edonation;
+package com.example.sweta.edonation.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class AdminActivity extends AppCompatActivity{
+import com.example.sweta.edonation.OrganizationRegisterActivity;
+import com.example.sweta.edonation.R;
+
+public class OnVerifyActivity extends AppCompatActivity{
     Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +27,7 @@ public class AdminActivity extends AppCompatActivity{
 
     private void initToolbar(){
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Admin");
+        getSupportActionBar().setTitle("On Verify");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -31,10 +35,12 @@ public class AdminActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                Intent intent=new Intent(OnVerifyActivity.this,
+                        OrganizationRegisterActivity.class);
+                startActivity(intent);
                 finish();
                 return true;
         }
-
 
         return super.onOptionsItemSelected(item);
     }
@@ -42,4 +48,5 @@ public class AdminActivity extends AppCompatActivity{
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
+
 }

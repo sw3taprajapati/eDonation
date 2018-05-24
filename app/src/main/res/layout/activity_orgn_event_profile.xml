@@ -33,16 +33,19 @@
 
             <Button
                 android:id="@+id/eventsBtn"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:gravity="left"
                 android:paddingBottom="5dp"
                 android:paddingTop="15dp"
+
                 android:text="EVENTS GOING TO BE HELD"
                 android:textColor="#04539b"
                 android:textSize="10dp"
                />
+
 
         </LinearLayout>
 

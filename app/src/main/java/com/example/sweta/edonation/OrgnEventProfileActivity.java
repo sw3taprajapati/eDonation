@@ -1,13 +1,15 @@
 package com.example.sweta.edonation;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
-public class OrgnEventProfileActivity extends AppCompatActivity {
+public class OrgnEventProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toolbar toolbar;
     Button eventButton;
@@ -17,6 +19,7 @@ public class OrgnEventProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_orgn_event_profile);
 
         initComponent();
+        setListeners();
         initToolbar();
     }
 
@@ -27,6 +30,9 @@ public class OrgnEventProfileActivity extends AppCompatActivity {
         eventButton =findViewById(R.id.eventsBtn);
 
 
+    }
+    private void setListeners(){
+        eventButton.setOnClickListener(this);
     }
 
     private void initToolbar() {
@@ -50,4 +56,12 @@ public class OrgnEventProfileActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        Intent intent=new Intent(OrgnEventProfileActivity.this,OrganizationEventActivity.class);
+        startActivity(intent);
+
+
+
+    }
 }

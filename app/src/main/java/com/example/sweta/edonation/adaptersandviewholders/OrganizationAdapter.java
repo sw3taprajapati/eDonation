@@ -1,4 +1,4 @@
-package com.example.sweta.edonation;
+package com.example.sweta.edonation.adaptersandviewholders;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,16 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.pojoclasses.Organization;
 
 import java.util.List;
 
-public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdapter.OrganizationViewHolder>{
+public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapter.OrganizationViewHolder>{
 
     Context context;
     List<Organization> organizationList;
 
-    public OrganizationsAdapter(Context context, List<Organization> organizationList) {
+    public OrganizationAdapter(Context context, List<Organization> organizationList) {
         this.context = context;
         this.organizationList = organizationList;
     }

@@ -9,49 +9,53 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
+    <Button
+        android:id="@+id/adminButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/toolbar"
+        android:textColor="@color/white"
+        android:background="@color/colorThemeDark"
+        android:layout_alignParentEnd="true"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        android:layout_gravity="right"
+        android:text="Admin"/>
+
+
     <EditText
         android:id="@+id/searchTxt"
-        android:layout_width="250dp"
+        android:layout_width="306dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/toolbar"
         android:layout_below="@+id/toolbar"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/search_layout"
         android:ems="10"
         android:hint="Search here"
+        android:cursorVisible="false"
+        android:inputType="textPersonName"
         android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="10dp"
         android:textColor="#999999"
-        android:textSize="16sp"
-        android:cursorVisible="false"/>
+        android:textSize="16sp" />
 
     <ImageButton
         android:id="@+id/searchBtn"
         android:layout_width="44dp"
         android:layout_height="41dp"
-        android:layout_alignParentEnd="true"
+        android:layout_alignEnd="@+id/llLocationContainer"
         android:layout_alignTop="@+id/searchTxt"
-        android:layout_marginEnd="66dp"
         android:background="@android:color/background_light"
         app:srcCompat="@drawable/ic_search" />
 
-    <ImageButton
-        android:id="@+id/mapBtn"
-        android:layout_width="44dp"
-        android:layout_height="41dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/searchTxt"
-        android:layout_marginEnd="17dp"
-        android:background="@android:color/background_light"
-        app:srcCompat="@drawable/ic_location" />
-
-    />
 
     <LinearLayout
         android:id="@+id/llLocationContainer"
@@ -68,7 +72,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center_horizontal|center_vertical"
-            android:padding="8dp"
+            android:padding="2dp"
             android:src="@mipmap/icon_register_text" />
 
         <Button
@@ -83,16 +87,16 @@
             android:textColor="@color/blue" />
     </LinearLayout>
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/recyclerView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/llLocationContainer"-->
-        <!--android:layout_margin="16dp"-->
-        <!--android:layout_marginLeft="16dp"-->
-        <!--android:layout_marginRight="16dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:padding="8dp"-->
-        <!--android:scrollbars="vertical" />-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llLocationContainer"
+        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:scrollbars="vertical" />
 
 </RelativeLayout>
