@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.example.sweta.edonation.activities.OnVerifyActivity;
+import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -60,9 +62,12 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
     private void initComponent() {
 
         toolbar = findViewById(R.id.toolBar);
-        orgname = findViewById(R.id.orgn_name);
-        orgemail = findViewById(R.id.orgn_email);
+        orgname = findViewById(R.id.orgName);
+        orgemail = findViewById(R.id.orgEmail);
         orgPassword = findViewById(R.id.orgPassword);
+
+        //orgConfirmPassword  = findViewById(R.id.orgConfirmPassword);
+
         orglocation = findViewById(R.id.orgnLocation);
         orgphone = findViewById(R.id.orgnPhone);
         orgwebsite = findViewById(R.id.orgnWebsite);
@@ -116,13 +121,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
             return false;
     }
 
-    public static boolean isValidPassword(String s) {
-        Pattern PASSWORD_PATTERN
-                = Pattern.compile(
-                "[a-zA-Z0-9]"
-        );
-        return !TextUtils.isEmpty(s) && PASSWORD_PATTERN.matcher(s).matches();
-    }
 
     public  void selectItem(View v){
 
@@ -174,6 +172,8 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
             } else if (orgemailString.matches(emailPattern)) {
 
                 orgPasswordString = orgPassword.getText().toString().trim();
+
+
                 if (orgPasswordString.equals("")) {
                     orgPassword.setError("Password cannot be empty");
                 } else if (orgPasswordString.length() <= 8) {

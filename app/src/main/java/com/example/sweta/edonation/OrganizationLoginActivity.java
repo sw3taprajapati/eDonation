@@ -41,7 +41,25 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
         getSupportActionBar().setTitle("Login As Organization");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            Intent intent = new Intent(OrganizationLoginActivity.this, ChooseUserActivity.class);
+            startActivity(intent);
+            finish();
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
 
     private void setListener(){
         orgSignin.setOnClickListener(this);
