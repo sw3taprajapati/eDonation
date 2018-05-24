@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.sweta.edonation.OrganizationRegisterActivity;
 import com.example.sweta.edonation.adaptersandviewholders.ListAdapter;
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.example.sweta.edonation.R;
@@ -162,7 +163,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         if (check1 == true) {
             if (v == registerBtn) {
                 Intent intent = new Intent(DashboardActivity.this,
-                        RegisterActivity.class);
+                        OrganizationRegisterActivity.class);
                 startActivity(intent);
                 finish();
 

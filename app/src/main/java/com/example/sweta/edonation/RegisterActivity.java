@@ -1,4 +1,5 @@
-package com.example.sweta.edonation.activities;
+package com.example.sweta.edonation;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.sweta.edonation.activities.OnVerifyActivity;
 import com.example.sweta.edonation.pojoclasses.Organization;
-import com.example.sweta.edonation.R;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.regex.Matcher;
@@ -24,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Toolbar toolbar;
 
     EditText nameOrg, emailOrg, locationOrg, phoneOrg, websiteOrg, panOrg;
-    String orgNameString, orgEmailString, orgLocationString, orgWebsiteString;
+    String orgNameString, orgEmailString, orgLocationString, orgWebsiteString,orgPasswordString,currentlyLooking,describeItems;
     int orgPhoneInt, orgPanInt,status=0;
     Button registerOrg;
 
@@ -33,9 +35,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     DatabaseReference databaseOrganization;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_organization_register);
         initComponent();
         initListeners();
         initToolbar();
@@ -47,16 +49,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void initListeners() {
         registerOrg.setOnClickListener(this);
 
-
-        //orgphone.setOnClickListener(this);
-
     }
 
     private void initComponent() {
 
         toolbar = findViewById(R.id.toolBar);
-        nameOrg = findViewById(R.id.orgnName);
-        emailOrg = findViewById(R.id.orgnEmail);
+        nameOrg = findViewById(R.id.orgName);
+        emailOrg = findViewById(R.id.orgEmail);
         locationOrg = findViewById(R.id.orgnLocation);
         phoneOrg = findViewById(R.id.orgnPhone);
         websiteOrg = findViewById(R.id.orgnWebsite);
@@ -76,9 +75,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent=new Intent(RegisterActivity.this,
-                        DashboardActivity.class);
-                startActivity(intent);
                 finish();
                 return true;
         }
@@ -129,10 +125,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
 
-                            //Toast.makeText(this, "Organization location cannot be empty", Toast.LENGTH_SHORT).show();
-                            locationOrg.setError("Organization location cannot be empty");
+                    //Toast.makeText(this, "Organization location cannot be empty", Toast.LENGTH_SHORT).show();
+                    locationOrg.setError("Organization location cannot be empty");
 
-                        } else {
+                } else {
                     phone = phoneOrg.getText().toString().trim();
 
                     if (phone.equals("")) {
@@ -171,7 +167,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 orgPanInt = Integer.parseInt(panOrg.getText().toString());
 
                                 String orgId = databaseOrganization.push().getKey();
-                                Organization org = new Organization(orgId, orgNameString, orgEmailString, orgLocationString, orgPhoneInt, orgWebsiteString, orgPanInt, status);
+                                Organization org = new Organization(orgId, orgNameString, orgEmailString,orgPasswordString, orgLocationString, orgPhoneInt, orgWebsiteString, orgPanInt,currentlyLooking,describeItems, status);
                                 databaseOrganization.child(orgId).setValue(org);
 
 
@@ -185,20 +181,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     }
                 }
 
-                        } else{
-                            emailOrg.setError("enter valid email");
-                            //Toast.makeText(this, "Enter valid email address", Toast.LENGTH_SHORT).show();
+            } else{
+                emailOrg.setError("enter valid email");
+                //Toast.makeText(this, "Enter valid email address", Toast.LENGTH_SHORT).show();
 
-
-                        }
-
-
-                    }
-
-
-                }
 
             }
 
 
+        }
 
+
+    }
+
+}
