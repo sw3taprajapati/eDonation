@@ -84,13 +84,13 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
 
             case R.id.nav_registerOrg:
-                Intent in = new Intent(MainActivity.this, RegisterActivity.class);
+                Intent in = new Intent(MainActivity.this, OrganizationRegisterActivity.class);
                 startActivity(in);
                 break;
 
 
             case R.id.nav_loginOrg:
-                Intent in2 = new Intent(MainActivity.this, DashboardActivity.class);
+                Intent in2 = new Intent(MainActivity.this, OrganizationLoginActivity.class);
                 startActivity(in2);
                 break;
 
