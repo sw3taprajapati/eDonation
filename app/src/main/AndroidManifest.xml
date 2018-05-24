@@ -19,30 +19,36 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
+        <!--<activity-->
+        <!--android:name=".SplashActivity"-->
+        <!--android:noHistory="true"-->
+        <!--android:theme="@style/AppTheme.Splash">-->
+
         <activity
             android:name=".SplashActivity"
-            android:noHistory="true"
-            android:theme="@style/AppTheme.Splash">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".DashboardActivity" />
-        <activity android:name=".AdminActivity" />
-        <activity android:name=".OnVerifyActivity" />
+            </activity>
+
+            <activity android:name=".RegisterActivity" />
+            <activity android:name=".DashboardActivity" />
+            <!--<activity android:name=".AdminActivity" />-->
+            <!--<activity android:name=".OnVerifyActivity" />-->
+            <!--<activity android:name=".DonorRegisterActivity" />-->
+            <!--<activity android:name=".OrgnEventProfileActivity" />-->
+            <!--<activity android:name=".OrganizationEventActivity" />-->
+            <!--<activity android:name=".DonorEventRecyclerActivity" />-->
+            <!--<activity android:name=".InterestedDonorRecyclerActivity" />-->
+
+
         <activity
-            android:name=".DonorProfileActivity"
-            android:label="@string/title_activity_donor_profile"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".DonorRegisterActivity" />
-        <activity android:name=".OrgnEventActivity" />
-        <activity android:name=".OrgnEventProfileActivity" />
-        <activity android:name=".OrganizationEventActivity" />
-        <activity android:name=".DonorEventRecyclerActivity" />
-        <activity android:name=".InterestedDonorRecyclerActivity"></activity>
+                android:name=".MainActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

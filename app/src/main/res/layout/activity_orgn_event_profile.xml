@@ -26,7 +26,7 @@
 
             <ImageView
                 android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:padding="8dp"
                 android:src="@drawable/ic_event" />
@@ -34,12 +34,13 @@
             <Button
                 android:id="@+id/eventsBtn"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@null"
                 android:gravity="left"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="15dp"
                 android:text="EVENTS GOING TO BE HELD"
+                android:textColor="#04539b"
                 android:textSize="10dp"
                />
 

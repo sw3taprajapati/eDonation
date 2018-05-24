@@ -1,4 +1,5 @@
 package com.example.sweta.edonation;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,9 +32,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     DatabaseReference databaseOrganization;
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         initComponent();
@@ -46,9 +46,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void initListeners() {
         registerOrg.setOnClickListener(this);
-
-
-        //orgphone.setOnClickListener(this);
 
     }
 
