@@ -93,7 +93,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            Intent intent = new Intent(OrganizationRegisterActivity.this, ChooseUserActivity.class);
+            Intent intent = new Intent(OrganizationRegisterActivity.this, OnVerifyActivity.class);
             startActivity(intent);
             finish();
 
