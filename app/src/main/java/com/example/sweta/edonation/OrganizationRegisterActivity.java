@@ -25,9 +25,11 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
 
 
     Toolbar toolbar;
-    EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan, orgPassword, orgConfirmPassword;
-    String orgnameString, orgemailString, orglocationString, orgwebsiteString, orgPasswordString, orgConfirmString;
-    int orgphoneInt, orgpanInt, status = 0;
+
+    EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan , orgPassword, orgConfirmPassword;
+    String orgnameString, orgemailString, orglocationString, orgwebsiteString, orgPasswordString, orgConfirmPasswordString;
+    int orgphoneInt,orgpanInt,status=0;
+
     Button orgregister;
 
     DatabaseReference databaseOrganization;
@@ -35,12 +37,14 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_organzation_register);
+        setContentView(R.layout.activity_organization_register);
         initComponent();
         initListeners();
         initToolbar();
 
-        databaseOrganization = FirebaseDatabase.getInstance().getReference("OrganizationDetails");
+
+       databaseOrganization= FirebaseDatabase.getInstance().getReference("OrganizationDetails");
+
 
     }
 
@@ -55,13 +59,17 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
         toolbar = findViewById(R.id.toolBar);
         orgname = findViewById(R.id.orgn_name);
         orgemail = findViewById(R.id.orgn_email);
+        orgPassword = findViewById(R.id.orgPassword);
+        //orgConfirmPassword  = findViewById(R.id.orgConfirmPassword);
         orglocation = findViewById(R.id.orgnLocation);
         orgphone = findViewById(R.id.orgnPhone);
         orgwebsite = findViewById(R.id.orgnWebsite);
         orgpan = findViewById(R.id.orgnPan);
+
         orgregister = findViewById(R.id.registerBtn);
-        orgPassword = findViewById(R.id.orgPassword);
-        orgConfirmPassword = findViewById(R.id.orgConfirmPassword);
+
+
+
 
 
     }
@@ -140,10 +148,10 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
                     orgPassword.setError("Enter pasword containing numbers and alphabets");
 
                 } else {
-                    orgConfirmString = orgConfirmPassword.getText().toString().trim();
-                    if (orgConfirmString.equals("")) {
+                    orgConfirmPasswordString = orgConfirmPassword.getText().toString().trim();
+                    if (orgConfirmPasswordString.equals("")) {
                         orgConfirmPassword.setError("Confirm password cannot be empty");
-                    } else if (orgConfirmString.equals(orgPasswordString)) {
+                    } else if (orgConfirmPasswordString.equals(orgPasswordString)) {
                         orglocationString = orglocation.getText().toString().trim();
                         if (orglocationString.equals("")) {
                             //Toast.makeText(this, "Organization location cannot be empty", Toast.LENGTH_SHORT).show();
@@ -183,9 +191,12 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
                                     } else {
                                         orgpanInt = Integer.parseInt(orgpan.getText().toString());
 
-                                        String orgId = databaseOrganization.push().getKey();
-                                        Organization org = new Organization(orgId, orgnameString, orgemailString, orglocationString, orgphoneInt, orgwebsiteString, orgpanInt, status);
-                                        databaseOrganization.child(orgId).setValue(org);
+
+
+
+                                    String orgId = databaseOrganization.push().getKey();
+                                    Organization org = new Organization(orgId, orgnameString,orgemailString,orgPasswordString, orgConfirmPasswordString,orglocationString,orgphoneInt,orgwebsiteString,orgpanInt,status);
+                                    databaseOrganization.child(orgId).setValue(org);
 
 
                                         Intent intent = new Intent(OrganizationRegisterActivity.this, OnVerifyActivity.class);
