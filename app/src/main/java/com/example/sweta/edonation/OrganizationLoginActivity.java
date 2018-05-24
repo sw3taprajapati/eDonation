@@ -38,7 +38,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Organization Login");
+        getSupportActionBar().setTitle("Login As Organization");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
