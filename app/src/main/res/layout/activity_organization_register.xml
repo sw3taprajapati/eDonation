@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/orgn_name"
+                android:id="@+id/orgName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/orgn_email"
+                android:id="@+id/orgEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -178,6 +178,7 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
+                android:onClick="selectItem"
 
                 />
 
@@ -189,6 +190,7 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
+                android:onClick="selectItem"
 
                 />
 
@@ -200,6 +202,7 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
+                android:onClick="selectItem"
 
                 />
 
@@ -211,6 +214,7 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
+                android:onClick="selectItem"
 
                 />
 

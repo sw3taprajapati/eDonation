@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Toolbar toolbar;
 
     EditText nameOrg, emailOrg, locationOrg, phoneOrg, websiteOrg, panOrg;
-    String orgNameString, orgEmailString, orgLocationString, orgWebsiteString,orgPasswordString;
+    String orgNameString, orgEmailString, orgLocationString, orgWebsiteString,orgPasswordString,currentlyLooking,describeItems;
     int orgPhoneInt, orgPanInt,status=0;
     Button registerOrg;
 
@@ -37,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_organization_register);
         initComponent();
         initListeners();
         initToolbar();
@@ -54,8 +54,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void initComponent() {
 
         toolbar = findViewById(R.id.toolBar);
-        nameOrg = findViewById(R.id.orgnName);
-        emailOrg = findViewById(R.id.orgnEmail);
+        nameOrg = findViewById(R.id.orgName);
+        emailOrg = findViewById(R.id.orgEmail);
         locationOrg = findViewById(R.id.orgnLocation);
         phoneOrg = findViewById(R.id.orgnPhone);
         websiteOrg = findViewById(R.id.orgnWebsite);
@@ -167,7 +167,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 orgPanInt = Integer.parseInt(panOrg.getText().toString());
 
                                 String orgId = databaseOrganization.push().getKey();
-                                Organization org = new Organization(orgId, orgNameString, orgEmailString,orgPasswordString, orgLocationString, orgPhoneInt, orgWebsiteString, orgPanInt, status);
+                                Organization org = new Organization(orgId, orgNameString, orgEmailString,orgPasswordString, orgLocationString, orgPhoneInt, orgWebsiteString, orgPanInt,currentlyLooking,describeItems, status);
                                 databaseOrganization.child(orgId).setValue(org);
 
 

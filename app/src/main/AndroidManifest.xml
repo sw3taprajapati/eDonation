@@ -10,60 +10,36 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-<<<<<<< HEAD
-        android:theme="@style/AppTheme"
-        tools:replace="android:allowBackup">
-        <!--<activity-->
-        <!--android:name=".SplashActivity"-->
-        <!--android:noHistory="true"-->
-        <!--android:theme="@style/AppTheme.Splash">-->
-
-        <activity
-            android:name=".SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-=======
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.UserDashboard"
-            android:noHistory="true"
-            android:theme="@style/AppTheme.Splash">
->>>>>>> 5a3ccf8daa9f849b21d9d57be0b23dfab75cc855
+        <activity
+        android:name=".activities.SplashActivity"
+        android:noHistory="true"
+        android:theme="@style/AppTheme.Splash">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-<<<<<<< HEAD
-            </activity>
-
-            <activity android:name=".RegisterActivity" />
-            <activity android:name=".DashboardActivity" />
-            <!--<activity android:name=".AdminActivity" />-->
-            <!--<activity android:name=".OnVerifyActivity" />-->
-            <!--<activity android:name=".DonorRegisterActivity" />-->
-            <!--<activity android:name=".OrgnEventProfileActivity" />-->
-            <!--<activity android:name=".OrganizationEventActivity" />-->
-            <!--<activity android:name=".DonorEventRecyclerActivity" />-->
-            <!--<activity android:name=".InterestedDonorRecyclerActivity" />-->
-
-
-        <activity
-                android:name=".MainActivity"
-                android:theme="@style/AppTheme.NoActionBar">
         </activity>
-    </application>
-=======
 
-        </activity>
->>>>>>> 5a3ccf8daa9f849b21d9d57be0b23dfab75cc855
+
 
         <activity android:name=".OrganizationRegisterActivity" />
-        <activity android:name=".activities.DashboardActivity"/>
+        <activity android:name=".activities.DashboardActivity" />
         <activity android:name=".activities.OnVerifyActivity" />
         <activity android:name=".activities.AdminActivity" />
         <activity android:name=".ChooseUserActivity" />
-        <activity android:name=".OrganizationLoginActivity"/>
+        <activity android:name=".OrganizationLoginActivity" />
 
 
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
+
+
     <uses-permission android:name="android.permission.CALL_PHONE" />
 </manifest>

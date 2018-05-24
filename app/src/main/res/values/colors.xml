@@ -11,4 +11,5 @@
     <color name="websiteColor">#05ace4</color>
     <color name="callColor">#00c268</color>
     <color name="checkBoxColor">#00b58c</color>
+    <!--<color name="loginBackground">#F</color>-->
 </resources>
