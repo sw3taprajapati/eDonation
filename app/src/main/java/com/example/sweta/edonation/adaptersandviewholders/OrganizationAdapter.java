@@ -1,6 +1,8 @@
 package com.example.sweta.edonation.adaptersandviewholders;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -48,13 +50,25 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
 
         holder.textViewOrgName.setText(organization.getOrgFullName());
         holder.textViewPanNo.setText(String.valueOf(organization.getOrgPan()));
-        /*holder.btnApprove.setOnClickListener(new View.OnClickListener() {
+        holder.btnApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                         getReference("OrganizationDetails");
                 dbOrganization.child("OrganizationDetails").child("orgId").child("status").setValue(1);
+
+
+
+
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Confirmation");
+                intent.putExtra(Intent.EXTRA_TEXT, "Your email is verfied");
+                if (intent.resolveActivity(context.getPackageManager()) != null) {
+                    context.startActivity(intent);
+                }
             }
         });
 
@@ -65,7 +79,7 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
                         getReference("OrganizationDetails");
                 dbOrganization.child("OrganizationDetails").child(organization.getOrgId()).removeValue();
             }
-        });*/
+        });
 
     }
 

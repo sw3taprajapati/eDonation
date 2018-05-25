@@ -1,5 +1,5 @@
-package com.example.sweta.edonation;
-import android.app.Fragment;
+package com.example.sweta.edonation.activities;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.sweta.edonation.activities.OnVerifyActivity;
+import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.pojoclasses.Organization;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,10 +26,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Toolbar toolbar;
 
     EditText nameOrg, emailOrg, locationOrg, phoneOrg, websiteOrg, panOrg;
-    String orgNameString, orgEmailString, orgLocationString, orgWebsiteString,orgPasswordString,currentlyLooking,describeItems;
-    int orgPhoneInt, orgPanInt,status=0;
+    String orgNameString, orgEmailString, orgLocationString, orgWebsiteString, orgPasswordString, currentlyLooking, describeItems;
+    int orgPhoneInt, orgPanInt, status = 0;
     Button registerOrg;
-
 
 
     DatabaseReference databaseOrganization;
@@ -42,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         initListeners();
         initToolbar();
 
-        databaseOrganization= FirebaseDatabase.getInstance().getReference("OrganizationDetails");
+        databaseOrganization = FirebaseDatabase.getInstance().getReference("OrganizationDetails");
 
     }
 
@@ -124,7 +123,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if (orgLocationString.equals("")) {
 
 
-
                     //Toast.makeText(this, "Organization location cannot be empty", Toast.LENGTH_SHORT).show();
                     locationOrg.setError("Organization location cannot be empty");
 
@@ -167,7 +165,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 orgPanInt = Integer.parseInt(panOrg.getText().toString());
 
                                 String orgId = databaseOrganization.push().getKey();
-                                Organization org = new Organization(orgId, orgNameString, orgEmailString,orgPasswordString, orgLocationString, orgPhoneInt, orgWebsiteString, orgPanInt,currentlyLooking,describeItems, status);
+                                Organization org = new Organization(orgId, orgNameString, orgEmailString, orgPasswordString, orgLocationString, orgPhoneInt, orgWebsiteString, orgPanInt, currentlyLooking, describeItems, status);
                                 databaseOrganization.child(orgId).setValue(org);
 
 
@@ -181,7 +179,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     }
                 }
 
-            } else{
+            } else {
                 emailOrg.setError("enter valid email");
                 //Toast.makeText(this, "Enter valid email address", Toast.LENGTH_SHORT).show();
 

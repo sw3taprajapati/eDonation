@@ -19,7 +19,5 @@ class ListViewHolder extends RecyclerView.ViewHolder{
         orgName = itemView.findViewById(R.id.orgName);
         orgLocation=itemView.findViewById(R.id.location);
         orgEmail=itemView.findViewById(R.id.emailTxt);
-        orgWebsite=itemView.findViewById(R.id.btnWebsite);
-        orgCall=itemView.findViewById(R.id.callBtn);
     }
 }

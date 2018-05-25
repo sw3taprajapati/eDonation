@@ -76,18 +76,6 @@ public class AdminActivity extends AppCompatActivity {
 
         organizationList = new ArrayList<>();
 
-
-
-            Intent intent = new Intent(Intent.ACTION_SENDTO);
-            intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Confirmation");
-            intent.putExtra(Intent.EXTRA_TEXT, "Your email is verfied");
-            if (intent.resolveActivity(getPackageManager()) != null) {
-                startActivity(intent);
-                finish();
-            }
-
         DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                 getReference("OrganizationDetails");
         dbOrganization.addValueEventListener(new ValueEventListener() {

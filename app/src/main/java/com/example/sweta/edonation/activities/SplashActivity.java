@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 
-import com.example.sweta.edonation.MainActivity;
 import com.example.sweta.edonation.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -24,8 +23,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
 
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-
+                Intent intent = new Intent(SplashActivity.this, UserDashboard.class);
                 startActivity(intent);
                 finish();
             }

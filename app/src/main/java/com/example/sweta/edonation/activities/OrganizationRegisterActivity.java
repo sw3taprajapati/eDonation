@@ -1,10 +1,9 @@
-package com.example.sweta.edonation;
+package com.example.sweta.edonation.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.example.sweta.edonation.activities.OnVerifyActivity;
+import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -98,7 +97,8 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            Intent intent = new Intent(OrganizationRegisterActivity.this, OnVerifyActivity.class);
+            Intent intent = new Intent(OrganizationRegisterActivity.this,
+                    OnVerifyActivity.class);
             startActivity(intent);
             finish();
 

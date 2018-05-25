@@ -1,7 +1,9 @@
-package com.example.sweta.edonation;
+package com.example.sweta.edonation.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.sweta.edonation.R;
 
 public class InterestedDonorRecyclerActivity extends AppCompatActivity {
 

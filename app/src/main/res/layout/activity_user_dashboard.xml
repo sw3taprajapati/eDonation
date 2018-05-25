@@ -15,6 +15,8 @@
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar" />
 
+
+
             <TextView
                 android:id="@+id/whatToDonate"
                 android:layout_width="wrap_content"
@@ -91,12 +93,19 @@
                 />
         </LinearLayout>
 
+        <Button
+            android:id="@+id/adminBtn"
+            android:layout_below="@+id/linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="107dp"
+            android:text="admin" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerViewUserDashboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linear"
+            android:layout_below="@+id/adminBtn"
             android:layout_margin="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
@@ -105,5 +114,9 @@
             android:scrollbars="vertical" />
 
 
+
     </RelativeLayout>
+
+
+
 </ScrollView>
