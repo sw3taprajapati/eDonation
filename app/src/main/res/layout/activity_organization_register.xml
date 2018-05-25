@@ -26,32 +26,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/orgName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorTheme"
-                android:hint="Name"
-                android:inputType="text"
-                android:paddingBottom="24dp"
-                android:textCursorDrawable="@drawable/ic_cursor"/>
+                <EditText
+                    android:id="@+id/orgName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorTheme"
+                    android:hint="Name"
+                    android:inputType="text"
+                    android:paddingBottom="24dp"
+                    android:textCursorDrawable="@drawable/ic_cursor" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/orgEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorTheme"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:paddingBottom="24dp"
-                android:textCursorDrawable="@drawable/ic_cursor" />
+                <EditText
+                    android:id="@+id/orgEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorTheme"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:paddingBottom="24dp"
+                    android:textCursorDrawable="@drawable/ic_cursor" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -60,17 +60,17 @@
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/colorTheme">
 
-            <EditText
-                android:id="@+id/orgPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorTheme"
-                android:hint="Password"
-                android:digits="0,1,2,3,4,5,6,7,8,9,*,qwertzuiopasdfghjklyxcvbnm,_"
-                android:inputType="textPassword"
-                android:paddingBottom="24dp"
-                android:textCursorDrawable="@drawable/ic_cursor" />
+                <EditText
+                    android:id="@+id/orgPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorTheme"
+                    android:digits="0,1,2,3,4,5,6,7,8,9,*,qwertzuiopasdfghjklyxcvbnm,_"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:paddingBottom="24dp"
+                    android:textCursorDrawable="@drawable/ic_cursor" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -79,18 +79,16 @@
                 android:layout_height="wrap_content">
 
 
-
-
-            <EditText
-                android:id="@+id/orgnLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorTheme"
-                android:hint="Location"
-                android:inputType="text"
-                android:paddingBottom="24dp"
-                android:textCursorDrawable="@drawable/ic_cursor"/>
+                <EditText
+                    android:id="@+id/orgnLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorTheme"
+                    android:hint="Location"
+                    android:inputType="text"
+                    android:paddingBottom="24dp"
+                    android:textCursorDrawable="@drawable/ic_cursor" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -98,34 +96,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/orgnPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorTheme"
-                android:hint="Phone no."
-                android:inputType="number"
-                android:paddingBottom="24dp"
-                android:textColor="@color/black"
+                <EditText
+                    android:id="@+id/orgnPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorTheme"
+                    android:hint="Phone no."
+                    android:inputType="number"
+                    android:paddingBottom="24dp"
+                    android:textColor="@color/black"
 
-                android:textCursorDrawable="@drawable/ic_cursor" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/orgnWebsite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorTheme"
-                android:hint="Website"
-                android:inputType="text"
-                android:paddingBottom="24dp"
-                android:textColor="@color/black"
-                android:textCursorDrawable="@drawable/ic_cursor" />
+                    android:textCursorDrawable="@drawable/ic_cursor" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -133,16 +114,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/orgnPan"
+                <EditText
+                    android:id="@+id/orgnWebsite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorTheme"
+                    android:hint="Website"
+                    android:inputType="text"
+                    android:paddingBottom="24dp"
+                    android:textColor="@color/black"
+                    android:textCursorDrawable="@drawable/ic_cursor" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorTheme"
-                android:hint="PAN No."
-                android:inputType="text"
-                android:paddingBottom="24dp"
-                android:textColor="@color/black"
-                android:textCursorDrawable="@drawable/ic_cursor" />
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/orgnPan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorTheme"
+                    android:hint="PAN No."
+                    android:inputType="text"
+                    android:paddingBottom="24dp"
+                    android:textColor="@color/black"
+                    android:textCursorDrawable="@drawable/ic_cursor" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -150,65 +148,65 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Currently Looking"
-                android:paddingBottom="8dp"/>
+                android:paddingBottom="8dp"
+                android:text="Currently Looking" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
                 android:layout_weight="4"
                 android:orientation="horizontal">
 
 
-            <CheckBox
-                android:id="@+id/food_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Food"
-                android:buttonTint="@color/checkBoxColor"
-                android:textColorHint="@color/black"
-                android:layout_weight="1"
-                android:onClick="selectItem"
+                <CheckBox
+                    android:id="@+id/food_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/checkBoxColor"
+                    android:hint="Food"
+                    android:onClick="selectItem"
+                    android:textColorHint="@color/black"
 
-                />
+                    />
 
-            <CheckBox
-                android:id="@+id/clothes_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Clothes"
-                android:buttonTint="@color/checkBoxColor"
-                android:textColorHint="@color/black"
-                android:layout_weight="1"
-                android:onClick="selectItem"
+                <CheckBox
+                    android:id="@+id/clothes_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/checkBoxColor"
+                    android:hint="Clothes"
+                    android:onClick="selectItem"
+                    android:textColorHint="@color/black"
 
-                />
+                    />
 
-            <CheckBox
-                android:id="@+id/books_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Books"
-                android:buttonTint="@color/checkBoxColor"
-                android:textColorHint="@color/black"
-                android:layout_weight="1"
-                android:onClick="selectItem"
+                <CheckBox
+                    android:id="@+id/books_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/checkBoxColor"
+                    android:hint="Books"
+                    android:onClick="selectItem"
+                    android:textColorHint="@color/black"
 
-                />
+                    />
 
-            <CheckBox
-                android:id="@+id/stationery_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Stationery"
-                android:buttonTint="@color/checkBoxColor"
-                android:textColorHint="@color/black"
-                android:layout_weight="1"
-                android:onClick="selectItem"
+                <CheckBox
+                    android:id="@+id/stationery_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/checkBoxColor"
+                    android:hint="Stationery"
+                    android:onClick="selectItem"
+                    android:textColorHint="@color/black"
 
-                />
+                    />
 
             </LinearLayout>
 
@@ -216,19 +214,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/describeItems"
-                android:hint="Describe Items"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorTheme"
-                android:inputType="textMultiLine"
-                android:paddingBottom="24dp"
-                android:textColor="@color/black"
-                android:textCursorDrawable="@drawable/ic_cursor" />
+                <EditText
+                    android:id="@+id/describeItems"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorTheme"
+                    android:hint="Describe Items"
+                    android:inputType="textMultiLine"
+                    android:paddingBottom="24dp"
+                    android:textColor="@color/black"
+                    android:textCursorDrawable="@drawable/ic_cursor" />
 
             </android.support.design.widget.TextInputLayout>
-
 
 
             <Button

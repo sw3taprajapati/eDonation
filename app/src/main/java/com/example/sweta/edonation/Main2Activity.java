@@ -12,30 +12,33 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.sweta.edonation.activities.AdminActivity;
-
-public class MainActivity extends AppCompatActivity
+public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     NavigationView navigationView;
-    Toolbar toolbar = null;
-
+    Toolbar toolbar=null;
+    ActionBarDrawerToggle toggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_navigation_user_dashboard);
+        setContentView(R.layout.activity_main2_navigation_login_org);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("e-Donation");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle = new ActionBarDrawerToggle(
+                this, drawer,toolbar,  R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+
+        navigationView = (NavigationView) findViewById(R.id.nav2);
         navigationView.setNavigationItemSelectedListener(this);
 
         Intent appLinkIntent = getIntent();
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main2, menu);
         return true;
     }
 
@@ -65,11 +68,15 @@ public class MainActivity extends AppCompatActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if(toggle.onOptionsItemSelected(item)){
+            return  true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -82,20 +89,15 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         switch (id) {
 
-            case R.id.nav_registerOrg:
-                Intent in = new Intent(MainActivity.this, OrganizationRegisterActivity.class);
+            case R.id.nav_editProfile:
+                Intent in = new Intent(Main2Activity.this, OrganizationRegisterActivity.class);
                 startActivity(in);
                 break;
 
 
-            case R.id.nav_loginOrg:
-                Intent in2 = new Intent(MainActivity.this, OrganizationLoginActivity.class);
-                startActivity(in2);
-                break;
-
             case R.id.nav_aboutApp:
-                Intent in3 = new Intent(MainActivity.this,AdminActivity.class);
-                startActivity(in3);
+                Intent in2 = new Intent(Main2Activity.this, OrganizationLoginActivity.class);
+                startActivity(in2);
                 break;
 
 
