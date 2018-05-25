@@ -1,4 +1,4 @@
-package com.example.sweta.edonation;
+package com.example.sweta.edonation.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,8 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.sweta.edonation.activities.AdminActivity;
-import com.example.sweta.edonation.activities.DashboardActivity;
+import com.example.sweta.edonation.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

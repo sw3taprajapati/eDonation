@@ -1,9 +1,8 @@
-package com.example.sweta.edonation;
+package com.example.sweta.edonation.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.Menu;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -11,8 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.example.sweta.edonation.R;
 
 public class OrganizationLoginActivity extends AppCompatActivity implements View.OnClickListener {
 

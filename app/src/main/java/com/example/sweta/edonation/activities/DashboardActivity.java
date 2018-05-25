@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.sweta.edonation.OrganizationRegisterActivity;
 import com.example.sweta.edonation.adaptersandviewholders.ListAdapter;
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.example.sweta.edonation.R;

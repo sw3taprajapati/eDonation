@@ -25,10 +25,10 @@
 
 
 
-        <activity android:name=".OrganizationRegisterActivity" />
+        <activity android:name=".activities.OrganizationRegisterActivity" />
 
 
-        <activity android:name=".OrganizationLoginActivity"/>
+        <activity android:name=".activities.OrganizationLoginActivity"/>
 
         <activity android:name=".activities.DashboardActivity" />
         <activity android:name=".activities.OnVerifyActivity" />
@@ -36,7 +36,7 @@
 
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
