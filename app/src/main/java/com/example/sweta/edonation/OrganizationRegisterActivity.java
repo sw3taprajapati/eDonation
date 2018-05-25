@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.example.sweta.edonation.activities.OnVerifyActivity;
@@ -19,23 +21,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class OrganizationRegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class OrganizationRegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
 
     Toolbar toolbar;
-    List<CheckBox> items = new ArrayList<CheckBox>();
-    EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan , orgPassword, describeItems;
-    String orgnameString, orgemailString, orglocationString, orgwebsiteString, orgPasswordString, currentlyLooking,orgDescribeItemsString;
+
+    EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan, orgPassword, describeItems;
+    String orgnameString, orgemailString, orglocationString, orgwebsiteString, orgPasswordString, orgDescribeItemsString;
     //boolean check1Boolean, check2Boolean,check3Boolean, check4Boolean;
-    int orgphoneInt,orgpanInt,status=0;
+    int orgphoneInt, orgpanInt, status = 0;
     CheckBox check1, check2, check3, check4;
+    String currentlyLooking = "";
+    ArrayList<String> list;
 
     Button orgregister;
+
 
     DatabaseReference databaseOrganization;
 
@@ -43,12 +47,14 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_register);
+
         initComponent();
         initListeners();
         initToolbar();
 
 
-       databaseOrganization= FirebaseDatabase.getInstance().getReference("OrganizationDetails");
+       databaseOrganization = FirebaseDatabase.getInstance().getReference("OrganizationDetails");
+
 
 
     }
@@ -60,6 +66,8 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
     }
 
     private void initComponent() {
+
+
 
         toolbar = findViewById(R.id.toolBar);
         orgname = findViewById(R.id.orgName);
@@ -78,9 +86,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
         check4 = findViewById(R.id.stationery_checkbox);
         describeItems = findViewById(R.id.describeItems);
         orgregister = findViewById(R.id.registerBtn);
-
-
-
 
 
     }
@@ -122,30 +127,12 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
     }
 
 
-    public  void selectItem(View v){
 
 
-        if(check1.isChecked()){
-            currentlyLooking = String.valueOf(check1.getText());
-            //check1Boolean= true;
-        }
 
-        if (check2.isChecked()){
-            currentlyLooking = String.valueOf(check2.getText());
-            //check2Boolean = true;
-        }
 
-        if(check3.isChecked()){
-            currentlyLooking = String.valueOf(check3.getText());
-            //check3Boolean = true;
-        }
 
-        if(check4.isChecked()){
-            currentlyLooking = String.valueOf(check4.getText());
-            //check4Boolean = true;
-        }
 
-    }
 
     @Override
     public void onClick(View v) {
@@ -155,12 +142,13 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
         String panNo;
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
+
+
         orgnameString = orgname.getText().toString().trim();
 
         if (orgnameString.equals("")) {
 
             orgname.setError("Organization name cannot be empty");
-
 
 
         } else {
@@ -183,72 +171,96 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
                     orgPassword.setError("Enter pasword containing numbers and alphabets");
 
                 } else {
-                        orglocationString = orglocation.getText().toString().trim();
-                        if (orglocationString.equals("")) {
-                            //Toast.makeText(this, "Organization location cannot be empty", Toast.LENGTH_SHORT).show();
-                            orglocation.setError("Organization location cannot be empty");
+                    orglocationString = orglocation.getText().toString().trim();
+                    if (orglocationString.equals("")) {
+                        //Toast.makeText(this, "Organization location cannot be empty", Toast.LENGTH_SHORT).show();
+                        orglocation.setError("Organization location cannot be empty");
+                    } else {
+                        phone = orgphone.getText().toString().trim();
+
+                        if (phone.equals("")) {
+                            //Toast.makeText(this, "Organization phone cannot be empty", Toast.LENGTH_SHORT).show();
+                            orgphone.setError("Organization phone cannot be empty");
+
+                        } else if (phone.length() != 10 && phone.length() != 7) {
+
+                            //Toast.makeText(this, "Enter valid phone number", Toast.LENGTH_SHORT).show();
+                            orgphone.setError("Enter valid number");
+
                         } else {
-                            phone = orgphone.getText().toString().trim();
+                            try {
+                                orgphoneInt = Integer.parseInt(orgphone.getText().toString());
+                            } catch (Exception e) {
 
-                            if (phone.equals("")) {
-                                //Toast.makeText(this, "Organization phone cannot be empty", Toast.LENGTH_SHORT).show();
-                                orgphone.setError("Organization phone cannot be empty");
+                            }
 
-                            } else if (phone.length() != 10 && phone.length() != 7) {
-
-                                //Toast.makeText(this, "Enter valid phone number", Toast.LENGTH_SHORT).show();
-                                orgphone.setError("Enter valid number");
+                            orgwebsiteString = orgwebsite.getText().toString().trim();
+                            boolean flag = isValidUrl(orgwebsiteString);
+                            if (orgwebsiteString.equals("")) {
+                                //Toast.makeText(this, "Organization website cannot be empty", Toast.LENGTH_SHORT).show();
+                                orgwebsite.setError("Organization website cannot be empty");
+                            } else if (flag == false) {
+                                orgwebsite.setError("Invalid website");
 
                             } else {
-                                try {
-                                    orgphoneInt = Integer.parseInt(orgphone.getText().toString());
-                                } catch (Exception e) {
-
-                                }
-
-                                orgwebsiteString = orgwebsite.getText().toString().trim();
-                                boolean flag = isValidUrl(orgwebsiteString);
-                                if (orgwebsiteString.equals("")) {
-                                    //Toast.makeText(this, "Organization website cannot be empty", Toast.LENGTH_SHORT).show();
-                                    orgwebsite.setError("Organization website cannot be empty");
-                                } else if (flag == false) {
-                                    orgwebsite.setError("Invalid website");
-
+                                panNo = orgpan.getText().toString();
+                                if (panNo.equals("")) {
+                                    orgpan.setError("Organization pan cannot be empty");
+                                    //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    panNo = orgpan.getText().toString();
-                                    if (panNo.equals("")) {
-                                        orgpan.setError("Organization pan cannot be empty");
-                                        //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        orgpanInt = Integer.parseInt(orgpan.getText().toString());
+                                    orgpanInt = Integer.parseInt(orgpan.getText().toString());
 
-
-
-
-                                    String orgId = databaseOrganization.push().getKey();
-                                    Organization org = new Organization(orgId, orgnameString,orgemailString,orgPasswordString,orglocationString,orgphoneInt,orgwebsiteString,orgpanInt,currentlyLooking,orgDescribeItemsString,status);
-                                    databaseOrganization.child(orgId).setValue(org);
-
-
-                                        Intent intent = new Intent(OrganizationRegisterActivity.this, OnVerifyActivity.class);
-                                        startActivity(intent);
-                                        finish();
+                                    if(check1.isChecked()){
+                                        currentlyLooking = "Food";
+                                        //Log.i("food", currentlyLooking);
 
 
                                     }
 
+                                    if(check2.isChecked()){
+                                        currentlyLooking += ","+"Clothes";
+                                        //Log.i("clothes", currentlyLooking);
+                                    }
+
+                                    if(check3.isChecked()){
+                                        currentlyLooking +=","+"Books";
+                                    }
+
+                                    if(check4.isChecked()){
+                                        currentlyLooking +=","+"Stationery";
+                                    }
+
+                                    orgDescribeItemsString = describeItems.getText().toString();
+
+                                    String orgId = databaseOrganization.push().getKey();
+                                    Organization org = new Organization(orgId, orgnameString, orgemailString, orgPasswordString, orglocationString, orgphoneInt, orgwebsiteString, orgpanInt, currentlyLooking, orgDescribeItemsString, status);
+                                    databaseOrganization.child(orgId).setValue(org);
+
+
+                                    Intent intent = new Intent(OrganizationRegisterActivity.this, OnVerifyActivity.class);
+                                    startActivity(intent);
+                                    finish();
+
 
                                 }
 
+
                             }
+
                         }
-
-
                     }
-                } else {
+
+
+                }
+            } else {
                 orgemail.setError("enter valid email");
                 //Toast.makeText(this, "Enter valid email address", Toast.LENGTH_SHORT).show();
             }
         }
+
+
     }
+
+
 }
+
