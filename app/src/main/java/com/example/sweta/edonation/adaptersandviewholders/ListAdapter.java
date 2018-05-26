@@ -31,7 +31,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.adapter_recycler_view, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.adapter_recycler_view, parent,
+                false);
         ListViewHolder listViewHolder = new ListViewHolder(view);
         return listViewHolder;
     }
@@ -44,7 +45,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
         holder.orgName.setText(organization.getOrgFullName());
         holder.orgLocation.setText(organization.getOrgLocation());
         holder.orgEmail.setText(organization.getOrgEmailID());
-        holder.orgWebsite.setOnClickListener(new View.OnClickListener() {
+        /*holder.orgWebsite.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -58,15 +59,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel :" + String.valueOf(organization.getOrgPhone())));
+                intent.setData(Uri.parse("tel:" + String.valueOf(organization.getOrgPhone())));
                 try {
                     context.startActivity(intent);
                 } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(context, "Could not find an activity to place the call.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Could not find an activity to place the call.",
+                            Toast.LENGTH_SHORT).show();
                 }
 
             }
-        });
+        });*/
 
     }
 

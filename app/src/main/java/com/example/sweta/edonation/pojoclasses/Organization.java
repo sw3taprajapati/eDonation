@@ -10,7 +10,6 @@ public class Organization {
     int orgPhone;
     String orgWebsite;
     int orgPan;
-
     String currentlyLooking;
     String describeItems;
     int status;
