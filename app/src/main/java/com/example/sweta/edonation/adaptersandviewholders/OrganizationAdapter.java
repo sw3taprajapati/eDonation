@@ -54,14 +54,16 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
             @Override
             public void onClick(View v) {
 
+                String id=organization.getOrgId();
+                int data=1;
                 DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                         getReference("OrganizationDetails");
-                dbOrganization.child("OrganizationDetails").child("orgId").
-                        child("status").setValue(1);
+                dbOrganization.child(id).child("status")
+                        .setValue(1);
 
 
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+                intent.setData(Uri.parse("mailto:"+organization.getOrgEmailID())); // only email apps should handle this
 
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Confirmation");
                 intent.putExtra(Intent.EXTRA_TEXT, "Your email is verfied");
@@ -74,10 +76,13 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
         holder.btnDecline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String id=organization.getOrgId();
+
                 DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
-                        getReference("OrganizationDetails");
-                dbOrganization.child("OrganizationDetails").
-                        child(organization.getOrgId()).removeValue();
+                        getReference("OrganizationDetails").child(id);
+                dbOrganization.removeValue();
+
             }
         });
 

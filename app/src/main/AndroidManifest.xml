@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.sweta.edonation">
 
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
     <application
         tools:replace="android:allowBackup"
         android:allowBackup="true"
@@ -28,7 +29,7 @@
         <activity android:name=".activities.OrganizationDetailActivity" />
 
 
-        <activity android:name=".OrganizationRegisterActivity"/>
+        <activity android:name=".activities.OrganizationRegisterActivity"/>
         <activity android:name=".OrganizationLoginActivity"/>
         <activity android:name=".activities.DashboardActivity" />
         <activity android:name=".activities.OnVerifyActivity" />
@@ -42,6 +43,4 @@
 
     </application>
 
-
-    <uses-permission android:name="android.permission.CALL_PHONE" />
 </manifest>

@@ -55,6 +55,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
                 Intent intent=new Intent(context, OrganizationDetailActivity.class);
                 intent.putExtra("orgName",organization.getOrgFullName());
                 intent.putExtra("orgLocation",organization.getOrgLocation());
+                intent.putExtra("orgEmail",organization.getOrgEmailID());
                 intent.putExtra("currentRequirement",organization.getCurrentlyLooking());
                 intent.putExtra("description",organization.getDescribeItems());
                 intent.putExtra("website",organization.getOrgWebsite());
