@@ -1,18 +1,21 @@
-package com.example.sweta.edonation.activities;
+package com.example.sweta.edonation;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
-import com.example.sweta.edonation.R;
+import com.example.sweta.edonation.activities.OnVerifyActivity;
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -22,13 +25,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class OrganizationRegisterActivity extends AppCompatActivity implements View.OnClickListener{
+public class OrganizationRegisterActivity extends AppCompatActivity
+        implements View.OnClickListener {
 
 
     Toolbar toolbar;
 
-    EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan, orgPassword, describeItems;
-    String orgnameString, orgemailString, orglocationString, orgwebsiteString, orgPasswordString, orgDescribeItemsString;
+    EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan,
+            orgPassword, describeItems;
+    String orgnameString, orgemailString, orglocationString, orgwebsiteString,
+            orgPasswordString, orgDescribeItemsString;
     //boolean check1Boolean, check2Boolean,check3Boolean, check4Boolean;
     int orgphoneInt, orgpanInt, status = 0;
     CheckBox check1, check2, check3, check4;
@@ -36,8 +42,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
     ArrayList<String> list;
 
     Button orgregister;
-
-
     DatabaseReference databaseOrganization;
 
     @Override
@@ -49,23 +53,16 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
         initListeners();
         initToolbar();
 
-
-       databaseOrganization = FirebaseDatabase.getInstance().getReference("OrganizationDetails");
-
-
+        databaseOrganization = FirebaseDatabase.getInstance().
+                getReference("OrganizationDetails");
 
     }
 
     private void initListeners() {
         orgregister.setOnClickListener(this);
-
-
     }
 
     private void initComponent() {
-
-
-
         toolbar = findViewById(R.id.toolBar);
         orgname = findViewById(R.id.orgName);
         orgemail = findViewById(R.id.orgEmail);
@@ -100,8 +97,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            Intent intent = new Intent(OrganizationRegisterActivity.this,
-                    OnVerifyActivity.class);
+            Intent intent = new Intent(OrganizationRegisterActivity.this, OnVerifyActivity.class);
             startActivity(intent);
             finish();
 
@@ -125,13 +121,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
     }
 
 
-
-
-
-
-
-
-
     @Override
     public void onClick(View v) {
 
@@ -139,7 +128,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
         String phone;
         String panNo;
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
 
 
         orgnameString = orgname.getText().toString().trim();
@@ -208,24 +196,24 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
                                 } else {
                                     orgpanInt = Integer.parseInt(orgpan.getText().toString());
 
-                                    if(check1.isChecked()){
+                                    if (check1.isChecked()) {
                                         currentlyLooking = "Food";
                                         //Log.i("food", currentlyLooking);
 
 
                                     }
 
-                                    if(check2.isChecked()){
-                                        currentlyLooking += ","+"Clothes";
+                                    if (check2.isChecked()) {
+                                        currentlyLooking += "," + "Clothes";
                                         //Log.i("clothes", currentlyLooking);
                                     }
 
-                                    if(check3.isChecked()){
-                                        currentlyLooking +=","+"Books";
+                                    if (check3.isChecked()) {
+                                        currentlyLooking += "," + "Books";
                                     }
 
-                                    if(check4.isChecked()){
-                                        currentlyLooking +=","+"Stationery";
+                                    if (check4.isChecked()) {
+                                        currentlyLooking += "," + "Stationery";
                                     }
 
                                     orgDescribeItemsString = describeItems.getText().toString();
