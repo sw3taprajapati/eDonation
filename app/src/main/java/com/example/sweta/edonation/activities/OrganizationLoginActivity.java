@@ -11,13 +11,12 @@ import android.widget.Button;
 
 
 import com.example.sweta.edonation.activities.MainDashboardActivity;
+import com.example.sweta.edonation.activities.OrganizationLoginDashboardActivity;
 
 public class OrganizationLoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toolbar toolbar;
-    Button orgSignin;
-
-
+    Button logInBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +29,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
 
     private void initComponent() {
         toolbar = findViewById(R.id.toolBar);
-        orgSignin = findViewById(R.id.orgSigninBtn);
+        logInBtn = findViewById(R.id.orgLogIn);
 
     }
 
@@ -45,7 +44,8 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            Intent intent = new Intent(OrganizationLoginActivity.this, MainDashboardActivity.class);
+            Intent intent = new Intent(OrganizationLoginActivity.this,
+                    MainDashboardActivity.class);
             startActivity(intent);
             finish();
 
@@ -60,17 +60,15 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
     }
 
     private void setListener(){
-        orgSignin.setOnClickListener(this);
+        logInBtn.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
 
-        if (v == orgSignin) {
+        if (v == logInBtn) {
 
             Intent intent = new Intent(OrganizationLoginActivity.this,
-                    MainDashboardActivity.class);
-
-
+                    OrganizationLoginDashboardActivity.class);
             startActivity(intent);
             finish();
         }
