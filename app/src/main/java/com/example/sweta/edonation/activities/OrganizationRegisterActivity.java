@@ -144,7 +144,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity
 
                 orgPasswordString = orgPassword.getText().toString().trim();
 
-
                 if (orgPasswordString.equals("")) {
                     orgPassword.setError("Password cannot be empty");
                 } else if (orgPasswordString.length() <= 8) {

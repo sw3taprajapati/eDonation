@@ -185,12 +185,14 @@ public class MainDashboardActivity extends AppCompatActivity
 
 
             case R.id.nav_loginOrg:
-                Intent intent1 = new Intent(MainDashboardActivity.this, OrganizationLoginActivity.class);
+                Intent intent1 = new Intent(MainDashboardActivity.this,
+                        OrganizationLoginActivity.class);
                 startActivity(intent1);
                 break;
 
             case R.id.nav_aboutApp:
-                Intent intent3 = new Intent(MainDashboardActivity.this, AdminActivity.class);
+                Intent intent3 = new Intent(MainDashboardActivity.this,
+                        AdminActivity.class);
                 startActivity(intent3);
                 break;
 
