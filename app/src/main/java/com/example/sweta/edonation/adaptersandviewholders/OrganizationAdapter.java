@@ -56,9 +56,8 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
 
                 DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                         getReference("OrganizationDetails");
-                dbOrganization.child("OrganizationDetails").child("orgId").child("status").setValue(1);
-
-
+                dbOrganization.child("OrganizationDetails").child("orgId").
+                        child("status").setValue(1);
 
 
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
@@ -77,7 +76,8 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
             public void onClick(View v) {
                 DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                         getReference("OrganizationDetails");
-                dbOrganization.child("OrganizationDetails").child(organization.getOrgId()).removeValue();
+                dbOrganization.child("OrganizationDetails").
+                        child(organization.getOrgId()).removeValue();
             }
         });
 

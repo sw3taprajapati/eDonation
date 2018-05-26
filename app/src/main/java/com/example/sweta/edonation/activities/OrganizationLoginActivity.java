@@ -1,4 +1,4 @@
-package com.example.sweta.edonation.activities;
+package com.example.sweta.edonation;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 
-import com.example.sweta.edonation.R;
+import com.example.sweta.edonation.activities.MainDashboardActivity;
 
 public class OrganizationLoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,8 +45,8 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            //Intent intent = new Intent(OrganizationLoginActivity.this, Choose.class);
-            //startActivity(intent);
+            Intent intent = new Intent(OrganizationLoginActivity.this, MainDashboardActivity.class);
+            startActivity(intent);
             finish();
 
         }
@@ -67,7 +67,10 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
 
         if (v == orgSignin) {
 
-            Intent intent = new Intent(OrganizationLoginActivity.this, OrganizationRegisterActivity.class);
+            Intent intent = new Intent(OrganizationLoginActivity.this,
+                    MainDashboardActivity.class);
+
+
             startActivity(intent);
             finish();
         }

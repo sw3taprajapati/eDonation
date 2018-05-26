@@ -57,7 +57,7 @@ public class AdminActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent=new Intent(
-                        AdminActivity.this,DashboardActivity.class);
+                        AdminActivity.this,MainDashboardActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -76,7 +76,9 @@ public class AdminActivity extends AppCompatActivity {
 
         organizationList = new ArrayList<>();
 
-        DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
+
+
+       DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                 getReference("OrganizationDetails");
         dbOrganization.addValueEventListener(new ValueEventListener() {
             @Override
@@ -87,13 +89,12 @@ public class AdminActivity extends AppCompatActivity {
                     for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
                         Organization org = organizationSnapshot.getValue(Organization.class);
 
-                        int status = org.getStatus();
-
-                        if (status == 0) {
+                        int status=org.getStatus();
+                        if(status==0) {
                             organizationList.add(org);
                         }
-                    }
 
+                    }
                     adapter = new OrganizationAdapter(AdminActivity.this, organizationList);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();

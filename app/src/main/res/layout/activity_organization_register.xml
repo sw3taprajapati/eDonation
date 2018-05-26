@@ -170,7 +170,7 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
-                android:onClick="selectItem"
+
 
                 />
 
@@ -182,7 +182,8 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
-                android:onClick="selectItem"
+
+
 
                 />
 
@@ -194,7 +195,8 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
-                android:onClick="selectItem"
+
+
 
                 />
 
@@ -206,7 +208,8 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
-                android:onClick="selectItem"
+
+
 
                 />
 
