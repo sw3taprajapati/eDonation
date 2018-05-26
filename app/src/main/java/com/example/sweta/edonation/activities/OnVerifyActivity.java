@@ -35,7 +35,7 @@ public class OnVerifyActivity extends AppCompatActivity{
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent=new Intent(OnVerifyActivity.this,
-                        OrganizationRegisterActivity.class);
+                        MainDashboardActivity.class);
                 startActivity(intent);
                 finish();
                 return true;

@@ -31,13 +31,11 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
                 this, drawer,toolbar,  R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
 
 
         navigationView = (NavigationView) findViewById(R.id.nav2);
@@ -104,7 +102,11 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
                 startActivity(in2);
                 break;
 
-
+            case R.id.nav_logOut:
+                Intent in3=new Intent(OrganizationLoginDashboardActivity.this,
+                        MainDashboardActivity.class);
+                startActivity(in3);
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

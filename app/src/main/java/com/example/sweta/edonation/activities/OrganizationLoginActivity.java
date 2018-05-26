@@ -45,7 +45,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
 
         if (id == android.R.id.home) {
             Intent intent = new Intent(OrganizationLoginActivity.this,
-                    OrganizationLoginDashboardActivity.class);
+                    MainDashboardActivity.class);
             startActivity(intent);
             finish();
 
