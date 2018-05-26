@@ -160,53 +160,62 @@
                 android:orientation="horizontal">
 
 
-                <CheckBox
-                    android:id="@+id/food_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/checkBoxColor"
-                    android:hint="Food"
-                    android:onClick="selectItem"
-                    android:textColorHint="@color/black"
+
 
                     />
 
-                <CheckBox
-                    android:id="@+id/clothes_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/checkBoxColor"
-                    android:hint="Clothes"
-                    android:onClick="selectItem"
-                    android:textColorHint="@color/black"
 
-                    />
 
-                <CheckBox
-                    android:id="@+id/books_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/checkBoxColor"
-                    android:hint="Books"
-                    android:onClick="selectItem"
-                    android:textColorHint="@color/black"
 
-                    />
 
-                <CheckBox
-                    android:id="@+id/stationery_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/checkBoxColor"
-                    android:hint="Stationery"
-                    android:onClick="selectItem"
-                    android:textColorHint="@color/black"
 
-                    />
+
+            <CheckBox
+                android:id="@+id/food_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Food"
+                android:buttonTint="@color/checkBoxColor"
+                android:textColorHint="@color/black"
+                android:layout_weight="1"
+                />
+
+            <CheckBox
+                android:id="@+id/clothes_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Clothes"
+                android:buttonTint="@color/checkBoxColor"
+                android:textColorHint="@color/black"
+                android:layout_weight="1"
+                />
+
+            <CheckBox
+                android:id="@+id/books_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Books"
+                android:buttonTint="@color/checkBoxColor"
+                android:textColorHint="@color/black"
+                android:layout_weight="1"
+
+
+
+                />
+
+            <CheckBox
+                android:id="@+id/stationery_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Stationery"
+                android:buttonTint="@color/checkBoxColor"
+                android:textColorHint="@color/black"
+                android:layout_weight="1"
+
+
+
+                />
+
 
             </LinearLayout>
 

@@ -28,7 +28,7 @@ dependencies {
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
 
-    implementation 'com.firebaseui:firebase-ui-database:2.1.1'
+
     //implementation 'com.google.firebase:firebase-database:11.0.2'
 
     implementation 'com.firebaseui:firebase-ui-database:3.2.2'
