@@ -6,13 +6,13 @@
     <application
         tools:replace="android:allowBackup"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/app_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-        android:name=".activities.SplashActivity"
+        android:name=".activities.EditProfileActivity"
         android:noHistory="true"
         android:theme="@style/AppTheme.Splash">
 
@@ -25,18 +25,17 @@
 
 
 
-        <activity android:name=".OrganizationRegisterActivity" />
+        <activity android:name=".activities.OrganizationDetailActivity" />
 
 
+        <activity android:name=".OrganizationRegisterActivity"/>
         <activity android:name=".OrganizationLoginActivity"/>
-
         <activity android:name=".activities.DashboardActivity" />
         <activity android:name=".activities.OnVerifyActivity" />
         <activity android:name=".activities.AdminActivity" />
 
-
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainDashboardActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>

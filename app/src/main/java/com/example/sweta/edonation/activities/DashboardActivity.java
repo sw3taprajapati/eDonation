@@ -20,8 +20,6 @@ import com.example.sweta.edonation.OrganizationRegisterActivity;
 import com.example.sweta.edonation.adaptersandviewholders.ListAdapter;
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.example.sweta.edonation.R;
-import com.example.sweta.edonation.adaptersandviewholders.SearchViewHolder;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,7 +40,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     private ListAdapter adapter;
     private EditText searchText;
     private DatabaseReference reference;
-    FirebaseRecyclerAdapter<Organization, SearchViewHolder> firebaseRecyclerAdapter;
 
 
     @Override
@@ -144,6 +141,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
+        if(recyclerView==null){
+            Toast.makeText(this,"No Data Found!!",Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void setListener() {
@@ -212,13 +213,16 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         Organization org = organizationSnapshot.getValue(Organization.class);
 
                         String name = org.getOrgFullName();
-                        if (name.equalsIgnoreCase(searchList)) {
+                        int status=org.getStatus();
+                        if (name.equalsIgnoreCase(searchList) && status==1) {
                             organizationList.add(org);
                         }
+
                     }
 
                     adapter = new ListAdapter(DashboardActivity.this, organizationList);
                     recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
 
                 }
             }
@@ -229,6 +233,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
             }
         });
+
+        if(recyclerView==null){
+            Toast.makeText(this,"No Data Found!!",Toast.LENGTH_LONG).show();
+        }
     }
 
 }

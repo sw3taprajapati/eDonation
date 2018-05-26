@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.sweta.edonation.R;
+import com.example.sweta.edonation.activities.OrganizationDetailActivity;
 import com.example.sweta.edonation.pojoclasses.Organization;
 
 import java.util.List;
@@ -31,7 +32,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.adapter_recycler_view, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.adapter_recycler_view, parent,
+                false);
         ListViewHolder listViewHolder = new ListViewHolder(view);
         return listViewHolder;
     }
@@ -43,28 +45,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
 
         holder.orgName.setText(organization.getOrgFullName());
         holder.orgLocation.setText(organization.getOrgLocation());
-        holder.orgEmail.setText(organization.getOrgEmailID());
-        holder.orgWebsite.setOnClickListener(new View.OnClickListener() {
+        holder.currentRequirement.setText("Currently Looking For : "
+                +organization.getCurrentlyLooking());
 
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(String.valueOf(organization.getOrgWebsite())));
+
+                Intent intent=new Intent(context, OrganizationDetailActivity.class);
+                intent.putExtra("orgName",organization.getOrgFullName());
+                intent.putExtra("orgLocation",organization.getOrgLocation());
+                intent.putExtra("currentRequirement",organization.getCurrentlyLooking());
+                intent.putExtra("description",organization.getDescribeItems());
+                intent.putExtra("website",organization.getOrgWebsite());
+                intent.putExtra("phone",organization.getOrgPhone());
                 context.startActivity(intent);
-            }
-        });
-        holder.orgCall.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("MissingPermission")
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel :" + String.valueOf(organization.getOrgPhone())));
-                try {
-                    context.startActivity(intent);
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(context, "Could not find an activity to place the call.", Toast.LENGTH_SHORT).show();
-                }
-
             }
         });
 

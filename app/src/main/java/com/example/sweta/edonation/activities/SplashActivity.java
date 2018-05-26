@@ -6,9 +6,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-
-import com.example.sweta.edonation.MainActivity;
-import com.example.sweta.edonation.R;
+import com.example.sweta.edonation.*;
 
 public class SplashActivity extends AppCompatActivity {
     @Override
@@ -20,12 +18,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-
-
-
-
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-
+                Intent intent = new Intent(SplashActivity.this, MainDashboardActivity.class);
                 startActivity(intent);
                 finish();
             }

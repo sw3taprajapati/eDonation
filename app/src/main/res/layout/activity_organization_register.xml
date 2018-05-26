@@ -140,7 +140,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorTheme"
                 android:hint="PAN No."
-                android:inputType="text"
+                android:inputType="number"
                 android:paddingBottom="24dp"
                 android:textColor="@color/black"
                 android:textCursorDrawable="@drawable/ic_cursor" />
@@ -171,7 +171,7 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
-                android:onClick="selectItem"
+
 
                 />
 
@@ -183,7 +183,8 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
-                android:onClick="selectItem"
+
+
 
                 />
 
@@ -195,7 +196,8 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
-                android:onClick="selectItem"
+
+
 
                 />
 
@@ -207,7 +209,8 @@
                 android:buttonTint="@color/checkBoxColor"
                 android:textColorHint="@color/black"
                 android:layout_weight="1"
-                android:onClick="selectItem"
+
+
 
                 />
 

@@ -16,12 +16,27 @@
                             <entry key="launcherLegacy">
                               <value>
                                 <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="image">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="paddingPercent" value="-5" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="$USER_HOME$/icons/splashIcon.png" />
-                                      <entry key="outputName" value="app_logo" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/edonation_new_icons/hdpi/items.png" />
+                                      <entry key="outputName" value="ic_items" />
                                     </map>
                                   </option>
                                 </PersistentState>
