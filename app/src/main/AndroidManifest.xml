@@ -3,20 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.sweta.edonation">
 
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
     <application
+        tools:replace="android:allowBackup"
         android:allowBackup="true"
         android:icon="@mipmap/app_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/app_logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:replace="android:allowBackup">
+        android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.SplashActivity"
-            android:noHistory="true"
-            android:theme="@style/AppTheme.Splash">
+        android:name=".activities.SplashActivity"
+        android:noHistory="true"
+        android:theme="@style/AppTheme.Splash">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,28 +24,22 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".OrganizationRegisterActivity" />
-        <activity android:name=".OrganizationLoginActivity" />
-        <activity android:name=".activities.DashboardActivity" />
-        <activity android:name=".activities.OnVerifyActivity" />
-        <activity android:name=".activities.AdminActivity" />
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Main2Activity"
-            android:theme="@style/AppTheme.NoActionBar" />
 
 
         <activity android:name=".activities.OrganizationDetailActivity" />
-
+        <activity android:name=".activities.OrganizationLoginDashboardActivity"/>
+        <activity android:name=".activities.EditProfileActivity"/>
+        <activity android:name=".activities.OrganizationRegisterActivity"/>
+        <activity android:name=".OrganizationLoginActivity"/>
+        <activity android:name=".activities.DashboardActivity" />
+        <activity android:name=".activities.OnVerifyActivity" />
+        <activity android:name=".activities.AdminActivity" />
 
         <activity
             android:name=".activities.MainDashboardActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-
 
     </application>
 

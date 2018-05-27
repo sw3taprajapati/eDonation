@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,70 +24,65 @@ public class OrganizationDetailActivity extends AppCompatActivity {
     TextView location;
     TextView currentReqDetail;
     TextView descriptionDetail;
+    TextView emailDetail;
     Button websiteBtn;
     Button callBtn;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_detail);
+
         initComponents();
+        initToolbar();
         getIntents();
     }
 
     private void getIntents() {
-        if (getIntent().hasExtra("orgName") && getIntent().hasExtra("oorgLocation")
-                && getIntent().hasExtra("orgName") && getIntent().hasExtra("orgLocation")
-                && getIntent().hasExtra("currentRequirement") && getIntent().hasExtra("description")
+        if (getIntent().hasExtra("orgName") && getIntent().hasExtra("orgLocation")
+                && getIntent().hasExtra("orgEmail")
+                && getIntent().hasExtra("currentRequirement")
+                && getIntent().hasExtra("description")
                 && getIntent().hasExtra("website") && getIntent().hasExtra("phone")) {
 
             String orgName = getIntent().getStringExtra("orgName");
             String orgLocation = getIntent().getStringExtra("orgLocation");
+            String email = getIntent().getStringExtra("orgEmail");
             String currentReq = getIntent().getStringExtra("currentRequirement");
             String description = getIntent().getStringExtra("description");
             String website = getIntent().getStringExtra("website");
-            int phone = getIntent().getIntExtra("phone",0);
+            int phone = getIntent().getIntExtra("phone", 0);
 
-            setDetails(orgName,orgLocation, currentReq,description,
-                website,phone);
+            setDetails(orgName, orgLocation, email, currentReq, description,
+                    website, phone);
         }
     }
 
-    private void setDetails(String orgName, String orgLocation,
+    private void setDetails(String orgName, String orgLocation, String email,
                             String currentReq, String description,
                             final String website, final int phone) {
         name.setText(orgName);
         location.setText(orgLocation);
+        emailDetail.setText(email);
         currentReqDetail.setText(currentReq);
         descriptionDetail.setText(description);
         websiteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(String.valueOf(website)));
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://" + website));
                 startActivity(intent);
             }
         });
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:" + String.valueOf(phone)));
+                Intent intent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:01"+ String.valueOf(phone)));
                 try {
-                    if (ActivityCompat.checkSelfPermission(OrganizationDetailActivity.this,
-                            Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        return;
-                    }
                     startActivity(intent);
-                } catch (android.content.ActivityNotFoundException ex) {
-
+                } catch (Exception e) {
                 }
             }
         });
@@ -93,9 +91,36 @@ public class OrganizationDetailActivity extends AppCompatActivity {
         name=findViewById(R.id.orgNameDetail);
         location=findViewById(R.id.locationDetail);
         currentReqDetail=findViewById(R.id.needDetail);
-        descriptionDetail=findViewById(R.id.describeItemsDetail);
+        descriptionDetail=findViewById(R.id.descriptionDetail);
         websiteBtn=findViewById(R.id.btnWebsiteDetail);
         callBtn=findViewById(R.id.callBtnDetail);
+        emailDetail=findViewById(R.id.emailDetail);
+        toolbar=findViewById(R.id.toolbar);
     }
 
+    private void initToolbar(){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Organization Detail");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            Intent intent = new Intent(OrganizationDetailActivity.this,
+                    MainDashboardActivity.class);
+            startActivity(intent);
+            finish();
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
 }

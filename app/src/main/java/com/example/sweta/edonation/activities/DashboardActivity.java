@@ -96,11 +96,11 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     private void initComponents() {
 
         registerBtn = findViewById(R.id.registerBtn);
-        adminBtn = findViewById(R.id.adminButton);
+        adminBtn = findViewById(R.id.adminBtn);
         recyclerView = findViewById(R.id.recyclerView);
         toolbar = findViewById(R.id.toolbar);
-        searchBtn = findViewById(R.id.searchBtn);
-        searchText = findViewById(R.id.searchTxt);
+//        searchBtn = findViewById(R.id.searchBtn);
+//        searchText = findViewById(R.id.searchTxt);
     }
 
     private void initRecyclerView() {

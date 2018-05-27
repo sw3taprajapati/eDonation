@@ -1,21 +1,18 @@
 package com.example.sweta.edonation.activities;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.example.sweta.edonation.R;
-import com.example.sweta.edonation.activities.OnVerifyActivity;
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -63,7 +60,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity
     }
 
     private void initComponent() {
-
         toolbar = findViewById(R.id.toolBar);
         orgname = findViewById(R.id.orgName);
         orgemail = findViewById(R.id.orgEmail);
@@ -89,7 +85,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Register Organization");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
     }
 
     @Override
@@ -98,9 +94,8 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-
-
-            Intent intent = new Intent(OrganizationRegisterActivity.this, OnVerifyActivity.class);
+            Intent intent = new Intent(OrganizationRegisterActivity.this,
+                    MainDashboardActivity.class);
             startActivity(intent);
             finish();
 
@@ -123,6 +118,8 @@ public class OrganizationRegisterActivity extends AppCompatActivity
             return false;
     }
 
+
+    @Override
     public void onClick(View v) {
 
 
@@ -147,7 +144,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity
             } else if (orgemailString.matches(emailPattern)) {
 
                 orgPasswordString = orgPassword.getText().toString().trim();
-
 
                 if (orgPasswordString.equals("")) {
                     orgPassword.setError("Password cannot be empty");

@@ -1,8 +1,6 @@
 package com.example.sweta.edonation.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,12 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.sweta.edonation.OrganizationLoginActivity;
 import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.adaptersandviewholders.ListAdapter;
 import com.example.sweta.edonation.pojoclasses.Organization;
@@ -31,64 +27,90 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainDashboardActivity extends AppCompatActivity
+public class OrganizationLoginDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     NavigationView navigationView;
+    ActionBarDrawerToggle toggle;
     RecyclerView recyclerView;
     Toolbar toolbar;
     private List<Organization> organizationList;
     private ListAdapter adapter;
     DatabaseReference reference;
-    //Button btnAdmin;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_dashboard);
-
-
-        reference = FirebaseDatabase.getInstance().getReference("OrganizationDetails");
+        setContentView(R.layout.activity_organization_login_dashboard);
 
         initComponents();
         initToolbar();
         initActionBar();
-        checkwifi();
         setListener();
         initRecyclerView();
     }
 
-    private void initComponents() {
+    private void initComponents(){
+        recyclerView=findViewById(R.id.recyclerViewOrganizationList);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        recyclerView = findViewById(R.id.recyclerViewOrganizationList);
-        // btnAdmin = findViewById(R.id.adminBtn);
+        navigationView = (NavigationView) findViewById(R.id.nav2);
     }
-
-    private void initToolbar() {
+    private void initToolbar(){
+        toolbar.setTitle("e-Donation");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
-
-    private void initActionBar() {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    private void initActionBar(){
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
+                this, drawer,toolbar,  R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-    }
-
-    private void setListener() {
-        navigationView.setNavigationItemSelectedListener(this);
-        //btnAdmin.setOnClickListener(this);
 
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
     }
+    private void setListener(){
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main2, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+
+        if(toggle.onOptionsItemSelected(item)){
+            return  true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     private void initRecyclerView() {
 
@@ -120,7 +142,7 @@ public class MainDashboardActivity extends AppCompatActivity
 
                     }
 
-                    adapter = new ListAdapter(MainDashboardActivity.this,
+                    adapter = new ListAdapter(OrganizationLoginDashboardActivity.this,
                             organizationList);
                     recyclerView.setAdapter(adapter);
                 }
@@ -138,39 +160,6 @@ public class MainDashboardActivity extends AppCompatActivity
         }
 
     }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -178,72 +167,29 @@ public class MainDashboardActivity extends AppCompatActivity
         int id = item.getItemId();
         switch (id) {
 
-            case R.id.nav_registerOrg:
-                Intent intent = new Intent(MainDashboardActivity.this,
-                        OrganizationRegisterActivity.class);
-                startActivity(intent);
+            case R.id.nav_editProfile:
+                Intent in = new Intent(OrganizationLoginDashboardActivity.this,
+                        EditProfileActivity.class);
+                startActivity(in);
                 break;
 
-
-            case R.id.nav_loginOrg:
-                Intent intent1 = new Intent(MainDashboardActivity.this,
-                        OrganizationLoginActivity.class);
-                startActivity(intent1);
-                break;
 
             case R.id.nav_aboutApp:
-                Intent intent3 = new Intent(MainDashboardActivity.this,
+                Intent in2 = new Intent(OrganizationLoginDashboardActivity.this,
                         AdminActivity.class);
-                startActivity(intent3);
+                startActivity(in2);
                 break;
 
-
+            case R.id.nav_logOut:
+                Intent in3=new Intent(OrganizationLoginDashboardActivity.this,
+                        MainDashboardActivity.class);
+                startActivity(in3);
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-/*
-    @Override
-    public void onClick(View v) {
-
-        //if (v == btnAdmin) {
-            Intent intent = new Intent(MainDashboardActivity.this,
-                    AdminActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }*/
-
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-
-
-        return cm.getActiveNetworkInfo() != null;
-
-
-    }
-
-    private void checkwifi() {
-
-        boolean check = isNetworkConnected();
-        if (check == true) {
-            initComponents();
-            setListener();
-
-        } else {
-
-            Toast toast = Toast.makeText(this, "Connect to a network",
-                    Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
-
-            initComponents();
-            setListener();
-        }
-
     }
 }
 

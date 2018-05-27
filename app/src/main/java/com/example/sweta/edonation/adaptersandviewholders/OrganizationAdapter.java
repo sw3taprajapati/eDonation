@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.activities.DashboardActivity;
 import com.example.sweta.edonation.pojoclasses.Organization;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +28,6 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
 
     Context context;
     List<Organization> organizationList;
-    Task<Void> databaseOrganization;
 
     public OrganizationAdapter(Context context, List<Organization> organizationList) {
         this.context = context;
@@ -49,37 +47,42 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
     public void onBindViewHolder(@NonNull OrganizationViewHolder holder, int position) {
 
         final Organization organization = organizationList.get(position);
+
         holder.textViewOrgName.setText(organization.getOrgFullName());
         holder.textViewPanNo.setText(String.valueOf(organization.getOrgPan()));
         holder.btnApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //update status to 1
+                String id=organization.getOrgId();
+                int data=1;
+                DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
+                        getReference("OrganizationDetails");
+                dbOrganization.child(id).child("status")
+                        .setValue(1);
 
-                databaseOrganization = FirebaseDatabase.getInstance().getReference().child("OrganizationDetails").child("status").setValue(1);
 
-
-
-                /*Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"+organization.getOrgEmailID())); // only email apps should handle this
 
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Confirmation");
                 intent.putExtra(Intent.EXTRA_TEXT, "Your email is verfied");
                 if (intent.resolveActivity(context.getPackageManager()) != null) {
                     context.startActivity(intent);
-                }*/
+                }
             }
         });
 
-        //delete org profile
         holder.btnDecline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String id=organization.getOrgId();
+
                 DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
-                        getReference("OrganizationDetails");
-                dbOrganization.child("OrganizationDetails").
-                        child(organization.getOrgId()).removeValue();
+                        getReference("OrganizationDetails").child(id);
+                dbOrganization.removeValue();
+
             }
         });
 

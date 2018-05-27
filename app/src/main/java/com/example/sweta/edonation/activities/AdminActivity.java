@@ -77,7 +77,6 @@ public class AdminActivity extends AppCompatActivity {
         organizationList = new ArrayList<>();
 
 
-
        DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                 getReference("OrganizationDetails");
         dbOrganization.addValueEventListener(new ValueEventListener() {
