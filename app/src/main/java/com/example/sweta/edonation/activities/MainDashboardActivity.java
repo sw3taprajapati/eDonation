@@ -16,13 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.sweta.edonation.OrganizationLoginActivity;
-import com.example.sweta.edonation.OrganizationRegisterActivity;
 import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.adaptersandviewholders.ListAdapter;
 import com.example.sweta.edonation.pojoclasses.Organization;
@@ -36,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainDashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     NavigationView navigationView;
@@ -68,7 +64,7 @@ public class MainDashboardActivity extends AppCompatActivity
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         recyclerView = findViewById(R.id.recyclerViewOrganizationList);
-       // btnAdmin = findViewById(R.id.adminBtn);
+        // btnAdmin = findViewById(R.id.adminBtn);
     }
 
     private void initToolbar() {
@@ -78,7 +74,8 @@ public class MainDashboardActivity extends AppCompatActivity
 
     private void initActionBar() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
     }
@@ -111,11 +108,16 @@ public class MainDashboardActivity extends AppCompatActivity
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
                         Organization org = organizationSnapshot.getValue(Organization.class);
+                        int status;
+                        try {
+                            status = org.getStatus();
+                            if (status == 1) {
+                                organizationList.add(org);
+                            }
+                        } catch (Exception e) {
 
-                        int status = org.getStatus();
-                        if (status == 1) {
-                            organizationList.add(org);
                         }
+
                     }
 
                     adapter = new ListAdapter(MainDashboardActivity.this,
@@ -184,12 +186,14 @@ public class MainDashboardActivity extends AppCompatActivity
 
 
             case R.id.nav_loginOrg:
-                Intent intent1 = new Intent(MainDashboardActivity.this, OrganizationLoginActivity.class);
+                Intent intent1 = new Intent(MainDashboardActivity.this,
+                        OrganizationLoginActivity.class);
                 startActivity(intent1);
                 break;
 
             case R.id.nav_aboutApp:
-                Intent intent3 = new Intent(MainDashboardActivity.this, AdminActivity.class);
+                Intent intent3 = new Intent(MainDashboardActivity.this,
+                        AdminActivity.class);
                 startActivity(intent3);
                 break;
 
@@ -203,7 +207,6 @@ public class MainDashboardActivity extends AppCompatActivity
 /*
     @Override
     public void onClick(View v) {
-
         //if (v == btnAdmin) {
             Intent intent = new Intent(MainDashboardActivity.this,
                     AdminActivity.class);
@@ -242,4 +245,3 @@ public class MainDashboardActivity extends AppCompatActivity
 
     }
 }
-

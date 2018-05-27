@@ -5,18 +5,19 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_registerOrg"
-            android:icon="@mipmap/ic_register"
-            android:title="Register Organization" />
-        <item
-            android:id="@+id/nav_loginOrg"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Login as Organization" />
+            android:id="@+id/nav_editProfile"
+            android:icon="@mipmap/ic_edit_profile"
+            android:title="Edit Profile" />
+
         <item
             android:id="@+id/nav_aboutApp"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@mipmap/ic_about_app"
             android:title="About App" />
 
+        <item
+            android:id="@+id/nav_logOut"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Log out" />
     </group>
 
 

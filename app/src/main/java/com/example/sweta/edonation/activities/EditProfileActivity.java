@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.sweta.edonation.OrganizationRegisterActivity;
 import com.example.sweta.edonation.R;
 
 public class EditProfileActivity extends AppCompatActivity{
@@ -37,7 +36,7 @@ public class EditProfileActivity extends AppCompatActivity{
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent=new Intent(EditProfileActivity.this,
-                        OrganizationRegisterActivity.class);
+                        OrganizationLoginDashboardActivity.class);
                 startActivity(intent);
                 finish();
                 return true;

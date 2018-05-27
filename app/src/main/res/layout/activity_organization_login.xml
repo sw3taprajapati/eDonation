@@ -1,7 +1,7 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F0F0F0"
     android:orientation="vertical"
     android:scrollbarAlwaysDrawVerticalTrack="true">
@@ -9,7 +9,6 @@
     <include
         android:id="@+id/toolBar"
         layout="@layout/toolbar" />
-
 
 
     <RelativeLayout
@@ -28,8 +27,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="30dp"
-            >
+            android:layout_marginTop="30dp">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -50,7 +48,9 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorTheme">
 
                 <EditText
                     android:id="@+id/orgPassword"
@@ -67,7 +67,7 @@
 
 
             <Button
-                android:id="@+id/orgSigninBtn"
+                android:id="@+id/orgLogIn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="30dp"

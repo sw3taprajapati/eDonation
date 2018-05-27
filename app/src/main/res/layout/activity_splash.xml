@@ -20,7 +20,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/appLogo"
         android:textColor="@color/white"
-        android:textSize="30dp"
+        android:textSize="35dp"
         android:fontFamily="sans-serif"
         android:textStyle="bold"/>
 
@@ -33,7 +33,7 @@
         android:layout_below="@+id/appName"
         android:textStyle="italic"
         android:fontFamily="sans-serif"
-        android:textSize="10dp"
+        android:textSize="12dp"
         />
 
 
