@@ -79,7 +79,7 @@ public class OrganizationDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL,
-                        Uri.parse("tel:"+ String.valueOf(phone)));
+                        Uri.parse("tel:01"+ String.valueOf(phone)));
                 try {
                     startActivity(intent);
                 } catch (Exception e) {
@@ -101,7 +101,7 @@ public class OrganizationDetailActivity extends AppCompatActivity {
     private void initToolbar(){
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Organization Detail");
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -119,7 +119,6 @@ public class OrganizationDetailActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
