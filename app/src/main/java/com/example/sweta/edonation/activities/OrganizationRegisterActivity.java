@@ -2,6 +2,7 @@ package com.example.sweta.edonation.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Patterns;
@@ -14,6 +15,10 @@ import android.widget.EditText;
 
 import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.pojoclasses.Organization;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -36,10 +41,10 @@ public class OrganizationRegisterActivity extends AppCompatActivity
     int orgphoneInt, orgpanInt, status = 0;
     CheckBox check1, check2, check3, check4;
     String currentlyLooking = "";
-    ArrayList<String> list;
-
     Button orgregister;
     DatabaseReference databaseOrganization;
+
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,10 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         initListeners();
         initToolbar();
 
+
+       firebaseAuth = FirebaseAuth.getInstance();
+
+
         databaseOrganization = FirebaseDatabase.getInstance().
                 getReference("OrganizationDetails");
 
@@ -59,7 +68,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         orgregister.setOnClickListener(this);
     }
 
-    private void initComponent() {
+    private void initComponent(){
         toolbar = findViewById(R.id.toolBar);
         orgname = findViewById(R.id.orgName);
         orgemail = findViewById(R.id.orgEmail);
@@ -85,7 +94,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Register Organization");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
     }
 
     @Override
@@ -94,7 +103,8 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            Intent intent = new Intent(OrganizationRegisterActivity.this, OnVerifyActivity.class);
+            Intent intent = new Intent(OrganizationRegisterActivity.this,
+                    MainDashboardActivity.class);
             startActivity(intent);
             finish();
 
@@ -116,6 +126,8 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         else
             return false;
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -142,7 +154,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity
             } else if (orgemailString.matches(emailPattern)) {
 
                 orgPasswordString = orgPassword.getText().toString().trim();
-
 
                 if (orgPasswordString.equals("")) {
                     orgPassword.setError("Password cannot be empty");
@@ -213,6 +224,19 @@ public class OrganizationRegisterActivity extends AppCompatActivity
                                     }
 
                                     orgDescribeItemsString = describeItems.getText().toString();
+
+
+                                    //this method creates user on the console on the basis of password and email given
+                                    firebaseAuth.createUserWithEmailAndPassword(orgemailString,orgPasswordString)
+                                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                                    if(task.isSuccessful()){
+                                                        //registered
+                                                    }
+                                                }
+                                            });
+
 
                                     String orgId = databaseOrganization.push().getKey();
                                     Organization org = new Organization(orgId, orgnameString, orgemailString, orgPasswordString, orglocationString, orgphoneInt, orgwebsiteString, orgpanInt, currentlyLooking, orgDescribeItemsString, status);

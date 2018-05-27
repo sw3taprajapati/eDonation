@@ -22,7 +22,6 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.sweta.edonation.OrganizationLoginActivity;
 import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.adaptersandviewholders.ListAdapter;
 import com.example.sweta.edonation.pojoclasses.Organization;
