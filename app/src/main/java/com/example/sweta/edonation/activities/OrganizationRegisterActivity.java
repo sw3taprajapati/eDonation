@@ -85,7 +85,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Register Organization");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     @Override
@@ -94,8 +94,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            Intent intent = new Intent(OrganizationRegisterActivity.this,
-                    MainDashboardActivity.class);
+            Intent intent = new Intent(OrganizationRegisterActivity.this, OnVerifyActivity.class);
             startActivity(intent);
             finish();
 
@@ -117,7 +116,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         else
             return false;
     }
-
 
     @Override
     public void onClick(View v) {
@@ -144,6 +142,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity
             } else if (orgemailString.matches(emailPattern)) {
 
                 orgPasswordString = orgPassword.getText().toString().trim();
+
 
                 if (orgPasswordString.equals("")) {
                     orgPassword.setError("Password cannot be empty");
