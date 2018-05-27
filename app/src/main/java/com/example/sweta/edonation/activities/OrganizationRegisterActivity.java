@@ -1,5 +1,4 @@
-package com.example.sweta.edonation;
-
+package com.example.sweta.edonation.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.activities.OnVerifyActivity;
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.firebase.database.DatabaseReference;
@@ -25,13 +25,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class OrganizationRegisterActivity extends AppCompatActivity implements View.OnClickListener{
+public class OrganizationRegisterActivity extends AppCompatActivity
+        implements View.OnClickListener {
 
 
     Toolbar toolbar;
 
-    EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan, orgPassword, describeItems;
-    String orgnameString, orgemailString, orglocationString, orgwebsiteString, orgPasswordString, orgDescribeItemsString;
+    EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan,
+            orgPassword, describeItems;
+    String orgnameString, orgemailString, orglocationString, orgwebsiteString,
+            orgPasswordString, orgDescribeItemsString;
     //boolean check1Boolean, check2Boolean,check3Boolean, check4Boolean;
     int orgphoneInt, orgpanInt, status = 0;
     CheckBox check1, check2, check3, check4;
@@ -39,8 +42,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
     ArrayList<String> list;
 
     Button orgregister;
-
-
     DatabaseReference databaseOrganization;
 
     @Override
@@ -52,21 +53,16 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
         initListeners();
         initToolbar();
 
-
-       databaseOrganization = FirebaseDatabase.getInstance().getReference("OrganizationDetails");
-
-
+        databaseOrganization = FirebaseDatabase.getInstance().
+                getReference("OrganizationDetails");
 
     }
 
     private void initListeners() {
         orgregister.setOnClickListener(this);
-
-
     }
 
     private void initComponent() {
-
 
         toolbar = findViewById(R.id.toolBar);
         orgname = findViewById(R.id.orgName);
@@ -127,18 +123,12 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
             return false;
     }
 
-
-
-
-
-    @Override
     public void onClick(View v) {
 
 
         String phone;
         String panNo;
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
 
 
         orgnameString = orgname.getText().toString().trim();
@@ -207,24 +197,24 @@ public class OrganizationRegisterActivity extends AppCompatActivity implements V
                                 } else {
                                     orgpanInt = Integer.parseInt(orgpan.getText().toString());
 
-                                    if(check1.isChecked()){
+                                    if (check1.isChecked()) {
                                         currentlyLooking = "Food";
                                         //Log.i("food", currentlyLooking);
 
 
                                     }
 
-                                    if(check2.isChecked()){
-                                        currentlyLooking += ","+"Clothes";
+                                    if (check2.isChecked()) {
+                                        currentlyLooking += "," + "Clothes";
                                         //Log.i("clothes", currentlyLooking);
                                     }
 
-                                    if(check3.isChecked()){
-                                        currentlyLooking +=","+"Books";
+                                    if (check3.isChecked()) {
+                                        currentlyLooking += "," + "Books";
                                     }
 
-                                    if(check4.isChecked()){
-                                        currentlyLooking +=","+"Stationery";
+                                    if (check4.isChecked()) {
+                                        currentlyLooking += "," + "Stationery";
                                     }
 
                                     orgDescribeItemsString = describeItems.getText().toString();

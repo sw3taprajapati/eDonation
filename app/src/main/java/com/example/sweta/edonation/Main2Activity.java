@@ -12,6 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.sweta.edonation.activities.OrganizationLoginActivity;
+import com.example.sweta.edonation.activities.OrganizationRegisterActivity;
+
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

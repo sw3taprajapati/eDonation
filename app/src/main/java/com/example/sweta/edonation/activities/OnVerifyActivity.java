@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.example.sweta.edonation.OrganizationRegisterActivity;
 import com.example.sweta.edonation.R;
 
 public class OnVerifyActivity extends AppCompatActivity{
