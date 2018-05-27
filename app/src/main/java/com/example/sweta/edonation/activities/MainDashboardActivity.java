@@ -193,7 +193,7 @@ public class MainDashboardActivity extends AppCompatActivity
 
             case R.id.nav_aboutApp:
                 Intent intent3 = new Intent(MainDashboardActivity.this,
-                        AdminActivity.class);
+                        AboutAppActivity.class);
                 startActivity(intent3);
                 break;
 
