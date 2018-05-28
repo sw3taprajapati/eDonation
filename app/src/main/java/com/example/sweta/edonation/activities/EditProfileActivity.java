@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,80 +17,84 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.example.sweta.edonation.R;
+import com.example.sweta.edonation.pojoclasses.Organization;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditProfileActivity extends AppCompatActivity{
     EditText orgname, orgemail, orglocation, orgphone, orgwebsite, orgpan , orgPassword, describeItems;
+    String name,email,website,pan;
 
     CheckBox check1, check2, check3, check4;
-
+    DatabaseReference reference;
     Button orgregister;
     Toolbar toolbar;
+    FirebaseUser user;
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_register);
-
+        mAuth = FirebaseAuth.getInstance();
+        accessInformation();
         initComponent();
         initToolbar();
         disableFields();
+
+
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+    private void updateUI(FirebaseUser user) {
 
-    private void getIntents() {
-        if (getIntent().hasExtra("orgName") && getIntent().hasExtra("orgEmail")
-                && getIntent().hasExtra("orgPassword") && getIntent().hasExtra("orgLocation")
-                && getIntent().hasExtra("currentRequirement") && getIntent().hasExtra("description")
-                && getIntent().hasExtra("website") && getIntent().hasExtra("phone")) {
+        //hideProgressDialog();
 
-            String orgName = getIntent().getStringExtra("orgName");
-            String orgEmail=getIntent().getStringExtra("orgEmail");
-            String password=getIntent().getStringExtra("orgPassword");
-            //String orgLocation = getIntent().getStringExtra("orgLocation");
-            String currentReq = getIntent().getStringExtra("currentRequirement");
-            //String description = getIntent().getStringExtra("description");
-            //String website = getIntent().getStringExtra("website");
-            //int phone = getIntent().getIntExtra("phone",0);
+        if (user != null) {
 
-            setDetails(orgName,orgEmail, currentReq,password);
         }
+
     }
-    private void setDetails(String orgName, String orgEmail,
-                            String currentReq, String password) {
-        orgname.setText(orgName);
-        //location.setText(orgLocation);
-        orgname.setText(orgEmail);
-        //descriptionDetail.setText(description);
-//        websiteBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(Intent.ACTION_VIEW);
-//                intent.setData(Uri.parse(String.valueOf(website)));
-//                startActivity(intent);
-//            }
-//        });
-//        callBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(Intent.ACTION_CALL);
-//                intent.setData(Uri.parse("tel:" + String.valueOf(phone)));
-//                try {
-//                    if (ActivityCompat.checkSelfPermission(EditProfileActivity.this,
-//                            Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-//                        // TODO: Consider calling
-//                        //    ActivityCompat#requestPermissions
-//                        // here to request the missing permissions, and then overriding
-//                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                        //                                          int[] grantResults)
-//                        // to handle the case where the user grants the permission. See the documentation
-//                        // for ActivityCompat#requestPermissions for more details.
-//                        return;
-//                    }
-//                    startActivity(intent);
-//                } catch (android.content.ActivityNotFoundException ex) {
-//
-//                }
-//            }
-//        });
+    private void accessInformation(){
+
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+           // website = user.getWebsite();
+
+            // Check if user's email is verified
+           // boolean emailVerified = user.isEmailVerified();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getToken() instead.
+            String uid = user.getUid();
+        }
+        orgname.setText(name);
+
+
+
+
     }
+
+
     private void disableFields(){
         orgname.setEnabled(false);
         orgemail.setEnabled(false);
