@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import com.example.sweta.edonation.R;
@@ -34,7 +35,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
     EditText orgEmail, orgPassword;
     String orgEmailString, orgPasswordString;
     Button logInBtn;
-   /* FirebaseAuth firebaseAuth;*/
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
         initComponent();
         initToolbar();
         setListener();
-        /*firebaseAuth = FirebaseAuth.getInstance();*/
+        firebaseAuth = FirebaseAuth.getInstance();
 
 
     }
@@ -88,10 +89,6 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
     }
 
 
-
-
-
-
     @Override
     public void onClick(View v) {
 
@@ -106,9 +103,9 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
             //checked if entered email or password matches or not
 
 
-
             //validation here
-            /*if (orgEmailString.equals("")) {
+            orgEmailString = orgEmail.getText().toString().trim();
+            if (orgEmailString.equals("")) {
 
                 orgEmail.setError("Organization email cannot be empty");
 
@@ -124,12 +121,12 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
                 } else if (orgPasswordString.contains("a-zA-Z1-9")) {
                     orgPassword.setError("Enter password containing numbers and alphabets");
 
-                }*/
+                }
+            }
 
 
 
-
-            dbOrganization.addValueEventListener(new ValueEventListener() {
+            /*dbOrganization.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
@@ -147,37 +144,42 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
                         }
                     }
                 }
-
-                @Override
+*/
+              /*  @Override
                 public void onCancelled(DatabaseError databaseError) {
 
                 }
-            });
+            });*/
 
-           /* firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                //logged in
-                                //LoginDashboard is opened
-                                finish();
-                                Intent intent = new Intent(OrganizationLoginActivity.this,
-                                        OrganizationLoginDashboardActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
+            firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
+                    .addOnCompleteListener(this,
+                            new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        }
-                    });*/
+                                    if (task.isSuccessful()) {
+                                        //logged in
+                                        //LoginDashboard is opened
+                                        finish();
+                                        Intent intent = new Intent(OrganizationLoginActivity.this,
+                                                OrganizationLoginDashboardActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Enter valid email id and password",
+                                                Toast.LENGTH_LONG).show();
+                                    }
 
-
-
-
-
-            }
+                                }
+                            });
 
 
         }
+
+
     }
+}
+
+
+
 

@@ -86,10 +86,13 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
 
                 String id=organization.getOrgId();
 
+                //Delete from firebase database
                 DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                         getReference("OrganizationDetails").child(id);
                 dbOrganization.removeValue();
 
+
+                //delete from Firebase Authentication
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
