@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 
 import com.example.sweta.edonation.R;
+import com.example.sweta.edonation.activities.MainDashboardActivity;
+import com.example.sweta.edonation.activities.OrganizationLoginDashboardActivity;
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -93,6 +95,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
 
+
         if (v == logInBtn) {
 
             DatabaseReference dbOrganization = FirebaseDatabase.getInstance().getReference("OrganizationDetails");
@@ -100,8 +103,10 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
 
             //checked if entered email or password matches or not
 
+
             //validation here
-            orgEmailString=orgEmail.getText().toString().trim();
+            orgEmailString = orgEmail.getText().toString().trim();
+
             if (orgEmailString.equals("")) {
 
                 orgEmail.setError("Organization email cannot be empty");
@@ -109,54 +114,67 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
             } else if (orgEmailString.matches(emailPattern)) {
 
                 orgPasswordString = orgPassword.getText().toString().trim();
-
-
-
-                }
-
-
-
-                dbOrganization.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
-                                Organization org = organizationSnapshot.
-                                        getValue(Organization.class);
-                                int status = org.getStatus();
-                                orgEmailString = orgEmail.getText().toString().trim();
-                                orgPasswordString = orgPassword.getText().toString().trim();
-
-                                logInValidation(status);
-                                /*if (status == 1) {
-
-                                    Intent intent = new Intent
-                                            (OrganizationLoginActivity.this,
-                                                    OrganizationLoginDashboardActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }*/
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
+                afterValidation();
 
             }
+
+
+//
+//            dbOrganization.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    if (dataSnapshot.exists()) {
+//                        for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
+//                            Organization org = organizationSnapshot.getValue(Organization.class);
+//                            int status = org.getStatus();
+//                            orgEmailString = orgEmail.getText().toString().trim();
+//                            orgPasswordString = orgPassword.getText().toString().trim();
+//                            if(status == 1){
+//                                Intent intent = new Intent(OrganizationLoginActivity.this,
+//                                        OrganizationLoginDashboardActivity.class);
+//                                startActivity(intent);
+//                                finish();
+//                            }
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//                }
+//            });
+
+
+
+//            firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
+//                    .addOnCompleteListener(this,
+//                            new OnCompleteListener<AuthResult>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                                    if (task.isSuccessful()) {
+//                                        //logged in
+//                                        //LoginDashboard is opened
+//                                        finish();
+//                                        Intent intent = new Intent(OrganizationLoginActivity.this,
+//                                                OrganizationLoginDashboardActivity.class);
+//                                        startActivity(intent);
+//                                        finish();
+//                                    } else {
+//                                        Toast.makeText(getApplicationContext(), "Enter valid email id and password",
+//                                                Toast.LENGTH_LONG).show();
+//                                    }
+//
+//                                }
+//                            });
 
 
         }
 
 
-    private void logInValidation(int status) {
-
-        if (status == 1) {
-            firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
+    }
+    private void afterValidation(){
+        firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
                     .addOnCompleteListener(this,
                             new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -170,15 +188,13 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
                                                 OrganizationLoginDashboardActivity.class);
                                         startActivity(intent);
                                         finish();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Enter valid email id and password",
+                                                Toast.LENGTH_LONG).show();
                                     }
 
                                 }
                             });
-        }
-        else {
-            Toast.makeText(this,"Email is either not registered or not Validated",
-                    Toast.LENGTH_LONG).show();
-        }
+
     }
 }
-
