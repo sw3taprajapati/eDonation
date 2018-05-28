@@ -27,24 +27,26 @@
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewOrganizationList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            >
-
-        </android.support.v7.widget.RecyclerView>
+            android:layout_below="@+id/linear"
+            android:layout_margin="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:padding="8dp"
+            android:scrollbars="vertical" />
     </LinearLayout>
 
-
-
     <android.support.design.widget.NavigationView
-        android:layout_below="@id/toolbar"
         android:id="@+id/nav2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main_user_dashboard"
-        app:menu="@menu/activity_main_drawer_login_org"/>
+        app:menu="@menu/activity_main_drawer_login_org" />
 
 </android.support.v4.widget.DrawerLayout>

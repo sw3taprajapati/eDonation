@@ -4,6 +4,7 @@
     package="com.example.sweta.edonation">
 
     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
         tools:replace="android:allowBackup"
         android:allowBackup="true"
@@ -30,7 +31,7 @@
         <activity android:name=".activities.OrganizationLoginDashboardActivity"/>
 
         <activity android:name=".activities.OrganizationRegisterActivity"/>
-        <activity android:name=".OrganizationLoginActivity"/>
+        <activity android:name=".activities.OrganizationLoginActivity"/>
         <activity android:name=".activities.DashboardActivity" />
         <activity android:name=".activities.OnVerifyActivity" />
         <activity android:name=".activities.AdminActivity" />

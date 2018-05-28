@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.example.sweta.edonation.adaptersandviewholders.OrganizationAdapter;
@@ -22,9 +24,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminActivity extends AppCompatActivity {
+public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toolbar toolbar;
+    Button btnRefresh;
     RecyclerView recyclerView;
     OrganizationAdapter adapter;
     List<Organization> organizationList;
@@ -38,18 +41,22 @@ public class AdminActivity extends AppCompatActivity {
         initComponent();
         initToolbar();
         initRecyclerView();
+        setListener();
     }
 
     private void initComponent() {
-        toolbar = findViewById(R.id.toolBar);
+        toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.recyclerView);
-
+        btnRefresh=findViewById(R.id.refreshBtn);
     }
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Admin");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    private void setListener(){
+        btnRefresh.setOnClickListener(this);
     }
 
     @Override
@@ -107,5 +114,13 @@ public class AdminActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+
+            Intent intent=new Intent(AdminActivity.this,AdminActivity.class);
+            startActivity(intent);
+            finish();
     }
 }

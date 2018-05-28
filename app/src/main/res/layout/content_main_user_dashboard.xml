@@ -30,11 +30,11 @@
 
 
             <LinearLayout
-                android:id="@+id/linear"
+                android:id="@+id/linearCheckbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/whatToDonate"
-                android:weightSum="4">
+                android:weightSum="5">
 
 
                 <CheckBox
@@ -86,17 +86,25 @@
                     android:layout_weight="1"
                     android:buttonTint="@color/checkBoxColor"
                     android:hint="Stationery"
-                    android:textColorHint="@color/black"
-
-                    />
+                    android:textColorHint="@color/black" />
             </LinearLayout>
 
-
+            <Button
+                android:id="@+id/searchBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linearCheckbox"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="16dp"
+                android:textColor="@color/white"
+                android:text="Search"
+                android:background="@color/colorTheme"
+                />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewOrganizationList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/linear"
+                android:layout_below="@+id/searchBtn"
                 android:layout_margin="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
