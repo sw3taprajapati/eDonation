@@ -1,5 +1,6 @@
 package com.example.sweta.edonation.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -67,6 +69,34 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main2, menu);
         return true;
     }
+    public void dialogBox() {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Are you sure you want to log out?");
+        alertDialogBuilder.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent intent=new Intent(OrganizationLoginDashboardActivity.this,MainDashboardActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("cancel",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                      arg0.cancel();
+
+
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -108,9 +138,10 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_logOut:
-                Intent in3=new Intent(OrganizationLoginDashboardActivity.this,
-                        MainDashboardActivity.class);
-                startActivity(in3);
+                dialogBox();
+//                Intent in3=new Intent(OrganizationLoginDashboardActivity.this,
+//                        MainDashboardActivity.class);
+//                startActivity(in3);
                 break;
         }
 
