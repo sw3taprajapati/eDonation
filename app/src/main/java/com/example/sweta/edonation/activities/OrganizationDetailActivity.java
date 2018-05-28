@@ -14,9 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.example.sweta.edonation.R;
 import android.widget.Toast;
 
-import com.example.sweta.edonation.R;
+
 
 public class OrganizationDetailActivity extends AppCompatActivity {
 
@@ -66,7 +67,7 @@ public class OrganizationDetailActivity extends AppCompatActivity {
         location.setText(orgLocation);
         emailDetail.setText(email);
         currentReqDetail.setText(currentReq);
-        descriptionDetail.setText(description);
+        descriptionDetail.setText("We are currently looking for "+description);
         websiteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +102,7 @@ public class OrganizationDetailActivity extends AppCompatActivity {
     private void initToolbar(){
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Organization Detail");
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -119,7 +120,6 @@ public class OrganizationDetailActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;

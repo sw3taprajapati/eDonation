@@ -28,13 +28,18 @@
 
 
         <activity android:name=".activities.OrganizationDetailActivity" />
-        <activity android:name=".activities.OrganizationLoginDashboardActivity"/>
-        <activity android:name=".activities.EditProfileActivity"/>
+
+
         <activity android:name=".activities.OrganizationRegisterActivity"/>
-        <activity android:name=".OrganizationLoginActivity"/>
+        <activity android:name=".activities.OrganizationLoginActivity"/>
+        <activity android:name=".activities.OrganizationLoginDashboardActivity"/>
+
         <activity android:name=".activities.DashboardActivity" />
         <activity android:name=".activities.OnVerifyActivity" />
         <activity android:name=".activities.AdminActivity" />
+        <activity android:name=".activities.EditProfileActivity" />
+
+
 
         <activity
             android:name=".activities.MainDashboardActivity"

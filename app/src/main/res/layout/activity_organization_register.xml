@@ -42,6 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+
+
                 <EditText
                     android:id="@+id/orgEmail"
                     android:layout_width="match_parent"
@@ -52,6 +54,7 @@
                     android:inputType="textEmailAddress"
                     android:paddingBottom="24dp"
                     android:textCursorDrawable="@drawable/ic_cursor" />
+
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -131,16 +134,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/orgnPan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorTheme"
-                    android:hint="PAN No."
-                    android:inputType="text"
-                    android:paddingBottom="24dp"
-                    android:textColor="@color/black"
-                    android:textCursorDrawable="@drawable/ic_cursor" />
+
+            <EditText
+                android:id="@+id/orgnPan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorTheme"
+                android:hint="PAN No."
+                android:inputType="number"
+                android:paddingBottom="24dp"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/ic_cursor" />
+
+
 
             </android.support.design.widget.TextInputLayout>
 

@@ -1,4 +1,5 @@
-package com.example.sweta.edonation;
+
+package com.example.sweta.edonation.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -147,7 +148,6 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
 */
               /*  @Override
                 public void onCancelled(DatabaseError databaseError) {
-
                 }
             });*/
 
@@ -179,7 +179,3 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
 
     }
 }
-
-
-
-
