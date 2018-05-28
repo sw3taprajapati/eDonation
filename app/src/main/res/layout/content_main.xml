@@ -24,7 +24,7 @@
                 android:layout_below="@+id/toolbar"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="8dp"
                 android:text="What do you like to donate?"
                 android:textSize="20sp" />
 
@@ -100,6 +100,8 @@
                 android:text="Search"
                 android:background="@color/colorTheme"
                 />
+
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewOrganizationList"
                 android:layout_width="match_parent"
@@ -111,6 +113,8 @@
                 android:layout_marginTop="5dp"
                 android:padding="8dp"
                 android:scrollbars="vertical" />
+
+
 
 
         </RelativeLayout>
