@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sweta.edonation.R;
@@ -38,6 +39,7 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
     private List<Organization> organizationList;
     private ListAdapter adapter;
     DatabaseReference reference;
+    EditText emailEditTxt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,9 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
         recyclerView=findViewById(R.id.recyclerViewOrganizationList);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         navigationView = (NavigationView) findViewById(R.id.nav2);
+        emailEditTxt=findViewById(R.id.emailEditTxt);
+
+        emailEditTxt.setText("@gmail.com");
     }
     private void initToolbar(){
         toolbar.setTitle("e-Donation");
@@ -176,7 +181,7 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
 
             case R.id.nav_aboutApp:
                 Intent in2 = new Intent(OrganizationLoginDashboardActivity.this,
-                        AdminActivity.class);
+                        AboutAppActivity.class);
                 startActivity(in2);
                 break;
 

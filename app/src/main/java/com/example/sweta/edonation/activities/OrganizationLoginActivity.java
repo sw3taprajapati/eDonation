@@ -1,4 +1,4 @@
-package com.example.sweta.edonation;
+package com.example.sweta.edonation.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 
+import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.activities.MainDashboardActivity;
 import com.example.sweta.edonation.activities.OrganizationLoginDashboardActivity;
 
