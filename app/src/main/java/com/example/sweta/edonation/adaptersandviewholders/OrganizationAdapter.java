@@ -16,6 +16,10 @@ import android.widget.Toast;
 import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.activities.DashboardActivity;
 import com.example.sweta.edonation.pojoclasses.Organization;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +32,7 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
 
     Context context;
     List<Organization> organizationList;
+    FirebaseAuth firebaseAuth;
 
     public OrganizationAdapter(Context context, List<Organization> organizationList) {
         this.context = context;
@@ -62,6 +67,8 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
                         .setValue(1);
 
 
+
+
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
                 intent.setData(Uri.parse("mailto:"+organization.getOrgEmailID())); // only email apps should handle this
 
@@ -79,9 +86,23 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
 
                 String id=organization.getOrgId();
 
+                //Delete from firebase database
                 DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                         getReference("OrganizationDetails").child(id);
                 dbOrganization.removeValue();
+
+
+                //delete from Firebase Authentication
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            //deleted
+                        }
+
+                    }
+                });
 
             }
         });

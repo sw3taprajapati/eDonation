@@ -160,16 +160,6 @@
                 android:orientation="horizontal">
 
 
-
-
-                    />
-
-
-
-
-
-
-
             <CheckBox
                 android:id="@+id/food_checkbox"
                 android:layout_width="wrap_content"

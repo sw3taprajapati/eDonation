@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.sweta.edonation.OrganizationLoginActivity;
 import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.adaptersandviewholders.ListAdapter;
 import com.example.sweta.edonation.pojoclasses.Organization;
@@ -207,7 +206,6 @@ public class MainDashboardActivity extends AppCompatActivity
 /*
     @Override
     public void onClick(View v) {
-
         //if (v == btnAdmin) {
             Intent intent = new Intent(MainDashboardActivity.this,
                     AdminActivity.class);
@@ -246,4 +244,3 @@ public class MainDashboardActivity extends AppCompatActivity
 
     }
 }
-
