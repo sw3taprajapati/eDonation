@@ -17,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 //import com.example.sweta.edonation.R;
+import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -45,7 +46,7 @@ public class EditProfileActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_register);
         mAuth = FirebaseAuth.getInstance();
-        accessInformation();
+        //accessInformation();
         initComponent();
         initToolbar();
         disableFields();
@@ -75,8 +76,8 @@ public class EditProfileActivity extends AppCompatActivity{
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
+            name = user.getDisplayName();
+            email = user.getEmail();
            // website = user.getWebsite();
 
             // Check if user's email is verified
@@ -98,9 +99,10 @@ public class EditProfileActivity extends AppCompatActivity{
     private void disableFields(){
         orgname.setEnabled(false);
         orgemail.setEnabled(false);
-        orgPassword.setEnabled(false);
+
         orgwebsite.setEnabled(false);
         orgpan.setEnabled(false);
+        orgregister.setText("Done");
 
 
 

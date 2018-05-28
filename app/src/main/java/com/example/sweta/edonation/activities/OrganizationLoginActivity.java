@@ -101,6 +101,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
             //checked if entered email or password matches or not
 
             //validation here
+            orgEmailString=orgEmail.getText().toString().trim();
             if (orgEmailString.equals("")) {
 
                 orgEmail.setError("Organization email cannot be empty");
@@ -109,15 +110,10 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
 
                 orgPasswordString = orgPassword.getText().toString().trim();
 
-                if (orgPasswordString.equals("")) {
-                    orgPassword.setError("Password cannot be empty");
-                } else if (orgPasswordString.length() <= 8) {
-                    orgPassword.setError("Password cannot be less than eight characters");
 
-                } else if (orgPasswordString.contains("a-zA-Z1-9")) {
-                    orgPassword.setError("Enter password containing numbers and alphabets");
 
                 }
+
 
 
                 dbOrganization.addValueEventListener(new ValueEventListener() {
@@ -155,7 +151,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
 
 
         }
-    }
+
 
     private void logInValidation(int status) {
 

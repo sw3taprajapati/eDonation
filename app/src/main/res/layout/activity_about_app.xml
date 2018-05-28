@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+   >
+
+    <include
+        android:id="@+id/toolBar"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        >
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="@dimen/dimen_60dp"
+        android:src="@mipmap/app_logo"
+        android:layout_gravity="center"
+       />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Version: 3.1"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:text="eDonation is a free app to provide ease for donor to view all the social organizations who are interested in receiving donation stuffs like clothes,foods,books and stationery."
+        android:padding="4dp"
+       android:layout_marginBottom="8dp"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:text="The donation receiving organization specifies what they currently wants from donors."
+            android:padding="4dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="14dp"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:text="The donor will then contact with organization on the basis of what they want to donate.Thus this app acts as a bridge to link the donors and recipients"
+            android:padding="4dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="14dp"
+            android:textColor="@color/black"
+            />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Developed By:"
+        android:textColor="@color/blue"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Likita Maharjan"
+        android:textColor="@color/blue"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roshnee Pradhan"
+        android:textColor="@color/blue"
+        android:layout_marginLeft="10dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Somanjali Maharjan"
+        android:textColor="@color/blue"
+        android:layout_marginLeft="10dp"/>
+
+
+    <TextView
+        android:id="@+id/sweta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sweta Prajapati"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/blue"
+        />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="'Donation For a Good Cause'"
+            android:textStyle="italic"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="If you have any queries? contact us via email given below"
+            android:gravity="center"
+            android:textSize="@dimen/dimen_10dp"
+            android:textColor="@color/black"
+            />
+
+        <Button
+            android:id="@+id/contact_us_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nav_header_subtitle"
+            android:gravity="center"
+            android:textColorHint="@color/blue"
+            android:background="@null"
+            />
+
+
+    </LinearLayout>
+</LinearLayout>
