@@ -11,6 +11,8 @@
         layout="@layout/toolbar" />
 
 
+
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -76,7 +78,13 @@
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp" />
+
+
         </LinearLayout>
+
+
+
+
     </RelativeLayout>
 
     <ImageButton
@@ -87,6 +95,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:background="@mipmap/ic_org"
-        android:elevation="4dp"
-         />
+        android:elevation="4dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"/>
+
+
+
 </RelativeLayout>

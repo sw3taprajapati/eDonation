@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.sweta.edonation.R;
@@ -46,7 +45,7 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_dashboard2);
+        setContentView(R.layout.activity_organization_login_dashboard);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("e-Donation");
         setSupportActionBar(toolbar);
