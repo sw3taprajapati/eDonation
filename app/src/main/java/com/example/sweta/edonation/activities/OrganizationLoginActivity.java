@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -15,12 +14,13 @@ import android.widget.Toast;
 
 
 import com.example.sweta.edonation.R;
+import com.example.sweta.edonation.activities.MainDashboardActivity;
+import com.example.sweta.edonation.activities.OrganizationLoginDashboardActivity;
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +44,9 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
         initComponent();
         initToolbar();
         setListener();
+        firebaseAuth = FirebaseAuth.getInstance();
+
+
     }
 
     private void initComponent() {
@@ -90,17 +93,17 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
     public void onClick(View v) {
 
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
-
         if (v == logInBtn) {
 
-            DatabaseReference dbOrganization = FirebaseDatabase.getInstance().getReference("OrganizationDetails");
+            DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
+                    getReference("OrganizationDetails");
 
 
             //checked if entered email or password matches or not
 
             //validation here
-           orgEmailString= orgEmail.getText().toString();
+            orgEmailString = orgEmail.getText().toString().trim();
+
             if (orgEmailString.equals("")) {
 
                 orgEmail.setError("Organization email cannot be empty");
@@ -108,111 +111,86 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
             } else if (orgEmailString.matches(emailPattern)) {
 
                 orgPasswordString = orgPassword.getText().toString().trim();
-
-                if (orgPasswordString.equals("")) {
-                    orgPassword.setError("Password cannot be empty");
-                } else if (orgPasswordString.length() <= 8) {
-                    orgPassword.setError("Password cannot be less than eight characters");
-
-                } else if (orgPasswordString.contains("a-zA-Z1-9")) {
-                    orgPassword.setError("Enter password containing numbers and alphabets");
-
-                }
-
-
-                dbOrganization.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
-                                Organization org = organizationSnapshot.
-                                        getValue(Organization.class);
-
-                                orgEmailString = orgEmail.getText().toString().trim();
-                                orgPasswordString = orgPassword.getText().toString().trim();
-
-                              if(orgEmailString.equalsIgnoreCase(org.getOrgEmailID()) &&
-                                      orgPasswordString.equals(org.getOrgPassword())){
-                                  int status = org.getStatus();
-                                  logInValidation(status);
-                              }/*else Toast.makeText(this, "Username or password incorrect!!",
-                                      Toast.LENGTH_LONG).show();*/
-
-                                /*if (status == 1) {
-
-                                    Intent intent = new Intent
-                                            (OrganizationLoginActivity.this,
-                                                    OrganizationLoginDashboardActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }*/
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
+                afterValidation();
 
             }
 
 
+//
+//            dbOrganization.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    if (dataSnapshot.exists()) {
+//                        for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
+//                            Organization org = organizationSnapshot.getValue(Organization.class);
+//                            int status = org.getStatus();
+//                            orgEmailString = orgEmail.getText().toString().trim();
+//                            orgPasswordString = orgPassword.getText().toString().trim();
+//                            if(status == 1){
+//                                Intent intent = new Intent(OrganizationLoginActivity.this,
+//                                        OrganizationLoginDashboardActivity.class);
+//                                startActivity(intent);
+//                                finish();
+//                            }
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//                }
+//            });
+
+
+
+//            firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
+//                    .addOnCompleteListener(this,
+//                            new OnCompleteListener<AuthResult>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                                    if (task.isSuccessful()) {
+//                                        //logged in
+//                                        //LoginDashboard is opened
+//                                        finish();
+//                                        Intent intent = new Intent(OrganizationLoginActivity.this,
+//                                                OrganizationLoginDashboardActivity.class);
+//                                        startActivity(intent);
+//                                        finish();
+//                                    } else {
+//                                        Toast.makeText(getApplicationContext(), "Enter valid email id and password",
+//                                                Toast.LENGTH_LONG).show();
+//                                    }
+//
+//                                }
+//                            });
+
+
         }
+
+
     }
-
-    private void logInValidation(int status) {
-
-       final int  statusTxt=status;
-        if (status == 1) {
-            firebaseAuth = FirebaseAuth.getInstance();
-
-            /*firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = firebaseAuth.getCurrentUser();
-                                updateUI(user);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(OrganizationLoginActivity.this,
-                                        "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                                updateUI(null);
-                            }
-
-                            // ...
-                        }
-                    });*/
-            firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
+    private void afterValidation(){
+        firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
                     .addOnCompleteListener(this,
                             new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (statusTxt == 1) {
                                     if (task.isSuccessful()) {
                                         //logged in
                                         //LoginDashboard is opened
-
-                                            Intent intent = new Intent(OrganizationLoginActivity.this,
-                                                    OrganizationLoginDashboardActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-
+                                        finish();
+                                        Intent intent = new Intent(OrganizationLoginActivity.this,
+                                                OrganizationLoginDashboardActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Enter valid email id and password",
+                                                Toast.LENGTH_LONG).show();
                                     }
 
                                 }
                             });
-        }
-        else {
-            Toast.makeText(this,"Email is either not registered or not Validated",
-                    Toast.LENGTH_LONG).show();
-        }
+
     }
 }
-

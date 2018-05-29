@@ -37,7 +37,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity
             orgPassword, describeItems;
     String orgnameString, orgemailString, orglocationString, orgwebsiteString,
             orgPasswordString, orgDescribeItemsString;
-    //boolean check1Boolean, check2Boolean,check3Boolean, check4Boolean;
+
     int orgphoneInt, orgpanInt, status = 0;
     CheckBox check1, check2, check3, check4;
     String currentlyLooking = "";

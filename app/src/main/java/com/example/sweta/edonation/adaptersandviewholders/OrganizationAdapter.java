@@ -5,34 +5,34 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sweta.edonation.R;
-import com.example.sweta.edonation.activities.DashboardActivity;
 import com.example.sweta.edonation.pojoclasses.Organization;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapter.OrganizationViewHolder>{
+public class OrganizationAdapter extends
+        RecyclerView.Adapter<OrganizationAdapter.OrganizationViewHolder>{
 
     Context context;
     List<Organization> organizationList;
+
     FirebaseAuth firebaseAuth;
+
 
     public OrganizationAdapter(Context context, List<Organization> organizationList) {
         this.context = context;
@@ -66,9 +66,6 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
                 dbOrganization.child(id).child("status")
                         .setValue(1);
 
-
-
-
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
                 intent.setData(Uri.parse("mailto:"+organization.getOrgEmailID())); // only email apps should handle this
 
@@ -86,10 +83,13 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
 
                 String id=organization.getOrgId();
 
+                //Delete from firebase database
                 DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                         getReference("OrganizationDetails").child(id);
                 dbOrganization.removeValue();
 
+
+                //delete from Firebase Authentication
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

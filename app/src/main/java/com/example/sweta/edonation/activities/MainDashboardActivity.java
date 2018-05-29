@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,19 +37,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainDashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-    DrawerLayout drawer;
-    NavigationView navigationView;
-    RecyclerView recyclerView;
-    Toolbar toolbar;
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
+    private RecyclerView recyclerView;
+    private Toolbar toolbar;
     private List<Organization> organizationList;
     private ListAdapter adapter;
-    DatabaseReference reference;
-    LinearLayout linearSearch;
-    CheckBox checkFood, checkClothes, checkBooks, checkStationery;
-    String searchTxt = "";
-    Button searchBtn;
+    private DatabaseReference reference;
+    private LinearLayout linearSearch;
+    private CheckBox checkFood, checkClothes, checkBooks, checkStationery;
+    private String searchTxt = "";
+    private Button searchBtn;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     //Button btnAdmin;
 
     @Override
@@ -78,6 +81,7 @@ public class MainDashboardActivity extends AppCompatActivity
         recyclerView = findViewById(R.id.recyclerViewOrganizationList);
         linearSearch = findViewById(R.id.linearCheckbox);
         searchBtn = findViewById(R.id.searchBtn);
+        swipeRefreshLayout = findViewById(R.id.refreshRecyclerView);
         // btnAdmin = findViewById(R.id.adminBtn);
     }
 
@@ -100,6 +104,7 @@ public class MainDashboardActivity extends AppCompatActivity
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
+        swipeRefreshLayout.setOnRefreshListener(this);
     }
 
 
@@ -220,7 +225,6 @@ public class MainDashboardActivity extends AppCompatActivity
 /*
     @Override
     public void onClick(View v) {
-
         //if (v == btnAdmin) {
             Intent intent = new Intent(MainDashboardActivity.this,
                     AdminActivity.class);
@@ -259,6 +263,7 @@ public class MainDashboardActivity extends AppCompatActivity
 
     }
 
+
     private void searchOrganization(String search) {
 
         organizationList.clear();
@@ -278,6 +283,7 @@ public class MainDashboardActivity extends AppCompatActivity
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //this method executes when successful
 
+
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
                         Organization org = organizationSnapshot.getValue(Organization.class);
@@ -285,12 +291,6 @@ public class MainDashboardActivity extends AppCompatActivity
                         String name = org.getCurrentlyLooking();
                         int status = org.getStatus();
 
-                        /*Query query=FirebaseDatabase.getInstance().
-                                getReference("OrganizationDetails")
-                                .orderByChild("currentlyLooking")
-                                .startAt(null,searchList)
-                                .endAt(searchList+'\uf8ff');
-                        query.addValueEventListener(v)*/
                         if (name.endsWith(searchList) && status == 1) {
                             organizationList.add(org);
                         }
@@ -319,28 +319,35 @@ public class MainDashboardActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        if (checkFood.isChecked()) {
-            searchTxt = "Food";
-            searchOrganization(searchTxt);
-            //Log.i("food", currentlyLooking);
-        }
 
-        if (checkClothes.isChecked()) {
-            searchTxt += "," + "Clothes";
-            searchOrganization(searchTxt);
-            //Log.i("clothes", currentlyLooking);
-        }
+        if (v == searchBtn) {
+            if (checkFood.isChecked()) {
+                searchTxt = "Food";
+                searchOrganization(searchTxt);
+                //Log.i("food", currentlyLooking);
+            }
 
-        if (checkBooks.isChecked()) {
-            searchTxt += "," + "Books";
-            searchOrganization(searchTxt);
-        }
+            if (checkClothes.isChecked()) {
+                searchTxt += "," + "Clothes";
+                searchOrganization(searchTxt);
+                //Log.i("clothes", currentlyLooking);
+            }
 
-        if (checkStationery.isChecked()) {
-            searchTxt += "," + "Stationery";
-            searchOrganization(searchTxt);
-        }
+            if (checkBooks.isChecked()) {
+                searchTxt += "," + "Books";
+                searchOrganization(searchTxt);
+            }
 
+            if (checkStationery.isChecked()) {
+                searchTxt += "," + "Stationery";
+                searchOrganization(searchTxt);
+            }
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        initRecyclerView();
+        swipeRefreshLayout.setRefreshing(false);
     }
 }
-
