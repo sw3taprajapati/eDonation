@@ -10,38 +10,27 @@ public class Organization {
     int orgPhone;
     String orgWebsite;
     int orgPan;
-    String currentlyLooking;
+    CurrentlyLooking currentlyLooking;
     String describeItems;
     int status;
-
-    /*boolean check1;
-    boolean check2;
-    boolean check3;
-    boolean check4;*/
     public Organization() {
 
     }
 
-    public Organization(String orgId, String orgFullName, String orgEmailID, String orgPassword, String orgLocation, int orgPhone, String orgWebsite, int orgPan, String currentlyLooking, String describeItems, int status) {
-
+    public Organization(String orgId, String orgFullName, String orgEmailID, String orgPassword, String orgLocation, int orgPhone, String orgWebsite, int orgPan,
+                        CurrentlyLooking currentlyLooking, String describeItems, int status) {
         this.orgId = orgId;
         this.orgFullName = orgFullName;
         this.orgEmailID = orgEmailID;
         this.orgPassword = orgPassword;
         this.orgLocation = orgLocation;
-        this.orgWebsite = orgWebsite;
         this.orgPhone = orgPhone;
+        this.orgWebsite = orgWebsite;
         this.orgPan = orgPan;
-       /* this.check1 = check1;
-        this.check2 = check2;
-        this.check3 = check3;
-        this.check4 = check4;*/
         this.currentlyLooking = currentlyLooking;
         this.describeItems = describeItems;
         this.status = status;
     }
-
-
 
     public String getOrgId() {
         return orgId;
@@ -75,7 +64,6 @@ public class Organization {
         this.orgPassword = orgPassword;
     }
 
-
     public String getOrgLocation() {
         return orgLocation;
     }
@@ -108,11 +96,11 @@ public class Organization {
         this.orgPan = orgPan;
     }
 
-    public String getCurrentlyLooking() {
+    public CurrentlyLooking getCurrentlyLooking() {
         return currentlyLooking;
     }
 
-    public void setCurrentlyLooking(String currentlyLooking) {
+    public void setCurrentlyLooking(CurrentlyLooking currentlyLooking) {
         this.currentlyLooking = currentlyLooking;
     }
 

@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.example.sweta.edonation.R;
+import com.example.sweta.edonation.pojoclasses.CurrentlyLooking;
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,8 +40,11 @@ public class OrganizationRegisterActivity extends AppCompatActivity
             orgPasswordString, orgDescribeItemsString;
 
     int orgphoneInt, orgpanInt, status = 0;
-    CheckBox check1, check2, check3, check4;
-    String currentlyLooking = "";
+    CheckBox checkFood, checkClothes, checkBooks, checkStationery;
+    private boolean foodBoolean;
+    private boolean clothesBoolean;
+    private boolean booksBoolean;
+    private boolean stationeryBoolean;
     Button orgregister;
     DatabaseReference databaseOrganization;
 
@@ -80,10 +84,10 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         orgphone = findViewById(R.id.orgnPhone);
         orgwebsite = findViewById(R.id.orgnWebsite);
         orgpan = findViewById(R.id.orgnPan);
-        check1 = findViewById(R.id.food_checkbox);
-        check2 = findViewById(R.id.clothes_checkbox);
-        check3 = findViewById(R.id.books_checkbox);
-        check4 = findViewById(R.id.stationery_checkbox);
+        checkFood = findViewById(R.id.food_checkbox);
+        checkClothes = findViewById(R.id.clothes_checkbox);
+        checkBooks = findViewById(R.id.books_checkbox);
+        checkStationery = findViewById(R.id.stationery_checkbox);
         describeItems = findViewById(R.id.describeItems);
         orgregister = findViewById(R.id.registerBtn);
 
@@ -203,22 +207,22 @@ public class OrganizationRegisterActivity extends AppCompatActivity
                                 } else {
                                     orgpanInt = Integer.parseInt(orgpan.getText().toString());
 
-                                    if (check1.isChecked()) {
-                                        currentlyLooking = "Food";
-                                        //Log.i("food", currentlyLooking);
+                                    if (checkFood.isChecked()) {
+                                        foodBoolean = true;
+                                        //= "," + "Stationery"Log.i("food", currentlyLooking);
                                     }
 
-                                    if (check2.isChecked()) {
-                                        currentlyLooking += "," + "Clothes";
+                                    if (checkBooks.isChecked()) {
+                                        booksBoolean= true;
                                         //Log.i("clothes", currentlyLooking);
                                     }
 
-                                    if (check3.isChecked()) {
-                                        currentlyLooking += "," + "Books";
+                                    if (checkClothes.isChecked()) {
+                                        clothesBoolean =true;
                                     }
 
-                                    if (check4.isChecked()) {
-                                        currentlyLooking += "," + "Stationery";
+                                    if (checkStationery.isChecked()) {
+                                        stationeryBoolean =true;
                                     }
 
                                     orgDescribeItemsString = describeItems.getText().toString();
@@ -237,11 +241,12 @@ public class OrganizationRegisterActivity extends AppCompatActivity
 
 
                                     String orgId = databaseOrganization.push().getKey();
+                                    CurrentlyLooking currentlyLooking=new CurrentlyLooking(foodBoolean,
+                                            clothesBoolean,booksBoolean,stationeryBoolean);
                                     Organization org = new Organization(orgId,
                                             orgnameString, orgemailString, orgPasswordString,
                                             orglocationString, orgphoneInt, orgwebsiteString,
-                                            orgpanInt, currentlyLooking, orgDescribeItemsString,
-                                            status);
+                                            orgpanInt,currentlyLooking,orgDescribeItemsString, status);
                                     databaseOrganization.child(orgId).setValue(org);
                                     Intent intent = new Intent(
                                             OrganizationRegisterActivity.this,
