@@ -79,7 +79,7 @@ public class OrganizationDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL,
-                        Uri.parse("tel:"+ String.valueOf(phone)));
+                        Uri.parse("tel: "+ String.valueOf(phone)));
                 try {
                     startActivity(intent);
                 } catch (Exception e) {

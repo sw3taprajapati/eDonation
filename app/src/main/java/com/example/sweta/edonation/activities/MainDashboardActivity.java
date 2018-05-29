@@ -29,6 +29,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class MainDashboardActivity extends AppCompatActivity
     DatabaseReference reference;
     LinearLayout linearSearch;
     CheckBox checkFood, checkClothes, checkBooks, checkStationery;
-    String searchTxt="";
+    String searchTxt = "";
     Button searchBtn;
     //Button btnAdmin;
 
@@ -75,8 +76,8 @@ public class MainDashboardActivity extends AppCompatActivity
         checkBooks = findViewById(R.id.books_checkbox);
         checkStationery = findViewById(R.id.stationery_checkbox);
         recyclerView = findViewById(R.id.recyclerViewOrganizationList);
-        linearSearch=findViewById(R.id.linearCheckbox);
-        searchBtn=findViewById(R.id.searchBtn);
+        linearSearch = findViewById(R.id.linearCheckbox);
+        searchBtn = findViewById(R.id.searchBtn);
         // btnAdmin = findViewById(R.id.adminBtn);
     }
 
@@ -263,13 +264,13 @@ public class MainDashboardActivity extends AppCompatActivity
         organizationList.clear();
         adapter.notifyDataSetChanged();
 
-        final String searchList=search;
+        final String searchList = search;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         organizationList = new ArrayList<>();
 
-        DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
+        final DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                 getReference("OrganizationDetails");
 
         dbOrganization.addValueEventListener(new ValueEventListener() {
@@ -282,8 +283,15 @@ public class MainDashboardActivity extends AppCompatActivity
                         Organization org = organizationSnapshot.getValue(Organization.class);
 
                         String name = org.getCurrentlyLooking();
-                        int status=org.getStatus();
-                        if (name.equalsIgnoreCase(searchList) && status==1) {
+                        int status = org.getStatus();
+
+                        /*Query query=FirebaseDatabase.getInstance().
+                                getReference("OrganizationDetails")
+                                .orderByChild("currentlyLooking")
+                                .startAt(null,searchList)
+                                .endAt(searchList+'\uf8ff');
+                        query.addValueEventListener(v)*/
+                        if (name.endsWith(searchList) && status == 1) {
                             organizationList.add(org);
                         }
 
@@ -304,8 +312,8 @@ public class MainDashboardActivity extends AppCompatActivity
             }
         });
 
-        if(recyclerView==null){
-            Toast.makeText(this,"No Data Found!!",Toast.LENGTH_LONG).show();
+        if (recyclerView == null) {
+            Toast.makeText(this, "No Data Found!!", Toast.LENGTH_LONG).show();
         }
     }
 

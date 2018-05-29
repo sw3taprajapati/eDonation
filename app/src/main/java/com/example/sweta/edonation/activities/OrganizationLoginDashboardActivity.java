@@ -8,37 +8,68 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.sweta.edonation.R;
+import com.example.sweta.edonation.adaptersandviewholders.ListAdapter;
+import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrganizationLoginDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     NavigationView navigationView;
-    Toolbar toolbar=null;
+    Toolbar toolbar;
     ActionBarDrawerToggle toggle;
+    RecyclerView recyclerView;
+    private List<Organization> organizationList;
+    private ListAdapter adapter;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_login_dashboard);
+
+        reference = FirebaseDatabase.getInstance().getReference("OrganizationDetails");
+
+        initComponents();
+        initToolbar();
+        initNavigationBar();
+        initRecyclerView();
+    }
+
+    private void initComponents() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        recyclerView = findViewById(R.id.recyclerViewOrganizationList);
+    }
+
+    private void initToolbar() {
         toolbar.setTitle("e-Donation");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
-                this, drawer,toolbar,  R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+    }
 
+    private void initNavigationBar() {
 
         navigationView = (NavigationView) findViewById(R.id.nav2);
         navigationView.setNavigationItemSelectedListener(this);
@@ -47,7 +78,54 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
 
+    }
 
+    private void initRecyclerView() {
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        organizationList = new ArrayList<>();
+
+        final DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
+                getReference("OrganizationDetails");
+
+        dbOrganization.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //this method executes when successful
+
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
+                        Organization org = organizationSnapshot.getValue(Organization.class);
+                        int status;
+                        try {
+                            status = org.getStatus();
+                            if (status == 1) {
+                                organizationList.add(org);
+                            }
+                        } catch (Exception e) {
+
+                        }
+
+                    }
+
+                    adapter = new ListAdapter(OrganizationLoginDashboardActivity.this,
+                            organizationList);
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //this method executes when error
+
+            }
+        });
+
+        if (recyclerView == null) {
+            Toast.makeText(this, "No Data Found!!", Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -80,8 +158,8 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
 //            return true;
 //        }
 
-        if(toggle.onOptionsItemSelected(item)){
-            return  true;
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -108,7 +186,7 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_logOut:
-                Intent in3=new Intent(OrganizationLoginDashboardActivity.this,
+                Intent in3 = new Intent(OrganizationLoginDashboardActivity.this,
                         MainDashboardActivity.class);
                 startActivity(in3);
                 break;

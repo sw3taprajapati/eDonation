@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,9 +44,6 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
         initComponent();
         initToolbar();
         setListener();
-        firebaseAuth = FirebaseAuth.getInstance();
-
-
     }
 
     private void initComponent() {
@@ -101,6 +100,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
             //checked if entered email or password matches or not
 
             //validation here
+           orgEmailString= orgEmail.getText().toString();
             if (orgEmailString.equals("")) {
 
                 orgEmail.setError("Organization email cannot be empty");
@@ -127,11 +127,17 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
                             for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
                                 Organization org = organizationSnapshot.
                                         getValue(Organization.class);
-                                int status = org.getStatus();
+
                                 orgEmailString = orgEmail.getText().toString().trim();
                                 orgPasswordString = orgPassword.getText().toString().trim();
 
-                                logInValidation(status);
+                              if(orgEmailString.equalsIgnoreCase(org.getOrgEmailID()) &&
+                                      orgPasswordString.equals(org.getOrgPassword())){
+                                  int status = org.getStatus();
+                                  logInValidation(status);
+                              }/*else Toast.makeText(this, "Username or password incorrect!!",
+                                      Toast.LENGTH_LONG).show();*/
+
                                 /*if (status == 1) {
 
                                     Intent intent = new Intent
@@ -159,21 +165,45 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
 
     private void logInValidation(int status) {
 
+       final int  statusTxt=status;
         if (status == 1) {
+            firebaseAuth = FirebaseAuth.getInstance();
+
+            /*firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                FirebaseUser user = firebaseAuth.getCurrentUser();
+                                updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(OrganizationLoginActivity.this,
+                                        "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                updateUI(null);
+                            }
+
+                            // ...
+                        }
+                    });*/
             firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
                     .addOnCompleteListener(this,
                             new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-
+                                    if (statusTxt == 1) {
                                     if (task.isSuccessful()) {
                                         //logged in
                                         //LoginDashboard is opened
-                                        finish();
-                                        Intent intent = new Intent(OrganizationLoginActivity.this,
-                                                OrganizationLoginDashboardActivity.class);
-                                        startActivity(intent);
-                                        finish();
+
+                                            Intent intent = new Intent(OrganizationLoginActivity.this,
+                                                    OrganizationLoginDashboardActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+
                                     }
 
                                 }

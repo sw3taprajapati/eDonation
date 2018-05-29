@@ -184,7 +184,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity
                             try {
                                 orgphoneInt = Integer.parseInt(orgphone.getText().toString());
                             } catch (Exception e) {
-
+                                orgphone.setError("Enter valid number");
                             }
 
                             orgwebsiteString = orgwebsite.getText().toString().trim();
@@ -206,8 +206,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity
                                     if (check1.isChecked()) {
                                         currentlyLooking = "Food";
                                         //Log.i("food", currentlyLooking);
-
-
                                     }
 
                                     if (check2.isChecked()) {
@@ -239,23 +237,23 @@ public class OrganizationRegisterActivity extends AppCompatActivity
 
 
                                     String orgId = databaseOrganization.push().getKey();
-                                    Organization org = new Organization(orgId, orgnameString, orgemailString, orgPasswordString, orglocationString, orgphoneInt, orgwebsiteString, orgpanInt, currentlyLooking, orgDescribeItemsString, status);
+                                    Organization org = new Organization(orgId,
+                                            orgnameString, orgemailString, orgPasswordString,
+                                            orglocationString, orgphoneInt, orgwebsiteString,
+                                            orgpanInt, currentlyLooking, orgDescribeItemsString,
+                                            status);
                                     databaseOrganization.child(orgId).setValue(org);
-
-
-                                    Intent intent = new Intent(OrganizationRegisterActivity.this, OnVerifyActivity.class);
+                                    Intent intent = new Intent(
+                                            OrganizationRegisterActivity.this,
+                                            OnVerifyActivity.class);
                                     startActivity(intent);
                                     finish();
 
-
                                 }
-
-
                             }
 
                         }
                     }
-
 
                 }
             } else {
@@ -263,10 +261,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity
                 //Toast.makeText(this, "Enter valid email address", Toast.LENGTH_SHORT).show();
             }
         }
-
-
     }
-
-
 }
 
