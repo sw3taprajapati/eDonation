@@ -43,7 +43,6 @@
 
         <activity android:name=".activities.AboutAppActivity" />
 
-        <activity android:name=".activities.DashboardActivity" />
         <activity android:name=".activities.OnVerifyActivity" />
         <activity android:name=".activities.AdminActivity" />
         <activity android:name=".activities.MainDashboardActivity" />
