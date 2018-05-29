@@ -1,3 +1,4 @@
+
 package com.example.sweta.edonation.activities;
 
 
@@ -50,7 +51,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     Button orgRegister;
     Toolbar toolbar;
     FirebaseUser user;
-    FirebaseAuth firebaseAuth;
+    FirebaseDatabase firebaseDatabase;
     List<Organization> organizationList;
     DatabaseReference databaseOrganization;
     String currentlyLooking = "";
@@ -61,8 +62,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_register);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        databaseOrganization = FirebaseDatabase.getInstance().
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseOrganization = firebaseDatabase.
                 getReference("OrganizationDetails");
         user = FirebaseAuth.getInstance().getCurrentUser();
         initComponent();

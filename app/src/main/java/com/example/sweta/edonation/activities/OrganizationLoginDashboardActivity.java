@@ -1,6 +1,5 @@
 package com.example.sweta.edonation.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,14 +7,16 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.example.sweta.edonation.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 
 public class OrganizationLoginDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -24,6 +25,8 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
     NavigationView navigationView;
     Toolbar toolbar=null;
     ActionBarDrawerToggle toggle;
+    FirebaseUser user;
+    EditText emailEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,7 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
 
-
+//        accessInformation();
 
     }
 
@@ -68,34 +71,6 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main2, menu);
         return true;
-    }
-    public void dialogBox() {
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("Are you sure you want to log out?");
-        alertDialogBuilder.setPositiveButton("Ok",
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        Intent intent=new Intent(OrganizationLoginDashboardActivity.this,MainDashboardActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-
-        alertDialogBuilder.setNegativeButton("cancel",
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                      arg0.cancel();
-
-
-                    }
-                });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
     }
 
     @Override
@@ -133,15 +108,14 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
 
             case R.id.nav_aboutApp:
                 Intent in2 = new Intent(OrganizationLoginDashboardActivity.this,
-                        AdminActivity.class);
+                        AboutAppActivity.class);
                 startActivity(in2);
                 break;
 
             case R.id.nav_logOut:
-                dialogBox();
-//                Intent in3=new Intent(OrganizationLoginDashboardActivity.this,
-//                        MainDashboardActivity.class);
-//                startActivity(in3);
+                Intent in3=new Intent(OrganizationLoginDashboardActivity.this,
+                        MainDashboardActivity.class);
+                startActivity(in3);
                 break;
         }
 
@@ -149,5 +123,12 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+//    public void accessInformation(){
+//        user= FirebaseAuth.getInstance().getCurrentUser();
+//
+//        String email = user.getEmail();
+//        emailEditText.setText(email);
+//    }
 }
 
