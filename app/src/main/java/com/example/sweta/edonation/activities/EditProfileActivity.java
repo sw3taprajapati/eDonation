@@ -47,15 +47,15 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     String emailFromDB, orgId;
     int orgPhoneInt, orgPanInt;
     CheckBox check1, check2, check3, check4;
-    DatabaseReference reference;
+
     Button orgRegister;
     Toolbar toolbar;
     FirebaseUser user;
     FirebaseDatabase firebaseDatabase;
-    List<Organization> organizationList;
+
     DatabaseReference databaseOrganization;
     String currentlyLooking = "";
-    int status = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,10 +80,21 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private void disableFields() {
         orgName.setEnabled(false);
         orgName.setFocusable(false);
-        orgName.setCursorVisible(false);
+
+
+        orgPassword.setEnabled(false);
+        orgPassword.setFocusable(false);
+
         orgEmail.setEnabled(false);
+        orgPassword.setFocusable(false);
+
+
         orgWebsite.setEnabled(false);
+        orgWebsite.setFocusable(false);
+
         orgPan.setEnabled(false);
+        orgPan.setFocusable(false);
+
         orgRegister.setText("UPDATE");
 
 
@@ -196,18 +207,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if (v == orgRegister) {
 
-            orgPassword = findViewById(R.id.orgPassword);
-
-
-            orgLocation = findViewById(R.id.orgnLocation);
-            orgPhone = findViewById(R.id.orgnPhone);
-
-            check1 = findViewById(R.id.food_checkbox);
-            check2 = findViewById(R.id.clothes_checkbox);
-            check3 = findViewById(R.id.books_checkbox);
-            check4 = findViewById(R.id.stationery_checkbox);
-            describeItems = findViewById(R.id.describeItems);
-            orgRegister = findViewById(R.id.registerBtn);
 
             String phone;
 
@@ -277,7 +276,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
                         databaseOrganization.child(orgId).child("orgPassword").setValue(orgPasswordString);
                         databaseOrganization.child(orgId).child("orgLocation").setValue(orgLocationString);
-                        databaseOrganization.child(orgId).child("orgPhone").setValue(phone);
+                        databaseOrganization.child(orgId).child("orgPhone").setValue(orgPhoneInt);
                         databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
                         databaseOrganization.child(orgId).child("currentlyLooking").setValue(currentlyLooking);
                         databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);

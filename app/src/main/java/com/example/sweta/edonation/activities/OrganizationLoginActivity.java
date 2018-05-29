@@ -175,26 +175,26 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
     }
     private void afterValidation(){
         firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
-                    .addOnCompleteListener(this,
-                            new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
+                .addOnCompleteListener(this,
+                        new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                    if (task.isSuccessful()) {
-                                        //logged in
-                                        //LoginDashboard is opened
-                                        finish();
-                                        Intent intent = new Intent(OrganizationLoginActivity.this,
-                                                OrganizationLoginDashboardActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "Enter valid email id and password",
-                                                Toast.LENGTH_LONG).show();
-                                    }
-
+                                if (task.isSuccessful()) {
+                                    //logged in
+                                    //LoginDashboard is opened
+                                    finish();
+                                    Intent intent = new Intent(OrganizationLoginActivity.this,
+                                            OrganizationLoginDashboardActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Enter valid email id and password",
+                                            Toast.LENGTH_LONG).show();
                                 }
-                            });
+
+                            }
+                        });
 
     }
 }
