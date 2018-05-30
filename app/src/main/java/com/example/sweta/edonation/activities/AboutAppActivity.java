@@ -55,6 +55,7 @@ public class AboutAppActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void onClick(View v){
+        //sending message through gmail
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"eDonation@gmail.com"});
         intent.setType("message/rfc822");

@@ -23,33 +23,20 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
 
                 if(FirebaseAuth.getInstance().getCurrentUser()==null){
+                    //if the user isnt logged in
                     Intent intent = new Intent(SplashActivity.this, MainDashboardActivity.class);
                     startActivity(intent);
                     finish();
 
                 }
                 else{
+                    //if the user is previously logged in
                     Intent intent = new Intent(SplashActivity.this, OrganizationLoginDashboardActivity.class);
                     startActivity(intent);
                     finish();
 
                 }
-             /*   mRef = FirebaseDatabase.getInstance().getReference();
-                auth = FirebaseAuth.getInstance();
-                firebaseAuth = new FirebaseAuth.AuthStateListener() {
-                    @Override
-                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                        if (firebaseAuth.getCurrentUser()!= null){
-                            Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
 
-
-                        } else {
-                            Toast.makeText(getApplicationContext(), "You are not currently logged in.", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                };
-                */
 
 
             }
