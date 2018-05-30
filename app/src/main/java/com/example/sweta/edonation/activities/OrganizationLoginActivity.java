@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
@@ -36,6 +37,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
     String orgEmailString, orgPasswordString;
     Button logInBtn;
     FirebaseAuth firebaseAuth;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
         orgEmail = findViewById(R.id.orgEmail);
         orgPassword = findViewById(R.id.orgPassword);
         logInBtn = findViewById(R.id.orgLogIn);
+        progressBar = findViewById(R.id.progressBar);
 
     }
 
@@ -114,87 +117,38 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
             } else if (orgEmailString.matches(emailPattern)) {
 
                 orgPasswordString = orgPassword.getText().toString().trim();
+
+                progressBar.setVisibility(View.VISIBLE);
                 afterValidation();
 
             }
-
-
-//
-//            dbOrganization.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//                    if (dataSnapshot.exists()) {
-//                        for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
-//                            Organization org = organizationSnapshot.getValue(Organization.class);
-//                            int status = org.getStatus();
-//                            orgEmailString = orgEmail.getText().toString().trim();
-//                            orgPasswordString = orgPassword.getText().toString().trim();
-//                            if(status == 1){
-//                                Intent intent = new Intent(OrganizationLoginActivity.this,
-//                                        OrganizationLoginDashboardActivity.class);
-//                                startActivity(intent);
-//                                finish();
-//                            }
-//                        }
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError databaseError) {
-//                }
-//            });
-
-
-
-//            firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
-//                    .addOnCompleteListener(this,
-//                            new OnCompleteListener<AuthResult>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<AuthResult> task) {
-//
-//                                    if (task.isSuccessful()) {
-//                                        //logged in
-//                                        //LoginDashboard is opened
-//                                        finish();
-//                                        Intent intent = new Intent(OrganizationLoginActivity.this,
-//                                                OrganizationLoginDashboardActivity.class);
-//                                        startActivity(intent);
-//                                        finish();
-//                                    } else {
-//                                        Toast.makeText(getApplicationContext(), "Enter valid email id and password",
-//                                                Toast.LENGTH_LONG).show();
-//                                    }
-//
-//                                }
-//                            });
-
-
         }
-
-
     }
     private void afterValidation(){
+
         firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
-                    .addOnCompleteListener(this,
-                            new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
+                .addOnCompleteListener(this,
+                        new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                    if (task.isSuccessful()) {
-                                        //logged in
-                                        //LoginDashboard is opened
-                                        finish();
-                                        Intent intent = new Intent(OrganizationLoginActivity.this,
-                                                OrganizationLoginDashboardActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "Enter valid email id and password",
-                                                Toast.LENGTH_LONG).show();
-                                    }
+                                progressBar.setVisibility(View.GONE);
 
+                                if (task.isSuccessful()) {
+                                    //logged in
+                                    //LoginDashboard is opened
+                                    finish();
+                                    Intent intent = new Intent(OrganizationLoginActivity.this,
+                                            OrganizationLoginDashboardActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Enter valid email id and password",
+                                            Toast.LENGTH_LONG).show();
                                 }
-                            });
+
+                            }
+                        });
 
     }
 }

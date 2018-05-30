@@ -1,10 +1,8 @@
 package com.example.sweta.edonation.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,8 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.sweta.edonation.R;
@@ -27,33 +24,33 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
 
 public class OrganizationLoginDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    private ArrayAdapter<String> adapter;
     DrawerLayout drawer;
     NavigationView navigationView;
-    Toolbar toolbar=null;
+    NavigationView navView;
+    Toolbar toolbar = null;
     ActionBarDrawerToggle toggle;
-    TextView emailTxt;
-    EditText orgEmail;
+
+    DatabaseReference databaseOrganization;
     FirebaseUser user;
-    FirebaseAuth auth;
-    DatabaseReference ref;
-    String orgEmailString;
+
+    TextView organizationEmail, organizationName;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_login_dashboard);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("e-Donation");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
@@ -62,50 +59,27 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
         toggle.syncState();
 
 
+        navigationView = (NavigationView) findViewById(R.id.nav_view2);
 
-//        ref=FirebaseDatabase.getInstance().getReference("OrganizationDetails");
-//        auth=FirebaseAuth.getInstance();
-//        user= auth.getCurrentUser();
+       navigationView.setNavigationItemSelectedListener(this);
 
-//
-//       ref = FirebaseDatabase.getInstance().getReference().child("Organization").child(user.getUid());
+        Intent appLinkIntent = getIntent();
+        String appLinkAction = appLinkIntent.getAction();
+        Uri appLinkData = appLinkIntent.getData();
 
-        navigationView = (NavigationView) findViewById(R.id.nav2);
-        navigationView.setNavigationItemSelectedListener(this);
-
-
-        emailTxt=findViewById(R.id.emailTxt);
-        orgEmail=findViewById(R.id.orgEmail);
-
-        DatabaseReference dbOrganization = FirebaseDatabase.getInstance().getReference("OrganizationDetails");
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-        //checked if entered email or password matches or not
 
 
-        //validation here
-        orgEmailString = orgEmail.getText().toString().trim();
-        emailTxt.setText(orgEmailString);
+        databaseOrganization = FirebaseDatabase.getInstance().
+                getReference("OrganizationDetails");
 
-//        ref.addValueEventListener(new ValueEventListener() {
-//                                      @Override
-//                                      public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                                          //Fetch values from you database child and set it to the specific view object.
-//                                          emailTxt.setText(dataSnapshot.child("orgEmail").getValue().toString());
-//                                      }
-//
-//                                      @Override
-//                                      public void onCancelled(DatabaseError databaseError) {
-//
-//                                      }
-//
-//            });
+        insertInfoInNav();
+
+//        accessInformation();
 
     }
-
-
-
 
     @Override
     public void onBackPressed() {
@@ -136,8 +110,8 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
 //            return true;
 //        }
 
-        if(toggle.onOptionsItemSelected(item)){
-            return  true;
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -164,7 +138,7 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_logOut:
-                Intent in3=new Intent(OrganizationLoginDashboardActivity.this,
+                Intent in3 = new Intent(OrganizationLoginDashboardActivity.this,
                         MainDashboardActivity.class);
                 startActivity(in3);
                 break;
@@ -174,4 +148,51 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    public void insertInfoInNav() {
+
+        final String email = user.getEmail();
+        organizationEmail  = (TextView) navigationView.getHeaderView(0).findViewById(R.id.organizationEmail);
+        organizationName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.organizationName);
+        databaseOrganization.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //this method executes when successful
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
+                        Organization org = organizationSnapshot.getValue(Organization.class);
+
+                        String emailFromDB = org.getOrgEmailID();
+                        if (email.equals(emailFromDB)) {
+                            String name = org.getOrgFullName();
+                            String emailID = org.getOrgEmailID();
+
+                            organizationEmail.setText(emailID);
+                            organizationName.setText(name);
+
+
+
+
+                        }
+                    }
+                }
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+//    public void accessInformation(){
+//        user= FirebaseAuth.getInstance().getCurrentUser();
+//
+//        String email = user.getEmail();
+//        emailEditText.setText(email);
+//    }
+    }
 }
+
+

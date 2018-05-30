@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.sweta.edonation.R;
@@ -25,21 +30,28 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainDashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-    DrawerLayout drawer;
-    NavigationView navigationView;
-    RecyclerView recyclerView;
-    Toolbar toolbar;
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
+    private RecyclerView recyclerView;
+    private Toolbar toolbar;
     private List<Organization> organizationList;
     private ListAdapter adapter;
-    DatabaseReference reference;
+    private DatabaseReference reference;
+    private LinearLayout linearSearch;
+    private CheckBox checkFood, checkClothes, checkBooks, checkStationery;
+    private String searchTxt = "";
+    private Button searchBtn;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     //Button btnAdmin;
 
     @Override
@@ -62,13 +74,19 @@ public class MainDashboardActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        checkFood = findViewById(R.id.food_checkbox);
+        checkClothes = findViewById(R.id.clothes_checkbox);
+        checkBooks = findViewById(R.id.books_checkbox);
+        checkStationery = findViewById(R.id.stationery_checkbox);
         recyclerView = findViewById(R.id.recyclerViewOrganizationList);
+        linearSearch = findViewById(R.id.linearCheckbox);
+        searchBtn = findViewById(R.id.searchBtn);
+//        swipeRefreshLayout = findViewById(R.id.refreshRecyclerView);
         // btnAdmin = findViewById(R.id.adminBtn);
     }
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
-
     }
 
     private void initActionBar() {
@@ -82,10 +100,11 @@ public class MainDashboardActivity extends AppCompatActivity
     private void setListener() {
         navigationView.setNavigationItemSelectedListener(this);
         //btnAdmin.setOnClickListener(this);
-
+        searchBtn.setOnClickListener(this);
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
+        swipeRefreshLayout.setOnRefreshListener(this);
     }
 
 
@@ -192,7 +211,7 @@ public class MainDashboardActivity extends AppCompatActivity
 
             case R.id.nav_aboutApp:
                 Intent intent3 = new Intent(MainDashboardActivity.this,
-                        AboutAppActivity.class);
+                        AdminActivity.class);
                 startActivity(intent3);
                 break;
 
@@ -242,5 +261,93 @@ public class MainDashboardActivity extends AppCompatActivity
             setListener();
         }
 
+    }
+
+
+    private void searchOrganization(String search) {
+
+        organizationList.clear();
+        adapter.notifyDataSetChanged();
+
+        final String searchList = search;
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        organizationList = new ArrayList<>();
+
+        final DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
+                getReference("OrganizationDetails");
+
+        dbOrganization.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //this method executes when successful
+
+
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
+                        Organization org = organizationSnapshot.getValue(Organization.class);
+
+                        String name = org.getCurrentlyLooking();
+                        int status = org.getStatus();
+
+                        if (name.endsWith(searchList) && status == 1) {
+                            organizationList.add(org);
+                        }
+
+                    }
+
+                    adapter = new ListAdapter(MainDashboardActivity.this,
+                            organizationList);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //this method executes when error
+
+            }
+        });
+
+        if (recyclerView == null) {
+            Toast.makeText(this, "No Data Found!!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if (v == searchBtn) {
+            if (checkFood.isChecked()) {
+                searchTxt = "Food";
+                searchOrganization(searchTxt);
+                //Log.i("food", currentlyLooking);
+            }
+
+            if (checkClothes.isChecked()) {
+                searchTxt += "," + "Clothes";
+                searchOrganization(searchTxt);
+                //Log.i("clothes", currentlyLooking);
+            }
+
+            if (checkBooks.isChecked()) {
+                searchTxt += "," + "Books";
+                searchOrganization(searchTxt);
+            }
+
+            if (checkStationery.isChecked()) {
+                searchTxt += "," + "Stationery";
+                searchOrganization(searchTxt);
+            }
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        initRecyclerView();
+        swipeRefreshLayout.setRefreshing(false);
     }
 }
