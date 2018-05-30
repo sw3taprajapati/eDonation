@@ -52,22 +52,22 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
         boolean stationery = organization.getCurrentlyLooking().isStationery();
 
         if (food == true) {
-            foodString = "Food ";
+            foodString = "Food  ";
         } else {
             foodString = "";
         }
         if (clothes == true) {
-            clothesString = "Clothes ";
+            clothesString = "Clothes  ";
         } else {
             clothesString = "";
         }
         if (books == true) {
-            booksString = "Books ";
+            booksString = "Books  ";
         } else {
             booksString = "";
         }
         if(stationery==true){
-            stationeryString="Stationery ";
+            stationeryString="Stationery  ";
         }else {
             stationeryString="";
         }

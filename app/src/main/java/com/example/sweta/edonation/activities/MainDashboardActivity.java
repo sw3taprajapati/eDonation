@@ -281,19 +281,27 @@ public class MainDashboardActivity extends AppCompatActivity
             if (checkFood.isChecked()) {
                 foodBoolean = true;
                 //Log.i("food", currentlyLooking);
+            }else{
+                foodBoolean=false;
             }
 
             if (checkClothes.isChecked()) {
                 clothesBoolean =true;
                 //Log.i("clothes", currentlyLooking);
+            }else {
+                clothesBoolean=false;
             }
 
             if (checkBooks.isChecked()) {
                 booksBoolean=true;
+            }else {
+                booksBoolean=false;
             }
 
             if (checkStationery.isChecked()) {
                 stationeryBoolean =true;
+            }else {
+                stationeryBoolean=false;
             }
 
         organizationList.clear();
@@ -322,10 +330,22 @@ public class MainDashboardActivity extends AppCompatActivity
                         Boolean booleanBooks=org.getCurrentlyLooking().isBooks();
                         Boolean booleanStationery=org.getCurrentlyLooking().isStationery();
 
-                        if ((booleanFood.equals(foodBoolean) || booleanClothes.equals(clothesBoolean)
-                                || booleanBooks.equals(booksBoolean)
-                                || booleanStationery.equals(stationeryBoolean))&& status == 1) {
-                            organizationList.add(org);
+                        if(status == 1){
+                            if ((booleanFood==true && foodBoolean == true)
+                                ||(booleanClothes==true && clothesBoolean==true)
+                                    ||(booleanBooks==true && booksBoolean==true)
+                                    ||(booleanStationery==true && stationeryBoolean==true)){
+                                organizationList.add(org);
+                            }
+                            /*if(booleanClothes==true && clothesBoolean==true){
+                                organizationList.add(org);
+                            }
+                            if(booleanBooks==true && booksBoolean==true){
+                                organizationList.add(org);
+                            }
+                            if(booleanStationery==true && stationeryBoolean==true){
+                                organizationList.add(org);
+                            }*/
                         }
 
                     }

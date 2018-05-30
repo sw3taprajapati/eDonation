@@ -92,11 +92,11 @@
             <Button
                 android:id="@+id/searchBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/linearCheckbox"
-                android:layout_margin="16dp"
-                android:background="@color/colorTheme"
+                android:layout_margin="10dp"
+                android:background="@drawable/round_search_button"
                 android:text="Search"
                 android:textColor="@color/white" />
             <android.support.v4.widget.SwipeRefreshLayout

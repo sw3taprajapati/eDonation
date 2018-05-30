@@ -1,5 +1,6 @@
 package com.example.sweta.edonation.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,14 +42,11 @@ import java.util.List;
 public class OrganizationDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
 
-
-    private ArrayAdapter<String> adapter;
     DrawerLayout drawer;
     NavigationView navigationView;
     private List<Organization> organizationList;
     private ListAdapter adapterList;
     private RecyclerView recyclerView;
-    NavigationView navView;
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
     DatabaseReference databaseOrganization;
@@ -79,9 +78,9 @@ public class OrganizationDashboardActivity extends AppCompatActivity
     private void initComponents() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.nav2);
-        recyclerView=findViewById(R.id.recyclerViewOrganizationList);
-        swipeRefreshLayout=findViewById(R.id.refreshRecyclerView);
+        navigationView = (NavigationView) findViewById(R.id.nav_view2);
+        recyclerView = findViewById(R.id.recyclerViewOrganizationList);
+        swipeRefreshLayout = findViewById(R.id.refreshRecyclerView);
     }
 
     private void initToolBar() {
@@ -231,11 +230,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity
 
             case R.id.nav_logOut:
 
-                PreferenceUtils.startLogInActivity(this, false);
-                finish();
-                Intent in3 = new Intent(OrganizationDashboardActivity.this,
-                        MainDashboardActivity.class);
-                startActivity(in3);
+                dialogBox();
                 break;
         }
 
@@ -244,11 +239,43 @@ public class OrganizationDashboardActivity extends AppCompatActivity
         return true;
     }
 
+    public void dialogBox() {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Are you sure you want to log out?");
+        alertDialogBuilder.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent intent = new Intent(OrganizationDashboardActivity.this,
+                                MainDashboardActivity.class);
+                        startActivity(intent);
+                        FirebaseAuth.getInstance().signOut();
+                        //unauth();
+                        finish();
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("cancel",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        arg0.cancel();
+
+
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
 
     public void insertInfoInNav() {
 
         final String email = user.getEmail();
-        organizationEmail  = (TextView) navigationView.getHeaderView(0).
+        organizationEmail = (TextView) navigationView.getHeaderView(0).
                 findViewById(R.id.organizationEmail);
         organizationName = (TextView) navigationView.getHeaderView(0).
                 findViewById(R.id.organizationName);
@@ -261,7 +288,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity
                         Organization org = organizationSnapshot.getValue(Organization.class);
 
                         String emailFromDB = org.getOrgEmailID();
-                       if (email.equals(emailFromDB)) {
+                        if (email.equals(emailFromDB)) {
                             String name = org.getOrgFullName();
                             String emailID = org.getOrgEmailID();
 

@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.sweta.edonation.*;
+import com.google.firebase.auth.FirebaseAuth;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
@@ -17,24 +18,27 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        SharedPreferences sharedPreferences = getDefaultSharedPreferences(this);
-        final Boolean isLoggedIn = sharedPreferences.getBoolean("IsLoggedIn", false);
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (isLoggedIn) {
 
+                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                    //if the user isnt logged in
+                    Intent intent = new Intent(SplashActivity.this, MainDashboardActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                } else {
+                    //if the user is previously logged in
                     Intent intent = new Intent(SplashActivity.this,
                             OrganizationDashboardActivity.class);
                     startActivity(intent);
+                    finish();
 
-                } else {
-                    Intent intent = new Intent(SplashActivity.this,
-                            MainDashboardActivity.class);
-                    startActivity(intent);
                 }
+
+
             }
-        },2000);
+        }, 2000);
     }
 }
