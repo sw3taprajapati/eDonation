@@ -31,7 +31,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -115,7 +114,6 @@ public class MainDashboardActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         organizationList = new ArrayList<>();
-
         final DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                 getReference("OrganizationDetails");
 
@@ -126,24 +124,33 @@ public class MainDashboardActivity extends AppCompatActivity
 
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
-                        Organization org = organizationSnapshot.getValue(Organization.class);
-                        int status;
-                        try {
-                            status = org.getStatus();
-                            if (status == 1) {
-                                organizationList.add(org);
+                            Organization org = organizationSnapshot.getValue(Organization.class);
+                            int status;
+
+
+                            try {
+                                status = org.getStatus();
+                                boolean food=org.getCurrentlyLooking().isFood();
+                                boolean clothes=org.getCurrentlyLooking().isClothes();
+                                boolean books=org.getCurrentlyLooking().isBooks();
+                                boolean stationery=org.getCurrentlyLooking().isStationery();
+
+                                if (status == 1 && (food==true
+                                        || clothes==true || books== true
+                                || stationery==true)){
+                                    organizationList.add(org);
+                                }
+                            } catch (Exception e) {
+
                             }
-                        } catch (Exception e) {
-
                         }
-
                     }
 
                     adapter = new ListAdapter(MainDashboardActivity.this,
                             organizationList);
                     recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 }
-            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -207,6 +214,7 @@ public class MainDashboardActivity extends AppCompatActivity
 
 
             case R.id.nav_loginOrg:
+
                 Intent intent1 = new Intent(MainDashboardActivity.this,
                         OrganizationLoginActivity.class);
                 startActivity(intent1);

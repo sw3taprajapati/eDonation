@@ -60,7 +60,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         initToolbar();
 
 
-       firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
 
         databaseOrganization = FirebaseDatabase.getInstance().
@@ -72,7 +72,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         orgregister.setOnClickListener(this);
     }
 
-    private void initComponent(){
+    private void initComponent() {
         toolbar = findViewById(R.id.toolBar);
         orgname = findViewById(R.id.orgName);
         orgemail = findViewById(R.id.orgEmail);
@@ -130,7 +130,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         else
             return false;
     }
-
 
 
     @Override
@@ -213,27 +212,27 @@ public class OrganizationRegisterActivity extends AppCompatActivity
                                     }
 
                                     if (checkBooks.isChecked()) {
-                                        booksBoolean= true;
+                                        booksBoolean = true;
                                         //Log.i("clothes", currentlyLooking);
                                     }
 
                                     if (checkClothes.isChecked()) {
-                                        clothesBoolean =true;
+                                        clothesBoolean = true;
                                     }
 
                                     if (checkStationery.isChecked()) {
-                                        stationeryBoolean =true;
+                                        stationeryBoolean = true;
                                     }
 
                                     orgDescribeItemsString = describeItems.getText().toString();
 
 
                                     //this method creates user on the console on the basis of password and email given
-                                    firebaseAuth.createUserWithEmailAndPassword(orgemailString,orgPasswordString)
+                                    firebaseAuth.createUserWithEmailAndPassword(orgemailString, orgPasswordString)
                                             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                                    if(task.isSuccessful()){
+                                                    if (task.isSuccessful()) {
                                                         //registered
                                                     }
                                                 }
@@ -241,12 +240,12 @@ public class OrganizationRegisterActivity extends AppCompatActivity
 
 
                                     String orgId = databaseOrganization.push().getKey();
-                                    CurrentlyLooking currentlyLooking=new CurrentlyLooking(foodBoolean,
-                                            clothesBoolean,booksBoolean,stationeryBoolean);
+                                    CurrentlyLooking currentlyLooking = new CurrentlyLooking(foodBoolean,
+                                            clothesBoolean, booksBoolean, stationeryBoolean);
                                     Organization org = new Organization(orgId,
                                             orgnameString, orgemailString, orgPasswordString,
                                             orglocationString, orgphoneInt, orgwebsiteString,
-                                            orgpanInt,currentlyLooking,orgDescribeItemsString, status);
+                                            orgpanInt, currentlyLooking, orgDescribeItemsString, status);
                                     databaseOrganization.child(orgId).setValue(org);
                                     Intent intent = new Intent(
                                             OrganizationRegisterActivity.this,
