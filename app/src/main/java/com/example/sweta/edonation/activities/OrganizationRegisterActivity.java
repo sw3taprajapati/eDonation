@@ -212,16 +212,28 @@ public class OrganizationRegisterActivity extends AppCompatActivity
                                     }
 
                                     if (checkBooks.isChecked()) {
+
                                         booksBoolean = true;
+
+                                        booksBoolean= true;
+
                                         //Log.i("clothes", currentlyLooking);
                                     }
 
                                     if (checkClothes.isChecked()) {
+
                                         clothesBoolean = true;
                                     }
 
                                     if (checkStationery.isChecked()) {
                                         stationeryBoolean = true;
+
+                                        clothesBoolean =true;
+                                    }
+
+                                    if (checkStationery.isChecked()) {
+                                        stationeryBoolean =true;
+
                                     }
 
                                     orgDescribeItemsString = describeItems.getText().toString();
@@ -240,13 +252,15 @@ public class OrganizationRegisterActivity extends AppCompatActivity
 
 
                                     String orgId = databaseOrganization.push().getKey();
-                                    CurrentlyLooking currentlyLooking = new CurrentlyLooking(foodBoolean,
-                                            clothesBoolean, booksBoolean, stationeryBoolean);
 
+
+                                    CurrentlyLooking currentlyLooking=new CurrentlyLooking(foodBoolean,
+                                            clothesBoolean,booksBoolean,stationeryBoolean);
                                     Organization org = new Organization(orgId,
                                             orgnameString, orgemailString, orgPasswordString,
                                             orglocationString, orgphoneInt, orgwebsiteString,
-                                            orgpanInt, currentlyLooking, orgDescribeItemsString, status);
+                                            orgpanInt,currentlyLooking,orgDescribeItemsString, status);
+
                                     databaseOrganization.child(orgId).setValue(org);
                                     Intent intent = new Intent(
                                             OrganizationRegisterActivity.this,

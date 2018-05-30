@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.activities.OrganizationDetailActivity;
+import com.example.sweta.edonation.pojoclasses.CurrentlyLooking;
 import com.example.sweta.edonation.pojoclasses.Organization;
 
 import java.util.List;
@@ -45,9 +46,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
 
         holder.orgName.setText(organization.getOrgFullName());
         holder.orgLocation.setText(organization.getOrgLocation());
-        holder.currentRequirement.setText("Currently Looking For : "
+        /*holder.currentRequirement.setText("Currently Looking For : "
                 +organization.getCurrentlyLooking());
-
+*/
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +57,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
                 intent.putExtra("orgName",organization.getOrgFullName());
                 intent.putExtra("orgLocation",organization.getOrgLocation());
                 intent.putExtra("orgEmail",organization.getOrgEmailID());
-                intent.putExtra("currentRequirement",organization.getCurrentlyLooking());
+                //intent.putExtra("currentRequirement",organization.getCurrentlyLooking());
                 intent.putExtra("description",organization.getDescribeItems());
                 intent.putExtra("website",organization.getOrgWebsite());
                 intent.putExtra("phone",organization.getOrgPhone());

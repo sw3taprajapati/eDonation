@@ -24,6 +24,7 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
     NavigationView navigationView;
     Toolbar toolbar=null;
     ActionBarDrawerToggle toggle;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
         toggle.syncState();
 
 
-        navigationView = (NavigationView) findViewById(R.id.nav2);
+        navigationView = (NavigationView) findViewById(R.id.nav_view2);
         navigationView.setNavigationItemSelectedListener(this);
 
         Intent appLinkIntent = getIntent();
@@ -79,6 +80,8 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
                     public void onClick(DialogInterface arg0, int arg1) {
                         Intent intent=new Intent(OrganizationLoginDashboardActivity.this,MainDashboardActivity.class);
                         startActivity(intent);
+                        FirebaseAuth.getInstance().signOut();
+                        //unauth();
                         finish();
                     }
                 });
@@ -139,6 +142,7 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
 
             case R.id.nav_logOut:
                 dialogBox();
+
 //                Intent in3=new Intent(OrganizationLoginDashboardActivity.this,
 //                        MainDashboardActivity.class);
 //                startActivity(in3);
