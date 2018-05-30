@@ -1,9 +1,12 @@
 package com.example.sweta.edonation.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -43,13 +46,42 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_login);
-        initComponent();
-        initToolbar();
-        setListener();
-        firebaseAuth = FirebaseAuth.getInstance();
+        checkWifi();
+
+
 
 
     }
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+
+        return cm.getActiveNetworkInfo() != null;
+
+
+    }
+
+    private void checkWifi() {
+
+        boolean check = isNetworkConnected();
+        if (check == true) {
+            initComponent();
+            initToolbar();
+            setListener();
+            firebaseAuth = FirebaseAuth.getInstance();
+
+        } else {
+
+            Toast toast = Toast.makeText(this, "Connect to a network",
+                    Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+
+
+        }
+    }
+
 
     private void initComponent() {
         toolbar = findViewById(R.id.toolBar);
@@ -95,60 +127,64 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
     @Override
     public void onClick(View v) {
 
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        if (!isNetworkConnected()) {
+            Toast.makeText(this, "no internet connection", Toast.LENGTH_SHORT).show();
+        } else {
+
+            String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
 
+            if (v == logInBtn) {
 
-        if (v == logInBtn) {
-
-            DatabaseReference dbOrganization = FirebaseDatabase.getInstance().getReference("OrganizationDetails");
-
-
-            //checked if entered email or password matches or not
+                DatabaseReference dbOrganization = FirebaseDatabase.getInstance().getReference("OrganizationDetails");
 
 
-            //validation here
-            orgEmailString = orgEmail.getText().toString().trim();
+                //checked if entered email or password matches or not
 
-            if (orgEmailString.equals("")) {
 
-                orgEmail.setError("Organization email cannot be empty");
+                //validation here
+                orgEmailString = orgEmail.getText().toString().trim();
 
-            } else if (orgEmailString.matches(emailPattern)) {
+                if (orgEmailString.equals("")) {
 
-                orgPasswordString = orgPassword.getText().toString().trim();
+                    orgEmail.setError("Organization email cannot be empty");
 
-                progressBar.setVisibility(View.VISIBLE);
-                afterValidation();
+                } else if (orgEmailString.matches(emailPattern)) {
 
+                    orgPasswordString = orgPassword.getText().toString().trim();
+
+                    progressBar.setVisibility(View.VISIBLE);
+                    afterValidation();
+
+                }
             }
         }
     }
-    private void afterValidation(){
+        private void afterValidation () {
 
-        firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
-                .addOnCompleteListener(this,
-                        new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
+            firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
+                    .addOnCompleteListener(this,
+                            new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                progressBar.setVisibility(View.GONE);
+                                    progressBar.setVisibility(View.GONE);
 
-                                if (task.isSuccessful()) {
-                                    //logged in
-                                    //LoginDashboard is opened
-                                    finish();
-                                    Intent intent = new Intent(OrganizationLoginActivity.this,
-                                            OrganizationLoginDashboardActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Enter valid email id and password",
-                                            Toast.LENGTH_LONG).show();
+                                    if (task.isSuccessful()) {
+                                        //logged in
+                                        //LoginDashboard is opened
+                                        finish();
+                                        Intent intent = new Intent(OrganizationLoginActivity.this,
+                                                OrganizationLoginDashboardActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Enter valid email id and password",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+
                                 }
+                            });
 
-                            }
-                        });
-
+        }
     }
-}

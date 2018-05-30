@@ -1,14 +1,17 @@
 package com.example.sweta.edonation.activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,13 +37,41 @@ public class OrganizationDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_detail);
+        checkWifi();
 
-        initComponents();
-        initToolbar();
-        getIntents();
+
+    }
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+
+        return cm.getActiveNetworkInfo() != null;
+
+
     }
 
-    private void getIntents() {
+    private void checkWifi() {
+
+        boolean check = isNetworkConnected();
+        if (check == true) {
+            initComponents();
+            initToolbar();
+            getIntents();
+
+        } else {
+
+            Toast toast = Toast.makeText(this, "Connect to a network",
+                    Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+
+
+        }
+    }
+
+
+        private void getIntents() {
         if (getIntent().hasExtra("orgName") && getIntent().hasExtra("orgLocation")
                 && getIntent().hasExtra("orgEmail")
                 /*&& getIntent().hasExtra("currentRequirement")*/

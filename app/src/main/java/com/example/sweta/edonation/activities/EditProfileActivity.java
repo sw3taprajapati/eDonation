@@ -3,8 +3,10 @@ package com.example.sweta.edonation.activities;
 
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -13,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,17 +65,45 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_register);
 
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseOrganization = firebaseDatabase.
                 getReference("OrganizationDetails");
         user = FirebaseAuth.getInstance().getCurrentUser();
-        initComponent();
-        initToolbar();
-        initListeners();
-        disableFields();
-        accessInformation();
+        checkWifi();
 
 
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+
+        return cm.getActiveNetworkInfo() != null;
+
+
+    }
+
+    private void checkWifi() {
+
+        boolean check = isNetworkConnected();
+        if (check == true) {
+            initComponent();
+            initToolbar();
+            initListeners();
+            disableFields();
+            accessInformation();
+
+        } else {
+
+            Toast toast = Toast.makeText(this, "Connect to a network",
+                    Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+
+
+        }
 
     }
 
@@ -150,9 +181,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     public void accessInformation() {
 
 
-
         final String email = user.getEmail();
-
 
 
         databaseOrganization.addValueEventListener(new ValueEventListener() {
@@ -205,97 +234,96 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        if (v == orgRegister) {
+        if (isNetworkConnected() == false) {
+            Toast.makeText(this, "no internet connection", Toast.LENGTH_SHORT).show();
+        } else {
+            if (v == orgRegister) {
 
 
-            String phone;
+                String phone;
 
-            String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
-
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
 
-            orgPasswordString = orgPassword.getText().toString().trim();
+                orgPasswordString = orgPassword.getText().toString().trim();
 
-            if (orgPasswordString.equals("")) {
-                orgPassword.setError("Password cannot be empty");
-            } else if (orgPasswordString.length() <= 8) {
-                orgPassword.setError("Password cannot be less than eight characters");
+                if (orgPasswordString.equals("")) {
+                    orgPassword.setError("Password cannot be empty");
+                } else if (orgPasswordString.length() <= 8) {
+                    orgPassword.setError("Password cannot be less than eight characters");
 
-            } else if (orgPasswordString.contains("a-zA-Z1-9")) {
-                orgPassword.setError("Enter pasword containing numbers and alphabets");
+                } else if (orgPasswordString.contains("a-zA-Z1-9")) {
+                    orgPassword.setError("Enter pasword containing numbers and alphabets");
 
-            } else {
-                orgLocationString = orgLocation.getText().toString().trim();
-                if (orgLocationString.equals("")) {
-
-                    orgLocation.setError("Organization location cannot be empty");
                 } else {
-                    phone = orgPhone.getText().toString().trim();
+                    orgLocationString = orgLocation.getText().toString().trim();
+                    if (orgLocationString.equals("")) {
 
-                    if (phone.equals("")) {
-
-                        orgPhone.setError("Organization phone cannot be empty");
-
-                    } else if (phone.length() != 10 && phone.length() != 7) {
-
-
-                        orgPhone.setError("Enter valid number");
-
+                        orgLocation.setError("Organization location cannot be empty");
                     } else {
-                        try {
-                            orgPhoneInt = Integer.parseInt(orgPhone.getText().toString());
-                        } catch (Exception e) {
+                        phone = orgPhone.getText().toString().trim();
+
+                        if (phone.equals("")) {
+
+                            orgPhone.setError("Organization phone cannot be empty");
+
+                        } else if (phone.length() != 10 && phone.length() != 7) {
+
+
+                            orgPhone.setError("Enter valid number");
+
+                        } else {
+                            try {
+                                orgPhoneInt = Integer.parseInt(orgPhone.getText().toString());
+                            } catch (Exception e) {
+
+                            }
+
+
+                            if (check1.isChecked()) {
+                                currentlyLooking = "Food";
+                                //Log.i("food", currentlyLooking);
+
+
+                            }
+
+                            if (check2.isChecked()) {
+                                currentlyLooking += "," + "Clothes";
+                                //Log.i("clothes", currentlyLooking);
+                            }
+
+                            if (check3.isChecked()) {
+                                currentlyLooking += "," + "Books";
+                            }
+
+                            if (check4.isChecked()) {
+                                currentlyLooking += "," + "Stationery";
+                            }
+
+                            orgDescribeItemsString = describeItems.getText().toString();
+
+
+                            databaseOrganization.child(orgId).child("orgPassword").setValue(orgPasswordString);
+                            databaseOrganization.child(orgId).child("orgLocation").setValue(orgLocationString);
+                            databaseOrganization.child(orgId).child("orgPhone").setValue(orgPhoneInt);
+                            databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
+                            databaseOrganization.child(orgId).child("currentlyLooking").setValue(currentlyLooking);
+                            databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
+
 
                         }
-
-
-
-                        if (check1.isChecked()) {
-                            currentlyLooking = "Food";
-                            //Log.i("food", currentlyLooking);
-
-
-                        }
-
-                        if (check2.isChecked()) {
-                            currentlyLooking += "," + "Clothes";
-                            //Log.i("clothes", currentlyLooking);
-                        }
-
-                        if (check3.isChecked()) {
-                            currentlyLooking += "," + "Books";
-                        }
-
-                        if (check4.isChecked()) {
-                            currentlyLooking += "," + "Stationery";
-                        }
-
-                        orgDescribeItemsString = describeItems.getText().toString();
-
-
-                        databaseOrganization.child(orgId).child("orgPassword").setValue(orgPasswordString);
-                        databaseOrganization.child(orgId).child("orgLocation").setValue(orgLocationString);
-                        databaseOrganization.child(orgId).child("orgPhone").setValue(orgPhoneInt);
-                        databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
-                        databaseOrganization.child(orgId).child("currentlyLooking").setValue(currentlyLooking);
-                        databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
-
-
-
-
                     }
                 }
+
+
             }
+            Toast.makeText(this, "Information Updated",
+                    Toast.LENGTH_LONG).show();
 
-
+            Intent intent = new Intent(EditProfileActivity.this,
+                    OrganizationLoginDashboardActivity.class);
+            startActivity(intent);
+            finish();
         }
-        Toast.makeText(this, "Information Updated",
-                Toast.LENGTH_LONG).show();
-
-        Intent intent = new Intent(EditProfileActivity.this,
-                OrganizationLoginDashboardActivity.class);
-        startActivity(intent);
-        finish();
     }
 }
