@@ -14,9 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.example.sweta.edonation.R;
-import android.widget.Toast;
 
+import com.example.sweta.edonation.R;
+
+import android.widget.Toast;
 
 
 public class OrganizationDetailActivity extends AppCompatActivity {
@@ -43,31 +44,32 @@ public class OrganizationDetailActivity extends AppCompatActivity {
     private void getIntents() {
         if (getIntent().hasExtra("orgName") && getIntent().hasExtra("orgLocation")
                 && getIntent().hasExtra("orgEmail")
-                /*&& getIntent().hasExtra("currentRequirement")*/
+                && getIntent().hasExtra("currentRequirement")
                 && getIntent().hasExtra("description")
                 && getIntent().hasExtra("website") && getIntent().hasExtra("phone")) {
 
             String orgName = getIntent().getStringExtra("orgName");
             String orgLocation = getIntent().getStringExtra("orgLocation");
             String email = getIntent().getStringExtra("orgEmail");
-            //String currentReq = getIntent().getStringExtra("currentRequirement");
+            String currentReq = getIntent().getStringExtra("currentRequirement");
             String description = getIntent().getStringExtra("description");
             String website = getIntent().getStringExtra("website");
             int phone = getIntent().getIntExtra("phone", 0);
 
-            setDetails(orgName, orgLocation, email, description,
+            setDetails(orgName, orgLocation, email, currentReq, description,
                     website, phone);
         }
     }
 
-    private void setDetails(String orgName, String orgLocation, String email/*,
-                            String currentReq*/, String description,
+    private void setDetails(String orgName, String orgLocation, String email,
+                            String currentReq, String description,
                             final String website, final int phone) {
         name.setText(orgName);
         location.setText(orgLocation);
         emailDetail.setText(email);
-        currentReqDetail.setText("Null");
-        descriptionDetail.setText("We are currently looking for "+description);
+        currentReqDetail.setText(currentReq);
+        descriptionDetail.setText("We are currently looking for " + description);
+
         websiteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,30 +78,44 @@ public class OrganizationDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        final String phoneNo = String.valueOf(phone);
+
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL,
-                        Uri.parse("tel: "+ String.valueOf(phone)));
-                try {
-                    startActivity(intent);
-                } catch (Exception e) {
+                if (phoneNo.length() == 10) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL,
+                            Uri.parse("tel: " + String.valueOf(phone)));
+
+                    try {
+                        startActivity(intent);
+                    } catch (Exception e) {
+                    }
+                } else if (phoneNo.length() >= 7 && phoneNo.length() < 10) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL,
+                            Uri.parse("tel: 01" + String.valueOf(phone)));
+
+                    try {
+                        startActivity(intent);
+                    } catch (Exception e) {
+                    }
                 }
             }
         });
     }
-    private void initComponents(){
-        name=findViewById(R.id.orgNameDetail);
-        location=findViewById(R.id.locationDetail);
-        currentReqDetail=findViewById(R.id.needDetail);
-        descriptionDetail=findViewById(R.id.descriptionDetail);
-        websiteBtn=findViewById(R.id.btnWebsiteDetail);
-        callBtn=findViewById(R.id.callBtnDetail);
-        emailDetail=findViewById(R.id.emailDetail);
-        toolbar=findViewById(R.id.toolbar);
+
+    private void initComponents() {
+        name = findViewById(R.id.orgNameDetail);
+        location = findViewById(R.id.locationDetail);
+        currentReqDetail = findViewById(R.id.needDetail);
+        descriptionDetail = findViewById(R.id.descriptionDetail);
+        websiteBtn = findViewById(R.id.btnWebsiteDetail);
+        callBtn = findViewById(R.id.callBtnDetail);
+        emailDetail = findViewById(R.id.emailDetail);
+        toolbar = findViewById(R.id.toolbar);
     }
 
-    private void initToolbar(){
+    private void initToolbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Organization Detail");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

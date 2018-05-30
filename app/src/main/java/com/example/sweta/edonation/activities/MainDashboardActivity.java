@@ -31,7 +31,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class MainDashboardActivity extends AppCompatActivity
     private DatabaseReference reference;
     private LinearLayout linearSearch;
     private CheckBox checkFood, checkClothes, checkBooks, checkStationery;
-    private String searchTxt = "";
+    private Boolean foodBoolean,clothesBoolean,booksBoolean,stationeryBoolean;
     private Button searchBtn;
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -115,7 +114,6 @@ public class MainDashboardActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         organizationList = new ArrayList<>();
-
         final DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                 getReference("OrganizationDetails");
 
@@ -126,24 +124,33 @@ public class MainDashboardActivity extends AppCompatActivity
 
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
-                        Organization org = organizationSnapshot.getValue(Organization.class);
-                        int status;
-                        try {
-                            status = org.getStatus();
-                            if (status == 1) {
-                                organizationList.add(org);
+                            Organization org = organizationSnapshot.getValue(Organization.class);
+                            int status;
+
+
+                            try {
+                                status = org.getStatus();
+                                boolean food=org.getCurrentlyLooking().isFood();
+                                boolean clothes=org.getCurrentlyLooking().isClothes();
+                                boolean books=org.getCurrentlyLooking().isBooks();
+                                boolean stationery=org.getCurrentlyLooking().isStationery();
+
+                                if (status == 1 && (food==true
+                                        || clothes==true || books== true
+                                || stationery==true)){
+                                    organizationList.add(org);
+                                }
+                            } catch (Exception e) {
+
                             }
-                        } catch (Exception e) {
-
                         }
-
                     }
 
                     adapter = new ListAdapter(MainDashboardActivity.this,
                             organizationList);
                     recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 }
-            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -207,6 +214,7 @@ public class MainDashboardActivity extends AppCompatActivity
 
 
             case R.id.nav_loginOrg:
+
                 Intent intent1 = new Intent(MainDashboardActivity.this,
                         OrganizationLoginActivity.class);
                 startActivity(intent1);
@@ -214,7 +222,7 @@ public class MainDashboardActivity extends AppCompatActivity
 
             case R.id.nav_aboutApp:
                 Intent intent3 = new Intent(MainDashboardActivity.this,
-                        AdminActivity.class);
+                        AboutAppActivity.class);
                 startActivity(intent3);
                 break;
 
@@ -267,12 +275,29 @@ public class MainDashboardActivity extends AppCompatActivity
     }
 
 
-    private void searchOrganization(String search) {
+    private void searchOrganization() {
+
+
+            if (checkFood.isChecked()) {
+                foodBoolean = true;
+                //Log.i("food", currentlyLooking);
+            }
+
+            if (checkClothes.isChecked()) {
+                clothesBoolean =true;
+                //Log.i("clothes", currentlyLooking);
+            }
+
+            if (checkBooks.isChecked()) {
+                booksBoolean=true;
+            }
+
+            if (checkStationery.isChecked()) {
+                stationeryBoolean =true;
+            }
 
         organizationList.clear();
         adapter.notifyDataSetChanged();
-
-        final String searchList = search;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -292,10 +317,16 @@ public class MainDashboardActivity extends AppCompatActivity
                         Organization org = organizationSnapshot.getValue(Organization.class);
 
                         int status = org.getStatus();
+                        Boolean booleanFood=org.getCurrentlyLooking().isFood();
+                        Boolean booleanClothes=org.getCurrentlyLooking().isClothes();
+                        Boolean booleanBooks=org.getCurrentlyLooking().isBooks();
+                        Boolean booleanStationery=org.getCurrentlyLooking().isStationery();
 
-                        /*if (name.endsWith(searchList) && status == 1) {
+                        if ((booleanFood.equals(foodBoolean) || booleanClothes.equals(clothesBoolean)
+                                || booleanBooks.equals(booksBoolean)
+                                || booleanStationery.equals(stationeryBoolean))&& status == 1) {
                             organizationList.add(org);
-                        }*/
+                        }
 
                     }
 
@@ -321,29 +352,8 @@ public class MainDashboardActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-
         if (v == searchBtn) {
-            if (checkFood.isChecked()) {
-                searchTxt = "Food";
-                searchOrganization(searchTxt);
-                //Log.i("food", currentlyLooking);
-            }
-
-            if (checkClothes.isChecked()) {
-                searchTxt += "," + "Clothes";
-                searchOrganization(searchTxt);
-                //Log.i("clothes", currentlyLooking);
-            }
-
-            if (checkBooks.isChecked()) {
-                searchTxt += "," + "Books";
-                searchOrganization(searchTxt);
-            }
-
-            if (checkStationery.isChecked()) {
-                searchTxt += "," + "Stationery";
-                searchOrganization(searchTxt);
-            }
+            searchOrganization();
         }
     }
 

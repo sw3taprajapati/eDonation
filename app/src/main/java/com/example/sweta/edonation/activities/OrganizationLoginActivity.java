@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 
 import com.example.sweta.edonation.R;
+import com.example.sweta.edonation.activities.checklogin.PreferenceUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -91,16 +92,12 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
 
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-
-
         if (v == logInBtn) {
 
-            DatabaseReference dbOrganization = FirebaseDatabase.getInstance().getReference("OrganizationDetails");
-
+            DatabaseReference dbOrganization = FirebaseDatabase.getInstance()
+                    .getReference("OrganizationDetails");
 
             //checked if entered email or password matches or not
-
-
             //validation here
             orgEmailString = orgEmail.getText().toString().trim();
 
@@ -118,7 +115,8 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
             }
         }
     }
-    private void afterValidation(){
+
+    private void afterValidation() {
 
         firebaseAuth.signInWithEmailAndPassword(orgEmailString, orgPasswordString)
                 .addOnCompleteListener(this,
@@ -131,16 +129,19 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
                                 if (task.isSuccessful()) {
                                     //logged in
                                     //LoginDashboard is opened
+                                    PreferenceUtils.startLogInActivity(
+                                            OrganizationLoginActivity.this,true);
                                     finish();
-                                    Intent intent = new Intent(OrganizationLoginActivity.this,
+                                    Intent intent = new Intent(
+                                            OrganizationLoginActivity.this,
                                             OrganizationDashboardActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "Enter valid email id and password",
+                                    Toast.makeText(getApplicationContext(),
+                                            "Enter valid email id and password",
                                             Toast.LENGTH_LONG).show();
                                 }
-
                             }
                         });
 
