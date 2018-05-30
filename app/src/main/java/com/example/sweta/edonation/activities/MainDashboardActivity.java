@@ -20,6 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -37,6 +39,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.sweta.edonation.R.id.imageView;
+import static com.example.sweta.edonation.R.id.nav_view2;
+
 public class MainDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
@@ -52,6 +57,8 @@ public class MainDashboardActivity extends AppCompatActivity
     private String searchTxt = "";
     private Button searchBtn;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private Boolean foodBoolean,clothesBoolean,booksBoolean,stationeryBoolean;
+    private ImageView imageView;
 
     //Button btnAdmin;
 
@@ -74,7 +81,7 @@ public class MainDashboardActivity extends AppCompatActivity
     private void initComponents() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         checkFood = findViewById(R.id.food_checkbox);
         checkClothes = findViewById(R.id.clothes_checkbox);
         checkBooks = findViewById(R.id.books_checkbox);
@@ -83,6 +90,8 @@ public class MainDashboardActivity extends AppCompatActivity
         linearSearch = findViewById(R.id.linearCheckbox);
         searchBtn = findViewById(R.id.searchBtn);
         swipeRefreshLayout = findViewById(R.id.refreshRecyclerView);
+        View header = navigationView.getHeaderView(0);
+        imageView=header.findViewById(R.id.imageView1);
         // btnAdmin = findViewById(R.id.adminBtn);
     }
 
@@ -102,10 +111,14 @@ public class MainDashboardActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //btnAdmin.setOnClickListener(this);
         searchBtn.setOnClickListener(this);
+
+        imageView.setOnClickListener(this);
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
         swipeRefreshLayout.setOnRefreshListener(this);
+
+
     }
 
 
@@ -198,6 +211,10 @@ public class MainDashboardActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         switch (id) {
+//            case R.id.imageView:
+//                Intent intentImg=new Intent(MainDashboardActivity.this,AdminActivity.class);
+//                startActivity(intentImg);
+//                break;
 
             case R.id.nav_registerOrg:
                 Intent intent = new Intent(MainDashboardActivity.this,
@@ -267,7 +284,38 @@ public class MainDashboardActivity extends AppCompatActivity
     }
 
 
+
     private void searchOrganization(String search) {
+
+   // private void searchOrganization() {
+
+
+            if (checkFood.isChecked()) {
+                foodBoolean = true;
+                //Log.i("food", currentlyLooking);
+            }else{
+                foodBoolean=false;
+            }
+
+            if (checkClothes.isChecked()) {
+                clothesBoolean =true;
+                //Log.i("clothes", currentlyLooking);
+            }else {
+                clothesBoolean=false;
+            }
+
+            if (checkBooks.isChecked()) {
+                booksBoolean=true;
+            }else {
+                booksBoolean=false;
+            }
+
+            if (checkStationery.isChecked()) {
+                stationeryBoolean =true;
+            }else {
+                stationeryBoolean=false;
+            }
+
 
         organizationList.clear();
         adapter.notifyDataSetChanged();
@@ -290,14 +338,43 @@ public class MainDashboardActivity extends AppCompatActivity
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
                         Organization org = organizationSnapshot.getValue(Organization.class);
+                        int status;
 
-                        int status = org.getStatus();
+
 
                         /*if (name.endsWith(searchList) && status == 1) {
                             organizationList.add(org);
                         }*/
+                        try {
+                            status = org.getStatus();
+                            boolean food = org.getCurrentlyLooking().isFood();
+                            boolean clothes = org.getCurrentlyLooking().isClothes();
+                            boolean books = org.getCurrentlyLooking().isBooks();
+                            boolean stationery = org.getCurrentlyLooking().isStationery();
 
-                    }
+                            if (status == 1 && (food == true
+                                    || clothes == true || books == true
+                                    || stationery == true)) {
+                                organizationList.add(org);
+                            }
+                        } catch (Exception e) {
+
+                        }
+
+
+                            /*if(booleanClothes==true && clothesBoolean==true){
+                                organizationList.add(org);
+                            }
+                            if(booleanBooks==true && booksBoolean==true){
+                                organizationList.add(org);
+                            }
+                            if(booleanStationery==true && stationeryBoolean==true){
+                                organizationList.add(org);
+                            }*/
+
+
+                }
+            }
 
                     adapter = new ListAdapter(MainDashboardActivity.this,
                             organizationList);
@@ -305,7 +382,9 @@ public class MainDashboardActivity extends AppCompatActivity
                     adapter.notifyDataSetChanged();
 
                 }
-            }
+
+
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -321,7 +400,10 @@ public class MainDashboardActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-
+        if(v==imageView){
+            Intent intentImg=new Intent(MainDashboardActivity.this,AdminActivity.class);
+            startActivity(intentImg);
+        }
         if (v == searchBtn) {
             if (checkFood.isChecked()) {
                 searchTxt = "Food";

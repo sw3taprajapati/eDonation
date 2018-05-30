@@ -56,7 +56,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     private void setListener(){
-        btnRefresh.setOnClickListener(this);
+       // btnRefresh.setOnClickListener(this);
     }
 
     @Override

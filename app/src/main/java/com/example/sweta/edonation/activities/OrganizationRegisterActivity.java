@@ -47,7 +47,6 @@ public class OrganizationRegisterActivity extends AppCompatActivity
     private boolean stationeryBoolean;
     Button orgregister;
     DatabaseReference databaseOrganization;
-
     FirebaseAuth firebaseAuth;
 
     @Override
