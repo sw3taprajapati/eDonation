@@ -14,9 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.example.sweta.edonation.R;
 import android.widget.Toast;
 
-import com.example.sweta.edonation.R;
+
 
 public class OrganizationDetailActivity extends AppCompatActivity {
 
@@ -66,7 +67,7 @@ public class OrganizationDetailActivity extends AppCompatActivity {
         location.setText(orgLocation);
         emailDetail.setText(email);
         currentReqDetail.setText(currentReq);
-        descriptionDetail.setText(description);
+        descriptionDetail.setText("We are currently looking for "+description);
         websiteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +80,7 @@ public class OrganizationDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL,
-                        Uri.parse("tel:01"+ String.valueOf(phone)));
+                        Uri.parse("tel:"+ String.valueOf(phone)));
                 try {
                     startActivity(intent);
                 } catch (Exception e) {
