@@ -69,6 +69,7 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main2, menu);
         return true;
     }
+
     public void dialogBox() {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage("Are you sure you want to log out?");
