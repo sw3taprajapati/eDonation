@@ -43,30 +43,30 @@ public class OrganizationDetailActivity extends AppCompatActivity {
     private void getIntents() {
         if (getIntent().hasExtra("orgName") && getIntent().hasExtra("orgLocation")
                 && getIntent().hasExtra("orgEmail")
-                && getIntent().hasExtra("currentRequirement")
+                /*&& getIntent().hasExtra("currentRequirement")*/
                 && getIntent().hasExtra("description")
                 && getIntent().hasExtra("website") && getIntent().hasExtra("phone")) {
 
             String orgName = getIntent().getStringExtra("orgName");
             String orgLocation = getIntent().getStringExtra("orgLocation");
             String email = getIntent().getStringExtra("orgEmail");
-            String currentReq = getIntent().getStringExtra("currentRequirement");
+            //String currentReq = getIntent().getStringExtra("currentRequirement");
             String description = getIntent().getStringExtra("description");
             String website = getIntent().getStringExtra("website");
             int phone = getIntent().getIntExtra("phone", 0);
 
-            setDetails(orgName, orgLocation, email, currentReq, description,
+            setDetails(orgName, orgLocation, email, description,
                     website, phone);
         }
     }
 
-    private void setDetails(String orgName, String orgLocation, String email,
-                            String currentReq, String description,
+    private void setDetails(String orgName, String orgLocation, String email/*,
+                            String currentReq*/, String description,
                             final String website, final int phone) {
         name.setText(orgName);
         location.setText(orgLocation);
         emailDetail.setText(email);
-        currentReqDetail.setText(currentReq);
+        currentReqDetail.setText("Null");
         descriptionDetail.setText("We are currently looking for "+description);
         websiteBtn.setOnClickListener(new View.OnClickListener() {
             @Override

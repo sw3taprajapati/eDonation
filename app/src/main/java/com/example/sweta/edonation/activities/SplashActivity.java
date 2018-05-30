@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                Intent intent = new Intent(SplashActivity.this, OrganizationLoginDashboardActivity.class);
+                Intent intent = new Intent(SplashActivity.this, OrganizationDashboardActivity.class);
                 startActivity(intent);
                 finish();
             }

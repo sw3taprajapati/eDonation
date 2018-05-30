@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.adaptersandviewholders.ListAdapter;
+import com.example.sweta.edonation.pojoclasses.CurrentlyLooking;
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -151,7 +152,9 @@ public class MainDashboardActivity extends AppCompatActivity
             }
         });
 
-        if (recyclerView == null) {
+        if (recyclerView == null)
+
+        {
             Toast.makeText(this, "No Data Found!!", Toast.LENGTH_LONG).show();
         }
 
@@ -288,12 +291,11 @@ public class MainDashboardActivity extends AppCompatActivity
                     for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
                         Organization org = organizationSnapshot.getValue(Organization.class);
 
-                        String name = org.getCurrentlyLooking();
                         int status = org.getStatus();
 
-                        if (name.endsWith(searchList) && status == 1) {
+                        /*if (name.endsWith(searchList) && status == 1) {
                             organizationList.add(org);
-                        }
+                        }*/
 
                     }
 
