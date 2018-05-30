@@ -29,7 +29,7 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_organization_login_dashboard);
+        setContentView(R.layout.activity_organization_dashboard);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("e-Donation");
         setSupportActionBar(toolbar);
