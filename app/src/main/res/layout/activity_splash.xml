@@ -5,9 +5,9 @@
     android:background="@color/colorTheme">
 
     <ImageView
-        android:id="@+id/appLogo"
-        android:layout_width="175dp"
-        android:layout_height="175dp"
+        android:id="@+id/splashLogo"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:src="@mipmap/ic_splash_logo"/>
@@ -18,22 +18,22 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/appLogo"
+        android:layout_below="@+id/splashLogo"
         android:textColor="@color/white"
-        android:textSize="35dp"
+        android:textSize="20dp"
         android:fontFamily="sans-serif"
         android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="For Good Cause"
+        android:text="For A Good Cause"
         android:layout_centerHorizontal="true"
         android:textColor="@color/white"
         android:layout_below="@+id/appName"
         android:textStyle="italic"
         android:fontFamily="sans-serif"
-        android:textSize="12dp"
+        android:textSize="10dp"
         />
 
 

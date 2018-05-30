@@ -93,41 +93,27 @@
                 android:id="@+id/searchBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/linearCheckbox"
                 android:layout_alignParentEnd="true"
+                android:layout_below="@id/linearCheckbox"
                 android:layout_margin="16dp"
-                android:textColor="@color/white"
-                android:text="Search"
                 android:background="@color/colorTheme"
-                />
-
-
-
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerViewOrganizationList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searchBtn"
-                    android:layout_margin="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:padding="8dp"
-                    android:scrollbars="vertical" />
-
-
-
-
-
-
-
-
-
-
-
-
-
+                android:text="Search"
+                android:textColor="@color/white" />
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/refreshRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewOrganizationList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/searchBtn"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:padding="8dp"
+                android:scrollbars="vertical" />
         </RelativeLayout>
     </ScrollView>
 

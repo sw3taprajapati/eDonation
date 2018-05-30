@@ -5,49 +5,25 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.OrganizationLoginDashboardActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorTheme"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        </android.support.design.widget.AppBarLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewOrganizationList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linear"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:padding="8dp"
-            android:scrollbars="vertical" />
-    </LinearLayout>
-
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav2"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/content_login_dashboard"
+            android:id="@+id/mainAppBar2"/>
+
+    </ScrollView>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view2"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
+        app:headerLayout="@layout/nav_header_login"
         app:menu="@menu/activity_main_drawer_login_org"
-        app:itemIconTint="@drawable/drawer_item_color"/>
+        app:itemIconTint="@drawable/drawer_item_color"
+        />
 
 </android.support.v4.widget.DrawerLayout>
