@@ -8,16 +8,11 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
-    <Button
-        android:id="@+id/refreshBtn"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refreshRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentEnd="true"
-        android:background="@color/colorThemeDark"
-        android:layout_margin="10dp"
-        android:textColor="@color/white"
-        android:text="refresh"/>
+        android:layout_below="@+id/toolbar"/>
     <LinearLayout
         android:id="@+id/adminHeading"
         android:layout_width="wrap_content"
@@ -55,9 +50,6 @@
             android:layout_weight="1"
            />
         </LinearLayout>
-
-
-
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

@@ -1,16 +1,12 @@
 package com.example.sweta.edonation.adaptersandviewholders;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.activities.OrganizationDetailActivity;
@@ -42,25 +38,53 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
 
+        String foodString;
+        String clothesString;
+        String booksString;
+        String stationeryString;
         final Organization organization = organizationList.get(position);
-
         holder.orgName.setText(organization.getOrgFullName());
         holder.orgLocation.setText(organization.getOrgLocation());
-        /*holder.currentRequirement.setText("Currently Looking For : "
-                +organization.getCurrentlyLooking());
-*/
+
+        boolean food = organization.getCurrentlyLooking().isFood();
+        boolean clothes = organization.getCurrentlyLooking().isClothes();
+        boolean books = organization.getCurrentlyLooking().isBooks();
+        boolean stationery = organization.getCurrentlyLooking().isStationery();
+
+        if (food == true) {
+            foodString = "Food ";
+        } else {
+            foodString = "";
+        }
+        if (clothes == true) {
+            clothesString = "Clothes ";
+        } else {
+            clothesString = "";
+        }
+        if (books == true) {
+            booksString = "Books ";
+        } else {
+            booksString = "";
+        }
+        if(stationery==true){
+            stationeryString="Stationery ";
+        }else {
+            stationeryString="";
+        }
+        final String currentlyLooking=foodString+clothesString+booksString+stationeryString;
+        holder.currentRequirement.setText("Currently Looking For : "+currentlyLooking);
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent=new Intent(context, OrganizationDetailActivity.class);
-                intent.putExtra("orgName",organization.getOrgFullName());
-                intent.putExtra("orgLocation",organization.getOrgLocation());
-                intent.putExtra("orgEmail",organization.getOrgEmailID());
-                //intent.putExtra("currentRequirement",organization.getCurrentlyLooking());
-                intent.putExtra("description",organization.getDescribeItems());
-                intent.putExtra("website",organization.getOrgWebsite());
-                intent.putExtra("phone",organization.getOrgPhone());
+                Intent intent = new Intent(context, OrganizationDetailActivity.class);
+                intent.putExtra("orgName", organization.getOrgFullName());
+                intent.putExtra("orgLocation", organization.getOrgLocation());
+                intent.putExtra("orgEmail", organization.getOrgEmailID());
+                intent.putExtra("currentRequirement",currentlyLooking);
+                intent.putExtra("description", organization.getDescribeItems());
+                intent.putExtra("website", organization.getOrgWebsite());
+                intent.putExtra("phone", organization.getOrgPhone());
                 context.startActivity(intent);
             }
         });

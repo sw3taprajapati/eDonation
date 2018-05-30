@@ -260,8 +260,8 @@ public class MainDashboardActivity extends AppCompatActivity
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
 
-//            initComponents();
-//            setListener();
+            initComponents();
+            setListener();
         }
 
     }
@@ -321,11 +321,8 @@ public class MainDashboardActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        if(isNetworkConnected()==false){
-            Toast.makeText(this,"no internet connection",Toast.LENGTH_SHORT).show();
-        }
 
-        else if (v == searchBtn) {
+        if (v == searchBtn) {
             if (checkFood.isChecked()) {
                 searchTxt = "Food";
                 searchOrganization(searchTxt);

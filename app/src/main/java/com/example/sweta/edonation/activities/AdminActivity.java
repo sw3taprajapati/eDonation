@@ -1,25 +1,20 @@
 package com.example.sweta.edonation.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.example.sweta.edonation.adaptersandviewholders.OrganizationAdapter;
 import com.example.sweta.edonation.R;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,54 +38,24 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        checkWifi();
-
-
+        initComponent();
+        initToolbar();
+        initRecyclerView();
+        setListener();
     }
 
     private void initComponent() {
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.recyclerView);
-        btnRefresh = findViewById(R.id.refreshBtn);
+        btnRefresh=findViewById(R.id.refreshRecyclerView);
     }
-
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-
-
-        return cm.getActiveNetworkInfo() != null;
-
-
-    }
-
-    private void checkWifi() {
-
-        boolean check = isNetworkConnected();
-        if (check == true) {
-            initComponent();
-            initToolbar();
-
-        } else {
-
-            Toast toast = Toast.makeText(this, "Connect to a network",
-                    Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
-
-
-        }
-
-    }
-
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Admin");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-    private void setListener() {
+    private void setListener(){
         btnRefresh.setOnClickListener(this);
     }
 
@@ -98,8 +63,8 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(
-                        AdminActivity.this, MainDashboardActivity.class);
+                Intent intent=new Intent(
+                        AdminActivity.this,MainDashboardActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -112,14 +77,14 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         return true;
     }
 
-    private void initRecyclerView() {
+    private void initRecyclerView(){
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         organizationList = new ArrayList<>();
 
 
-        DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
+       DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                 getReference("OrganizationDetails");
         dbOrganization.addValueEventListener(new ValueEventListener() {
             @Override
@@ -130,8 +95,8 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                     for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
                         Organization org = organizationSnapshot.getValue(Organization.class);
 
-                        int status = org.getStatus();
-                        if (status == 0) {
+                        int status=org.getStatus();
+                        if(status==0) {
                             organizationList.add(org);
                         }
 
@@ -153,13 +118,9 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if (isNetworkConnected() == false) {
-            Toast.makeText(this, "no internet connection", Toast.LENGTH_SHORT).show();
-        } else {
 
-            Intent intent = new Intent(AdminActivity.this, AdminActivity.class);
+            Intent intent=new Intent(AdminActivity.this,AdminActivity.class);
             startActivity(intent);
             finish();
-        }
     }
 }
