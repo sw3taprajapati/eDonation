@@ -43,7 +43,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class OrganizationDashboardActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, NavigationView.OnNavigationItemSelectedListener {
+public class OrganizationDashboardActivity extends AppCompatActivity
+        implements SwipeRefreshLayout.OnRefreshListener,
+        NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
@@ -284,8 +286,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
 
 
         organizationEmail = (TextView) navigationView.getHeaderView(0).
-
-
                 findViewById(R.id.organizationEmail);
         organizationName = (TextView) navigationView.getHeaderView(0).
                 findViewById(R.id.organizationName);
@@ -320,7 +320,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
     @Override
     public void onRefresh() {
         initRecyclerView();
-
         refreshRecyclerView.setRefreshing(false);
 
     }

@@ -48,13 +48,16 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             orgPasswordString, orgDescribeItemsString;
     private String emailFromDB, orgId;
     private int orgPhoneInt, orgPanInt;
-    private CheckBox check1, check2, check3, check4;
+    private CheckBox checkFood, checkClothes, checkBooks, checkStationery;
 
     private Button orgRegister;
     private Toolbar toolbar;
     private FirebaseUser user;
     private FirebaseDatabase firebaseDatabase;
-
+    private boolean foodBoolean;
+    private boolean clothesBoolean;
+    private boolean booksBoolean;
+    private boolean stationeryBoolean;
     private DatabaseReference databaseOrganization;
     private String currentlyLooking = "";
 
@@ -139,10 +142,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         orgPhone = findViewById(R.id.orgnPhone);
         orgWebsite = findViewById(R.id.orgnWebsite);
         orgPan = findViewById(R.id.orgnPan);
-        check1 = findViewById(R.id.food_checkbox);
-        check2 = findViewById(R.id.clothes_checkbox);
-        check3 = findViewById(R.id.books_checkbox);
-        check4 = findViewById(R.id.stationery_checkbox);
+        checkFood = findViewById(R.id.food_checkbox);
+        checkClothes = findViewById(R.id.clothes_checkbox);
+        checkBooks = findViewById(R.id.books_checkbox);
+        checkStationery = findViewById(R.id.stationery_checkbox);
         describeItems = findViewById(R.id.describeItems);
         orgRegister = findViewById(R.id.registerBtn);
         orgRegister.setText("Update");
@@ -263,22 +266,22 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
                         }
 
-                        if (check1.isChecked()) {
-                            currentlyLooking = "Food";
-                            //Log.i("food", currentlyLooking);
+                        if (checkFood.isChecked()) {
+                            foodBoolean = true;
+                            //= "," + "Stationery"Log.i("food", currentlyLooking);
                         }
 
-                        if (check2.isChecked()) {
-                            currentlyLooking += "," + "Clothes";
+                        if (checkBooks.isChecked()) {
+                            booksBoolean= true;
                             //Log.i("clothes", currentlyLooking);
                         }
 
-                        if (check3.isChecked()) {
-                            currentlyLooking += "," + "Books";
+                        if (checkClothes.isChecked()) {
+                            clothesBoolean =true;
                         }
 
-                        if (check4.isChecked()) {
-                            currentlyLooking += "," + "Stationery";
+                        if (checkStationery.isChecked()) {
+                            stationeryBoolean =true;
                         }
 
                         orgDescribeItemsString = describeItems.getText().toString();
@@ -288,22 +291,12 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         databaseOrganization.child(orgId).child("orgLocation").setValue(orgLocationString);
                         databaseOrganization.child(orgId).child("orgPhone").setValue(orgPhoneInt);
                         databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
-                        databaseOrganization.child(orgId).child("currentlyLooking").setValue(currentlyLooking);
+                        databaseOrganization.child(orgId).child("currentlyLooking").child("food").setValue(foodBoolean);
+                        databaseOrganization.child(orgId).child("currentlyLooking").child("clothes").setValue(clothesBoolean);
+                        databaseOrganization.child(orgId).child("currentlyLooking").child("books").setValue(booksBoolean);
+                        databaseOrganization.child(orgId).child("currentlyLooking").child("stationery").setValue(stationeryBoolean);
+
                         databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
-
-
-                        databaseOrganization.child(orgId).child("orgPassword").
-                                setValue(orgPasswordString);
-                        databaseOrganization.child(orgId).child("orgLocation").
-                                setValue(orgLocationString);
-                        databaseOrganization.child(orgId).child("orgPhone").
-                                setValue(orgPhoneInt);
-                        databaseOrganization.child(orgId).child("describeItems").
-                                setValue(orgDescribeItemsString);
-                        databaseOrganization.child(orgId).child("currentlyLooking").
-                                setValue(currentlyLooking);
-                        databaseOrganization.child(orgId).child("describeItems").
-                                setValue(orgDescribeItemsString);
 
                     }
                 }
@@ -311,10 +304,5 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
         Toast.makeText(this, "Information Updated",
                 Toast.LENGTH_LONG).show();
-
-        /*Intent intent = new Intent(EditProfileActivity.this,
-                OrganizationLoginDashboardActivity.class);
-        startActivity(intent);
-        finish();*/
     }
 }
