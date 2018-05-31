@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -42,20 +43,21 @@ import static com.example.sweta.edonation.R.id.imageView;
 import static com.example.sweta.edonation.R.id.nav_view2;
 
 public class MainDashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private RecyclerView recyclerView;
     private Toolbar toolbar;
     private List<Organization> organizationList;
+
     private ListAdapter adapter;
     private DatabaseReference reference;
     private LinearLayout linearSearch;
     private CheckBox checkFood, checkClothes, checkBooks, checkStationery;
     private String searchTxt = "";
     private Button searchBtn;
-    private SwipeRefreshLayout swipeRefreshLayout;
+    //private SwipeRefreshLayout swipeRefreshLayout;
     private Boolean foodBoolean, clothesBoolean, booksBoolean, stationeryBoolean;
     private ImageView imageView;
 
@@ -92,7 +94,7 @@ public class MainDashboardActivity extends AppCompatActivity
         recyclerView = findViewById(R.id.recyclerViewOrganizationList);
         linearSearch = findViewById(R.id.linearCheckbox);
         searchBtn = findViewById(R.id.searchBtn);
-        swipeRefreshLayout = findViewById(R.id.swipeRefresh);
+        //swipeRefreshLayout = findViewById(R.id.swipeRefresh);
         View header = navigationView.getHeaderView(0);
         imageView = header.findViewById(R.id.imageView1);
     }
@@ -117,7 +119,7 @@ public class MainDashboardActivity extends AppCompatActivity
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
-        swipeRefreshLayout.setOnRefreshListener(this);
+        //swipeRefreshLayout.setOnRefreshListener(this);
 
 
     }
@@ -369,6 +371,15 @@ public class MainDashboardActivity extends AppCompatActivity
                                     Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    initRecyclerView();
+                                }
+                            },1000);
+
+
                         }
 
                     }
@@ -410,9 +421,9 @@ public class MainDashboardActivity extends AppCompatActivity
         }*/
     }
 
-    @Override
+    /*@Override
     public void onRefresh() {
         initRecyclerView();
         swipeRefreshLayout.setRefreshing(false);
-    }
+    }*/
 }
