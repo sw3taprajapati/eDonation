@@ -8,11 +8,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.sweta.edonation.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class AboutAppActivity extends AppCompatActivity implements View.OnClickListener{
 
     private android.support.v7.widget.Toolbar toolbar;
-     Button contact_us_btn;
+     private Button contact_us_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +39,18 @@ public class AboutAppActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-
         if (id == android.R.id.home) {
-            Intent intent = new Intent(AboutAppActivity.this,
-                    MainDashboardActivity.class);
-            startActivity(intent);
-            finish();
+            if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                Intent intent = new Intent(AboutAppActivity.this,
+                        MainDashboardActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Intent intent = new Intent(AboutAppActivity.this,
+                        OrganizationDashboardActivity.class);
+                startActivity(intent);
+                finish();
+            }
 
         }
 

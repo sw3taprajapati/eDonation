@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -31,10 +32,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.sweta.edonation.R.id.imageView;
+import static com.example.sweta.edonation.R.id.nav_view2;
 
 public class MainDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
@@ -48,11 +53,11 @@ public class MainDashboardActivity extends AppCompatActivity
     private DatabaseReference reference;
     private LinearLayout linearSearch;
     private CheckBox checkFood, checkClothes, checkBooks, checkStationery;
-    private Boolean foodBoolean,clothesBoolean,booksBoolean,stationeryBoolean;
+    private String searchTxt = "";
     private Button searchBtn;
     private SwipeRefreshLayout swipeRefreshLayout;
-
-    //Button btnAdmin;
+    private Boolean foodBoolean, clothesBoolean, booksBoolean, stationeryBoolean;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +72,19 @@ public class MainDashboardActivity extends AppCompatActivity
         initActionBar();
         checkwifi();
         setListener();
+        //settingClickable();
         initRecyclerView();
+
+    }
+
+    private void settingClickable() {
+        imageView.setClickable(false);
     }
 
     private void initComponents() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         checkFood = findViewById(R.id.food_checkbox);
         checkClothes = findViewById(R.id.clothes_checkbox);
         checkBooks = findViewById(R.id.books_checkbox);
@@ -82,7 +93,8 @@ public class MainDashboardActivity extends AppCompatActivity
         linearSearch = findViewById(R.id.linearCheckbox);
         searchBtn = findViewById(R.id.searchBtn);
         swipeRefreshLayout = findViewById(R.id.refreshRecyclerView);
-        // btnAdmin = findViewById(R.id.adminBtn);
+        View header = navigationView.getHeaderView(0);
+        imageView = header.findViewById(R.id.imageView1);
     }
 
     private void initToolbar() {
@@ -101,10 +113,13 @@ public class MainDashboardActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //btnAdmin.setOnClickListener(this);
         searchBtn.setOnClickListener(this);
+        imageView.setOnClickListener(this);
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
         swipeRefreshLayout.setOnRefreshListener(this);
+
+
     }
 
 
@@ -114,6 +129,7 @@ public class MainDashboardActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         organizationList = new ArrayList<>();
+
         final DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                 getReference("OrganizationDetails");
 
@@ -124,33 +140,37 @@ public class MainDashboardActivity extends AppCompatActivity
 
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
-                            Organization org = organizationSnapshot.getValue(Organization.class);
-                            int status;
+                        Organization org = organizationSnapshot.getValue(Organization.class);
+                        int status;
 
 
-                            try {
-                                status = org.getStatus();
-                                boolean food=org.getCurrentlyLooking().isFood();
-                                boolean clothes=org.getCurrentlyLooking().isClothes();
-                                boolean books=org.getCurrentlyLooking().isBooks();
-                                boolean stationery=org.getCurrentlyLooking().isStationery();
+                        try {
+                            status = org.getStatus();
+                            boolean food = org.getCurrentlyLooking().isFood();
+                            boolean clothes = org.getCurrentlyLooking().isClothes();
+                            boolean books = org.getCurrentlyLooking().isBooks();
+                            boolean stationery = org.getCurrentlyLooking().isStationery();
 
-                                if (status == 1 && (food==true
-                                        || clothes==true || books== true
-                                || stationery==true)){
-                                    organizationList.add(org);
-                                }
-                            } catch (Exception e) {
-
+                            if (status == 1 && (food == true
+                                    || clothes == true || books == true
+                                    || stationery == true)) {
+                                organizationList.add(org);
+                            } else {
+                                Toast.makeText(getApplicationContext(),
+                                        "No data found",
+                                        Toast.LENGTH_LONG).show();
                             }
+                        } catch (Exception e) {
+
                         }
+
                     }
 
                     adapter = new ListAdapter(MainDashboardActivity.this,
                             organizationList);
                     recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
                 }
+            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -205,8 +225,15 @@ public class MainDashboardActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         switch (id) {
+            case R.id.imageView:
+                finish();
+                Intent intentImg=new Intent(MainDashboardActivity.this,
+                        AdminActivity.class);
+                startActivity(intentImg);
+                break;
 
             case R.id.nav_registerOrg:
+                finish();
                 Intent intent = new Intent(MainDashboardActivity.this,
                         OrganizationRegisterActivity.class);
                 startActivity(intent);
@@ -214,13 +241,14 @@ public class MainDashboardActivity extends AppCompatActivity
 
 
             case R.id.nav_loginOrg:
-
+                finish();
                 Intent intent1 = new Intent(MainDashboardActivity.this,
                         OrganizationLoginActivity.class);
                 startActivity(intent1);
                 break;
 
             case R.id.nav_aboutApp:
+                finish();
                 Intent intent3 = new Intent(MainDashboardActivity.this,
                         AboutAppActivity.class);
                 startActivity(intent3);
@@ -275,29 +303,41 @@ public class MainDashboardActivity extends AppCompatActivity
     }
 
 
-    private void searchOrganization() {
+    private void searchOrganization(String search) {
 
+        // private void searchOrganization() {
 
-            if (checkFood.isChecked()) {
-                foodBoolean = true;
-                //Log.i("food", currentlyLooking);
-            }
+        if (checkFood.isChecked()) {
+            foodBoolean = true;
+            //Log.i("food", currentlyLooking);
+        } else {
+            foodBoolean = false;
+        }
 
-            if (checkClothes.isChecked()) {
-                clothesBoolean =true;
-                //Log.i("clothes", currentlyLooking);
-            }
+        if (checkClothes.isChecked()) {
+            clothesBoolean = true;
+            //Log.i("clothes", currentlyLooking);
+        } else {
+            clothesBoolean = false;
+        }
 
-            if (checkBooks.isChecked()) {
-                booksBoolean=true;
-            }
+        if (checkBooks.isChecked()) {
+            booksBoolean = true;
+        } else {
+            booksBoolean = false;
+        }
 
-            if (checkStationery.isChecked()) {
-                stationeryBoolean =true;
-            }
+        if (checkStationery.isChecked()) {
+            stationeryBoolean = true;
+        } else {
+            stationeryBoolean = false;
+        }
+
 
         organizationList.clear();
         adapter.notifyDataSetChanged();
+
+        final String searchList = search;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -315,28 +355,44 @@ public class MainDashboardActivity extends AppCompatActivity
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
                         Organization org = organizationSnapshot.getValue(Organization.class);
+                        int status;
 
-                        int status = org.getStatus();
-                        Boolean booleanFood=org.getCurrentlyLooking().isFood();
-                        Boolean booleanClothes=org.getCurrentlyLooking().isClothes();
-                        Boolean booleanBooks=org.getCurrentlyLooking().isBooks();
-                        Boolean booleanStationery=org.getCurrentlyLooking().isStationery();
 
-                        if ((booleanFood.equals(foodBoolean) || booleanClothes.equals(clothesBoolean)
-                                || booleanBooks.equals(booksBoolean)
-                                || booleanStationery.equals(stationeryBoolean))&& status == 1) {
+
+                        /*if (name.endsWith(searchList) && status == 1) {
                             organizationList.add(org);
+                        }*/
+                        try {
+                            status = org.getStatus();
+                            boolean food = org.getCurrentlyLooking().isFood();
+                            boolean clothes = org.getCurrentlyLooking().isClothes();
+                            boolean books = org.getCurrentlyLooking().isBooks();
+                            boolean stationery = org.getCurrentlyLooking().isStationery();
+
+                            if (status == 1 && (food == true
+                                    || clothes == true || books == true
+                                    || stationery == true)) {
+                                organizationList.add(org);
+                            } else {
+                                Toast.makeText(getApplicationContext(),
+                                        "No data found",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception e) {
+
                         }
 
+
                     }
-
-                    adapter = new ListAdapter(MainDashboardActivity.this,
-                            organizationList);
-                    recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-
                 }
+
+                adapter = new ListAdapter(MainDashboardActivity.this,
+                        organizationList);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -345,16 +401,49 @@ public class MainDashboardActivity extends AppCompatActivity
             }
         });
 
-        if (recyclerView == null) {
+        if (recyclerView == null)
+
+        {
             Toast.makeText(this, "No Data Found!!", Toast.LENGTH_LONG).show();
         }
+
     }
 
     @Override
     public void onClick(View v) {
-        if (v == searchBtn) {
-            searchOrganization();
+        if (v == imageView) {
+            Intent intentImg = new Intent(MainDashboardActivity.this, AdminActivity.class);
+            startActivity(intentImg);
         }
+        if (v == searchBtn) {
+            if (checkFood.isChecked()) {
+                searchTxt = "Food";
+                searchOrganization(searchTxt);
+                //Log.i("food", currentlyLooking);
+            }
+
+            if (checkClothes.isChecked()) {
+                searchTxt += "," + "Clothes";
+                searchOrganization(searchTxt);
+                //Log.i("clothes", currentlyLooking);
+            }
+
+            if (checkBooks.isChecked()) {
+                searchTxt += "," + "Books";
+                searchOrganization(searchTxt);
+            }
+
+            if (checkStationery.isChecked()) {
+                searchTxt += "," + "Stationery";
+                searchOrganization(searchTxt);
+            }
+        }
+        /*else if(v==imageView){
+            Intent intent=new Intent(MainDashboardActivity.this,
+                    AdminActivity.class);
+            startActivity(intent);
+            finish();
+        }*/
     }
 
     @Override

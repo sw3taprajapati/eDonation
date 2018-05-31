@@ -13,7 +13,8 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView1"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/nav_header_desc"
@@ -28,13 +29,14 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="e-Donation"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/orgEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:textSize="15dp"
         android:text="edonation018@gmail.com"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 

@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.sweta.edonation.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import android.widget.Toast;
 
@@ -158,10 +159,17 @@ public class OrganizationDetailActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            Intent intent = new Intent(OrganizationDetailActivity.this,
-                    MainDashboardActivity.class);
-            startActivity(intent);
-            finish();
+            if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                Intent intent = new Intent(OrganizationDetailActivity.this,
+                        MainDashboardActivity.class);
+                startActivity(intent);
+                finish();
+            }else {
+                Intent intent = new Intent(OrganizationDetailActivity.this,
+                        OrganizationDashboardActivity.class);
+                startActivity(intent);
+                finish();
+            }
 
         }
 
