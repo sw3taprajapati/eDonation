@@ -60,6 +60,7 @@ public class MainDashboardActivity extends AppCompatActivity
     private Boolean foodBoolean,clothesBoolean,booksBoolean,stationeryBoolean;
     private ImageView imageView;
 
+
     //Button btnAdmin;
 
     @Override
@@ -75,7 +76,12 @@ public class MainDashboardActivity extends AppCompatActivity
         initActionBar();
         checkwifi();
         setListener();
+        //settingClickable();
         initRecyclerView();
+
+    }
+    private void settingClickable(){
+        imageView.setClickable(false);
     }
 
     private void initComponents() {
@@ -400,7 +406,7 @@ public class MainDashboardActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        if(v==imageView){
+        if(v==imageView ){
             Intent intentImg=new Intent(MainDashboardActivity.this,AdminActivity.class);
             startActivity(intentImg);
         }
