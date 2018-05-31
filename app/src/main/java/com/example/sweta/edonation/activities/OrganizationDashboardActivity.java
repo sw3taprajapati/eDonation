@@ -137,6 +137,10 @@ public class OrganizationDashboardActivity extends AppCompatActivity
                                     || clothes == true || books == true
                                     || stationery == true)) {
                                 organizationList.add(org);
+                            }else{
+                                Toast.makeText(getApplicationContext(),
+                                        "No data found",
+                                        Toast.LENGTH_LONG).show();
                             }
                         } catch (Exception e) {
 

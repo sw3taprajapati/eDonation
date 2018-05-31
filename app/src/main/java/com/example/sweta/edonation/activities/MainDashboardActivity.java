@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -51,6 +52,7 @@ public class MainDashboardActivity extends AppCompatActivity
     private Boolean foodBoolean,clothesBoolean,booksBoolean,stationeryBoolean;
     private Button searchBtn;
     private SwipeRefreshLayout swipeRefreshLayout;
+    //private ImageView imageView;
 
     //Button btnAdmin;
 
@@ -82,6 +84,7 @@ public class MainDashboardActivity extends AppCompatActivity
         linearSearch = findViewById(R.id.linearCheckbox);
         searchBtn = findViewById(R.id.searchBtn);
         swipeRefreshLayout = findViewById(R.id.refreshRecyclerView);
+        //imageView=findViewById(R.id.imageViewLogo);
         // btnAdmin = findViewById(R.id.adminBtn);
     }
 
@@ -101,6 +104,7 @@ public class MainDashboardActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //btnAdmin.setOnClickListener(this);
         searchBtn.setOnClickListener(this);
+        //imageView.setOnClickListener(this);
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
@@ -139,6 +143,10 @@ public class MainDashboardActivity extends AppCompatActivity
                                         || clothes==true || books== true
                                 || stationery==true)){
                                     organizationList.add(org);
+                                }else{
+                                    Toast.makeText(getApplicationContext(),
+                                            "No data found",
+                                            Toast.LENGTH_LONG).show();
                                 }
                             } catch (Exception e) {
 
@@ -277,7 +285,6 @@ public class MainDashboardActivity extends AppCompatActivity
 
     private void searchOrganization() {
 
-
             if (checkFood.isChecked()) {
                 foodBoolean = true;
                 //Log.i("food", currentlyLooking);
@@ -336,16 +343,11 @@ public class MainDashboardActivity extends AppCompatActivity
                                     ||(booleanBooks==true && booksBoolean==true)
                                     ||(booleanStationery==true && stationeryBoolean==true)){
                                 organizationList.add(org);
+                            }else {
+                                Toast.makeText(getApplicationContext(),
+                                        "No data found",
+                                        Toast.LENGTH_LONG).show();
                             }
-                            /*if(booleanClothes==true && clothesBoolean==true){
-                                organizationList.add(org);
-                            }
-                            if(booleanBooks==true && booksBoolean==true){
-                                organizationList.add(org);
-                            }
-                            if(booleanStationery==true && stationeryBoolean==true){
-                                organizationList.add(org);
-                            }*/
                         }
 
                     }
@@ -375,6 +377,12 @@ public class MainDashboardActivity extends AppCompatActivity
         if (v == searchBtn) {
             searchOrganization();
         }
+        /*else if(v==imageView){
+            Intent intent=new Intent(MainDashboardActivity.this,
+                    AdminActivity.class);
+            startActivity(intent);
+            finish();
+        }*/
     }
 
     @Override
