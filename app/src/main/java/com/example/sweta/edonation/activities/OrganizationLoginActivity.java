@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 
 import com.example.sweta.edonation.R;
-import com.example.sweta.edonation.activities.checklogin.PreferenceUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -129,8 +128,6 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
                                 if (task.isSuccessful()) {
                                     //logged in
                                     //LoginDashboard is opened
-                                    PreferenceUtils.startLogInActivity(
-                                            OrganizationLoginActivity.this,true);
                                     finish();
                                     Intent intent = new Intent(
                                             OrganizationLoginActivity.this,

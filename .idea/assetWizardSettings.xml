@@ -20,8 +20,8 @@
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="$USER_HOME$/edonation_new_icons/xxxhdpi/splashlogo.png" />
-                                      <entry key="outputName" value="ic_splash_logo" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/ic_logout_icon.png" />
+                                      <entry key="outputName" value="ic_logout" />
                                     </map>
                                   </option>
                                 </PersistentState>
