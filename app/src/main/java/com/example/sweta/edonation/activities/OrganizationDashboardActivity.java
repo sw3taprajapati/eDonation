@@ -189,7 +189,8 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            finish();
+            //sothat one cannot return to maindashboard after logging in
         }
     }
 
