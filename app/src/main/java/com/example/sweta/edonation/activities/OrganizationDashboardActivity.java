@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,16 +16,21 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.example.sweta.edonation.R;
+
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sweta.edonation.R;
-import com.example.sweta.edonation.activities.checklogin.PreferenceUtils;
 import com.example.sweta.edonation.adaptersandviewholders.ListAdapter;
+
 import com.example.sweta.edonation.pojoclasses.Organization;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,25 +38,36 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class OrganizationDashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
+
+public class OrganizationDashboardActivity extends AppCompatActivity implements  SwipeRefreshLayout.OnRefreshListener, NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     NavigationView navigationView;
+
+    NavigationView navView;
+    Toolbar toolbar = null;
+
     private List<Organization> organizationList;
     private ListAdapter adapterList;
     private RecyclerView recyclerView;
-    Toolbar toolbar;
+
     ActionBarDrawerToggle toggle;
     DatabaseReference databaseOrganization;
     FirebaseUser user;
-    SwipeRefreshLayout swipeRefreshLayout;
+  //  private ListAdapter adapterList;
+
+
     TextView organizationEmail, organizationName;
+
+
+    EditText emailEditText;
+
+    DatabaseReference reference;
+    private SwipeRefreshLayout refreshRecyclerView;
 
 
     @Override
@@ -61,9 +76,9 @@ public class OrganizationDashboardActivity extends AppCompatActivity
         setContentView(R.layout.activity_organization_dashboard);
 
         initComponents();
-        initToolBar();
+        initToolbar();
         initDrawer();
-        setListener();
+        setListeners();
         initRecyclerView();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -71,24 +86,26 @@ public class OrganizationDashboardActivity extends AppCompatActivity
                 getReference("OrganizationDetails");
 
         insertInfoInNav();
-//        accessInformation();
-
     }
+
 
     private void initComponents() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.nav_view2);
+
         recyclerView = findViewById(R.id.recyclerViewOrganizationList);
-        swipeRefreshLayout = findViewById(R.id.refreshRecyclerView);
+        refreshRecyclerView = findViewById(R.id.refreshRecyclerView);
+        navigationView = (NavigationView) findViewById(R.id.nav_view2);
+
+
+
     }
 
-    private void initToolBar() {
+    private void initToolbar() {
         toolbar.setTitle("e-Donation");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
     private void initDrawer() {
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open,
@@ -101,9 +118,11 @@ public class OrganizationDashboardActivity extends AppCompatActivity
         Uri appLinkData = appLinkIntent.getData();
     }
 
-    private void setListener() {
+
+
+    private void setListeners() {
         navigationView.setNavigationItemSelectedListener(this);
-        swipeRefreshLayout.setOnRefreshListener(this);
+        refreshRecyclerView.setOnRefreshListener(this);
     }
 
     private void initRecyclerView() {
@@ -158,12 +177,11 @@ public class OrganizationDashboardActivity extends AppCompatActivity
             public void onCancelled(DatabaseError databaseError) {
                 //this method executes when error
 
+
             }
         });
 
-        if (recyclerView == null)
-
-        {
+        if (recyclerView == null) {
             Toast.makeText(this, "No Data Found!!", Toast.LENGTH_LONG).show();
         }
 
@@ -175,7 +193,8 @@ public class OrganizationDashboardActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            finish();
+            //sothat one cannot return to maindashboard after logging in
         }
     }
 
@@ -191,20 +210,13 @@ public class OrganizationDashboardActivity extends AppCompatActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-       /*int id = item.getItemId();
-      //noinspection SimplifiableIfStatement
-       if (id == R.id.action_settings) {
-           finish();
-           return true;
-        }
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
-*/
-        int id = item.getItemId();
-
-        if (id == android.R.id.home) {
-            finish();
-
-        }
         if (toggle.onOptionsItemSelected(item)) {
             return true;
         }
@@ -212,7 +224,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -234,7 +245,13 @@ public class OrganizationDashboardActivity extends AppCompatActivity
 
             case R.id.nav_logOut:
 
+                Intent in3 = new Intent(OrganizationDashboardActivity.this,
+                        MainDashboardActivity.class);
+                startActivity(in3);
+
+
                 dialogBox();
+
                 break;
         }
 
@@ -276,10 +293,15 @@ public class OrganizationDashboardActivity extends AppCompatActivity
     }
 
 
+
     public void insertInfoInNav() {
 
         final String email = user.getEmail();
-        organizationEmail = (TextView) navigationView.getHeaderView(0).
+
+
+        organizationEmail  = (TextView) navigationView.getHeaderView(0).
+
+
                 findViewById(R.id.organizationEmail);
         organizationName = (TextView) navigationView.getHeaderView(0).
                 findViewById(R.id.organizationName);
@@ -303,12 +325,16 @@ public class OrganizationDashboardActivity extends AppCompatActivity
                 }
             }
 
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
+
+    }
+
+
+
 
 //    public void accessInformation(){
 //        user= FirebaseAuth.getInstance().getCurrentUser();
@@ -316,11 +342,18 @@ public class OrganizationDashboardActivity extends AppCompatActivity
 //        String email = user.getEmail();
 //        emailEditText.setText(email);
 //    }
-    }
+
 
     @Override
     public void onRefresh() {
         initRecyclerView();
-        swipeRefreshLayout.setRefreshing(false);
+
+        refreshRecyclerView.setRefreshing(false);
+
     }
+
+
+
 }
+
+

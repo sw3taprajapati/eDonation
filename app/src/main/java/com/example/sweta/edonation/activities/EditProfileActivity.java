@@ -2,10 +2,20 @@
 package com.example.sweta.edonation.activities;
 
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +25,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sweta.edonation.R;
+import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.pojoclasses.Organization;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,10 +38,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener {
+
     EditText orgName, orgEmail, orgLocation, orgPhone, orgWebsite, orgPan, orgPassword, describeItems;
-
-
     String orgNameString, orgEmailString, orgLocationString, orgWebsiteString,
             orgPasswordString, orgDescribeItemsString;
     String emailFromDB, orgId;
@@ -52,6 +68,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         databaseOrganization = firebaseDatabase.
                 getReference("OrganizationDetails");
         user = FirebaseAuth.getInstance().getCurrentUser();
+        checkwifi();
         initComponent();
         initToolbar();
         initListeners();
@@ -59,9 +76,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         accessInformation();
 
 
-
     }
-
 
     private void disableFields() {
         orgName.setEnabled(false);
@@ -86,13 +101,39 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     }
 
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+
+        return cm.getActiveNetworkInfo() != null;
+
+
+    }
+
+    private void checkwifi() {
+
+        boolean check = isNetworkConnected();
+        if (check == true) {
+            initComponent();
+
+        } else {
+
+            Toast toast = Toast.makeText(this, "Connect to a network",
+                    Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+
+            initComponent();
+        }
+
+    }
     private void initComponent() {
 
         toolbar = findViewById(R.id.toolBar);
         orgName = findViewById(R.id.orgName);
         orgEmail = findViewById(R.id.orgEmail);
         orgPassword = findViewById(R.id.orgPassword);
-
         orgLocation = findViewById(R.id.orgnLocation);
         orgPhone = findViewById(R.id.orgnPhone);
         orgWebsite = findViewById(R.id.orgnWebsite);
@@ -103,6 +144,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         check4 = findViewById(R.id.stationery_checkbox);
         describeItems = findViewById(R.id.describeItems);
         orgRegister = findViewById(R.id.registerBtn);
+        orgRegister.setText("Update");
     }
 
     private void initToolbar() {
@@ -135,11 +177,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     public void accessInformation() {
 
-
-
         final String email = user.getEmail();
-
-
 
         databaseOrganization.addValueEventListener(new ValueEventListener() {
             @Override
@@ -152,18 +190,14 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
                         emailFromDB = org.getOrgEmailID();
 
-
                         if (email.equals(emailFromDB)) {
                             orgId = org.getOrgId();
                             String name = org.getOrgFullName();
                             String password = org.getOrgPassword();
                             String location = org.getOrgLocation();
                             String phoneNo = String.valueOf(org.getOrgPhone());
-
                             String website = org.getOrgWebsite();
                             String panNo = String.valueOf(org.getOrgPan());
-
-
                             //setting to the edit text
                             orgName.setText(name);
                             orgEmail.setText(email);
@@ -179,11 +213,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
             }
 
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 //this method executes when error
-
             }
         });
     }
@@ -193,13 +225,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if (v == orgRegister) {
 
-
             String phone;
-
             String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
-
-
 
             orgPasswordString = orgPassword.getText().toString().trim();
 
@@ -235,13 +262,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
                         }
 
-
-
                         if (check1.isChecked()) {
                             currentlyLooking = "Food";
                             //Log.i("food", currentlyLooking);
-
-
                         }
 
                         if (check2.isChecked()) {
@@ -270,18 +293,29 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
 
 
+                        databaseOrganization.child(orgId).child("orgPassword").
+                                setValue(orgPasswordString);
+                        databaseOrganization.child(orgId).child("orgLocation").
+                                setValue(orgLocationString);
+                        databaseOrganization.child(orgId).child("orgPhone").
+                                setValue(orgPhoneInt);
+                        databaseOrganization.child(orgId).child("describeItems").
+                                setValue(orgDescribeItemsString);
+                        databaseOrganization.child(orgId).child("currentlyLooking").
+                                setValue(currentlyLooking);
+                        databaseOrganization.child(orgId).child("describeItems").
+                                setValue(orgDescribeItemsString);
+
                     }
                 }
             }
-
-
         }
         Toast.makeText(this, "Information Updated",
                 Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(EditProfileActivity.this,
-                OrganizationDashboardActivity.class);
+        /*Intent intent = new Intent(EditProfileActivity.this,
+                OrganizationLoginDashboardActivity.class);
         startActivity(intent);
-        finish();
+        finish();*/
     }
 }
