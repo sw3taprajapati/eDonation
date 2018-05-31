@@ -12,7 +12,7 @@ import com.example.sweta.edonation.R;
 public class AboutAppActivity extends AppCompatActivity implements View.OnClickListener{
 
     private android.support.v7.widget.Toolbar toolbar;
-     Button contact_us_btn;
+     private Button contact_us_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

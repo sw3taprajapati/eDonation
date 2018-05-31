@@ -94,7 +94,7 @@ public class MainDashboardActivity extends AppCompatActivity
         searchBtn = findViewById(R.id.searchBtn);
         swipeRefreshLayout = findViewById(R.id.refreshRecyclerView);
         View header = navigationView.getHeaderView(0);
-        imageView = header.findViewById(R.id.imageView);
+        imageView = header.findViewById(R.id.imageView1);
     }
 
     private void initToolbar() {
@@ -225,12 +225,15 @@ public class MainDashboardActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         switch (id) {
-//            case R.id.imageView:
-//                Intent intentImg=new Intent(MainDashboardActivity.this,AdminActivity.class);
-//                startActivity(intentImg);
-//                break;
+            case R.id.imageView:
+                finish();
+                Intent intentImg=new Intent(MainDashboardActivity.this,
+                        AdminActivity.class);
+                startActivity(intentImg);
+                break;
 
             case R.id.nav_registerOrg:
+                finish();
                 Intent intent = new Intent(MainDashboardActivity.this,
                         OrganizationRegisterActivity.class);
                 startActivity(intent);
@@ -238,12 +241,14 @@ public class MainDashboardActivity extends AppCompatActivity
 
 
             case R.id.nav_loginOrg:
+                finish();
                 Intent intent1 = new Intent(MainDashboardActivity.this,
                         OrganizationLoginActivity.class);
                 startActivity(intent1);
                 break;
 
             case R.id.nav_aboutApp:
+                finish();
                 Intent intent3 = new Intent(MainDashboardActivity.this,
                         AdminActivity.class);
                 startActivity(intent3);

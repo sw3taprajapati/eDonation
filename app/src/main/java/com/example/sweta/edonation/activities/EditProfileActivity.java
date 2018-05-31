@@ -43,20 +43,20 @@ import java.util.List;
 
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText orgName, orgEmail, orgLocation, orgPhone, orgWebsite, orgPan, orgPassword, describeItems;
-    String orgNameString, orgEmailString, orgLocationString, orgWebsiteString,
+    private EditText orgName, orgEmail, orgLocation, orgPhone, orgWebsite, orgPan, orgPassword, describeItems;
+    private String orgNameString, orgEmailString, orgLocationString, orgWebsiteString,
             orgPasswordString, orgDescribeItemsString;
-    String emailFromDB, orgId;
-    int orgPhoneInt, orgPanInt;
-    CheckBox check1, check2, check3, check4;
+    private String emailFromDB, orgId;
+    private int orgPhoneInt, orgPanInt;
+    private CheckBox check1, check2, check3, check4;
 
-    Button orgRegister;
-    Toolbar toolbar;
-    FirebaseUser user;
-    FirebaseDatabase firebaseDatabase;
+    private Button orgRegister;
+    private Toolbar toolbar;
+    private FirebaseUser user;
+    private FirebaseDatabase firebaseDatabase;
 
-    DatabaseReference databaseOrganization;
-    String currentlyLooking = "";
+    private DatabaseReference databaseOrganization;
+    private String currentlyLooking = "";
 
 
     @Override
@@ -128,6 +128,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
 
     }
+
     private void initComponent() {
 
         toolbar = findViewById(R.id.toolBar);
@@ -289,8 +290,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
                         databaseOrganization.child(orgId).child("currentlyLooking").setValue(currentlyLooking);
                         databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
-
-
 
 
                         databaseOrganization.child(orgId).child("orgPassword").

@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import com.example.sweta.edonation.R;
 
 public class OnVerifyActivity extends AppCompatActivity{
-    Toolbar toolbar;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

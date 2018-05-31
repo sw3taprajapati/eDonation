@@ -38,35 +38,29 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
+public class OrganizationDashboardActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, NavigationView.OnNavigationItemSelectedListener {
 
-public class OrganizationDashboardActivity extends AppCompatActivity implements  SwipeRefreshLayout.OnRefreshListener, NavigationView.OnNavigationItemSelectedListener {
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
 
-    DrawerLayout drawer;
-    NavigationView navigationView;
-
-    NavigationView navView;
-    Toolbar toolbar = null;
+    private NavigationView navView;
+    private Toolbar toolbar = null;
 
     private List<Organization> organizationList;
     private ListAdapter adapterList;
     private RecyclerView recyclerView;
 
-    ActionBarDrawerToggle toggle;
-    DatabaseReference databaseOrganization;
-    FirebaseUser user;
-  //  private ListAdapter adapterList;
-
-
-    TextView organizationEmail, organizationName;
-
-
-    EditText emailEditText;
-
-    DatabaseReference reference;
+    private ActionBarDrawerToggle toggle;
+    private DatabaseReference databaseOrganization;
+    private FirebaseUser user;
+    private TextView organizationEmail, organizationName;
+    private EditText emailEditText;
+    private DatabaseReference reference;
     private SwipeRefreshLayout refreshRecyclerView;
 
 
@@ -98,7 +92,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
         navigationView = (NavigationView) findViewById(R.id.nav_view2);
 
 
-
     }
 
     private void initToolbar() {
@@ -106,6 +99,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     private void initDrawer() {
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open,
@@ -117,7 +111,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
     }
-
 
 
     private void setListeners() {
@@ -156,7 +149,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
                                     || clothes == true || books == true
                                     || stationery == true)) {
                                 organizationList.add(org);
-                            }else{
+                            } else {
                                 Toast.makeText(getApplicationContext(),
                                         "No data found",
                                         Toast.LENGTH_LONG).show();
@@ -207,15 +200,11 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            System.exit(0);
+
+        }
 
         if (toggle.onOptionsItemSelected(item)) {
             return true;
@@ -231,6 +220,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
         switch (id) {
 
             case R.id.nav_editProfile:
+                finish();
                 Intent in = new Intent(OrganizationDashboardActivity.this,
                         EditProfileActivity.class);
                 startActivity(in);
@@ -238,18 +228,14 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
 
 
             case R.id.nav_aboutApp:
+                finish();
                 Intent in2 = new Intent(OrganizationDashboardActivity.this,
                         AboutAppActivity.class);
                 startActivity(in2);
                 break;
 
             case R.id.nav_logOut:
-
-                Intent in3 = new Intent(OrganizationDashboardActivity.this,
-                        MainDashboardActivity.class);
-                startActivity(in3);
-
-
+                finish();
                 dialogBox();
 
                 break;
@@ -268,12 +254,12 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
 
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                        FirebaseAuth.getInstance().signOut();
                         Intent intent = new Intent(OrganizationDashboardActivity.this,
                                 MainDashboardActivity.class);
                         startActivity(intent);
-                        FirebaseAuth.getInstance().signOut();
-                        //unauth();
-                        finish();
+
                     }
                 });
 
@@ -284,7 +270,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
                     public void onClick(DialogInterface arg0, int arg1) {
                         arg0.cancel();
 
-
                     }
                 });
 
@@ -293,13 +278,12 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
     }
 
 
-
     public void insertInfoInNav() {
 
         final String email = user.getEmail();
 
 
-        organizationEmail  = (TextView) navigationView.getHeaderView(0).
+        organizationEmail = (TextView) navigationView.getHeaderView(0).
 
 
                 findViewById(R.id.organizationEmail);
@@ -333,17 +317,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
 
     }
 
-
-
-
-//    public void accessInformation(){
-//        user= FirebaseAuth.getInstance().getCurrentUser();
-//
-//        String email = user.getEmail();
-//        emailEditText.setText(email);
-//    }
-
-
     @Override
     public void onRefresh() {
         initRecyclerView();
@@ -351,7 +324,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
         refreshRecyclerView.setRefreshing(false);
 
     }
-
 
 
 }
