@@ -237,7 +237,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_logOut:
-                finish();
                 dialogBox();
 
                 break;

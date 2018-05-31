@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">eDonation</string>
+    <string name="app_name">e-Donation</string>
     <string name="register">Register As Organization</string>
     <string name="register_donor">Register As Donor</string>
     <string name="search">Search by Name</string>

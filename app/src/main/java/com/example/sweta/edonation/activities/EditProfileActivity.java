@@ -148,7 +148,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         checkStationery = findViewById(R.id.stationery_checkbox);
         describeItems = findViewById(R.id.describeItems);
         orgRegister = findViewById(R.id.registerBtn);
-        orgRegister.setText("Update");
     }
 
     private void initToolbar() {
@@ -304,5 +303,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
         Toast.makeText(this, "Information Updated",
                 Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(EditProfileActivity.this,
+                OrganizationDashboardActivity.class);
+        startActivity(intent);
+        finish();
+
     }
 }
