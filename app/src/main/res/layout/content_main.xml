@@ -99,10 +99,12 @@
                 android:background="@drawable/round_search_button"
                 android:text="Search"
                 android:textColor="@color/white" />
+
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/refreshRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewOrganizationList"
                 android:layout_width="match_parent"

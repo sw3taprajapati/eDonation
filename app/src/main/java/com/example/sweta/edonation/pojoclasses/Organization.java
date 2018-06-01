@@ -13,6 +13,7 @@ public class Organization {
     CurrentlyLooking currentlyLooking;
     String describeItems;
     int status;
+
     public Organization() {
 
     }

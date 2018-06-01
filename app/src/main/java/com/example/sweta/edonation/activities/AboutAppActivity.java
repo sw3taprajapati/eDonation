@@ -9,10 +9,10 @@ import android.widget.Button;
 
 import com.example.sweta.edonation.R;
 
-public class AboutAppActivity extends AppCompatActivity implements View.OnClickListener{
+public class AboutAppActivity extends AppCompatActivity implements View.OnClickListener {
 
     private android.support.v7.widget.Toolbar toolbar;
-     Button contact_us_btn;
+    Button contact_us_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +25,8 @@ public class AboutAppActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initComponents() {
-        toolbar=findViewById(R.id.toolBar);
-        contact_us_btn=findViewById(R.id.contact_us_btn);
+        toolbar = findViewById(R.id.toolBar);
+        contact_us_btn = findViewById(R.id.contact_us_btn);
     }
 
     private void initToolbar() {
@@ -50,11 +50,11 @@ public class AboutAppActivity extends AppCompatActivity implements View.OnClickL
         return super.onOptionsItemSelected(item);
     }
 
-    public void initListener(){
+    public void initListener() {
         contact_us_btn.setOnClickListener(this);
     }
 
-    public void onClick(View v){
+    public void onClick(View v) {
         //sending message through gmail
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"eDonation@gmail.com"});

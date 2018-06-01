@@ -43,6 +43,7 @@ public class OrganizationDetailActivity extends AppCompatActivity {
 
 
     }
+
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -73,7 +74,7 @@ public class OrganizationDetailActivity extends AppCompatActivity {
     }
 
 
-        private void getIntents() {
+    private void getIntents() {
         if (getIntent().hasExtra("orgName") && getIntent().hasExtra("orgLocation")
                 && getIntent().hasExtra("orgEmail")
                 && getIntent().hasExtra("currentRequirement")
@@ -164,7 +165,7 @@ public class OrganizationDetailActivity extends AppCompatActivity {
                         MainDashboardActivity.class);
                 startActivity(intent);
                 finish();
-            }else {
+            } else {
                 Intent intent = new Intent(OrganizationDetailActivity.this,
                         OrganizationDashboardActivity.class);
                 startActivity(intent);

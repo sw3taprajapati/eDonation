@@ -57,7 +57,7 @@ public class MainDashboardActivity extends AppCompatActivity
     private String searchTxt = "";
     private Button searchBtn;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private Boolean foodBoolean,clothesBoolean,booksBoolean,stationeryBoolean;
+    private Boolean foodBoolean, clothesBoolean, booksBoolean, stationeryBoolean;
     private ImageView imageView;
 
 
@@ -80,7 +80,8 @@ public class MainDashboardActivity extends AppCompatActivity
         initRecyclerView();
 
     }
-    private void settingClickable(){
+
+    private void settingClickable() {
         imageView.setClickable(false);
     }
 
@@ -97,7 +98,7 @@ public class MainDashboardActivity extends AppCompatActivity
         searchBtn = findViewById(R.id.searchBtn);
         swipeRefreshLayout = findViewById(R.id.refreshRecyclerView);
         View header = navigationView.getHeaderView(0);
-        imageView=header.findViewById(R.id.imageView1);
+        imageView = header.findViewById(R.id.imageView1);
         // btnAdmin = findViewById(R.id.adminBtn);
     }
 
@@ -223,6 +224,7 @@ public class MainDashboardActivity extends AppCompatActivity
 //                break;
 
             case R.id.nav_registerOrg:
+                finish();
                 Intent intent = new Intent(MainDashboardActivity.this,
                         OrganizationRegisterActivity.class);
                 startActivity(intent);
@@ -230,12 +232,14 @@ public class MainDashboardActivity extends AppCompatActivity
 
 
             case R.id.nav_loginOrg:
+                finish();
                 Intent intent1 = new Intent(MainDashboardActivity.this,
                         OrganizationLoginActivity.class);
                 startActivity(intent1);
                 break;
 
             case R.id.nav_aboutApp:
+                finish();
                 Intent intent3 = new Intent(MainDashboardActivity.this,
                         AdminActivity.class);
                 startActivity(intent3);
@@ -290,37 +294,36 @@ public class MainDashboardActivity extends AppCompatActivity
     }
 
 
-
     private void searchOrganization(String search) {
 
-   // private void searchOrganization() {
+        // private void searchOrganization() {
 
 
-            if (checkFood.isChecked()) {
-                foodBoolean = true;
-                //Log.i("food", currentlyLooking);
-            }else{
-                foodBoolean=false;
-            }
+        if (checkFood.isChecked()) {
+            foodBoolean = true;
+            //Log.i("food", currentlyLooking);
+        } else {
+            foodBoolean = false;
+        }
 
-            if (checkClothes.isChecked()) {
-                clothesBoolean =true;
-                //Log.i("clothes", currentlyLooking);
-            }else {
-                clothesBoolean=false;
-            }
+        if (checkClothes.isChecked()) {
+            clothesBoolean = true;
+            //Log.i("clothes", currentlyLooking);
+        } else {
+            clothesBoolean = false;
+        }
 
-            if (checkBooks.isChecked()) {
-                booksBoolean=true;
-            }else {
-                booksBoolean=false;
-            }
+        if (checkBooks.isChecked()) {
+            booksBoolean = true;
+        } else {
+            booksBoolean = false;
+        }
 
-            if (checkStationery.isChecked()) {
-                stationeryBoolean =true;
-            }else {
-                stationeryBoolean=false;
-            }
+        if (checkStationery.isChecked()) {
+            stationeryBoolean = true;
+        } else {
+            stationeryBoolean = false;
+        }
 
 
         organizationList.clear();
@@ -379,17 +382,15 @@ public class MainDashboardActivity extends AppCompatActivity
                             }*/
 
 
+                    }
                 }
+
+                adapter = new ListAdapter(MainDashboardActivity.this,
+                        organizationList);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
             }
-
-                    adapter = new ListAdapter(MainDashboardActivity.this,
-                            organizationList);
-                    recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-
-                }
-
-
 
 
             @Override
@@ -406,8 +407,8 @@ public class MainDashboardActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        if(v==imageView ){
-            Intent intentImg=new Intent(MainDashboardActivity.this,AdminActivity.class);
+        if (v == imageView) {
+            Intent intentImg = new Intent(MainDashboardActivity.this, AdminActivity.class);
             startActivity(intentImg);
         }
         if (v == searchBtn) {

@@ -47,7 +47,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     private void initComponent() {
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.recyclerView);
-        btnRefresh=findViewById(R.id.refreshRecyclerView);
+        btnRefresh = findViewById(R.id.refreshRecyclerView);
     }
 
     private void initToolbar() {
@@ -55,16 +55,17 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().setTitle("Admin");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-    private void setListener(){
-       // btnRefresh.setOnClickListener(this);
+
+    private void setListener() {
+        // btnRefresh.setOnClickListener(this);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent=new Intent(
-                        AdminActivity.this,MainDashboardActivity.class);
+                Intent intent = new Intent(
+                        AdminActivity.this, MainDashboardActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -77,14 +78,14 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         return true;
     }
 
-    private void initRecyclerView(){
+    private void initRecyclerView() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         organizationList = new ArrayList<>();
 
 
-       DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
+        DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                 getReference("OrganizationDetails");
         dbOrganization.addValueEventListener(new ValueEventListener() {
             @Override
@@ -95,8 +96,8 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                     for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
                         Organization org = organizationSnapshot.getValue(Organization.class);
 
-                        int status=org.getStatus();
-                        if(status==0) {
+                        int status = org.getStatus();
+                        if (status == 0) {
                             organizationList.add(org);
                         }
 
@@ -119,8 +120,8 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-            Intent intent=new Intent(AdminActivity.this,AdminActivity.class);
-            startActivity(intent);
-            finish();
+        Intent intent = new Intent(AdminActivity.this, AdminActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

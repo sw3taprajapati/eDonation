@@ -38,12 +38,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-
-public class OrganizationDashboardActivity extends AppCompatActivity implements  SwipeRefreshLayout.OnRefreshListener, NavigationView.OnNavigationItemSelectedListener {
+public class OrganizationDashboardActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     NavigationView navigationView;
@@ -58,7 +58,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
     ActionBarDrawerToggle toggle;
     DatabaseReference databaseOrganization;
     FirebaseUser user;
-  //  private ListAdapter adapterList;
+    //  private ListAdapter adapterList;
 
 
     TextView organizationEmail, organizationName;
@@ -98,7 +98,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
         navigationView = (NavigationView) findViewById(R.id.nav_view2);
 
 
-
     }
 
     private void initToolbar() {
@@ -106,6 +105,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     private void initDrawer() {
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open,
@@ -117,7 +117,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
     }
-
 
 
     private void setListeners() {
@@ -186,10 +185,13 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+
             finish();
+            System.exit(0);
             //sothat one cannot return to maindashboard after logging in
         }
     }
@@ -241,11 +243,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
 
             case R.id.nav_logOut:
 
-                Intent in3 = new Intent(OrganizationDashboardActivity.this,
-                        MainDashboardActivity.class);
-                startActivity(in3);
-
-
                 dialogBox();
 
                 break;
@@ -289,13 +286,12 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
     }
 
 
-
     public void insertInfoInNav() {
 
         final String email = user.getEmail();
 
 
-        organizationEmail  = (TextView) navigationView.getHeaderView(0).
+        organizationEmail = (TextView) navigationView.getHeaderView(0).
 
 
                 findViewById(R.id.organizationEmail);
@@ -330,8 +326,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
     }
 
 
-
-
 //    public void accessInformation(){
 //        user= FirebaseAuth.getInstance().getCurrentUser();
 //
@@ -347,7 +341,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
         refreshRecyclerView.setRefreshing(false);
 
     }
-
 
 
 }

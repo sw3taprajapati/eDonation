@@ -128,6 +128,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
 
     }
+
     private void initComponent() {
 
         toolbar = findViewById(R.id.toolBar);
@@ -289,8 +290,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
                         databaseOrganization.child(orgId).child("currentlyLooking").setValue(currentlyLooking);
                         databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
-
-
 
 
                         databaseOrganization.child(orgId).child("orgPassword").
