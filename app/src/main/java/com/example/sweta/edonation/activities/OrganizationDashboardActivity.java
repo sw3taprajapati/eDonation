@@ -1,7 +1,9 @@
 package com.example.sweta.edonation.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -71,10 +73,12 @@ public class OrganizationDashboardActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_dashboard);
 
+
         initComponents();
         initToolbar();
         initDrawer();
         setListeners();
+        checkwifi();
         initRecyclerView();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -94,6 +98,33 @@ public class OrganizationDashboardActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view2);
 
 
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+
+        return cm.getActiveNetworkInfo() != null;
+
+
+    }
+
+    private void checkwifi() {
+
+        boolean check = isNetworkConnected();
+        if (check == true) {
+
+
+        } else {
+
+            Toast toast = Toast.makeText(this, "Connect to a network",
+                    Toast.LENGTH_SHORT);
+            //toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+
+
+        }
     }
 
     private void initToolbar() {
@@ -237,7 +268,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_logOut:
-
                 dialogBox();
 
                 break;

@@ -1,6 +1,8 @@
 package com.example.sweta.edonation.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,6 +40,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
     Button logInBtn;
     FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
+    boolean check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +95,37 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
     }
 
 
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+
+        return cm.getActiveNetworkInfo() != null;
+
+
+    }
+
+    private void checkwifi() {
+
+        check = isNetworkConnected();
+        if (check == true) {
+
+
+        } else {
+
+            Toast toast = Toast.makeText(this, "Connect to a network",
+                    Toast.LENGTH_SHORT);
+            //toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+
+
+        }
+    }
+
+
     @Override
     public void onClick(View v) {
+        checkwifi();
 
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         if (v == logInBtn) {
@@ -139,9 +171,14 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
                                             OrganizationDashboardActivity.class);
                                     startActivity(intent);
                                     finish();
-                                } else {
+                                } else if(check==true) {
+
                                     Toast.makeText(getApplicationContext(), "Enter valid email id and password",
-                                            Toast.LENGTH_LONG).show();
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    Toast.makeText(getApplicationContext(), "Connect to a network",
+                                            Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

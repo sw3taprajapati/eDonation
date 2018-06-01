@@ -26,4 +26,5 @@
         app:itemIconTint="@drawable/drawer_item_color"
         />
 
+
 </android.support.v4.widget.DrawerLayout>
