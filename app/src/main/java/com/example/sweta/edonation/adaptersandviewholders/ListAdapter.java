@@ -72,7 +72,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
             stationeryString="";
         }
         final String currentlyLooking=foodString+clothesString+booksString+stationeryString;
-        holder.currentRequirement.setText("Currently Looking For : "+currentlyLooking);
+        if(books==false && clothes==false && books==false && stationery==false){
+            holder.currentRequirement.setText("We aren't accepting any donation at this time. " +
+                    "Thank you!!!!!");
+        }else {
+            holder.currentRequirement.setText("Currently Looking For : " + currentlyLooking);
+        }
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

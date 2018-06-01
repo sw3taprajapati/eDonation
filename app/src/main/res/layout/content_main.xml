@@ -85,15 +85,21 @@
             <Button
                 android:id="@+id/searchBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/linearCheckbox"
                 android:layout_margin="10dp"
+                android:padding="10dp"
                 android:background="@drawable/round_search_button"
-                android:text="Search"
+                android:text="Find Organization"
                 android:textColor="@color/white" />
 
-
+            <ProgressBar
+                android:id="@+id/progressBarMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/searchBtn"
+                android:layout_centerInParent="true"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerViewOrganizationList"

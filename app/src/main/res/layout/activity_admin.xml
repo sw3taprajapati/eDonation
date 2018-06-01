@@ -7,6 +7,14 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
+    <ImageView
+        android:id="@+id/refreshButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_refresh"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="5dp"
+        android:layout_below="@id/toolbar"/>
 
     <!--<android.support.v4.widget.SwipeRefreshLayout-->
         <!--android:id="@+id/refreshRecyclerView"-->
@@ -33,9 +41,7 @@
             android:text="Orgn Name"
             android:textSize="16dp"
             android:textStyle="bold"
-            android:layout_weight="1"
-
-            />
+            android:layout_weight="1.5"/>
 
         <TextView
             android:id="@+id/panNo"
@@ -47,7 +53,7 @@
             android:text="PAN No."
             android:textSize="16dp"
             android:textStyle="bold"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
            />
         </LinearLayout>
 

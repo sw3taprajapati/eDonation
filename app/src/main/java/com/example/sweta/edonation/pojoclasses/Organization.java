@@ -7,7 +7,7 @@ public class Organization {
     String orgEmailID;
     String orgPassword;
     String orgLocation;
-    int orgPhone;
+    long orgPhone;
     String orgWebsite;
     int orgPan;
     CurrentlyLooking currentlyLooking;
@@ -17,7 +17,9 @@ public class Organization {
 
     }
 
-    public Organization(String orgId, String orgFullName, String orgEmailID, String orgPassword, String orgLocation, int orgPhone, String orgWebsite, int orgPan,
+    public Organization(String orgId, String orgFullName, String orgEmailID,
+                        String orgPassword, String orgLocation,
+                        long orgPhone, String orgWebsite, int orgPan,
                         CurrentlyLooking currentlyLooking, String describeItems, int status) {
         this.orgId = orgId;
         this.orgFullName = orgFullName;
@@ -72,11 +74,11 @@ public class Organization {
         this.orgLocation = orgLocation;
     }
 
-    public int getOrgPhone() {
+    public long getOrgPhone() {
         return orgPhone;
     }
 
-    public void setOrgPhone(int orgPhone) {
+    public void setOrgPhone(long orgPhone) {
         this.orgPhone = orgPhone;
     }
 
