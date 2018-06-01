@@ -167,14 +167,16 @@ public class MainDashboardActivity extends AppCompatActivity
                     }
 
 
-                }
+                }try{
                 if (adapter.getItemCount() <= 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), "No Data Found",
                             Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
-            }
+            }catch(Exception e) {
+                }
+                }
 
                 @Override
                 public void onCancelled (DatabaseError databaseError){
@@ -375,6 +377,9 @@ public class MainDashboardActivity extends AppCompatActivity
                         }
 
                     }
+                    try{
+
+
                     if (adapter.getItemCount() <= 0) {
                         Toast toast = Toast.makeText(getApplicationContext(), "No Data Found",
                                 Toast.LENGTH_LONG);
@@ -387,7 +392,9 @@ public class MainDashboardActivity extends AppCompatActivity
                                 initRecyclerView();
                             }
                         }, 1000);
+                    }
 
+                    }catch (Exception e){
 
                     }
                 }

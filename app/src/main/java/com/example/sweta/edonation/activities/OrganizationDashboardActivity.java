@@ -190,13 +190,16 @@ public class OrganizationDashboardActivity extends AppCompatActivity
 
                         }
                     }
+                    try{
                     if (adapterList.getItemCount() <= 0) {
                         Toast toast = Toast.makeText(getApplicationContext(), "No Data Found",
                                 Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                     }
-                }
+                }catch(Exception e) {
+                    }
+                    }
 
 
             }
