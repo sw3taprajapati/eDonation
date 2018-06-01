@@ -43,8 +43,8 @@ public class OrganizationRegisterActivity extends AppCompatActivity
     String orgnameString, orgemailString, orglocationString, orgwebsiteString,
             orgPasswordString, orgDescribeItemsString;
 
-    int orgpanInt, status = 0;
-    Long orgphoneLong;
+    int status = 0;
+    Long orgphoneLong,orgpanLong;
     CheckBox checkFood, checkClothes, checkBooks, checkStationery;
     private boolean foodBoolean;
     private boolean clothesBoolean;
@@ -247,7 +247,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity
                                         orgpan.setError("Organization pan cannot be empty");
                                         //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        orgpanInt = Integer.parseInt(orgpan.getText().toString());
+                                        orgpanLong = Long.parseLong(orgpan.getText().toString());
 
                                         if (checkFood.isChecked()) {
                                             foodBoolean = true;
@@ -288,7 +288,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity
                                         Organization org = new Organization(orgId,
                                                 orgnameString, orgemailString, orgPasswordString,
                                                 orglocationString, orgphoneLong, orgwebsiteString,
-                                                orgpanInt, currentlyLooking, orgDescribeItemsString, status);
+                                                orgpanLong, currentlyLooking, orgDescribeItemsString, status);
                                         databaseOrganization.child(orgId).setValue(org);
                                         Intent intent = new Intent(
                                                 OrganizationRegisterActivity.this,
