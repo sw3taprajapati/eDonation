@@ -15,6 +15,7 @@ import android.widget.Button;
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.example.sweta.edonation.adaptersandviewholders.OrganizationAdapter;
 import com.example.sweta.edonation.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,11 +27,11 @@ import java.util.List;
 
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Toolbar toolbar;
-    Button btnRefresh;
-    RecyclerView recyclerView;
-    OrganizationAdapter adapter;
-    List<Organization> organizationList;
+    private Toolbar toolbar;
+    private Button btnRefresh;
+    private RecyclerView recyclerView;
+    private OrganizationAdapter adapter;
+    private List<Organization> organizationList;
 
 
     @Override
@@ -62,16 +63,24 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Intent intent = new Intent(
-                        AdminActivity.this, MainDashboardActivity.class);
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                Intent intent = new Intent(AdminActivity.this,
+                        MainDashboardActivity.class);
                 startActivity(intent);
                 finish();
-                return true;
+            } else {
+                Intent intent = new Intent(AdminActivity.this,
+                        OrganizationDashboardActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
         }
 
         return super.onOptionsItemSelected(item);
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,7 +1,9 @@
 package com.example.sweta.edonation.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -43,30 +45,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class OrganizationDashboardActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, NavigationView.OnNavigationItemSelectedListener {
+public class OrganizationDashboardActivity extends AppCompatActivity
+        implements SwipeRefreshLayout.OnRefreshListener,
+        NavigationView.OnNavigationItemSelectedListener {
 
-    DrawerLayout drawer;
-    NavigationView navigationView;
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
 
-    NavigationView navView;
-    Toolbar toolbar = null;
+    private NavigationView navView;
+    private Toolbar toolbar = null;
 
     private List<Organization> organizationList;
     private ListAdapter adapterList;
     private RecyclerView recyclerView;
 
-    ActionBarDrawerToggle toggle;
-    DatabaseReference databaseOrganization;
-    FirebaseUser user;
-    //  private ListAdapter adapterList;
-
-
-    TextView organizationEmail, organizationName;
-
-
-    EditText emailEditText;
-
-    DatabaseReference reference;
+    private ActionBarDrawerToggle toggle;
+    private DatabaseReference databaseOrganization;
+    private FirebaseUser user;
+    private TextView organizationEmail, organizationName;
+    private EditText emailEditText;
+    private DatabaseReference reference;
     private SwipeRefreshLayout refreshRecyclerView;
 
 
@@ -75,10 +73,12 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_dashboard);
 
+
         initComponents();
         initToolbar();
         initDrawer();
         setListeners();
+        checkwifi();
         initRecyclerView();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -98,6 +98,33 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
         navigationView = (NavigationView) findViewById(R.id.nav_view2);
 
 
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+
+        return cm.getActiveNetworkInfo() != null;
+
+
+    }
+
+    private void checkwifi() {
+
+        boolean check = isNetworkConnected();
+        if (check == true) {
+
+
+        } else {
+
+            Toast toast = Toast.makeText(this, "Connect to a network",
+                    Toast.LENGTH_SHORT);
+            //toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+
+
+        }
     }
 
     private void initToolbar() {
@@ -155,6 +182,10 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
                                     || clothes == true || books == true
                                     || stationery == true)) {
                                 organizationList.add(org);
+                            } else {
+                                Toast.makeText(getApplicationContext(),
+                                        "No data found",
+                                        Toast.LENGTH_LONG).show();
                             }
                         } catch (Exception e) {
 
@@ -185,13 +216,10 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-
             finish();
-            System.exit(0);
             //sothat one cannot return to maindashboard after logging in
         }
     }
@@ -205,15 +233,11 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            System.exit(0);
+
+        }
 
         if (toggle.onOptionsItemSelected(item)) {
             return true;
@@ -229,6 +253,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
         switch (id) {
 
             case R.id.nav_editProfile:
+                finish();
                 Intent in = new Intent(OrganizationDashboardActivity.this,
                         EditProfileActivity.class);
                 startActivity(in);
@@ -236,13 +261,13 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
 
 
             case R.id.nav_aboutApp:
+                finish();
                 Intent in2 = new Intent(OrganizationDashboardActivity.this,
                         AboutAppActivity.class);
                 startActivity(in2);
                 break;
 
             case R.id.nav_logOut:
-
                 dialogBox();
 
                 break;
@@ -261,12 +286,12 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
 
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                        FirebaseAuth.getInstance().signOut();
                         Intent intent = new Intent(OrganizationDashboardActivity.this,
                                 MainDashboardActivity.class);
                         startActivity(intent);
-                        FirebaseAuth.getInstance().signOut();
-                        //unauth();
-                        finish();
+
                     }
                 });
 
@@ -276,7 +301,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
                         arg0.cancel();
-
 
                     }
                 });
@@ -292,8 +316,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
 
 
         organizationEmail = (TextView) navigationView.getHeaderView(0).
-
-
                 findViewById(R.id.organizationEmail);
         organizationName = (TextView) navigationView.getHeaderView(0).
                 findViewById(R.id.organizationName);
@@ -325,19 +347,9 @@ public class OrganizationDashboardActivity extends AppCompatActivity implements 
 
     }
 
-
-//    public void accessInformation(){
-//        user= FirebaseAuth.getInstance().getCurrentUser();
-//
-//        String email = user.getEmail();
-//        emailEditText.setText(email);
-//    }
-
-
     @Override
     public void onRefresh() {
         initRecyclerView();
-
         refreshRecyclerView.setRefreshing(false);
 
     }

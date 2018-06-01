@@ -9,9 +9,8 @@ import android.view.MenuItem;
 
 import com.example.sweta.edonation.R;
 
-public class OnVerifyActivity extends AppCompatActivity {
-    Toolbar toolbar;
-
+public class OnVerifyActivity extends AppCompatActivity{
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,11 +20,11 @@ public class OnVerifyActivity extends AppCompatActivity {
         initToolbar();
     }
 
-    private void initComponent() {
-        toolbar = findViewById(R.id.toolBar);
+    private void initComponent(){
+        toolbar=findViewById(R.id.toolBar);
     }
 
-    private void initToolbar() {
+    private void initToolbar(){
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("On Verify");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -35,7 +34,7 @@ public class OnVerifyActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(OnVerifyActivity.this,
+                Intent intent=new Intent(OnVerifyActivity.this,
                         MainDashboardActivity.class);
                 startActivity(intent);
                 finish();

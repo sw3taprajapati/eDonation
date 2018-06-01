@@ -28,4 +28,5 @@
         app:itemIconTint="@drawable/drawer_item_color"
         app:menu="@menu/activity_main_drawer_user_dashboard" />
 
+
 </android.support.v4.widget.DrawerLayout>

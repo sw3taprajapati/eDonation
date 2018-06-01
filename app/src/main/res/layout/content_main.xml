@@ -26,8 +26,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="8dp"
                 android:text="What do you like to donate?"
+                android:textColor="@color/black"
                 android:textSize="20sp" />
-
 
             <LinearLayout
                 android:id="@+id/linearCheckbox"
@@ -35,7 +35,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/whatToDonate"
                 android:weightSum="5">
-
 
                 <CheckBox
                     android:id="@+id/food_checkbox"
@@ -45,9 +44,7 @@
                     android:layout_weight="1"
                     android:buttonTint="@color/checkBoxColor"
                     android:hint="Food"
-                    android:textColorHint="@color/black"
-
-                    />
+                    android:textColorHint="@color/black" />
 
                 <CheckBox
                     android:id="@+id/clothes_checkbox"
@@ -59,9 +56,7 @@
                     android:layout_weight="1"
                     android:buttonTint="@color/checkBoxColor"
                     android:hint="Clothes"
-                    android:textColorHint="@color/black"
-
-                    />
+                    android:textColorHint="@color/black" />
 
                 <CheckBox
                     android:id="@+id/books_checkbox"
@@ -73,9 +68,7 @@
                     android:layout_weight="1"
                     android:buttonTint="@color/checkBoxColor"
                     android:hint="Books"
-                    android:textColorHint="@color/black"
-
-                    />
+                    android:textColorHint="@color/black" />
 
                 <CheckBox
                     android:id="@+id/stationery_checkbox"
@@ -100,22 +93,21 @@
                 android:text="Search"
                 android:textColor="@color/white" />
 
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/refreshRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerViewOrganizationList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/searchBtn"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
-                android:padding="8dp"
-                android:scrollbars="vertical" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerViewOrganizationList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/searchBtn"
+                    android:layout_margin="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:padding="8dp"
+                    android:scrollbars="vertical" />
+
+
         </RelativeLayout>
     </ScrollView>
 
