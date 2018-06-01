@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.example.sweta.edonation.adaptersandviewholders.OrganizationAdapter;
@@ -32,6 +33,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     private RecyclerView recyclerView;
     private OrganizationAdapter adapter;
     private List<Organization> organizationList;
+    private ImageView imageView;
 
 
     @Override
@@ -49,6 +51,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.recyclerView);
         btnRefresh = findViewById(R.id.refreshRecyclerView);
+        imageView=findViewById(R.id.refreshButton);
     }
 
     private void initToolbar() {
@@ -58,7 +61,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void setListener() {
-        // btnRefresh.setOnClickListener(this);
+        imageView.setOnClickListener(this);
     }
 
     @Override
@@ -129,8 +132,6 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-        Intent intent = new Intent(AdminActivity.this, AdminActivity.class);
-        startActivity(intent);
-        finish();
+        initRecyclerView();
     }
 }

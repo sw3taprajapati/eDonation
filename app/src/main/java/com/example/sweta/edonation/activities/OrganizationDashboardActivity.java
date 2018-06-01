@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -178,25 +179,26 @@ public class OrganizationDashboardActivity extends AppCompatActivity
                             boolean books = org.getCurrentlyLooking().isBooks();
                             boolean stationery = org.getCurrentlyLooking().isStationery();
 
-                            if (status == 1 && (food == true
-                                    || clothes == true || books == true
-                                    || stationery == true)) {
+                            if (status == 1) {
                                 organizationList.add(org);
-                            } else {
-                                Toast.makeText(getApplicationContext(),
-                                        "No data found",
-                                        Toast.LENGTH_LONG).show();
+                                adapterList = new ListAdapter(OrganizationDashboardActivity.this,
+                                        organizationList);
+                                recyclerView.setAdapter(adapterList);
+                                adapterList.notifyDataSetChanged();
                             }
                         } catch (Exception e) {
 
                         }
                     }
+                    if (adapterList.getItemCount() <= 0) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "No Data Found",
+                                Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    }
                 }
 
-                adapterList = new ListAdapter(OrganizationDashboardActivity.this,
-                        organizationList);
-                recyclerView.setAdapter(adapterList);
-                adapterList.notifyDataSetChanged();
+
             }
 
             @Override

@@ -101,7 +101,14 @@ public class OrganizationDetailActivity extends AppCompatActivity {
         location.setText(orgLocation);
         emailDetail.setText(email);
         currentReqDetail.setText(currentReq);
-        descriptionDetail.setText("We are currently looking for " + description);
+
+        if(description.equals("")){
+            descriptionDetail.setText("We aren't accepting any donation at this time. " +
+                    "Thank you!!!!!");
+        }else{
+            descriptionDetail.setText("We are currently looking for " + description);
+        }
+
 
         websiteBtn.setOnClickListener(new View.OnClickListener() {
             @Override

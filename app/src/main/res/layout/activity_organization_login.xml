@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F0F0F0"
     android:orientation="vertical"
     android:scrollbarAlwaysDrawVerticalTrack="true">
@@ -11,7 +11,10 @@
         layout="@layout/toolbar" />
 
 
+
+
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolBar"
@@ -24,10 +27,11 @@
         android:paddingTop="20dp">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="30dp">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -38,12 +42,12 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorTheme"
-                    android:hint="Email ID"
-                    android:inputType="textEmailAddress"
-                    android:paddingLeft="30dp"
+                    android:textCursorDrawable="@drawable/ic_cursor"
                     android:singleLine="true"
+                    android:paddingLeft="30dp"
+                    android:hint="Email ID"
                     android:textColorHint="@color/black"
-                    android:textCursorDrawable="@drawable/ic_cursor" />
+                    android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -57,12 +61,12 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:singleLine="true"
+                    android:paddingLeft="30dp"
+
                     android:backgroundTint="@color/colorTheme"
                     android:hint="Password"
-
-                    android:inputType="textPassword"
-                    android:paddingLeft="30dp"
-                    android:singleLine="true" />
+                    android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -76,10 +80,7 @@
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp" />
-
-
         </LinearLayout>
-
 
     </RelativeLayout>
 
@@ -95,11 +96,14 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
-        android:layout_centerHorizontal="true"
-        android:visibility="invisible" />
+        android:layout_below="@id/relativeLayout"
+        android:layout_margin="16dp"
+        android:visibility="invisible"/>
+
 
 
 </RelativeLayout>
