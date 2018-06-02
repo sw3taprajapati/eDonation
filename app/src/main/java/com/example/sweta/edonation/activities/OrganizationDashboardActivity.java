@@ -25,7 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class OrganizationLoginDashboardActivity extends AppCompatActivity
+public class OrganizationDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
@@ -45,7 +45,7 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_organization_login_dashboard);
+        setContentView(R.layout.activity_organization_dashboard);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("e-Donation");
         setSupportActionBar(toolbar);
@@ -125,20 +125,20 @@ public class OrganizationLoginDashboardActivity extends AppCompatActivity
         switch (id) {
 
             case R.id.nav_editProfile:
-                Intent in = new Intent(OrganizationLoginDashboardActivity.this,
+                Intent in = new Intent(OrganizationDashboardActivity.this,
                         EditProfileActivity.class);
                 startActivity(in);
                 break;
 
 
             case R.id.nav_aboutApp:
-                Intent in2 = new Intent(OrganizationLoginDashboardActivity.this,
+                Intent in2 = new Intent(OrganizationDashboardActivity.this,
                         AboutAppActivity.class);
                 startActivity(in2);
                 break;
 
             case R.id.nav_logOut:
-                Intent in3 = new Intent(OrganizationLoginDashboardActivity.this,
+                Intent in3 = new Intent(OrganizationDashboardActivity.this,
                         MainDashboardActivity.class);
                 startActivity(in3);
                 break;

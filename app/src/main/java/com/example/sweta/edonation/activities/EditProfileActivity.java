@@ -2,17 +2,10 @@
 package com.example.sweta.edonation.activities;
 
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,11 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sweta.edonation.R;
-import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.pojoclasses.Organization;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,27 +24,26 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener {
     EditText orgName, orgEmail, orgLocation, orgPhone, orgWebsite, orgPan, orgPassword, describeItems;
 
 
-    String orgNameString, orgEmailString, orgLocationString, orgWebsiteString,
+    String orgLocationString,
             orgPasswordString, orgDescribeItemsString;
     String emailFromDB, orgId;
-    int orgPhoneInt, orgPanInt;
-    CheckBox check1, check2, check3, check4;
+    int orgPhoneInt;
+    CheckBox checkFood, checkClothes, checkBooks, checkStationery;
 
     Button orgRegister;
     Toolbar toolbar;
     FirebaseUser user;
     FirebaseDatabase firebaseDatabase;
+    private boolean foodBoolean;
+    private boolean clothesBoolean;
+    private boolean booksBoolean;
+    private boolean stationeryBoolean;
 
     DatabaseReference databaseOrganization;
-    String currentlyLooking = "";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,10 +99,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         orgPhone = findViewById(R.id.orgnPhone);
         orgWebsite = findViewById(R.id.orgnWebsite);
         orgPan = findViewById(R.id.orgnPan);
-        check1 = findViewById(R.id.food_checkbox);
-        check2 = findViewById(R.id.clothes_checkbox);
-        check3 = findViewById(R.id.books_checkbox);
-        check4 = findViewById(R.id.stationery_checkbox);
+        checkFood = findViewById(R.id.food_checkbox);
+        checkClothes = findViewById(R.id.clothes_checkbox);
+        checkBooks = findViewById(R.id.books_checkbox);
+        checkStationery = findViewById(R.id.stationery_checkbox);
         describeItems = findViewById(R.id.describeItems);
         orgRegister = findViewById(R.id.registerBtn);
     }
@@ -130,7 +118,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(EditProfileActivity.this,
-                        OrganizationLoginDashboardActivity.class);
+                        OrganizationDashboardActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -251,24 +239,22 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
 
 
-                        if (check1.isChecked()) {
-                            currentlyLooking = "Food";
-                            //Log.i("food", currentlyLooking);
-
-
+                        if (checkFood.isChecked()) {
+                            foodBoolean = true;
+                            //= "," + "Stationery"Log.i("food", currentlyLooking);
                         }
 
-                        if (check2.isChecked()) {
-                            currentlyLooking += "," + "Clothes";
+                        if (checkBooks.isChecked()) {
+                            booksBoolean= true;
                             //Log.i("clothes", currentlyLooking);
                         }
 
-                        if (check3.isChecked()) {
-                            currentlyLooking += "," + "Books";
+                        if (checkClothes.isChecked()) {
+                            clothesBoolean =true;
                         }
 
-                        if (check4.isChecked()) {
-                            currentlyLooking += "," + "Stationery";
+                        if (checkStationery.isChecked()) {
+                            stationeryBoolean =true;
                         }
 
                         orgDescribeItemsString = describeItems.getText().toString();
@@ -278,7 +264,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         databaseOrganization.child(orgId).child("orgLocation").setValue(orgLocationString);
                         databaseOrganization.child(orgId).child("orgPhone").setValue(orgPhoneInt);
                         databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
-                        databaseOrganization.child(orgId).child("currentlyLooking").setValue(currentlyLooking);
+                        databaseOrganization.child(orgId).child("currentlyLooking").child("food").setValue(foodBoolean);
+                        databaseOrganization.child(orgId).child("currentlyLooking").child("clothes").setValue(clothesBoolean);
+                        databaseOrganization.child(orgId).child("currentlyLooking").child("books").setValue(booksBoolean);
+                        databaseOrganization.child(orgId).child("currentlyLooking").child("stationery").setValue(stationeryBoolean);
+
                         databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
 
 
@@ -294,7 +284,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 Toast.LENGTH_LONG).show();
 
         Intent intent = new Intent(EditProfileActivity.this,
-                OrganizationLoginDashboardActivity.class);
+                OrganizationDashboardActivity.class);
         startActivity(intent);
         finish();
     }
