@@ -21,13 +21,12 @@
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:layout_below="@+id/toolbar"/>-->
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/adminHeading"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_below="@+id/toolbar"
-        android:layout_marginLeft="8dp"
+        android:layout_below="@+id/refreshButton"
         android:orientation="horizontal"
         android:weightSum="4">
 
@@ -39,32 +38,32 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="Orgn Name"
-            android:textSize="16dp"
+            android:textSize="10dp"
             android:textStyle="bold"
+            android:textColor="@color/blue"
             android:layout_weight="1.5"/>
 
         <TextView
             android:id="@+id/panNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
             android:text="PAN No."
-            android:textSize="16dp"
+            android:textSize="10dp"
+            android:gravity="left"
             android:textStyle="bold"
+            android:textColor="@color/blue"
             android:layout_weight="1.5"
            />
         </LinearLayout>
-
+-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/adminHeading"
+        android:layout_below="@+id/refreshButton"
         android:layout_margin="8dp"
         android:padding="8dp"
         android:scrollbars="vertical" />
-
-
 </RelativeLayout>
