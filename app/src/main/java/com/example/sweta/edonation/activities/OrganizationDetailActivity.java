@@ -87,7 +87,7 @@ public class OrganizationDetailActivity extends AppCompatActivity {
             String currentReq = getIntent().getStringExtra("currentRequirement");
             String description = getIntent().getStringExtra("description");
             String website = getIntent().getStringExtra("website");
-            int phone = getIntent().getIntExtra("phone", 0);
+            Long phone = getIntent().getLongExtra("phone", 0);
 
             setDetails(orgName, orgLocation, email, currentReq, description,
                     website, phone);
@@ -96,13 +96,15 @@ public class OrganizationDetailActivity extends AppCompatActivity {
 
     private void setDetails(String orgName, String orgLocation, String email,
                             String currentReq, String description,
-                            final String website, final int phone) {
+                            final String website, final long phone) {
         name.setText(orgName);
         location.setText(orgLocation);
         emailDetail.setText(email);
         currentReqDetail.setText(currentReq);
+
         if(description.equals("")){
-            descriptionDetail.setText("We are currently looking for ");
+            descriptionDetail.setText("We aren't accepting any donation at this time. " +
+                    "Thank you!!!!!");
         }else{
             descriptionDetail.setText("We are currently looking for " + description);
         }

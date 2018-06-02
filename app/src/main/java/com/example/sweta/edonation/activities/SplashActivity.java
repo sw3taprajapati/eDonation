@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
                 } else {
                     //if the user is previously logged in
                     Intent intent = new Intent(SplashActivity.this,
-                            M.class);
+                            OrganizationDashboardActivity.class);
                     startActivity(intent);
                     finish();
 

@@ -66,13 +66,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
         } else {
             booksString = "";
         }
-        if (stationery == true) {
-            stationeryString = "Stationery  ";
-        } else {
-            stationeryString = "";
+        if(stationery==true){
+            stationeryString="Stationery  ";
+        }else {
+            stationeryString="";
         }
-        final String currentlyLooking = foodString + clothesString + booksString + stationeryString;
-        holder.currentRequirement.setText("Currently Looking For : " + currentlyLooking);
+        final String currentlyLooking=foodString+clothesString+booksString+stationeryString;
+        if(books==false && clothes==false && books==false && stationery==false){
+            holder.currentRequirement.setText("We aren't accepting any donation at this time. " +
+                    "Thank you!!!!!");
+        }else {
+            holder.currentRequirement.setText("Currently Looking For : " + currentlyLooking);
+        }
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +86,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
                 intent.putExtra("orgName", organization.getOrgFullName());
                 intent.putExtra("orgLocation", organization.getOrgLocation());
                 intent.putExtra("orgEmail", organization.getOrgEmailID());
-                intent.putExtra("currentRequirement", currentlyLooking);
+                intent.putExtra("currentRequirement",currentlyLooking);
                 intent.putExtra("description", organization.getDescribeItems());
                 intent.putExtra("website", organization.getOrgWebsite());
                 intent.putExtra("phone", organization.getOrgPhone());
