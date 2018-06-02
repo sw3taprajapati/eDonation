@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -154,6 +155,17 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Edit Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //Do what you want here
+            Intent intent=new Intent(EditProfileActivity.this,OrganizationDashboardActivity.class);
+            startActivity(intent);
+            finish();
+            //moveTaskToBack(true);
+            // return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

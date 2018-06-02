@@ -3,6 +3,7 @@ package com.example.sweta.edonation.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,17 @@ public class AboutAppActivity extends AppCompatActivity implements View.OnClickL
         initComponents();
         initToolbar();
         initListener();
+    }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //Do what you want here
+            Intent intent=new Intent(AboutAppActivity.this,OrganizationDashboardActivity.class);
+            startActivity(intent);
+            finish();
+            //moveTaskToBack(true);
+            // return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void initComponents() {
