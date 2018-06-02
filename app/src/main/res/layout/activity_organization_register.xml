@@ -33,7 +33,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorTheme"
                     android:hint="Name"
-                    android:inputType="text"
+                    android:inputType="textCapSentences"
                     android:paddingBottom="24dp"
                     android:textCursorDrawable="@drawable/ic_cursor" />
             </android.support.design.widget.TextInputLayout>
@@ -106,7 +106,6 @@
                     android:hint="Phone no."
                     android:inputType="number"
                     android:paddingBottom="24dp"
-                    android:textColor="@color/black"
 
                     android:textCursorDrawable="@drawable/ic_cursor" />
 
@@ -124,7 +123,7 @@
                     android:hint="Website"
                     android:inputType="text"
                     android:paddingBottom="24dp"
-                    android:textColor="@color/black"
+
                     android:textCursorDrawable="@drawable/ic_cursor" />
 
             </android.support.design.widget.TextInputLayout>
@@ -142,7 +141,7 @@
                     android:hint="PAN No."
                     android:inputType="number"
                     android:paddingBottom="24dp"
-                    android:textColor="@color/black"
+
                     android:textCursorDrawable="@drawable/ic_cursor" />
 
 
@@ -228,6 +227,7 @@
                 android:layout_marginTop="12dp"
                 android:background="@drawable/round_button"
                 android:text="REGISTER"
+                android:layout_marginBottom="24dp"
                 android:textColor="@color/white" />
 
         </LinearLayout>

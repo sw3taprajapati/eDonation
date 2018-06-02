@@ -2,12 +2,13 @@ package com.example.sweta.edonation.pojoclasses;
 
 public class CurrentlyLooking {
 
+
     boolean food;
     boolean clothes;
     boolean books;
     boolean stationery;
 
-    public CurrentlyLooking(){
+    public CurrentlyLooking() {
 
     }
 
@@ -49,4 +50,5 @@ public class CurrentlyLooking {
     public void setStationery(boolean stationery) {
         this.stationery = stationery;
     }
+
 }

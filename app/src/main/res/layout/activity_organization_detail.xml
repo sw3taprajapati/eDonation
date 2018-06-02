@@ -15,9 +15,9 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:textStyle="bold"
         android:textColor="@color/blue"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/locationContainer"
@@ -64,17 +64,19 @@
             android:layout_marginLeft="20dp"
             android:textSize="16dp" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/lookingFor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Looking for"
-        android:textSize="20dp"
+        android:layout_below="@id/ll_email_container"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="50dp"
-        android:layout_below="@id/ll_email_container"
         android:fontFamily=""
-        android:textColor="@color/black"/>
+        android:text="Looking for"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
     <LinearLayout
         android:id="@+id/needContainer"
         android:layout_width="match_parent"
@@ -84,6 +86,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -101,11 +104,12 @@
         android:id="@+id/descriptionDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
+        android:layout_below="@+id/needContainer"
         android:layout_marginLeft="16dp"
-        android:textSize="16dp"
         android:layout_marginTop="16dp"
-        android:layout_below="@+id/needContainer"/>
+        android:inputType="textMultiLine"
+        android:textSize="16dp" />
+
     <LinearLayout
         android:id="@+id/btnLinearLayout"
         android:layout_width="match_parent"

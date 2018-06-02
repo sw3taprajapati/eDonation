@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.example.sweta.edonation.R;
 
-class ListViewHolder extends RecyclerView.ViewHolder{
+class ListViewHolder extends RecyclerView.ViewHolder {
 
-    TextView orgName,orgLocation, currentRequirement;
+    TextView orgName, orgLocation, currentRequirement;
     Button orgWebsite, orgCall;
     RelativeLayout relativeLayout;
 
@@ -20,8 +20,8 @@ class ListViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
 
         orgName = itemView.findViewById(R.id.orgName);
-        orgLocation=itemView.findViewById(R.id.location);
-        currentRequirement=itemView.findViewById(R.id.needTxt);
-        relativeLayout=itemView.findViewById(R.id.relativeLayout);
+        orgLocation = itemView.findViewById(R.id.location);
+        currentRequirement = itemView.findViewById(R.id.needTxt);
+        relativeLayout = itemView.findViewById(R.id.relativeLayout);
     }
 }

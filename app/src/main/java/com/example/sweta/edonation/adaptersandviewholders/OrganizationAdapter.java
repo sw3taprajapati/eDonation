@@ -26,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 
 public class OrganizationAdapter extends
-        RecyclerView.Adapter<OrganizationAdapter.OrganizationViewHolder>{
+        RecyclerView.Adapter<OrganizationAdapter.OrganizationViewHolder> {
 
     Context context;
     List<Organization> organizationList;
@@ -59,15 +59,15 @@ public class OrganizationAdapter extends
             @Override
             public void onClick(View v) {
 
-                String id=organization.getOrgId();
-                int data=1;
+                String id = organization.getOrgId();
+                int data = 1;
                 DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                         getReference("OrganizationDetails");
                 dbOrganization.child(id).child("status")
                         .setValue(1);
 
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:"+organization.getOrgEmailID())); // only email apps should handle this
+                intent.setData(Uri.parse("mailto:" + organization.getOrgEmailID())); // only email apps should handle this
 
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Confirmation");
                 intent.putExtra(Intent.EXTRA_TEXT, "Your email is verfied");
@@ -81,7 +81,7 @@ public class OrganizationAdapter extends
             @Override
             public void onClick(View v) {
 
-                String id=organization.getOrgId();
+                String id = organization.getOrgId();
 
                 //Delete from firebase database
                 DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
@@ -94,7 +94,7 @@ public class OrganizationAdapter extends
                 user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             //deleted
                         }
 
@@ -111,18 +111,18 @@ public class OrganizationAdapter extends
         return organizationList.size();
     }
 
-    class OrganizationViewHolder extends RecyclerView.ViewHolder{
+    class OrganizationViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewOrgName, textViewPanNo;
-        Button btnApprove,btnDecline;
+        Button btnApprove, btnDecline;
 
         public OrganizationViewHolder(View itemView) {
             super(itemView);
 
             textViewOrgName = itemView.findViewById(R.id.orgName);
             textViewPanNo = itemView.findViewById(R.id.panNo);
-            btnApprove=itemView.findViewById(R.id.approveBtn);
-            btnDecline=itemView.findViewById(R.id.declineBtn);
+            btnApprove = itemView.findViewById(R.id.approveBtn);
+            btnDecline = itemView.findViewById(R.id.declineBtn);
         }
     }
 }

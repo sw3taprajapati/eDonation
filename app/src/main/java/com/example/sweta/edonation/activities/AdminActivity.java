@@ -11,10 +11,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.example.sweta.edonation.adaptersandviewholders.OrganizationAdapter;
 import com.example.sweta.edonation.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,11 +28,12 @@ import java.util.List;
 
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Toolbar toolbar;
-    Button btnRefresh;
-    RecyclerView recyclerView;
-    OrganizationAdapter adapter;
-    List<Organization> organizationList;
+    private Toolbar toolbar;
+    private Button btnRefresh;
+    private RecyclerView recyclerView;
+    private OrganizationAdapter adapter;
+    private List<Organization> organizationList;
+    private ImageView imageView;
 
 
     @Override
@@ -47,7 +50,8 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     private void initComponent() {
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.recyclerView);
-        btnRefresh=findViewById(R.id.refreshBtn);
+        btnRefresh = findViewById(R.id.refreshRecyclerView);
+        imageView=findViewById(R.id.refreshButton);
     }
 
     private void initToolbar() {
@@ -55,36 +59,45 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().setTitle("Admin");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-    private void setListener(){
-        btnRefresh.setOnClickListener(this);
+
+    private void setListener() {
+        imageView.setOnClickListener(this);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Intent intent=new Intent(
-                        AdminActivity.this,MainDashboardActivity.class);
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                Intent intent = new Intent(AdminActivity.this,
+                        MainDashboardActivity.class);
                 startActivity(intent);
                 finish();
-                return true;
+            } else {
+                Intent intent = new Intent(AdminActivity.this,
+                        OrganizationDashboardActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
         }
 
         return super.onOptionsItemSelected(item);
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
 
-    private void initRecyclerView(){
+    private void initRecyclerView() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         organizationList = new ArrayList<>();
 
 
-       DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
+        DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
                 getReference("OrganizationDetails");
         dbOrganization.addValueEventListener(new ValueEventListener() {
             @Override
@@ -95,8 +108,8 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                     for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
                         Organization org = organizationSnapshot.getValue(Organization.class);
 
-                        int status=org.getStatus();
-                        if(status==0) {
+                        int status = org.getStatus();
+                        if (status == 0) {
                             organizationList.add(org);
                         }
 
@@ -119,8 +132,6 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-            Intent intent=new Intent(AdminActivity.this,AdminActivity.class);
-            startActivity(intent);
-            finish();
+        initRecyclerView();
     }
 }

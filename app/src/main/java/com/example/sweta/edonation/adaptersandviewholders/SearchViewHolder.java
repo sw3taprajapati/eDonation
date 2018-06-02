@@ -11,15 +11,15 @@ public class SearchViewHolder extends RecyclerView.ViewHolder {
 
     View view;
     TextView orgName;
-    TextView location ;
-    TextView email ;
+    TextView location;
+    TextView email;
     Button websiteBtn;
     Button callBtn;
 
     public SearchViewHolder(View itemView) {
         super(itemView);
 
-        orgName =(TextView) view.findViewById(R.id.orgName);
+        orgName = (TextView) view.findViewById(R.id.orgName);
         location = (TextView) view.findViewById(R.id.location);
     }
 }
