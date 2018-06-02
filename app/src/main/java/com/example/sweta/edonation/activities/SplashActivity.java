@@ -22,7 +22,8 @@ public class SplashActivity extends AppCompatActivity {
 
                 if (FirebaseAuth.getInstance().getCurrentUser() == null) {
                     //if the user isnt logged in
-                    Intent intent = new Intent(SplashActivity.this, MainDashboardActivity.class);
+                    Intent intent = new Intent(SplashActivity.this,
+                            MainDashboardActivity.class);
                     startActivity(intent);
                     finish();
 
