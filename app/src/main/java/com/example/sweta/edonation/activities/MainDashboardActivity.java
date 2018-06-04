@@ -76,7 +76,7 @@ public class MainDashboardActivity extends AppCompatActivity
         initActionBar();
         checkwifi();
         setListener();
-        //settingClickable();
+        settingClickable();
         initRecyclerView();
 
     }
