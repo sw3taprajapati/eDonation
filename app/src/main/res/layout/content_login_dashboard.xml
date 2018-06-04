@@ -9,18 +9,17 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewOrganizationList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:padding="8dp"
-            android:scrollbars="vertical" />
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewOrganizationList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_margin="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:padding="8dp"
+        android:scrollbars="vertical" />
 
 
 </RelativeLayout>

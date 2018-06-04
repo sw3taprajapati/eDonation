@@ -22,7 +22,6 @@
         app:srcCompat="@mipmap/app_logo" />
 
 
-
     <TextView
         android:id="@+id/orgName"
         android:layout_width="wrap_content"

@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -41,6 +43,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
     FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
     boolean check;
+    TextView forgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,20 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
         orgPassword = findViewById(R.id.orgPassword);
         logInBtn = findViewById(R.id.orgLogIn);
         progressBar = findViewById(R.id.progressBar);
+        forgotPassword = findViewById(R.id.forgotPassword);
 
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //Do what you want here
+            Intent intent=new Intent(OrganizationLoginActivity.this,MainDashboardActivity.class);
+            startActivity(intent);
+            finish();
+            //moveTaskToBack(true);
+            // return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void initToolbar() {
@@ -92,6 +108,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
 
     private void setListener() {
         logInBtn.setOnClickListener(this);
+        forgotPassword.setOnClickListener(this);
     }
 
 
@@ -151,6 +168,10 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
                 afterValidation();
 
             }
+        }
+
+        if(v == forgotPassword){
+            startActivity( new Intent(OrganizationLoginActivity.this, PasswordActivity.class));
         }
     }
 

@@ -8,7 +8,7 @@ public class CurrentlyLooking {
     boolean books;
     boolean stationery;
 
-    public CurrentlyLooking(){
+    public CurrentlyLooking() {
 
     }
 

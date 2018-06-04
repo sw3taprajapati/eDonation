@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Patterns;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,8 +43,8 @@ public class OrganizationRegisterActivity extends AppCompatActivity
     String orgnameString, orgemailString, orglocationString, orgwebsiteString,
             orgPasswordString, orgDescribeItemsString;
 
-    int orgpanInt, status = 0;
-    Long orgphoneLong;
+    int status = 0;
+    Long orgphoneLong,orgpanLong;
     CheckBox checkFood, checkClothes, checkBooks, checkStationery;
     private boolean foodBoolean;
     private boolean clothesBoolean;
@@ -161,6 +162,17 @@ public class OrganizationRegisterActivity extends AppCompatActivity
         else
             return false;
     }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //Do what you want here
+            Intent intent=new Intent(OrganizationRegisterActivity.this,MainDashboardActivity.class);
+            startActivity(intent);
+            finish();
+            //moveTaskToBack(true);
+           // return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 
     @Override
@@ -235,7 +247,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity
                                         orgpan.setError("Organization pan cannot be empty");
                                         //Toast.makeText(this, "Organization PAN No. cannot be empty", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        orgpanInt = Integer.parseInt(orgpan.getText().toString());
+                                        orgpanLong = Long.parseLong(orgpan.getText().toString());
 
                                         if (checkFood.isChecked()) {
                                             foodBoolean = true;
@@ -276,7 +288,7 @@ public class OrganizationRegisterActivity extends AppCompatActivity
                                         Organization org = new Organization(orgId,
                                                 orgnameString, orgemailString, orgPasswordString,
                                                 orglocationString, orgphoneLong, orgwebsiteString,
-                                                orgpanInt, currentlyLooking, orgDescribeItemsString, status);
+                                                orgpanLong, currentlyLooking, orgDescribeItemsString, status);
                                         databaseOrganization.child(orgId).setValue(org);
                                         Intent intent = new Intent(
                                                 OrganizationRegisterActivity.this,

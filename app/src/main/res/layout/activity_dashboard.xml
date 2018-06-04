@@ -14,13 +14,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/toolbar"
-        android:textColor="@color/white"
-        android:background="@color/colorThemeDark"
         android:layout_alignParentEnd="true"
-        android:padding="8dp"
-        android:layout_margin="8dp"
         android:layout_gravity="right"
-        android:text="Admin"/>
+        android:layout_margin="8dp"
+        android:background="@color/colorThemeDark"
+        android:padding="8dp"
+        android:text="Admin"
+        android:textColor="@color/white" />
 
 
     <EditText
@@ -36,9 +36,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/search_layout"
+        android:cursorVisible="false"
         android:ems="10"
         android:hint="Search here"
-        android:cursorVisible="false"
         android:inputType="textPersonName"
         android:paddingBottom="10dp"
         android:paddingLeft="20dp"
