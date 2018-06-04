@@ -264,12 +264,18 @@ public class OrganizationDashboardActivity extends AppCompatActivity
                 startActivity(in);
                 break;
 
+            case R.id.nav_addDonor:
+                finish();
+                Intent in2 = new Intent(OrganizationDashboardActivity.this,
+                        AddDonorActivity.class);
+                startActivity(in2);
+                break;
 
             case R.id.nav_aboutApp:
                 finish();
-                Intent in2 = new Intent(OrganizationDashboardActivity.this,
+                Intent in3 = new Intent(OrganizationDashboardActivity.this,
                         AboutAppActivity.class);
-                startActivity(in2);
+                startActivity(in3);
                 break;
 
             case R.id.nav_logOut:
