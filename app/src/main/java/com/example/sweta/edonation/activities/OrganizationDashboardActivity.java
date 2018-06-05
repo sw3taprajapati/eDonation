@@ -177,10 +177,6 @@ public class OrganizationDashboardActivity extends AppCompatActivity
 
                         try {
                             status = org.getStatus();
-                            boolean food = org.getCurrentlyLooking().isFood();
-                            boolean clothes = org.getCurrentlyLooking().isClothes();
-                            boolean books = org.getCurrentlyLooking().isBooks();
-                            boolean stationery = org.getCurrentlyLooking().isStationery();
 
                             if (status == 1) {
                                 organizationList.add(org);
@@ -280,6 +276,13 @@ public class OrganizationDashboardActivity extends AppCompatActivity
                 Intent in2 = new Intent(OrganizationDashboardActivity.this,
                         AboutAppActivity.class);
                 startActivity(in2);
+                break;
+
+            case R.id.nav_add_donor:
+                finish();
+                Intent in3 = new Intent(OrganizationDashboardActivity.this,
+                        .class);
+                startActivity(in3);
                 break;
 
             case R.id.nav_logOut:
