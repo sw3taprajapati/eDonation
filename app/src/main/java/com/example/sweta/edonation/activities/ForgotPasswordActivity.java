@@ -1,9 +1,12 @@
 package com.example.sweta.edonation.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -121,9 +124,9 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(ForgotPasswordActivity.this ,"Password reset, email sent!!",Toast.LENGTH_SHORT).show();
-                            finish();
-                            startActivity(new Intent(ForgotPasswordActivity.this,OrganizationLoginActivity.class));
+
+                            dialogBox();
+
                         }else{
                             Toast.makeText(ForgotPasswordActivity.this ,"Error in sending password reset email",Toast.LENGTH_SHORT).show();
                         }
@@ -135,4 +138,29 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         }
 
     }
+
+    public void dialogBox() {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Check your email to reset password");
+        alertDialogBuilder.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+
+                        Intent intent = new Intent(ForgotPasswordActivity.this, OrganizationLoginActivity.class);
+                        startActivity(intent);
+
+
+
+                    }
+                });
+
+
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
 }

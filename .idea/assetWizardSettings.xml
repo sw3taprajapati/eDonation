@@ -19,8 +19,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/if_refresh_430112.png" />
-                                      <entry key="outputName" value="ic_refresh" />
+                                      <entry key="iconShape" value="NONE" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/email_icon.png" />
+                                      <entry key="outputName" value="ic_gmail" />
                                     </map>
                                   </option>
                                 </PersistentState>
