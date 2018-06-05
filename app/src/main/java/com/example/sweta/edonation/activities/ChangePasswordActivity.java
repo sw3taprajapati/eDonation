@@ -6,39 +6,37 @@ import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import com.example.sweta.edonation.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.payu.custombrowser.CustomBrowserMain;
+import com.google.firebase.auth.FirebaseUser;
 
-public class PasswordActivity extends AppCompatActivity implements View.OnClickListener {
+public class ChangePasswordActivity extends AppCompatActivity implements View.OnClickListener{
 
     Toolbar toolbar;
-    private Button resetPasswordBtn;
-    private EditText passwordEmail;
-    private FirebaseAuth firebaseAuth;
+    private EditText newPassword;
+    private Button changePasswordBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_password);
+        setContentView(R.layout.activity_change_password);
         checkwifi();
         initComponent();
         initToolbar();
         initListeners();
 
-        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     private boolean isNetworkConnected() {
@@ -71,8 +69,8 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
 
     private void initComponent() {
         toolbar = findViewById(R.id.toolBar);
-        resetPasswordBtn = findViewById(R.id.resetBtn);
-        passwordEmail = findViewById(R.id.resetPasswordEmail);
+        newPassword = findViewById(R.id.newPassword);
+        changePasswordBtn = findViewById(R.id.changePasswordBtn);
 
 
 
@@ -90,7 +88,7 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(PasswordActivity.this,
+                Intent intent = new Intent(ChangePasswordActivity.this,
                         OrganizationLoginActivity.class);
                 startActivity(intent);
                 finish();
@@ -105,33 +103,39 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initListeners() {
-        resetPasswordBtn.setOnClickListener(this);
+        changePasswordBtn.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
-        if(v == resetPasswordBtn){
-            String userEmail = passwordEmail.getText().toString().trim();
 
-            if(userEmail.equals("")){
-                Toast.makeText(this, "Please enter your registered email ID",Toast.LENGTH_SHORT).show();
 
-            }
-            else{
-                firebaseAuth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(PasswordActivity.this ,"Password reset, email sent!!",Toast.LENGTH_SHORT).show();
-                            finish();
-                            startActivity(new Intent(PasswordActivity.this,OrganizationLoginActivity.class));
-                        }else{
-                            Toast.makeText(PasswordActivity.this ,"Error in sending password reset email",Toast.LENGTH_SHORT).show();
-                        }
 
+        if(v == changePasswordBtn){
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null)
+        {
+
+            user.updatePassword(newPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(ChangePasswordActivity.this,"Your password has been changed",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(ChangePasswordActivity.this,OrganizationLoginActivity.class));
                     }
-                });
-            }
+                    else{
+                        Toast.makeText(ChangePasswordActivity.this,"Your password could not be changed",Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+        }
+
+
+
 
         }
 

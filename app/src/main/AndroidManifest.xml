@@ -33,7 +33,8 @@
         <activity android:name=".activities.OnVerifyActivity" />
         <activity android:name=".activities.AdminActivity" />
         <activity android:name=".activities.MainDashboardActivity" />
-        <activity android:name=".activities.PasswordActivity"></activity>
+        <activity android:name=".activities.ForgotPasswordActivity" />
+        <activity android:name=".activities.ChangePasswordActivity"></activity>
     </application>
 
 </manifest>
