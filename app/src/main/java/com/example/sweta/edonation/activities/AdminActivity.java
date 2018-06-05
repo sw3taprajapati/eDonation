@@ -3,6 +3,7 @@ package com.example.sweta.edonation.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,14 +27,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
+public class AdminActivity extends AppCompatActivity implements
+        SwipeRefreshLayout.OnRefreshListener {
 
     private Toolbar toolbar;
     private Button btnRefresh;
     private RecyclerView recyclerView;
     private OrganizationAdapter adapter;
     private List<Organization> organizationList;
-    private ImageView imageView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -51,7 +53,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.recyclerView);
         btnRefresh = findViewById(R.id.refreshRecyclerView);
-        imageView=findViewById(R.id.refreshButton);
+        swipeRefreshLayout=findViewById(R.id.swipeRefresh);
     }
 
     private void initToolbar() {
@@ -61,7 +63,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void setListener() {
-        imageView.setOnClickListener(this);
+        swipeRefreshLayout.setOnRefreshListener(this);
     }
 
     @Override
@@ -129,9 +131,10 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    @Override
-    public void onClick(View v) {
 
+    @Override
+    public void onRefresh() {
         initRecyclerView();
+        swipeRefreshLayout.setRefreshing(false);
     }
 }
