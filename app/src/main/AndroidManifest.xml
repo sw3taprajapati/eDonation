@@ -37,12 +37,12 @@
         <activity android:name=".activities.EditProfileActivity" />
         <activity android:name=".activities.AboutAppActivity" />
 
-
+<activity android:name=".activities.AddDonorActivity"/>
 
         <activity android:name=".activities.OnVerifyActivity" />
         <activity android:name=".activities.AdminActivity" />
         <activity android:name=".activities.MainDashboardActivity" />
-        <activity android:name=".activities.AddDonorActivity"/>
+
 
         <activity android:name=".activities.ForgotPasswordActivity" />
         <activity android:name=".activities.ChangePasswordActivity"></activity>

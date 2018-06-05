@@ -157,10 +157,14 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
             } else if (orgEmailString.matches(emailPattern)) {
 
                 orgPasswordString = orgPassword.getText().toString().trim();
+                if (orgPasswordString.equals("")) {
+                    Toast.makeText(this, "Password cannot be empty", Toast.LENGTH_SHORT).show();
+                } else {
 
-                progressBar.setVisibility(View.VISIBLE);
-                afterValidation();
+                    progressBar.setVisibility(View.VISIBLE);
+                    afterValidation();
 
+                }
             }
         }
 

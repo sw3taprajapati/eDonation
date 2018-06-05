@@ -1,23 +1,47 @@
 package com.example.sweta.edonation.pojoclasses;
 
-public class donorInfoPojo {
+public class DonorInfoPojo {
+    String donorId;
+
+
+    String orgnName;
+
+
+
     String donorName;
     String donorEmail;
     String donorLocation;
     Long donorPhone;
-    CurrentlyLooking currentlyLooking;
+    public  CurrentlyLooking currentlyLooking;
 
 
-    donorInfoPojo(){
+    DonorInfoPojo(){
 
     }
 
-    donorInfoPojo(String donorName,String donorEmail,String donorLocation,Long donorPhone,CurrentlyLooking currentlyLooking){
+    public DonorInfoPojo(String donorId,String orgnName, String donorName, String donorEmail, String donorLocation, Long donorPhone, CurrentlyLooking currentlyLooking){
+        this.orgnName=orgnName;
+        this.donorId=donorId;
         this.donorName=donorName;
         this.donorEmail=donorEmail;
         this.donorLocation=donorLocation;
         this.donorPhone=donorPhone;
         this.currentlyLooking=currentlyLooking;
+    }
+    public String getDonorId() {
+        return donorId;
+    }
+
+    public void setDonorId(String donorId) {
+        this.donorId = donorId;
+    }
+
+    public String getOrgnName() {
+        return orgnName;
+    }
+
+    public void setOrgnName(String orgnName) {
+        this.orgnName = orgnName;
     }
 
     public CurrentlyLooking getCurrentlyLooking() {
