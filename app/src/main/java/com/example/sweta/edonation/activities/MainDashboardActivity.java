@@ -58,6 +58,9 @@ public class MainDashboardActivity extends AppCompatActivity
     private CheckBox checkFood, checkClothes, checkBooks, checkStationery;
     private String searchTxt = "";
     private Button searchBtn;
+
+    //private SwipeRefreshLayout swipeRefreshLayout;
+
     private Boolean foodBoolean, clothesBoolean, booksBoolean, stationeryBoolean;
     private ImageView imageView;
     private ProgressBar mainProgressBar;
@@ -261,6 +264,17 @@ public class MainDashboardActivity extends AppCompatActivity
             return true;
         }
 
+/*
+    @Override
+    public void onClick(View v) {
+        //if (v == btnAdmin) {
+            Intent intent = new Intent(MainDashboardActivity.this,
+                    AdminActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }*/
+
 
         private boolean isNetworkConnected () {
             ConnectivityManager cm = (ConnectivityManager)
@@ -415,7 +429,21 @@ public class MainDashboardActivity extends AppCompatActivity
                 searchOrganization();
             }
 
+
         }
 
 
-    }
+
+        /*else if(v==imageView){
+            Intent intent=new Intent(MainDashboardActivity.this,
+                    AdminActivity.class);
+            startActivity(intent);
+            finish();
+        }*/
+        }
+
+    /*@Override
+    public void onRefresh() {
+        initRecyclerView();
+        swipeRefreshLayout.setRefreshing(false);
+    }*/

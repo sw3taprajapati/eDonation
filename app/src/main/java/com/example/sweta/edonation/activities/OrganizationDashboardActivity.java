@@ -152,6 +152,9 @@ public class OrganizationDashboardActivity extends AppCompatActivity
         refreshRecyclerView.setOnRefreshListener(this);
     }
 
+
+
+
     private void initRecyclerView() {
 
         recyclerView.setHasFixedSize(true);
@@ -248,6 +251,13 @@ public class OrganizationDashboardActivity extends AppCompatActivity
             return true;
         }
 
+
+        if (id == R.id.action_change_password) {
+
+            startActivity(new Intent(OrganizationDashboardActivity.this,ChangePasswordActivity.class));
+
+
+        }
         return super.onOptionsItemSelected(item);
     }
 

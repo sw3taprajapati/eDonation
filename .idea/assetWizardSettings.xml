@@ -16,6 +16,7 @@
                             <entry key="launcherLegacy">
                               <value>
                                 <PersistentState>
+<<<<<<< HEAD
                                   <option name="children">
                                     <map>
                                       <entry key="clipartAsset">
@@ -36,6 +37,13 @@
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="imageAsset" value="C:\Users\hp\Downloads\res\drawable-xxxhdpi\ic_action_add_user.png" />
                                       <entry key="outputName" value="ic_donor" />
+=======
+                                  <option name="values">
+                                    <map>
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/if_refresh_430112.png" />
+                                      <entry key="outputName" value="ic_refresh" />
+>>>>>>> ba5d9936ee9282dad95be9bb89cfbfc4c169eaec
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -56,11 +64,14 @@
             </PersistentState>
           </value>
         </entry>
+<<<<<<< HEAD
         <entry key="vectorWizard">
           <value>
             <PersistentState />
           </value>
         </entry>
+=======
+>>>>>>> ba5d9936ee9282dad95be9bb89cfbfc4c169eaec
       </map>
     </option>
   </component>
