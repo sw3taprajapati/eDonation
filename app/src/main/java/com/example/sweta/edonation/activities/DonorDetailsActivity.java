@@ -68,49 +68,50 @@ public class DonorDetailsActivity extends AppCompatActivity {
         }
     }
 
-
     private void getIntents() {
-        if (getIntent().hasExtra("orgName") && getIntent().hasExtra("orgLocation")
-                && getIntent().hasExtra("orgEmail")
-                && getIntent().hasExtra("currentRequirement")
+        if (getIntent().hasExtra("donorName") && getIntent().hasExtra("donorLocation")
+                && getIntent().hasExtra("donorEmail")
+                && getIntent().hasExtra("currentDonation")
                 && getIntent().hasExtra("description")
-                && getIntent().hasExtra("website") && getIntent().hasExtra("phone")) {
+                && getIntent().hasExtra("phone")) {
 
-            String orgName = getIntent().getStringExtra("orgName");
-            String orgLocation = getIntent().getStringExtra("orgLocation");
-            String email = getIntent().getStringExtra("orgEmail");
-            String currentReq = getIntent().getStringExtra("currentRequirement");
+            String donorName = getIntent().getStringExtra("donorName");
+            String donorLocation = getIntent().getStringExtra("donorLocation");
+            String email = getIntent().getStringExtra("donorEmail");
+            String currentDonation = getIntent().getStringExtra("currentDonation");
             String description = getIntent().getStringExtra("description");
-            String website = getIntent().getStringExtra("website");
             Long phone = getIntent().getLongExtra("phone", 0);
 
-            setDetails(orgName, orgLocation, email, currentReq, description,
-                    website, phone);
+            setDetails(donorName, donorLocation, email, currentDonation, description, phone);
         }
     }
 
-    private void setDetails(String orgName, String orgLocation, String email,
-                            String currentReq, String description,
-                            final String website, final long phone) {
-        name.setText(orgName);
-        location.setText(orgLocation);
+    private void setDetails(String donorName, String donorLocation, final String email,
+                            String currentDonation, String description, final long phone) {
+        name.setText(donorName);
+        location.setText(donorLocation);
         emailDetail.setText(email);
-        currentReqDetail.setText(currentReq);
+        currentReqDetail.setText(currentDonation);
 
         if(description.equals("")){
             descriptionDetail.setText("We aren't accepting any donation at this time. " +
                     "Thank you!!!!!");
         }else{
-            descriptionDetail.setText("We are currently looking for " + description);
+            descriptionDetail.setText("Donation received for: " + description);
         }
 
 
         emailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://" + website));
-                startActivity(intent);
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:" + email)); // only email apps should handle this
+
+                intent.putExtra(Intent.EXTRA_SUBJECT, "");
+                intent.putExtra(Intent.EXTRA_TEXT, "");
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
             }
         });
         final String phoneNo = String.valueOf(phone);
@@ -140,9 +141,9 @@ public class DonorDetailsActivity extends AppCompatActivity {
     }
 
     private void initComponents() {
-        name = findViewById(R.id.orgNameDetail);
+        name = findViewById(R.id.donorNameDetail);
         location = findViewById(R.id.locationDetail);
-        currentReqDetail = findViewById(R.id.needDetail);
+        currentReqDetail = findViewById(R.id.donationDetail);
         descriptionDetail = findViewById(R.id.descriptionDetail);
         emailBtn = findViewById(R.id.btnEmailDetail);
         callBtn = findViewById(R.id.callBtnDetail);
@@ -152,7 +153,7 @@ public class DonorDetailsActivity extends AppCompatActivity {
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Organization Detail");
+        getSupportActionBar().setTitle("Donor Detail");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
