@@ -14,22 +14,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.sweta.edonation.R;
-import com.example.sweta.edonation.activities.MainDashboardActivity;
-import com.example.sweta.edonation.activities.OrganizationDashboardActivity;
-import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 
 public class OrganizationLoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -42,6 +37,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
     FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
     boolean check;
+    TextView forgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +57,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
         orgPassword = findViewById(R.id.orgPassword);
         logInBtn = findViewById(R.id.orgLogIn);
         progressBar = findViewById(R.id.progressBar);
+        forgotPassword = findViewById(R.id.forgotPassword);
 
     }
 
@@ -105,6 +102,7 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
 
     private void setListener() {
         logInBtn.setOnClickListener(this);
+        forgotPassword.setOnClickListener(this);
     }
 
 
@@ -164,6 +162,10 @@ public class OrganizationLoginActivity extends AppCompatActivity implements View
                 afterValidation();
 
             }
+        }
+
+        if(v == forgotPassword){
+            startActivity( new Intent(OrganizationLoginActivity.this, ForgotPasswordActivity.class));
         }
     }
 

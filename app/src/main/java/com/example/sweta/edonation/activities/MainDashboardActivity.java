@@ -58,6 +58,7 @@ public class MainDashboardActivity extends AppCompatActivity
     private CheckBox checkFood, checkClothes, checkBooks, checkStationery;
     private String searchTxt = "";
     private Button searchBtn;
+    //private SwipeRefreshLayout swipeRefreshLayout;
     private Boolean foodBoolean, clothesBoolean, booksBoolean, stationeryBoolean;
     private ImageView imageView;
     private ProgressBar mainProgressBar;
@@ -75,6 +76,7 @@ public class MainDashboardActivity extends AppCompatActivity
         initActionBar();
         checkwifi();
         setListener();
+        //settingClickable();
         initRecyclerView();
 
     }
@@ -94,6 +96,7 @@ public class MainDashboardActivity extends AppCompatActivity
         recyclerView = findViewById(R.id.recyclerViewOrganizationList);
         linearSearch = findViewById(R.id.linearCheckbox);
         searchBtn = findViewById(R.id.searchBtn);
+        //swipeRefreshLayout = findViewById(R.id.swipeRefresh);
         View header = navigationView.getHeaderView(0);
         imageView = header.findViewById(R.id.imageView1);
         mainProgressBar = findViewById(R.id.progressBarMain);
@@ -257,7 +260,16 @@ public class MainDashboardActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
             return true;
         }
-
+/*
+    @Override
+    public void onClick(View v) {
+        //if (v == btnAdmin) {
+            Intent intent = new Intent(MainDashboardActivity.this,
+                    AdminActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }*/
 
         private boolean isNetworkConnected () {
             ConnectivityManager cm = (ConnectivityManager)
@@ -411,8 +423,17 @@ public class MainDashboardActivity extends AppCompatActivity
             if (v == searchBtn) {
                 searchOrganization();
             }
-
+        /*else if(v==imageView){
+            Intent intent=new Intent(MainDashboardActivity.this,
+                    AdminActivity.class);
+            startActivity(intent);
+            finish();
+        }*/
         }
 
-
+    /*@Override
+    public void onRefresh() {
+        initRecyclerView();
+        swipeRefreshLayout.setRefreshing(false);
+    }*/
     }
