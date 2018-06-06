@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.pojoclasses.Organization;
@@ -82,24 +83,31 @@ public class OrganizationAdapter extends
             public void onClick(View v) {
 
                 String id = organization.getOrgId();
+                try {
+                    //Delete from firebase database
+                    DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
+                            getReference("OrganizationDetails").child(id);
+                    dbOrganization.removeValue();
+                } catch (Exception e) {
 
-                //Delete from firebase database
-                DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
-                        getReference("OrganizationDetails").child(id);
-                dbOrganization.removeValue();
+                }
 
 
                 //delete from Firebase Authentication
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            //deleted
-                        }
+                try {
+                    user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                //deleted
+                                Toast.makeText(context, "User deleted", Toast.LENGTH_LONG).show();
+                            }
 
-                    }
-                });
+                        }
+                    });
+                }catch(Exception e){
+                }
 
             }
         });

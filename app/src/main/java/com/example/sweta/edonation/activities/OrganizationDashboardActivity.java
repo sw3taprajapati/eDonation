@@ -31,8 +31,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sweta.edonation.R;
+import com.example.sweta.edonation.adaptersandviewholders.DonorAdapter;
 import com.example.sweta.edonation.adaptersandviewholders.ListAdapter;
 
+import com.example.sweta.edonation.pojoclasses.Donor;
 import com.example.sweta.edonation.pojoclasses.Organization;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -59,7 +61,8 @@ public class OrganizationDashboardActivity extends AppCompatActivity
     private List<Organization> organizationList;
     private ListAdapter adapterList;
     private RecyclerView recyclerView;
-
+    private List<Donor> donorList;
+    private DonorAdapter adapter;
     private ActionBarDrawerToggle toggle;
     private DatabaseReference databaseOrganization;
     private FirebaseUser user;
@@ -67,6 +70,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity
     private EditText emailEditText;
     private DatabaseReference reference;
     private SwipeRefreshLayout refreshRecyclerView;
+    private String organizationNameString;
 
 
     @Override
@@ -160,41 +164,36 @@ public class OrganizationDashboardActivity extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        organizationList = new ArrayList<>();
-        final DatabaseReference dbOrganization = FirebaseDatabase.getInstance().
-                getReference("OrganizationDetails");
+        donorList = new ArrayList<>();
+        DatabaseReference dbDonor=FirebaseDatabase.getInstance().getReference("DonorDetails");
 
-        dbOrganization.addValueEventListener(new ValueEventListener() {
+        dbDonor.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //this method executes when successful
 
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
-                        Organization org = organizationSnapshot.getValue(Organization.class);
+                        Donor donor = organizationSnapshot.getValue(Donor.class);
                         int status;
 
 
                         try {
-                            status = org.getStatus();
-                            boolean food = org.getCurrentlyLooking().isFood();
-                            boolean clothes = org.getCurrentlyLooking().isClothes();
-                            boolean books = org.getCurrentlyLooking().isBooks();
-                            boolean stationery = org.getCurrentlyLooking().isStationery();
+                            String orgName = donor.getOrgName();
 
-                            if (status == 1) {
-                                organizationList.add(org);
-                                adapterList = new ListAdapter(OrganizationDashboardActivity.this,
-                                        organizationList);
-                                recyclerView.setAdapter(adapterList);
-                                adapterList.notifyDataSetChanged();
+                            if (orgName.equals(organizationNameString)) {
+                                donorList.add(donor);
+                                adapter = new DonorAdapter(OrganizationDashboardActivity.this,
+                                        donorList);
+                                recyclerView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
                             }
                         } catch (Exception e) {
 
                         }
                     }
                     try{
-                    if (adapterList.getItemCount() <= 0) {
+                    if (adapter.getItemCount() <= 0) {
                         Toast toast = Toast.makeText(getApplicationContext(), "No Data Found",
                                 Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
@@ -274,12 +273,18 @@ public class OrganizationDashboardActivity extends AppCompatActivity
                 startActivity(in);
                 break;
 
+            case R.id.nav_addDonor:
+                finish();
+                Intent in2 = new Intent(OrganizationDashboardActivity.this,
+                        AddDonorActivity.class);
+                startActivity(in2);
+                break;
 
             case R.id.nav_aboutApp:
                 finish();
-                Intent in2 = new Intent(OrganizationDashboardActivity.this,
+                Intent in3 = new Intent(OrganizationDashboardActivity.this,
                         AboutAppActivity.class);
-                startActivity(in2);
+                startActivity(in3);
                 break;
 
             case R.id.nav_logOut:
@@ -346,7 +351,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity
                         if (email.equals(emailFromDB)) {
                             String name = org.getOrgFullName();
                             String emailID = org.getOrgEmailID();
-
+                            organizationNameString=org.getOrgFullName();
                             organizationEmail.setText(emailID);
                             organizationName.setText(name);
                         }
