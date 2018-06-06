@@ -49,17 +49,12 @@ import java.util.List;
 
 
 public class OrganizationDashboardActivity extends AppCompatActivity
-        implements SwipeRefreshLayout.OnRefreshListener,
-        NavigationView.OnNavigationItemSelectedListener {
+        implements
+        NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
-
-    private NavigationView navView;
-    private Toolbar toolbar = null;
-
-    private List<Organization> organizationList;
-    private ListAdapter adapterList;
+    private Toolbar toolbar;
     private RecyclerView recyclerView;
     private List<Donor> donorList;
     private DonorAdapter adapter;
@@ -67,10 +62,9 @@ public class OrganizationDashboardActivity extends AppCompatActivity
     private DatabaseReference databaseOrganization;
     private FirebaseUser user;
     private TextView organizationEmail, organizationName;
-    private EditText emailEditText;
-    private DatabaseReference reference;
-    private SwipeRefreshLayout refreshRecyclerView;
     private String organizationNameString;
+    private DatabaseReference dbDonor;
+    private SwipeRefreshLayout refreshLayout;
 
 
     @Override
@@ -84,24 +78,24 @@ public class OrganizationDashboardActivity extends AppCompatActivity
         initDrawer();
         setListeners();
         checkwifi();
-        initRecyclerView();
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseOrganization = FirebaseDatabase.getInstance().
                 getReference("OrganizationDetails");
+        dbDonor=FirebaseDatabase.getInstance().getReference("DonorDetails");
 
         insertInfoInNav();
+        initRecyclerView();
     }
 
 
     private void initComponents() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
         recyclerView = findViewById(R.id.recyclerViewOrganizationList);
-        refreshRecyclerView = findViewById(R.id.refreshRecyclerView);
         navigationView = (NavigationView) findViewById(R.id.nav_view2);
-
+        refreshLayout=findViewById(R.id.refreshRecyclerViewOrganization);
 
     }
 
@@ -153,7 +147,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity
 
     private void setListeners() {
         navigationView.setNavigationItemSelectedListener(this);
-        refreshRecyclerView.setOnRefreshListener(this);
+        refreshLayout.setOnRefreshListener(this);
     }
 
 
@@ -367,14 +361,12 @@ public class OrganizationDashboardActivity extends AppCompatActivity
 
     }
 
+
     @Override
     public void onRefresh() {
+        refreshLayout.setRefreshing(false);
         initRecyclerView();
-        refreshRecyclerView.setRefreshing(false);
-
     }
-
-
 }
 
 

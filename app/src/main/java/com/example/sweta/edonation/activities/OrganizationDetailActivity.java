@@ -167,17 +167,12 @@ public class OrganizationDetailActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-                Intent intent = new Intent(OrganizationDetailActivity.this,
-                        MainDashboardActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
+
                 Intent intent = new Intent(OrganizationDetailActivity.this,
                         OrganizationDashboardActivity.class);
                 startActivity(intent);
                 finish();
-            }
+
 
         }
 
