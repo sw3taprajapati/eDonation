@@ -92,15 +92,7 @@ public class DonorDetailsActivity extends AppCompatActivity {
         location.setText(donorLocation);
         emailDetail.setText(email);
         currentReqDetail.setText(currentDonation);
-
-        if(description.equals("")){
-            descriptionDetail.setText("We aren't accepting any donation at this time. " +
-                    "Thank you!!!!!");
-        }else{
-            descriptionDetail.setText("Donation received for: " + description);
-        }
-
-
+        descriptionDetail.setText("Donation received for: " + description);
         emailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
