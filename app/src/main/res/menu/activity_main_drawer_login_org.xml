@@ -18,7 +18,6 @@
             android:id="@+id/nav_aboutApp"
             android:icon="@mipmap/ic_about_app"
             android:title="About App" />
-
         <item
             android:id="@+id/nav_logOut"
             android:icon="@mipmap/ic_logout"

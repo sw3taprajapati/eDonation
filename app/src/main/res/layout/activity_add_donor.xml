@@ -27,14 +27,17 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/orgName"
+                android:id="@+id/orgNameDonor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorTheme"
                 android:hint="Name of Organization"
                 android:inputType="textCapSentences"
+                android:textColor="@color/black"
                 android:paddingBottom="24dp"
+                android:textStyle="bold"
+                android:textSize="20dp"
                 android:textCursorDrawable="@drawable/ic_cursor" />
         </android.support.design.widget.TextInputLayout>
 
@@ -44,6 +47,7 @@
             android:paddingBottom="8dp"
             android:text="Donor's Details"
             android:textStyle="bold"
+            android:textColor="@color/colorTheme"
             android:gravity="center"
             android:textSize="@dimen/dimen_20dp"/>
 
