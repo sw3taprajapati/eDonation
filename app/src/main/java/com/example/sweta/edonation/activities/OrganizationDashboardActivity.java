@@ -189,7 +189,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity
                                 adapter = new DonorAdapter(OrganizationDashboardActivity.this,
                                         donorList);
                                 recyclerView.setAdapter(adapter);
-                                adapter.notifyDataSetChanged();
+                                /*adapter.notifyDataSetChanged();*/
                             }
                         } catch (Exception e) {
 

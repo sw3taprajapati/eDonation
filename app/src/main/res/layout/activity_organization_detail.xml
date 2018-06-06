@@ -135,8 +135,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:background="@mipmap/ic_gmail" />
-
+                android:background="@mipmap/ic_website"/>
             <Button
                 android:id="@+id/btnWebsiteDetail"
                 android:layout_width="wrap_content"

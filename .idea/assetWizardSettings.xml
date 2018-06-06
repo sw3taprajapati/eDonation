@@ -20,12 +20,8 @@
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/email_icon.png" />
-<<<<<<< HEAD
-                                      <entry key="outputName" value="ic_gmail" />
-=======
-                                      <entry key="outputName" value="ic_email_button" />
->>>>>>> 51c86d7d38518916e18eb9766ebd6e9eb9531efd
+                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/ic_our_donors.png" />
+                                      <entry key="outputName" value="ic_our_donors" />
                                     </map>
                                   </option>
                                 </PersistentState>

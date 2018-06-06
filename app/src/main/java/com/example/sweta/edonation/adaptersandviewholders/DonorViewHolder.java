@@ -10,14 +10,16 @@ import com.example.sweta.edonation.R;
 
 public class DonorViewHolder extends RecyclerView.ViewHolder {
 
-    TextView donorName, donorLocation, currentDonation;
+    TextView donorName, donorLocation, currentDonation,organzationName;
     Button orgWebsite, orgCall;
     RelativeLayout relativeLayout;
+
     public DonorViewHolder(View itemView) {
         super(itemView);
         donorName = itemView.findViewById(R.id.donorName);
         donorLocation = itemView.findViewById(R.id.location);
         currentDonation = itemView.findViewById(R.id.donatedItems);
         relativeLayout = itemView.findViewById(R.id.relativeLayoutDonor);
+        organzationName=itemView.findViewById(R.id.organization_name);
     }
 }

@@ -39,7 +39,7 @@ public class DonorAdapter extends RecyclerView.Adapter<DonorViewHolder> {
         final Donor donor = donorList.get(position);
         holder.donorName.setText(donor.getDonorName());
         holder.donorLocation.setText(donor.getDonorLocation());
-
+        holder.organzationName.setText("Donated to : "+donor.getOrgName());
         boolean food = donor.getCurrentlyLooking().isFood();
         boolean clothes = donor.getCurrentlyLooking().isClothes();
         boolean books = donor.getCurrentlyLooking().isBooks();
@@ -66,6 +66,7 @@ public class DonorAdapter extends RecyclerView.Adapter<DonorViewHolder> {
             stationeryString="";
         }
         final String currentlyLooking=foodString+clothesString+booksString+stationeryString;
+
             holder.currentDonation.setText("Donated items: " + currentlyLooking);
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
