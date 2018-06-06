@@ -66,12 +66,8 @@ public class DonorAdapter extends RecyclerView.Adapter<DonorViewHolder> {
             stationeryString="";
         }
         final String currentlyLooking=foodString+clothesString+booksString+stationeryString;
-        if(books==false && clothes==false && books==false && stationery==false){
-            holder.currentDonation.setText("We aren't accepting any donation at this time. " +
-                    "Thank you!!!!!");
-        }else {
-            holder.currentDonation.setText("Currently Looking For : " + currentlyLooking);
-        }
+            holder.currentDonation.setText("Donated items: " + currentlyLooking);
+
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
