@@ -169,7 +169,7 @@ public class OrganizationDetailActivity extends AppCompatActivity {
         if (id == android.R.id.home) {
 
                 Intent intent = new Intent(OrganizationDetailActivity.this,
-                        OrganizationDashboardActivity.class);
+                        MainDashboardActivity.class);
                 startActivity(intent);
                 finish();
 

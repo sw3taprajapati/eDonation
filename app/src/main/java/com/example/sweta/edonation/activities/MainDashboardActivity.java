@@ -80,7 +80,7 @@ public class MainDashboardActivity extends AppCompatActivity
     }
 
     private void settingClickable() {
-        imageView.setClickable(false);
+        imageView.setClickable(true);
     }
 
     private void initComponents() {
