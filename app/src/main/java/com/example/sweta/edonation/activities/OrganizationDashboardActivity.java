@@ -77,6 +77,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organization_dashboard);
+        reference = FirebaseDatabase.getInstance().getReference("DonorDetails");
 
 
         initComponents();
@@ -87,6 +88,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity
         initRecyclerView();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+
         databaseOrganization = FirebaseDatabase.getInstance().
                 getReference("OrganizationDetails");
 
@@ -165,8 +167,9 @@ public class OrganizationDashboardActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         donorList = new ArrayList<>();
-        DatabaseReference dbDonor=FirebaseDatabase.getInstance().getReference("DonorDetails");
 
+
+        DatabaseReference dbDonor=FirebaseDatabase.getInstance().getReference("DonorDetails");
         dbDonor.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -186,7 +189,7 @@ public class OrganizationDashboardActivity extends AppCompatActivity
                                 adapter = new DonorAdapter(OrganizationDashboardActivity.this,
                                         donorList);
                                 recyclerView.setAdapter(adapter);
-                                adapter.notifyDataSetChanged();
+                                /*adapter.notifyDataSetChanged();*/
                             }
                         } catch (Exception e) {
 

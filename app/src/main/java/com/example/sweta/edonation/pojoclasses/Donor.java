@@ -16,14 +16,14 @@ public class Donor {
 
     public Donor(String donorId, String orgName, String donorName, String donorEmail,
                  String donorLocation, Long donorPhone,
-                 CurrentlyLooking currentlyLooking, String describeItems) {
+                 CurrentlyLooking donatedItems, String describeItems) {
         this.donorId = donorId;
         this.orgName = orgName;
         this.donorName = donorName;
         this.donorEmail = donorEmail;
         this.donorLocation = donorLocation;
         this.donorPhone = donorPhone;
-        this.currentlyLooking = currentlyLooking;
+        this.currentlyLooking = donatedItems;
         this.describeItems = describeItems;
     }
 

@@ -166,7 +166,7 @@ public class AddDonorActivity extends AppCompatActivity implements View.OnClickL
                         databaseOrganization.child(donorId).setValue(donor);
 
                         Intent intent = new Intent(Intent.ACTION_SENDTO);
-                        intent.setData(Uri.parse("mailto:" + email)); // only email apps should handle this
+                        intent.setData(Uri.parse("mailto:" + donor.getDonorEmail())); // only email apps should handle this
 
                         intent.putExtra(Intent.EXTRA_SUBJECT, "Donation Received");
                         intent.putExtra(Intent.EXTRA_TEXT, "Thank you for your donation. Your " +
