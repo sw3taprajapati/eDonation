@@ -90,7 +90,6 @@
             android:layout_below="@+id/ll_currentNeed"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-
             android:orientation="horizontal">
 
             <ImageView
