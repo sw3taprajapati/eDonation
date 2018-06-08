@@ -101,6 +101,8 @@
                 android:layout_below="@id/searchBtn"
                 android:layout_centerInParent="true"/>
 
+
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerViewOrganizationList"
                     android:layout_width="match_parent"
@@ -111,7 +113,9 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
                     android:padding="8dp"
-                    android:scrollbars="vertical" />
+                    android:scrollbars="vertical"
+                    android:fadeScrollbars="true"/>
+
 
 
         </RelativeLayout>

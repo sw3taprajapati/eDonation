@@ -15,7 +15,6 @@
         <include
             android:id="@+id/mainAppBar"
             layout="@layout/app_bar_main" />
-
     </ScrollView>
 
     <android.support.design.widget.NavigationView
@@ -30,3 +29,4 @@
 
 
 </android.support.v4.widget.DrawerLayout>
+

@@ -80,7 +80,7 @@ public class MainDashboardActivity extends AppCompatActivity
     }
 
     private void settingClickable() {
-        imageView.setClickable(false);
+        imageView.setClickable(true);
     }
 
     private void initComponents() {
@@ -128,7 +128,8 @@ public class MainDashboardActivity extends AppCompatActivity
     private void initRecyclerView() {
 
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+
 
         organizationList = new ArrayList<>();
 

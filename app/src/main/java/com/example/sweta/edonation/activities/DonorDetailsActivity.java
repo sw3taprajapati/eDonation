@@ -156,10 +156,11 @@ public class DonorDetailsActivity extends AppCompatActivity {
 
         if (id == android.R.id.home) {
             if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-                Intent intent = new Intent(DonorDetailsActivity.this,
-                        MainDashboardActivity.class);
-                startActivity(intent);
                 finish();
+                Intent intent = new Intent(DonorDetailsActivity.this,
+                        OurDonorsActivity.class);
+                startActivity(intent);
+
             } else {
                 Intent intent = new Intent(DonorDetailsActivity.this,
                         OrganizationDashboardActivity.class);

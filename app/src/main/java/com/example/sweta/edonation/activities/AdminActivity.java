@@ -31,7 +31,6 @@ public class AdminActivity extends AppCompatActivity implements
         SwipeRefreshLayout.OnRefreshListener {
 
     private Toolbar toolbar;
-    private Button btnRefresh;
     private RecyclerView recyclerView;
     private OrganizationAdapter adapter;
     private List<Organization> organizationList;
@@ -52,7 +51,6 @@ public class AdminActivity extends AppCompatActivity implements
     private void initComponent() {
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.recyclerView);
-        btnRefresh = findViewById(R.id.refreshRecyclerView);
         swipeRefreshLayout=findViewById(R.id.swipeRefresh);
     }
 
