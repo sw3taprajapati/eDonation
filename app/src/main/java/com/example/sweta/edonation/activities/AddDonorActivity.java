@@ -1,22 +1,21 @@
 package com.example.sweta.edonation.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.sweta.edonation.R;
 import com.example.sweta.edonation.pojoclasses.CurrentlyLooking;
-import com.example.sweta.edonation.pojoclasses.DonorInfoPojo;
+import com.example.sweta.edonation.pojoclasses.Donor;
 import com.example.sweta.edonation.pojoclasses.Organization;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,22 +26,26 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AddDonorActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Toolbar toolbar;
-    EditText orgnName, donorName, email, location, phone;
-    String donorNameString, emailString, locationString, phoneString;
-    Long phoneNumber;
-    Button addButton;
+    private Toolbar toolbar;
+    private EditText orgnName, donorName, email, location, phone;
+    private String donorNameString, emailString, locationString, phoneString;
+    private Long phoneNumber;
+    private Button addButton;
     private boolean foodBoolean;
     private boolean clothesBoolean;
     private boolean booksBoolean;
-    private boolean check;
+    private CheckBox checkBoxFood;
+    private CheckBox checkboxClothes;
+    private CheckBox checkboxBooks;
+    private CheckBox checkboxStationery;
     private boolean stationeryBoolean;
-    DatabaseReference databaseOrganization;
-    DatabaseReference databaseReference;
-    FirebaseAuth firebaseAuth;
-
-    FirebaseUser user;
-    String name;
+    private DatabaseReference databaseOrganization;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth;
+    private String emailNavigation;
+    private FirebaseUser user;
+    private String name;
+    private EditText describedItems;
 
     private FirebaseDatabase firebaseDatabase;
 
@@ -51,12 +54,10 @@ public class AddDonorActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_add_donor);
 
         initComponent();
+        accessInformation();
         initToolbar();
         initListeners();
-        firebaseAuth = FirebaseAuth.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
 
 
     }
@@ -70,8 +71,11 @@ public class AddDonorActivity extends AppCompatActivity implements View.OnClickL
         location = findViewById(R.id.donorLocation);
         phone = findViewById(R.id.donorPhone);
         addButton = findViewById(R.id.donorAddBtn);
-        accessInformation();
-
+        checkboxBooks=findViewById(R.id.books_checkbox);
+        checkboxClothes=findViewById(R.id.clothes_checkbox);
+        checkBoxFood=findViewById(R.id.food_checkbox);
+        checkboxStationery=findViewById(R.id.stationery_checkbox);
+        describedItems=findViewById(R.id.describeItems);
     }
 
     private void initListeners() {
@@ -131,33 +135,45 @@ public class AddDonorActivity extends AppCompatActivity implements View.OnClickL
 
                     } else {
                         phoneNumber = Long.parseLong(phoneString);
+                        if (checkBoxFood.isChecked()) {
+                            foodBoolean = true;
+                            //= "," + "Stationery"Log.i("food", currentlyLooking);
+                        }
 
-//                        firebaseAuth.createUserWithEmailAndPassword(orgemailString, orgPasswordString)
-//                                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                                        if (task.isSuccessful()) {
-//                                            //registered
-//                                        }
-//                                    }
-//                                });
+                        if (checkboxBooks.isChecked()) {
+                            booksBoolean = true;
+                            //Log.i("clothes", currentlyLooking);
+                        }
 
+                        if (checkboxClothes.isChecked()) {
+                            clothesBoolean = true;
+                        }
 
-                        accessInformation();
+                        if (checkboxStationery.isChecked()) {
+                            stationeryBoolean = true;
+                        }
+
+                        String orgDescribeItemsString = describedItems.getText().toString();
                         databaseOrganization = FirebaseDatabase.getInstance().
                                 getReference("DonorDetails");
 
                         String donorId = databaseOrganization.push().getKey();
                         CurrentlyLooking currentlyLooking = new CurrentlyLooking(foodBoolean,
                                 clothesBoolean, booksBoolean, stationeryBoolean);
-                        DonorInfoPojo donor = new DonorInfoPojo(donorId, name, donorNameString, emailString, locationString, phoneNumber, currentlyLooking);
+                        Donor donor = new Donor(donorId, name, donorNameString, emailString,
+                                locationString, phoneNumber,
+                                currentlyLooking,orgDescribeItemsString);
                         databaseOrganization.child(donorId).setValue(donor);
-                        Intent intent = new Intent(
-                                AddDonorActivity.this,
-                                OrganizationDashboardActivity.class);
-                        startActivity(intent);
-                        finish();
 
+                        Intent intent = new Intent(Intent.ACTION_SENDTO);
+                        intent.setData(Uri.parse("mailto:" + donor.getDonorEmail())); // only email apps should handle this
+
+                        intent.putExtra(Intent.EXTRA_SUBJECT, "Donation Received");
+                        intent.putExtra(Intent.EXTRA_TEXT, "Thank you for your donation. Your " +
+                                "donation has been sent");
+                        if (intent.resolveActivity(getPackageManager()) != null) {
+                            startActivity(intent);
+                        }
 
                     }
                 }
@@ -173,14 +189,16 @@ public class AddDonorActivity extends AppCompatActivity implements View.OnClickL
 
     public void accessInformation() {
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
+        firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.
                 getReference("OrganizationDetails");
 
-        final String email;
-        email = user.getEmail();
+        emailNavigation = user.getEmail();
 
-        databaseOrganization.addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //this method executes when successful
@@ -189,14 +207,13 @@ public class AddDonorActivity extends AppCompatActivity implements View.OnClickL
                     for (DataSnapshot organizationSnapshot : dataSnapshot.getChildren()) {
                         Organization org = organizationSnapshot.getValue(Organization.class);
                         String emailFromDB = org.getOrgEmailID();
-
-                        if (email.equals(emailFromDB)) {
+                        if (emailNavigation.equals(emailFromDB)) {
 
                             try {
                                 name = org.getOrgFullName();
-
                                 //setting to the edit text
                                 orgnName.setText(name);
+                                orgnName.setEnabled(false);
 
                             } catch (Exception e) {
                             }

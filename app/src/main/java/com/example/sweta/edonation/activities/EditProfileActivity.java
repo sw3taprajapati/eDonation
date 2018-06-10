@@ -301,24 +301,25 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         databaseOrganization.child(orgId).child("orgPassword").setValue(orgPasswordString);
                         databaseOrganization.child(orgId).child("orgLocation").setValue(orgLocationString);
                         databaseOrganization.child(orgId).child("orgPhone").setValue(orgPhoneInt);
-                        databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
+
                         databaseOrganization.child(orgId).child("currentlyLooking").child("food").setValue(foodBoolean);
                         databaseOrganization.child(orgId).child("currentlyLooking").child("clothes").setValue(clothesBoolean);
                         databaseOrganization.child(orgId).child("currentlyLooking").child("books").setValue(booksBoolean);
                         databaseOrganization.child(orgId).child("currentlyLooking").child("stationery").setValue(stationeryBoolean);
 
                         databaseOrganization.child(orgId).child("describeItems").setValue(orgDescribeItemsString);
+                        Toast.makeText(this, "Information Updated",
+                                Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(EditProfileActivity.this,
+                                OrganizationDashboardActivity.class);
+                        startActivity(intent);
+                        finish();
 
                     }
                 }
             }
         }
-        Toast.makeText(this, "Information Updated",
-                Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(EditProfileActivity.this,
-                OrganizationDashboardActivity.class);
-        startActivity(intent);
-        finish();
+
 
     }
 }

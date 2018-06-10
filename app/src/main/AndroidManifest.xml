@@ -3,14 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.sweta.edonation">
 
-
-
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
 
     <application
         android:allowBackup="true"
@@ -36,17 +30,14 @@
         <activity android:name=".activities.OrganizationLoginActivity" />
         <activity android:name=".activities.EditProfileActivity" />
         <activity android:name=".activities.AboutAppActivity" />
-
-<activity android:name=".activities.AddDonorActivity"/>
-
         <activity android:name=".activities.OnVerifyActivity" />
         <activity android:name=".activities.AdminActivity" />
+        <activity android:name=".activities.AddDonorActivity"/>
+        <activity android:name=".activities.OurDonorsActivity"/>
+        <activity android:name=".activities.DonorDetailsActivity"/>
         <activity android:name=".activities.MainDashboardActivity" />
-
-
         <activity android:name=".activities.ForgotPasswordActivity" />
         <activity android:name=".activities.ChangePasswordActivity"></activity>
-
     </application>
 
 </manifest>

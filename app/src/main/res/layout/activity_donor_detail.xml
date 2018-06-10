@@ -8,7 +8,7 @@
         layout="@layout/toolbar" />
 
     <TextView
-        android:id="@+id/orgNameDetail"
+        android:id="@+id/donorNameDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
@@ -23,7 +23,7 @@
         android:id="@+id/locationContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/orgNameDetail"
+        android:layout_below="@+id/donorNameDetail"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
@@ -73,7 +73,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="50dp"
         android:fontFamily=""
-        android:text="Looking for"
+        android:text="Donated Items"
         android:textColor="@color/black"
         android:textSize="20dp" />
 
@@ -93,7 +93,7 @@
             android:src="@mipmap/ic_items" />
 
         <TextView
-            android:id="@+id/needDetail"
+            android:id="@+id/donationDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -119,7 +119,7 @@
         android:weightSum="2">
 
         <LinearLayout
-            android:id="@+id/websiteBtnLayout"
+            android:id="@+id/emailBtnLayout"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginBottom="8dp"
@@ -127,7 +127,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:background="@drawable/website_button"
+            android:background="@drawable/email_button"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
@@ -135,14 +135,15 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:background="@mipmap/ic_website"/>
+                android:background="@mipmap/ic_email_button" />
+
             <Button
-                android:id="@+id/btnWebsiteDetail"
+                android:id="@+id/btnEmailDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:background="@null"
-                android:text="website"
+                android:text="Gmail"
                 android:textColor="@color/white" />
         </LinearLayout>
 

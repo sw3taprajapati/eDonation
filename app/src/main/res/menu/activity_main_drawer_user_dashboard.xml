@@ -13,6 +13,12 @@
             android:id="@+id/nav_loginOrg"
             android:icon="@mipmap/ic_login"
             android:title="Login as Organization" />
+
+        <item
+            android:id="@+id/nav_our_donors"
+            android:icon="@mipmap/ic_our_donors"
+            android:title="Our Donors" />
+
         <item
             android:id="@+id/nav_aboutApp"
             android:icon="@mipmap/ic_about_app"

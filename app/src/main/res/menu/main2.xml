@@ -4,6 +4,6 @@
     <item
         android:id="@+id/action_change_password"
         android:orderInCategory="100"
-        android:title="Change Password"
+        android:title="Reset Password"
         app:showAsAction="never" />
 </menu>
